@@ -1,0 +1,110 @@
+﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" x:Class="BrasilDidaticos.Apresentacao.WPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Brasil Didáticos" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" WindowState="Maximized" Icon="/BrasilDidaticos;component/brasildidaticos.ico" Closing="Window_Closing">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#EB0047E4" Offset="1" />
+            <GradientStop Color="#FFF8FFFF" Offset="0.075" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
+        <Menu Name="mnBrasilDidaticos" DockPanel.Dock="Top" Height="25" Width="Auto">
+            <MenuItem Name="BrasilDidaticos" Header="Brasil Didáticos" DataContext="{Binding}">
+                <MenuItem Name="Orcamento" Header="Orçamento" Click="Orcamento_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_worcamento.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Cliente" Header="Cliente" Click="Cliente_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wcliente.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Fornecedor" Header="Fornecedor" Click="Fornecedor_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wfornecedor.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Produto" Header="Produto" Click="Produto_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wproduto.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Taxa" Header="Taxa" Click="Taxa_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wtaxa.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Name="Relatorio" Header="Relatório">
+                <MenuItem Name="Varejo" Header="Varejo" Click="Varejo_Click" >
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wvarejo.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Atacado" Header="Atacado" Click="Atacado_Click" >
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_watacado.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Name="Administracao" Header="Administração">
+                <MenuItem Name="Usuario" Header="Usuário" Click="Usuario_Click" >
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wusuario.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Perfil" Header="Perfil" Click="Perfil_Click" >
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wperfil.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="Parametro" Header="Parâmetros" Click="Parametro_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wconfiguracao.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarPanel DockPanel.Dock="Top" Name="tbpBrasilDidaticos" Height="25" VerticalAlignment="Top" Width="Auto"></ToolBarPanel>
+        <GroupBox Name="Filtro" DockPanel.Dock="Top" Width="400">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Image  Source="/BrasilDidaticos;component/Imagens/ico_filtro.png" Width="16" Height="16" />
+                    <TextBlock Text="Filtros" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid Name="gdFiltro" DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="2" />
+            </Grid>
+        </GroupBox>
+        <StackPanel Name="stpBotoes" DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">            
+            <Button Grid.Column="2" Name="btnBuscar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="True" Margin="0,0,5,0" Click="btnBuscar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_buscar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Buscar"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <GroupBox Name="GpbProdutos" DockPanel.Dock="Top" Header="Produtos">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgProdutos" Width="Auto" CanUserAddRows="False" SelectionUnit="CellOrRowHeader" ScrollViewer.ScrollChanged="dgProdutos_ScrollChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Fornecedor" Binding="{Binding Fornecedor.Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Custo" Binding="{Binding ValorCusto, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Atacado" Binding="{Binding ValorAtacado, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Varejo" Binding="{Binding ValorVarejo, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </DockPanel>
+</Window>

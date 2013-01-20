@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="BrasilDidaticos.Apresentacao.Controler.MRadioListBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="300">
+    <Grid Height="25" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition  />
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Name="lblRadioListBox" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Content="lblRadioButton" Margin="0,0,5,0" Focusable="False" />
+        <ListBox Grid.Column="1" Name="lstRadioListBox"
+	      Style="{StaticResource HorizontalRadioButtonList}"
+	      SelectedValuePath="Tag" SelectionChanged="lstRadioListBox_SelectionChanged">
+        </ListBox>
+        <Label Grid.Column="2" Name="lblRadioListBoxErro" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Content="*" Foreground="Red" Visibility="Hidden"/>
+    </Grid>    
+</UserControl>

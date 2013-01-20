@@ -1,0 +1,33 @@
+﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" x:Class="BrasilDidaticos.Apresentacao.Teste"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ews="clr-namespace:BrasilDidaticos.Comum"
+        ews:ExtraWindowStyles.CanMinimize="false" 
+        ews:ExtraWindowStyles.CanMaximize="false" 
+        Title="Teste" Height="300" Width="300" Loaded="Window_Loaded">
+    <DataGrid AutoGenerateColumns="False" Height="200" Name="dataGrid1" Width="200" CanUserAddRows="True">
+        <DataGrid.Resources>
+            <Style TargetType="{x:Type DataGridCell}">
+                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                <EventSetter Event="PreviewTextInput" Handler="DataGridCell_NumericFloatOnly"></EventSetter>
+            </Style>
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Porcentagem" x:Name="Porcentagem" >
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Text" Value="{Binding Path=ValorPorcentagem, Mode=OneWay, StringFormat=P2, ConverterCulture=pt-BR}"/>
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+                <DataGridTextColumn.EditingElementStyle>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Text" Value="{Binding Path=ValorDecimal, StringFormat=F2, ConverterCulture=pt-BR}"></Setter>
+                    </Style>
+                </DataGridTextColumn.EditingElementStyle>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="Porcentagem" x:Name="DecimalAtualizada" Binding="{Binding Path=ValorPorcentagem, Mode=OneWay}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>

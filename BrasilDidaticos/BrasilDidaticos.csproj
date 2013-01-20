@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EE40C134-4BEA-40FE-9BBD-A52AD385B0A2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BrasilDidaticos</RootNamespace>
+    <AssemblyName>BrasilDidaticos</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BrasilDidaticos.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2A61956CFEDBDCE8F96CC10C9238E4E91113AB0C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>BrasilDidaticos_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>brasildidaticos.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="CepFacil.API">
+      <HintPath>..\..\..\References\CepFacil.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\References\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="BrasilDidaticos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Apresentacao\Controler\MDatePicker.xaml.cs">
+      <DependentUpon>MDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MDecimalUpDown.xaml.cs">
+      <DependentUpon>MDecimalUpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MComboBox.xaml.cs">
+      <DependentUpon>MComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MRadioListBox.xaml.cs">
+      <DependentUpon>MRadioListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MRadioButton.xaml.cs">
+      <DependentUpon>MRadioButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MMaskTextBox.xaml.cs">
+      <DependentUpon>MMaskTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MCheckBox.xaml.cs">
+      <DependentUpon>MCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Cliente.xaml.cs">
+      <DependentUpon>Cliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\ClienteCadastro.xaml.cs">
+      <DependentUpon>ClienteCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WRelatorioOrcamentoCusto.xaml.cs">
+      <DependentUpon>WRelatorioOrcamentoCusto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WRelatorioOrcamento.xaml.cs">
+      <DependentUpon>WRelatorioOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WOrcamentoProduto.xaml.cs">
+      <DependentUpon>WOrcamentoProduto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WOrcamentoCadastro.xaml.cs">
+      <DependentUpon>WOrcamentoCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WOrcamento.xaml.cs">
+      <DependentUpon>WOrcamento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WSessao.xaml.cs">
+      <DependentUpon>WSessao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WRelatorioAtacado.xaml.cs">
+      <DependentUpon>WRelatorioAtacado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WRelatorioVarejo.xaml.cs">
+      <DependentUpon>WRelatorioVarejo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WImportarProduto.xaml.cs">
+      <DependentUpon>WImportarProduto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WParametro.xaml.cs">
+      <DependentUpon>WParametro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WProdutoCadastro.xaml.cs">
+      <DependentUpon>WProdutoCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WProduto.xaml.cs">
+      <DependentUpon>WProduto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WTaxaCadastro.xaml.cs">
+      <DependentUpon>WTaxaCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WTaxa.xaml.cs">
+      <DependentUpon>WTaxa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WPerfilCadastro.xaml.cs">
+      <DependentUpon>WPerfilCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WPerfil.xaml.cs">
+      <DependentUpon>WPerfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\Teste.xaml.cs">
+      <DependentUpon>Teste.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WUsuarioCadastro.xaml.cs">
+      <DependentUpon>WUsuarioCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WUsuario.xaml.cs">
+      <DependentUpon>WUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WFornecedorCadastro.xaml.cs">
+      <DependentUpon>WFornecedorCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Comum\EnterKeyTransversal.cs" />
+    <Compile Include="Comum\ExtraWindowStyles.cs" />
+    <Compile Include="Objeto\Produto.cs" />
+    <Compile Include="Objeto\Taxa.cs" />
+    <Compile Include="Objeto\Permissao.cs" />
+    <Compile Include="Objeto\Perfil.cs" />
+    <Compile Include="Comum\Constantes.cs" />
+    <Compile Include="Apresentacao\Controler\MPasswordBox.xaml.cs">
+      <DependentUpon>MPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WFornecedor.xaml.cs">
+      <DependentUpon>WFornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WPrincipal.xaml.cs">
+      <DependentUpon>WPrincipal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Comum\Enumeradores.cs" />
+    <Compile Include="Comum\Parametros.cs" />
+    <Compile Include="Comum\Util.cs" />
+    <Compile Include="Service References\Servico\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Page Include="Apresentacao\Controler\MDatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MDecimalUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MRadioListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MRadioButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MMaskTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MCheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MPasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Controler\MTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Apresentacao\Cliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\ClienteCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WRelatorioOrcamentoCusto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WRelatorioOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WOrcamentoProduto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WOrcamentoCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WOrcamento.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WSessao.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WRelatorioAtacado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WRelatorioVarejo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WParametro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WImportarProduto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Apresentacao\WProdutoCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WProduto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WTaxaCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WTaxa.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WPerfilCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WPerfil.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\Teste.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Apresentacao\WUsuarioCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WUsuario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WFornecedorCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WFornecedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Apresentacao\WLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="BrasilDidaticos.xaml.cs">
+      <DependentUpon>BrasilDidaticos.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Apresentacao\Controler\MTextBox.xaml.cs">
+      <DependentUpon>MTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WLogin.xaml.cs">
+      <DependentUpon>WLogin.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Apresentacao\WPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DictionaryGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DictionaryListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Themas\BureauBlack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themas\BureauBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themas\ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themas\ExpressionLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themas\ShinyBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themas\ShinyRed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Themas\WhistlerBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Content Include="Relatorio\RelatorioOrcamento.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Relatorio\RelatorioOrcamentoCusto.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Imagens\ico_worcamento.png" />
+    <Content Include="Relatorio\RelatorioAtacado.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Relatorio\RelatorioVarejo.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BrasilDidaticos_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Cliente.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Item.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Orcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Produto.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoCliente.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoEstadoOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoFornecedor.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoParametro.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoPerfil.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoPermissao.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoProduto.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoSessao.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoTaxa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoUnidadeFederativa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoUsuario.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.UnidadeFederativa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Usuario.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Objeto.Produto.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\Servico\BrasilDidaticos.wsdl" />
+    <None Include="Service References\Servico\BrasilDidaticos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Servico\BrasilDidaticos1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Servico\BrasilDidaticos2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.10.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2008 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BrasilDidaticos.Contrato\BrasilDidaticos.Contrato.csproj">
+      <Project>{D05B89F7-D0EE-4319-8456-08030C03EFEC}</Project>
+      <Name>BrasilDidaticos.Contrato</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Servico\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Servico\BrasilDidaticos.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Servico\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Servico\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Servico\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_sair.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_buscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_novo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_cancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_filtro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_wlogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_wcliente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_wfornecedor.png" />
+    <Resource Include="Imagens\ico_wproduto.png" />
+    <Resource Include="Imagens\ico_wtaxa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="brasildidaticos.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_watacado.png" />
+    <Resource Include="Imagens\ico_wconfiguracao.png" />
+    <Resource Include="Imagens\ico_wperfil.png" />
+    <Resource Include="Imagens\ico_wusuario.png" />
+    <Resource Include="Imagens\ico_wvarejo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_gravar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_editar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_wsessao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_desbloquear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_produto_importar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_procurar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_wimportarproduto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imagens\ico_campos.png" />
+    <Resource Include="Imagens\ico_csv_arquivo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

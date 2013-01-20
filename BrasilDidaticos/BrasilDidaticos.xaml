@@ -1,0 +1,14 @@
+﻿<Application x:Class="BrasilDidaticos.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Apresentacao\WLogin.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Themas\WhistlerBlue.xaml"/>
+                <ResourceDictionary Source="Resources\DictionaryListBox.xaml"/>
+                <ResourceDictionary Source="Resources\DictionaryGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

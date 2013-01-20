@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BrasilDidaticos" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBrasilDidaticos_TestarServico_InputMessage">
+    <wsdl:part name="parameters" element="tns:TestarServico" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_TestarServico_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestarServicoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UsuarioLogar_InputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioLogar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UsuarioLogar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioLogarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UsuarioListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UsuarioListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UsuarioSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UsuarioSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_SessaoExcluir_InputMessage">
+    <wsdl:part name="parameters" element="tns:SessaoExcluir" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_SessaoExcluir_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SessaoExcluirResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_SessaoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:SessaoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_SessaoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SessaoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PerfilListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:PerfilListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PerfilListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PerfilListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PerfilSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:PerfilSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PerfilSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PerfilSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PermissaoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:PermissaoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PermissaoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PermissaoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_TaxaListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaxaListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_TaxaListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaxaListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_TaxaSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:TaxaSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_TaxaSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TaxaSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_FornecedorListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:FornecedorListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_FornecedorListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FornecedorListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_FornecedorSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:FornecedorSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_FornecedorSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FornecedorSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutosSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutosSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutosSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutosSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ParametroListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParametroListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ParametroListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParametroListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ParametrosSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParametrosSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ParametrosSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParametrosSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ClienteListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClienteListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ClienteListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClienteListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ClienteSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClienteSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ClienteSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClienteSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_EstadoOrcamentoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:EstadoOrcamentoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_EstadoOrcamentoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EstadoOrcamentoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_OrcamentoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrcamentoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_OrcamentoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrcamentoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_OrcamentoSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrcamentoSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_OrcamentoSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrcamentoSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UnidadeFederativaListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnidadeFederativaListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UnidadeFederativaListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnidadeFederativaListarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBrasilDidaticos">
+    <wsdl:operation name="TestarServico">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/TestarServico" message="tns:IBrasilDidaticos_TestarServico_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/TestarServicoResponse" message="tns:IBrasilDidaticos_TestarServico_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioLogar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UsuarioLogar" message="tns:IBrasilDidaticos_UsuarioLogar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UsuarioLogarResponse" message="tns:IBrasilDidaticos_UsuarioLogar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UsuarioListar" message="tns:IBrasilDidaticos_UsuarioListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UsuarioListarResponse" message="tns:IBrasilDidaticos_UsuarioListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UsuarioSalvar" message="tns:IBrasilDidaticos_UsuarioSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UsuarioSalvarResponse" message="tns:IBrasilDidaticos_UsuarioSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SessaoExcluir">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/SessaoExcluir" message="tns:IBrasilDidaticos_SessaoExcluir_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/SessaoExcluirResponse" message="tns:IBrasilDidaticos_SessaoExcluir_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SessaoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/SessaoListar" message="tns:IBrasilDidaticos_SessaoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/SessaoListarResponse" message="tns:IBrasilDidaticos_SessaoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PerfilListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/PerfilListar" message="tns:IBrasilDidaticos_PerfilListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/PerfilListarResponse" message="tns:IBrasilDidaticos_PerfilListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PerfilSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/PerfilSalvar" message="tns:IBrasilDidaticos_PerfilSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/PerfilSalvarResponse" message="tns:IBrasilDidaticos_PerfilSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PermissaoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/PermissaoListar" message="tns:IBrasilDidaticos_PermissaoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/PermissaoListarResponse" message="tns:IBrasilDidaticos_PermissaoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaxaListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/TaxaListar" message="tns:IBrasilDidaticos_TaxaListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/TaxaListarResponse" message="tns:IBrasilDidaticos_TaxaListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TaxaSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/TaxaSalvar" message="tns:IBrasilDidaticos_TaxaSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/TaxaSalvarResponse" message="tns:IBrasilDidaticos_TaxaSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FornecedorListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorListar" message="tns:IBrasilDidaticos_FornecedorListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorListarResponse" message="tns:IBrasilDidaticos_FornecedorListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FornecedorSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorSalvar" message="tns:IBrasilDidaticos_FornecedorSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorSalvarResponse" message="tns:IBrasilDidaticos_FornecedorSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProdutoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoListar" message="tns:IBrasilDidaticos_ProdutoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoListarResponse" message="tns:IBrasilDidaticos_ProdutoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProdutoSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoSalvar" message="tns:IBrasilDidaticos_ProdutoSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoSalvarResponse" message="tns:IBrasilDidaticos_ProdutoSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProdutosSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutosSalvar" message="tns:IBrasilDidaticos_ProdutosSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutosSalvarResponse" message="tns:IBrasilDidaticos_ProdutosSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ParametroListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ParametroListar" message="tns:IBrasilDidaticos_ParametroListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ParametroListarResponse" message="tns:IBrasilDidaticos_ParametroListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ParametrosSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ParametrosSalvar" message="tns:IBrasilDidaticos_ParametrosSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ParametrosSalvarResponse" message="tns:IBrasilDidaticos_ParametrosSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClienteListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteListar" message="tns:IBrasilDidaticos_ClienteListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteListarResponse" message="tns:IBrasilDidaticos_ClienteListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClienteSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteSalvar" message="tns:IBrasilDidaticos_ClienteSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteSalvarResponse" message="tns:IBrasilDidaticos_ClienteSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EstadoOrcamentoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/EstadoOrcamentoListar" message="tns:IBrasilDidaticos_EstadoOrcamentoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/EstadoOrcamentoListarResponse" message="tns:IBrasilDidaticos_EstadoOrcamentoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrcamentoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoListar" message="tns:IBrasilDidaticos_OrcamentoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoListarResponse" message="tns:IBrasilDidaticos_OrcamentoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrcamentoSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoSalvar" message="tns:IBrasilDidaticos_OrcamentoSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoSalvarResponse" message="tns:IBrasilDidaticos_OrcamentoSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnidadeFederativaListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListar" message="tns:IBrasilDidaticos_UnidadeFederativaListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListarResponse" message="tns:IBrasilDidaticos_UnidadeFederativaListar_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBrasilDidaticos" type="tns:IBrasilDidaticos">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestarServico">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/TestarServico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioLogar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UsuarioLogar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UsuarioListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UsuarioSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SessaoExcluir">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/SessaoExcluir" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SessaoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/SessaoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PerfilListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/PerfilListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PerfilSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/PerfilSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PermissaoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/PermissaoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaxaListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/TaxaListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaxaSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/TaxaSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FornecedorListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/FornecedorListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FornecedorSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/FornecedorSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProdutoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ProdutoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProdutoSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ProdutoSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProdutosSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ProdutosSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParametroListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ParametroListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParametrosSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ParametrosSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClienteListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ClienteListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClienteSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ClienteSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EstadoOrcamentoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/EstadoOrcamentoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrcamentoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/OrcamentoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrcamentoSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/OrcamentoSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnidadeFederativaListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BrasilDidaticos">
+    <wsdl:port name="BasicHttpBinding_IBrasilDidaticos" binding="tns:BasicHttpBinding_IBrasilDidaticos">
+      <soap:address location="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

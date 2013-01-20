@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="EntradaUsuario">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:Usuario" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaUsuario" nillable="true" type="tns:EntradaUsuario" />
+  <xs:complexType name="Entrada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CantidadeItens" type="xs:int" />
+      <xs:element minOccurs="0" name="Chave" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Novo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Paginar" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PosicaoUltimoItem" type="xs:int" />
+      <xs:element minOccurs="0" name="UsuarioLogado" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Entrada" nillable="true" type="tns:Entrada" />
+  <xs:complexType name="Usuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Perfis" nillable="true" type="tns:ArrayOfPerfil" />
+      <xs:element minOccurs="0" name="Senha" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Usuario" nillable="true" type="tns:Usuario" />
+  <xs:complexType name="ArrayOfPerfil">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Perfil" nillable="true" type="tns:Perfil" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPerfil" nillable="true" type="tns:ArrayOfPerfil" />
+  <xs:complexType name="Perfil">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Permissoes" nillable="true" type="tns:ArrayOfPermissao" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Perfil" nillable="true" type="tns:Perfil" />
+  <xs:complexType name="ArrayOfPermissao">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Permissao" nillable="true" type="tns:Permissao" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPermissao" nillable="true" type="tns:ArrayOfPermissao" />
+  <xs:complexType name="Permissao">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Permissao" nillable="true" type="tns:Permissao" />
+  <xs:complexType name="RetornoUsuario">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Usuarios" nillable="true" type="tns:ArrayOfUsuario" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoUsuario" nillable="true" type="tns:RetornoUsuario" />
+  <xs:complexType name="Retorno">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+      <xs:element minOccurs="0" name="Mensagem" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Retorno" nillable="true" type="tns:Retorno" />
+  <xs:complexType name="ArrayOfUsuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Usuario" nillable="true" type="tns:Usuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUsuario" nillable="true" type="tns:ArrayOfUsuario" />
+  <xs:complexType name="Sessao">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Chave" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Sessao" nillable="true" type="tns:Sessao" />
+  <xs:complexType name="RetornoSessao">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Sessoes" nillable="true" type="tns:ArrayOfSessao" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoSessao" nillable="true" type="tns:RetornoSessao" />
+  <xs:complexType name="ArrayOfSessao">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Sessao" nillable="true" type="tns:Sessao" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSessao" nillable="true" type="tns:ArrayOfSessao" />
+  <xs:complexType name="EntradaPerfil">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Perfil" nillable="true" type="tns:Perfil" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaPerfil" nillable="true" type="tns:EntradaPerfil" />
+  <xs:complexType name="RetornoPerfil">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Perfis" nillable="true" type="tns:ArrayOfPerfil" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoPerfil" nillable="true" type="tns:RetornoPerfil" />
+  <xs:complexType name="EntradaPermissao">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Permissao" nillable="true" type="tns:Permissao" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaPermissao" nillable="true" type="tns:EntradaPermissao" />
+  <xs:complexType name="RetornoPermissao">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Permissoes" nillable="true" type="tns:ArrayOfPermissao" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoPermissao" nillable="true" type="tns:RetornoPermissao" />
+  <xs:complexType name="EntradaTaxa">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Taxa" nillable="true" type="tns:Taxa" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaTaxa" nillable="true" type="tns:EntradaTaxa" />
+  <xs:complexType name="Taxa">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Desconto" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Fornecedor" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Percentagem" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Prioridade" type="xs:short" />
+      <xs:element minOccurs="0" name="Produto" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Valor" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Taxa" nillable="true" type="tns:Taxa" />
+  <xs:complexType name="RetornoTaxa">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Taxas" nillable="true" type="tns:ArrayOfTaxa" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoTaxa" nillable="true" type="tns:RetornoTaxa" />
+  <xs:complexType name="ArrayOfTaxa">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Taxa" nillable="true" type="tns:Taxa" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaxa" nillable="true" type="tns:ArrayOfTaxa" />
+  <xs:complexType name="EntradaFornecedor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Fornecedor" nillable="true" type="tns:Fornecedor" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaFornecedor" nillable="true" type="tns:EntradaFornecedor" />
+  <xs:complexType name="Fornecedor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cpf_Cnpj" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Taxas" nillable="true" type="tns:ArrayOfTaxa" />
+      <xs:element minOccurs="0" name="Tipo" nillable="true" type="tns:Enumeradores.Pessoa" />
+      <xs:element minOccurs="0" name="ValorPercentagemAtacado" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorPercentagemVarejo" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fornecedor" nillable="true" type="tns:Fornecedor" />
+  <xs:simpleType name="Enumeradores.Pessoa">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Fisica" />
+      <xs:enumeration value="Juridica" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Enumeradores.Pessoa" nillable="true" type="tns:Enumeradores.Pessoa" />
+  <xs:complexType name="RetornoFornecedor">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Fornecedores" nillable="true" type="tns:ArrayOfFornecedor" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoFornecedor" nillable="true" type="tns:RetornoFornecedor" />
+  <xs:complexType name="ArrayOfFornecedor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Fornecedor" nillable="true" type="tns:Fornecedor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFornecedor" nillable="true" type="tns:ArrayOfFornecedor" />
+  <xs:complexType name="EntradaProduto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Produto" nillable="true" type="tns:Produto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaProduto" nillable="true" type="tns:EntradaProduto" />
+  <xs:complexType name="Produto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fornecedor" nillable="true" type="tns:Fornecedor" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Ncm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Taxas" nillable="true" type="tns:ArrayOfTaxa" />
+      <xs:element minOccurs="0" name="ValorBase" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Produto" nillable="true" type="tns:Produto" />
+  <xs:complexType name="RetornoProduto">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Produtos" nillable="true" type="tns:ArrayOfProduto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoProduto" nillable="true" type="tns:RetornoProduto" />
+  <xs:complexType name="ArrayOfProduto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Produto" nillable="true" type="tns:Produto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProduto" nillable="true" type="tns:ArrayOfProduto" />
+  <xs:complexType name="EntradaProdutos">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Fornecedor" nillable="true" type="tns:Fornecedor" />
+          <xs:element minOccurs="0" name="Produtos" nillable="true" type="tns:ArrayOfProduto" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaProdutos" nillable="true" type="tns:EntradaProdutos" />
+  <xs:complexType name="EntradaParametro">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Parametro" nillable="true" type="tns:Parametro" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaParametro" nillable="true" type="tns:EntradaParametro" />
+  <xs:complexType name="Parametro">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoParametro" type="tns:Enumeradores.TipoParametro" />
+      <xs:element minOccurs="0" name="Valor" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Parametro" nillable="true" type="tns:Parametro" />
+  <xs:simpleType name="Enumeradores.TipoParametro">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Binario" />
+      <xs:enumeration value="Texto" />
+      <xs:enumeration value="Inteiro" />
+      <xs:enumeration value="Decimal" />
+      <xs:enumeration value="Percentagem" />
+      <xs:enumeration value="DataHora" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Enumeradores.TipoParametro" nillable="true" type="tns:Enumeradores.TipoParametro" />
+  <xs:complexType name="RetornoParametro">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Parametros" nillable="true" type="tns:ArrayOfParametro" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoParametro" nillable="true" type="tns:RetornoParametro" />
+  <xs:complexType name="ArrayOfParametro">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Parametro" nillable="true" type="tns:Parametro" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParametro" nillable="true" type="tns:ArrayOfParametro" />
+  <xs:complexType name="EntradaParametros">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Parametros" nillable="true" type="tns:ArrayOfParametro" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaParametros" nillable="true" type="tns:EntradaParametros" />
+  <xs:complexType name="EntradaCliente">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Cliente" nillable="true" type="tns:Cliente" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaCliente" nillable="true" type="tns:EntradaCliente" />
+  <xs:complexType name="Cliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Bairro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CaixaEscolar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Celular" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cep" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cidade" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Complemento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cpf_Cnpj" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Endereco" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="InscricaoEstadual" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Numero" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Telefone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tipo" nillable="true" type="tns:Enumeradores.Pessoa" />
+      <xs:element minOccurs="0" name="Uf" nillable="true" type="tns:UnidadeFederativa" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Cliente" nillable="true" type="tns:Cliente" />
+  <xs:complexType name="UnidadeFederativa">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnidadeFederativa" nillable="true" type="tns:UnidadeFederativa" />
+  <xs:complexType name="RetornoCliente">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Clientes" nillable="true" type="tns:ArrayOfCliente" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoCliente" nillable="true" type="tns:RetornoCliente" />
+  <xs:complexType name="ArrayOfCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Cliente" nillable="true" type="tns:Cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCliente" nillable="true" type="tns:ArrayOfCliente" />
+  <xs:complexType name="EntradaEstadoOrcamento">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EstadoOrcamento" nillable="true" type="tns:EstadoOrcamento" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaEstadoOrcamento" nillable="true" type="tns:EntradaEstadoOrcamento" />
+  <xs:complexType name="EstadoOrcamento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EstadoOrcamento" nillable="true" type="tns:EstadoOrcamento" />
+  <xs:complexType name="RetornoEstadoOrcamento">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EstadosOrcamento" nillable="true" type="tns:ArrayOfEstadoOrcamento" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoEstadoOrcamento" nillable="true" type="tns:RetornoEstadoOrcamento" />
+  <xs:complexType name="ArrayOfEstadoOrcamento">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EstadoOrcamento" nillable="true" type="tns:EstadoOrcamento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEstadoOrcamento" nillable="true" type="tns:ArrayOfEstadoOrcamento" />
+  <xs:complexType name="EntradaOrcamento">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Orcamento" nillable="true" type="tns:Orcamento" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaOrcamento" nillable="true" type="tns:EntradaOrcamento" />
+  <xs:complexType name="Orcamento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cliente" nillable="true" type="tns:Cliente" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Data" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="tns:EstadoOrcamento" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Itens" nillable="true" type="tns:ArrayOfItem" />
+      <xs:element minOccurs="0" name="PercentagemDesconto" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Responsavel" nillable="true" type="tns:Usuario" />
+      <xs:element minOccurs="0" name="Vendedor" nillable="true" type="tns:Usuario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Orcamento" nillable="true" type="tns:Orcamento" />
+  <xs:complexType name="ArrayOfItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="tns:Item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItem" nillable="true" type="tns:ArrayOfItem" />
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Orcamento" nillable="true" type="tns:Orcamento" />
+      <xs:element minOccurs="0" name="PercentagemDesconto" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Produto" nillable="true" type="tns:Produto" />
+      <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
+      <xs:element minOccurs="0" name="ValorCusto" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorReal" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Item" nillable="true" type="tns:Item" />
+  <xs:complexType name="RetornoOrcamento">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Orcamentos" nillable="true" type="tns:ArrayOfOrcamento" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoOrcamento" nillable="true" type="tns:RetornoOrcamento" />
+  <xs:complexType name="ArrayOfOrcamento">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Orcamento" nillable="true" type="tns:Orcamento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrcamento" nillable="true" type="tns:ArrayOfOrcamento" />
+  <xs:complexType name="RetornoUnidadeFederativa">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UnidadesFederativas" nillable="true" type="tns:ArrayOfUnidadeFederativa" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoUnidadeFederativa" nillable="true" type="tns:RetornoUnidadeFederativa" />
+  <xs:complexType name="ArrayOfUnidadeFederativa">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnidadeFederativa" nillable="true" type="tns:UnidadeFederativa" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnidadeFederativa" nillable="true" type="tns:ArrayOfUnidadeFederativa" />
+</xs:schema>

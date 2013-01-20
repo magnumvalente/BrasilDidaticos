@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="BrasilDidaticos.Apresentacao.Controler.MDecimalUpDown"             
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"             
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Height="25" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="lblDecimalUpDown" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Content="lblMaskTextBox" Margin="0,0,5,0"/>
+        <toolkit:DecimalUpDown Name="txtDecimalUpDown" Height="25" VerticalAlignment="Top" Grid.Column="1" FormatString="C2" Increment=".01" Value="0" DataContext="{Binding}" HorizontalAlignment="Left" Width="140" AllowSpin="True" IsHitTestVisible="True" ShowButtonSpinner="False" SelectAllOnGotFocus="True" />
+        <Label Name="lblDecimalUpDownErro" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2" Content="*" Foreground="Red" Visibility="Hidden"/>
+    </Grid>
+</UserControl>

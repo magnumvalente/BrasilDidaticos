@@ -1,0 +1,74 @@
+﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" x:Class="BrasilDidaticos.Apresentacao.WImportarProduto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ews="clr-namespace:BrasilDidaticos.Comum"
+        ews:ExtraWindowStyles.CanMinimize="False"
+        Title="Brasil Didáticos" Height="600" Width="800" ShowInTaskbar="False" Topmost="False" WindowStartupLocation="CenterScreen" Icon="/BrasilDidaticos;component/brasildidaticos.ico" WindowState="Maximized">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#EB0047E4" Offset="1" />
+            <GradientStop Color="#FFF8FFFF" Offset="0.075" />
+        </LinearGradientBrush>
+    </Window.Background>    
+    <DockPanel>
+        <StackPanel Name="stpCabecalho" DockPanel.Dock="Top" Height="50" Orientation="Horizontal">
+            <Image Source="/BrasilDidaticos;component/Imagens/ico_wimportarproduto.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock Text="IMPORTAR PRODUTO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
+        </StackPanel>
+        <GroupBox Name="Campos" DockPanel.Dock="Top" Width="200">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Image  Source="/BrasilDidaticos;component/Imagens/ico_campos.png" Width="16" Height="16" />
+                    <TextBlock Text="Campos" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid Name="gdCampo" DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <my:MCheckBox x:Name="chkCodigoProduto" Titulo="Código:" IsEnabled="False" Selecionado="True" Grid.Row="0" />
+                <my:MCheckBox x:Name="chkNomeProduto" Titulo="Nome:" IsEnabled="False" Selecionado="True" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MCheckBox x:Name="chkValorProduto" Titulo="Valor:" IsEnabled="False" Selecionado="True" Grid.Row="2" />
+                <my:MCheckBox x:Name="chkNCM" Titulo="NCM:" Grid.Row="3" Background="#FFF0F0F0" />                
+            </Grid>
+        </GroupBox>
+        <GroupBox Name="gpbCaminho" DockPanel.Dock="Top" Width="370" Margin="0,10,0,0">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Image  Source="/BrasilDidaticos;component/Imagens/ico_csv_arquivo.png" Width="16" Height="16" />
+                    <TextBlock Text="Arquivo 'CSV'" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid Name="gdCaminho" DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                 <my:MTextBox x:Name="txtCaminhoArquivo" Titulo="Caminho:" Height="25" Width="275" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Grid.Row="4"/>
+                <Button Name="btnProcurar" Height="25" Width="75" HorizontalAlignment="Right" VerticalAlignment="Center" IsDefault="True" Grid.Row="4" Margin="0,0,5,0" Click="btnProcurar_Click" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/BrasilDidaticos;component/Imagens/ico_procurar.png" Margin="0,0,5,0" />
+                        <TextBlock Text="Procurar"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </GroupBox>
+        <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal" Margin="0,10,0,0">            
+            <Button Grid.Column="2" Name="btnGravar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Margin="0,0,5,0" Click="btnGravar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_gravar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Gravar"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Name="btnCancelar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsCancel="True" Margin="0,0,5,0" Click="btnCancelar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_cancelar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Cancelar"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <FlowDocumentReader Margin="0,10,0,0" Name="FlowDocReader" Background="LightBlue" Canvas.Top="35" Canvas.Left="5" ViewingMode="Scroll"></FlowDocumentReader>
+    </DockPanel>
+</Window>
