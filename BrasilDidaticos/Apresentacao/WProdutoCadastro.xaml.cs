@@ -243,7 +243,7 @@ namespace BrasilDidaticos.Apresentacao
                 entTaxa = new Contrato.EntradaTaxa();
                 entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
                 entTaxa.Chave = Comum.Util.Chave;
-                entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Fornecedor = true };
+                entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Fornecedor = true, Produto = false };
 
                 servBrasilDidaticos = new Servico.BrasilDidaticosClient();
                 retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
@@ -256,9 +256,23 @@ namespace BrasilDidaticos.Apresentacao
             }
             else
             {
-                lstTaxas.AddRange((from f in _lstFornecedores
-                                   where f.Id == ((Contrato.Fornecedor)cmbFornecedor.ValorSelecionado).Id
-                                   select f).First().Taxas);                
+                // Recupera as taxas do fornecedor
+                List<Contrato.Taxa> taxas = (from f in _lstFornecedores
+                                            where f.Id == ((Contrato.Fornecedor)cmbFornecedor.ValorSelecionado).Id
+                                            select f).First().Taxas;
+                
+                // Se encontrou as taxas do fornecedor
+                if (taxas != null)
+                {
+                    // Para cada taxa dentro da listagem de taxa
+                    foreach (Contrato.Taxa tx in taxas)
+                    {                        
+                        lstTaxas.RemoveAll(t => t.Nome == tx.Nome && t.Valor == tx.Valor || t.Valor == 0);
+                       
+                        if (lstTaxas.Where(t => t.Nome == tx.Nome && t.Valor != tx.Valor).Count() == 0)
+                            lstTaxas.Add(tx);
+                    }
+                }
             }
 
             if (lstTaxas != null)
@@ -363,6 +377,38 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             } 
+        }
+
+        private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = Comum.Util.IsTextNumeric(e.Text);
+        }
+
+        private void NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            string valorDecimal = e.Text;
+
+            if (sender != null && sender.GetType() == typeof(TextBox))
+                valorDecimal = ((TextBox)sender).Text + e.Text;
+
+            e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
+        }
+
+        private void DataGridCell_NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (((DataGridCell)sender).Content.GetType() == typeof(TextBlock))
+            {
+                switch (((DataGridCell)sender).Column.Header.ToString())
+                {
+                    case "Quantidade":
+                        e.Handled = Comum.Util.IsTextNumeric(e.Text);
+                        break;
+                    case "Desconto":
+                    case "Valor Real":
+                        e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
+                        break;
+                }
+            }
         }
 
         private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

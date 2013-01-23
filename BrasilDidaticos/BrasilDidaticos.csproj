@@ -522,13 +522,19 @@
     <WCFMetadataStorage Include="Service References\Servico\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Servico\BrasilDidaticos.disco" />
+    <None Include="Service References\Servico\BrasilDidaticos.disco">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Servico\configuration91.svcinfo" />
+    <None Include="Service References\Servico\configuration91.svcinfo">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Servico\configuration.svcinfo" />
+    <None Include="Service References\Servico\configuration.svcinfo">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Servico\Reference.svcmap">

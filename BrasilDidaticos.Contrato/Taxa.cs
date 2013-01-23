@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.ComponentModel;
 
 namespace BrasilDidaticos.Contrato
 {
     [DataContract]
-    public class Taxa
+    public class Taxa : INotifyPropertyChanged
     {
         private decimal _Valor = 0;
 
@@ -56,6 +57,7 @@ namespace BrasilDidaticos.Contrato
             set
             {
                 _Valor = value;
+                OnPropertyChanged("Percentagem");
             }
         }
 
@@ -69,6 +71,8 @@ namespace BrasilDidaticos.Contrato
             set
             {
                 Valor = (value * 100);
+                OnPropertyChanged("Percentagem");
+                OnPropertyChanged("Valor");
             }
         }
 
@@ -84,6 +88,17 @@ namespace BrasilDidaticos.Contrato
         {
             get;
             set;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

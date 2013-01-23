@@ -10,7 +10,6 @@ namespace BrasilDidaticos.Contrato
     [DataContract]
     public class Produto
     {
-
         private decimal _ValorCusto;
 
         [DataMember]

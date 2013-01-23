@@ -67,35 +67,37 @@
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                        <EventSetter Event="PreviewTextInput" Handler="DataGridCell_NumericFloatOnly"></EventSetter>
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="Selecionado" Binding="{Binding Selecionado}" CanUserSort="False" CanUserReorder="False" />
                     <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" CanUserReorder="True" />
-                    <DataGridTemplateColumn Header="Prioridade" CanUserReorder="True" CanUserSort="True">
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <toolkit:DecimalUpDown Name="txtPrioridade" Increment="1" Value="{Binding Prioridade}" Minimum="0" Text="{Binding Prioridade}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Name="lblPrioridade" Text="{Binding Prioridade}" HorizontalAlignment="center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Valor" CanUserReorder="True" CanUserSort="True">
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <toolkit:DecimalUpDown Name="txtValor" FormatString="P2" Increment=".0001" Value="{Binding Percentagem}" Text="{Binding PercentagemToString}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Name="lblValor" Text="{Binding PercentagemToString}" HorizontalAlignment="Right"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Prioridade" Binding="{Binding Prioridade, StringFormat=N0, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" >
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <EventSetter Event="PreviewTextInput" Handler="NumericOnly"></EventSetter>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Valor (%)" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Text" Value="{Binding Path=Percentagem, StringFormat=P2, ConverterCulture=pt-BR}"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Text" Value="{Binding Path=PercentagemToString, StringFormat=F2, ConverterCulture=pt-BR}"/>
+                                <EventSetter Event="PreviewTextInput" Handler="NumericFloatOnly"/>
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

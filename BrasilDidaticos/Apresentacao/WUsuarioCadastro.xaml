@@ -53,6 +53,11 @@
         </StackPanel>
         <GroupBox Name="gpbPerfis" DockPanel.Dock="Top" Header="Perfis">
             <DataGrid DockPanel.Dock="Bottom" Name="dgPerfis" AutoGenerateColumns="False" Width="Auto" CanUserAddRows="False">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="Selecionado" Binding="{Binding Selecionado}" CanUserSort="False" CanUserReorder="False" />
                     <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
