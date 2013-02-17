@@ -113,15 +113,21 @@ namespace BrasilDidaticos.Apresentacao
                 // Verifica se o usuário logou com sucesso
                 if (retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO || sessaoDesbloqueda)
                 {
+                    // Loga novamenente na aplicação
+                    servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                    retUsuario = servBrasilDidaticos.UsuarioLogar(usuario);
+                    servBrasilDidaticos.Close();
                     // Guarda os dados do usuário Logado
                     Comum.Util.UsuarioLogado = retUsuario.Usuarios.First();
                     // Esconde a tela de login
                     this.Visibility = System.Windows.Visibility.Hidden;
                     // Recupera os parâmetros
                     Comum.Parametros.CarregarParametros();
-                    // Entra na tela principal
+                    //// Entra na tela principal
                     WPrincipal wPrincipal = new WPrincipal();
                     wPrincipal.ShowDialog();
+                    //Teste wteste = new Teste();
+                    //wteste.ShowDialog();
                 }
                 else if (retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 {

@@ -103,6 +103,14 @@ namespace BrasilDidaticos.Servico {
         
         BrasilDidaticos.Contrato.RetornoTaxa EndTaxaSalvar(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigoResponse")]
+        string FornecedorBuscarCodigo();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigoResponse")]
+        System.IAsyncResult BeginFornecedorBuscarCodigo(System.AsyncCallback callback, object asyncState);
+        
+        string EndFornecedorBuscarCodigo(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/FornecedorListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/FornecedorListarResponse")]
         BrasilDidaticos.Contrato.RetornoFornecedor FornecedorListar(BrasilDidaticos.Contrato.EntradaFornecedor Fornecedor);
         
@@ -119,6 +127,14 @@ namespace BrasilDidaticos.Servico {
         
         BrasilDidaticos.Contrato.RetornoFornecedor EndFornecedorSalvar(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigoResponse")]
+        string ProdutoBuscarCodigo();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigoResponse")]
+        System.IAsyncResult BeginProdutoBuscarCodigo(System.AsyncCallback callback, object asyncState);
+        
+        string EndProdutoBuscarCodigo(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/ProdutoListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/ProdutoListarResponse")]
         BrasilDidaticos.Contrato.RetornoProduto ProdutoListar(BrasilDidaticos.Contrato.EntradaProduto Produto);
         
@@ -126,6 +142,14 @@ namespace BrasilDidaticos.Servico {
         System.IAsyncResult BeginProdutoListar(BrasilDidaticos.Contrato.EntradaProduto Produto, System.AsyncCallback callback, object asyncState);
         
         BrasilDidaticos.Contrato.RetornoProduto EndProdutoListar(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorio", ReplyAction="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorioResponse")]
+        BrasilDidaticos.Contrato.RetornoProduto ProdutoListarRelatorio(BrasilDidaticos.Contrato.EntradaProduto Produto);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorio", ReplyAction="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorioResponse")]
+        System.IAsyncResult BeginProdutoListarRelatorio(BrasilDidaticos.Contrato.EntradaProduto Produto, System.AsyncCallback callback, object asyncState);
+        
+        BrasilDidaticos.Contrato.RetornoProduto EndProdutoListarRelatorio(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/ProdutoSalvar", ReplyAction="http://tempuri.org/IBrasilDidaticos/ProdutoSalvarResponse")]
         BrasilDidaticos.Contrato.RetornoProduto ProdutoSalvar(BrasilDidaticos.Contrato.EntradaProduto Produto);
@@ -159,6 +183,14 @@ namespace BrasilDidaticos.Servico {
         
         BrasilDidaticos.Contrato.RetornoParametro EndParametrosSalvar(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigoResponse")]
+        string ClienteBuscarCodigo();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigoResponse")]
+        System.IAsyncResult BeginClienteBuscarCodigo(System.AsyncCallback callback, object asyncState);
+        
+        string EndClienteBuscarCodigo(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/ClienteListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/ClienteListarResponse")]
         BrasilDidaticos.Contrato.RetornoCliente ClienteListar(BrasilDidaticos.Contrato.EntradaCliente Cliente);
         
@@ -174,6 +206,14 @@ namespace BrasilDidaticos.Servico {
         System.IAsyncResult BeginClienteSalvar(BrasilDidaticos.Contrato.EntradaCliente Cliente, System.AsyncCallback callback, object asyncState);
         
         BrasilDidaticos.Contrato.RetornoCliente EndClienteSalvar(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigoResponse")]
+        string OrcamentoBuscarCodigo();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigoResponse")]
+        System.IAsyncResult BeginOrcamentoBuscarCodigo(System.AsyncCallback callback, object asyncState);
+        
+        string EndOrcamentoBuscarCodigo(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/EstadoOrcamentoListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/EstadoOrcamentoListarResponse")]
         BrasilDidaticos.Contrato.RetornoEstadoOrcamento EstadoOrcamentoListar(BrasilDidaticos.Contrato.EntradaEstadoOrcamento EstadoOrcamento);
@@ -423,6 +463,25 @@ namespace BrasilDidaticos.Servico {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class FornecedorBuscarCodigoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public FornecedorBuscarCodigoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class FornecedorListarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -461,11 +520,49 @@ namespace BrasilDidaticos.Servico {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ProdutoBuscarCodigoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ProdutoBuscarCodigoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ProdutoListarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
         public ProdutoListarCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public BrasilDidaticos.Contrato.RetornoProduto Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((BrasilDidaticos.Contrato.RetornoProduto)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ProdutoListarRelatorioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ProdutoListarRelatorioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -556,6 +653,25 @@ namespace BrasilDidaticos.Servico {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ClienteBuscarCodigoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public ClienteBuscarCodigoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class ClienteListarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -588,6 +704,25 @@ namespace BrasilDidaticos.Servico {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((BrasilDidaticos.Contrato.RetornoCliente)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class OrcamentoBuscarCodigoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public OrcamentoBuscarCodigoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -738,6 +873,12 @@ namespace BrasilDidaticos.Servico {
         
         private System.Threading.SendOrPostCallback onTaxaSalvarCompletedDelegate;
         
+        private BeginOperationDelegate onBeginFornecedorBuscarCodigoDelegate;
+        
+        private EndOperationDelegate onEndFornecedorBuscarCodigoDelegate;
+        
+        private System.Threading.SendOrPostCallback onFornecedorBuscarCodigoCompletedDelegate;
+        
         private BeginOperationDelegate onBeginFornecedorListarDelegate;
         
         private EndOperationDelegate onEndFornecedorListarDelegate;
@@ -750,11 +891,23 @@ namespace BrasilDidaticos.Servico {
         
         private System.Threading.SendOrPostCallback onFornecedorSalvarCompletedDelegate;
         
+        private BeginOperationDelegate onBeginProdutoBuscarCodigoDelegate;
+        
+        private EndOperationDelegate onEndProdutoBuscarCodigoDelegate;
+        
+        private System.Threading.SendOrPostCallback onProdutoBuscarCodigoCompletedDelegate;
+        
         private BeginOperationDelegate onBeginProdutoListarDelegate;
         
         private EndOperationDelegate onEndProdutoListarDelegate;
         
         private System.Threading.SendOrPostCallback onProdutoListarCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginProdutoListarRelatorioDelegate;
+        
+        private EndOperationDelegate onEndProdutoListarRelatorioDelegate;
+        
+        private System.Threading.SendOrPostCallback onProdutoListarRelatorioCompletedDelegate;
         
         private BeginOperationDelegate onBeginProdutoSalvarDelegate;
         
@@ -780,6 +933,12 @@ namespace BrasilDidaticos.Servico {
         
         private System.Threading.SendOrPostCallback onParametrosSalvarCompletedDelegate;
         
+        private BeginOperationDelegate onBeginClienteBuscarCodigoDelegate;
+        
+        private EndOperationDelegate onEndClienteBuscarCodigoDelegate;
+        
+        private System.Threading.SendOrPostCallback onClienteBuscarCodigoCompletedDelegate;
+        
         private BeginOperationDelegate onBeginClienteListarDelegate;
         
         private EndOperationDelegate onEndClienteListarDelegate;
@@ -791,6 +950,12 @@ namespace BrasilDidaticos.Servico {
         private EndOperationDelegate onEndClienteSalvarDelegate;
         
         private System.Threading.SendOrPostCallback onClienteSalvarCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginOrcamentoBuscarCodigoDelegate;
+        
+        private EndOperationDelegate onEndOrcamentoBuscarCodigoDelegate;
+        
+        private System.Threading.SendOrPostCallback onOrcamentoBuscarCodigoCompletedDelegate;
         
         private BeginOperationDelegate onBeginEstadoOrcamentoListarDelegate;
         
@@ -857,11 +1022,17 @@ namespace BrasilDidaticos.Servico {
         
         public event System.EventHandler<TaxaSalvarCompletedEventArgs> TaxaSalvarCompleted;
         
+        public event System.EventHandler<FornecedorBuscarCodigoCompletedEventArgs> FornecedorBuscarCodigoCompleted;
+        
         public event System.EventHandler<FornecedorListarCompletedEventArgs> FornecedorListarCompleted;
         
         public event System.EventHandler<FornecedorSalvarCompletedEventArgs> FornecedorSalvarCompleted;
         
+        public event System.EventHandler<ProdutoBuscarCodigoCompletedEventArgs> ProdutoBuscarCodigoCompleted;
+        
         public event System.EventHandler<ProdutoListarCompletedEventArgs> ProdutoListarCompleted;
+        
+        public event System.EventHandler<ProdutoListarRelatorioCompletedEventArgs> ProdutoListarRelatorioCompleted;
         
         public event System.EventHandler<ProdutoSalvarCompletedEventArgs> ProdutoSalvarCompleted;
         
@@ -871,9 +1042,13 @@ namespace BrasilDidaticos.Servico {
         
         public event System.EventHandler<ParametrosSalvarCompletedEventArgs> ParametrosSalvarCompleted;
         
+        public event System.EventHandler<ClienteBuscarCodigoCompletedEventArgs> ClienteBuscarCodigoCompleted;
+        
         public event System.EventHandler<ClienteListarCompletedEventArgs> ClienteListarCompleted;
         
         public event System.EventHandler<ClienteSalvarCompletedEventArgs> ClienteSalvarCompleted;
+        
+        public event System.EventHandler<OrcamentoBuscarCodigoCompletedEventArgs> OrcamentoBuscarCodigoCompleted;
         
         public event System.EventHandler<EstadoOrcamentoListarCompletedEventArgs> EstadoOrcamentoListarCompleted;
         
@@ -1433,6 +1608,54 @@ namespace BrasilDidaticos.Servico {
                         Taxa}, this.onEndTaxaSalvarDelegate, this.onTaxaSalvarCompletedDelegate, userState);
         }
         
+        public string FornecedorBuscarCodigo() {
+            return base.Channel.FornecedorBuscarCodigo();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginFornecedorBuscarCodigo(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginFornecedorBuscarCodigo(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndFornecedorBuscarCodigo(System.IAsyncResult result) {
+            return base.Channel.EndFornecedorBuscarCodigo(result);
+        }
+        
+        private System.IAsyncResult OnBeginFornecedorBuscarCodigo(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginFornecedorBuscarCodigo(callback, asyncState);
+        }
+        
+        private object[] OnEndFornecedorBuscarCodigo(System.IAsyncResult result) {
+            string retVal = this.EndFornecedorBuscarCodigo(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnFornecedorBuscarCodigoCompleted(object state) {
+            if ((this.FornecedorBuscarCodigoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.FornecedorBuscarCodigoCompleted(this, new FornecedorBuscarCodigoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void FornecedorBuscarCodigoAsync() {
+            this.FornecedorBuscarCodigoAsync(null);
+        }
+        
+        public void FornecedorBuscarCodigoAsync(object userState) {
+            if ((this.onBeginFornecedorBuscarCodigoDelegate == null)) {
+                this.onBeginFornecedorBuscarCodigoDelegate = new BeginOperationDelegate(this.OnBeginFornecedorBuscarCodigo);
+            }
+            if ((this.onEndFornecedorBuscarCodigoDelegate == null)) {
+                this.onEndFornecedorBuscarCodigoDelegate = new EndOperationDelegate(this.OnEndFornecedorBuscarCodigo);
+            }
+            if ((this.onFornecedorBuscarCodigoCompletedDelegate == null)) {
+                this.onFornecedorBuscarCodigoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFornecedorBuscarCodigoCompleted);
+            }
+            base.InvokeAsync(this.onBeginFornecedorBuscarCodigoDelegate, null, this.onEndFornecedorBuscarCodigoDelegate, this.onFornecedorBuscarCodigoCompletedDelegate, userState);
+        }
+        
         public BrasilDidaticos.Contrato.RetornoFornecedor FornecedorListar(BrasilDidaticos.Contrato.EntradaFornecedor Fornecedor) {
             return base.Channel.FornecedorListar(Fornecedor);
         }
@@ -1533,6 +1756,54 @@ namespace BrasilDidaticos.Servico {
                         Fornecedor}, this.onEndFornecedorSalvarDelegate, this.onFornecedorSalvarCompletedDelegate, userState);
         }
         
+        public string ProdutoBuscarCodigo() {
+            return base.Channel.ProdutoBuscarCodigo();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginProdutoBuscarCodigo(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginProdutoBuscarCodigo(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndProdutoBuscarCodigo(System.IAsyncResult result) {
+            return base.Channel.EndProdutoBuscarCodigo(result);
+        }
+        
+        private System.IAsyncResult OnBeginProdutoBuscarCodigo(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginProdutoBuscarCodigo(callback, asyncState);
+        }
+        
+        private object[] OnEndProdutoBuscarCodigo(System.IAsyncResult result) {
+            string retVal = this.EndProdutoBuscarCodigo(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnProdutoBuscarCodigoCompleted(object state) {
+            if ((this.ProdutoBuscarCodigoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ProdutoBuscarCodigoCompleted(this, new ProdutoBuscarCodigoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ProdutoBuscarCodigoAsync() {
+            this.ProdutoBuscarCodigoAsync(null);
+        }
+        
+        public void ProdutoBuscarCodigoAsync(object userState) {
+            if ((this.onBeginProdutoBuscarCodigoDelegate == null)) {
+                this.onBeginProdutoBuscarCodigoDelegate = new BeginOperationDelegate(this.OnBeginProdutoBuscarCodigo);
+            }
+            if ((this.onEndProdutoBuscarCodigoDelegate == null)) {
+                this.onEndProdutoBuscarCodigoDelegate = new EndOperationDelegate(this.OnEndProdutoBuscarCodigo);
+            }
+            if ((this.onProdutoBuscarCodigoCompletedDelegate == null)) {
+                this.onProdutoBuscarCodigoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnProdutoBuscarCodigoCompleted);
+            }
+            base.InvokeAsync(this.onBeginProdutoBuscarCodigoDelegate, null, this.onEndProdutoBuscarCodigoDelegate, this.onProdutoBuscarCodigoCompletedDelegate, userState);
+        }
+        
         public BrasilDidaticos.Contrato.RetornoProduto ProdutoListar(BrasilDidaticos.Contrato.EntradaProduto Produto) {
             return base.Channel.ProdutoListar(Produto);
         }
@@ -1581,6 +1852,56 @@ namespace BrasilDidaticos.Servico {
             }
             base.InvokeAsync(this.onBeginProdutoListarDelegate, new object[] {
                         Produto}, this.onEndProdutoListarDelegate, this.onProdutoListarCompletedDelegate, userState);
+        }
+        
+        public BrasilDidaticos.Contrato.RetornoProduto ProdutoListarRelatorio(BrasilDidaticos.Contrato.EntradaProduto Produto) {
+            return base.Channel.ProdutoListarRelatorio(Produto);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginProdutoListarRelatorio(BrasilDidaticos.Contrato.EntradaProduto Produto, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginProdutoListarRelatorio(Produto, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public BrasilDidaticos.Contrato.RetornoProduto EndProdutoListarRelatorio(System.IAsyncResult result) {
+            return base.Channel.EndProdutoListarRelatorio(result);
+        }
+        
+        private System.IAsyncResult OnBeginProdutoListarRelatorio(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            BrasilDidaticos.Contrato.EntradaProduto Produto = ((BrasilDidaticos.Contrato.EntradaProduto)(inValues[0]));
+            return this.BeginProdutoListarRelatorio(Produto, callback, asyncState);
+        }
+        
+        private object[] OnEndProdutoListarRelatorio(System.IAsyncResult result) {
+            BrasilDidaticos.Contrato.RetornoProduto retVal = this.EndProdutoListarRelatorio(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnProdutoListarRelatorioCompleted(object state) {
+            if ((this.ProdutoListarRelatorioCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ProdutoListarRelatorioCompleted(this, new ProdutoListarRelatorioCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ProdutoListarRelatorioAsync(BrasilDidaticos.Contrato.EntradaProduto Produto) {
+            this.ProdutoListarRelatorioAsync(Produto, null);
+        }
+        
+        public void ProdutoListarRelatorioAsync(BrasilDidaticos.Contrato.EntradaProduto Produto, object userState) {
+            if ((this.onBeginProdutoListarRelatorioDelegate == null)) {
+                this.onBeginProdutoListarRelatorioDelegate = new BeginOperationDelegate(this.OnBeginProdutoListarRelatorio);
+            }
+            if ((this.onEndProdutoListarRelatorioDelegate == null)) {
+                this.onEndProdutoListarRelatorioDelegate = new EndOperationDelegate(this.OnEndProdutoListarRelatorio);
+            }
+            if ((this.onProdutoListarRelatorioCompletedDelegate == null)) {
+                this.onProdutoListarRelatorioCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnProdutoListarRelatorioCompleted);
+            }
+            base.InvokeAsync(this.onBeginProdutoListarRelatorioDelegate, new object[] {
+                        Produto}, this.onEndProdutoListarRelatorioDelegate, this.onProdutoListarRelatorioCompletedDelegate, userState);
         }
         
         public BrasilDidaticos.Contrato.RetornoProduto ProdutoSalvar(BrasilDidaticos.Contrato.EntradaProduto Produto) {
@@ -1783,6 +2104,54 @@ namespace BrasilDidaticos.Servico {
                         Parametros}, this.onEndParametrosSalvarDelegate, this.onParametrosSalvarCompletedDelegate, userState);
         }
         
+        public string ClienteBuscarCodigo() {
+            return base.Channel.ClienteBuscarCodigo();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginClienteBuscarCodigo(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginClienteBuscarCodigo(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndClienteBuscarCodigo(System.IAsyncResult result) {
+            return base.Channel.EndClienteBuscarCodigo(result);
+        }
+        
+        private System.IAsyncResult OnBeginClienteBuscarCodigo(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginClienteBuscarCodigo(callback, asyncState);
+        }
+        
+        private object[] OnEndClienteBuscarCodigo(System.IAsyncResult result) {
+            string retVal = this.EndClienteBuscarCodigo(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnClienteBuscarCodigoCompleted(object state) {
+            if ((this.ClienteBuscarCodigoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ClienteBuscarCodigoCompleted(this, new ClienteBuscarCodigoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ClienteBuscarCodigoAsync() {
+            this.ClienteBuscarCodigoAsync(null);
+        }
+        
+        public void ClienteBuscarCodigoAsync(object userState) {
+            if ((this.onBeginClienteBuscarCodigoDelegate == null)) {
+                this.onBeginClienteBuscarCodigoDelegate = new BeginOperationDelegate(this.OnBeginClienteBuscarCodigo);
+            }
+            if ((this.onEndClienteBuscarCodigoDelegate == null)) {
+                this.onEndClienteBuscarCodigoDelegate = new EndOperationDelegate(this.OnEndClienteBuscarCodigo);
+            }
+            if ((this.onClienteBuscarCodigoCompletedDelegate == null)) {
+                this.onClienteBuscarCodigoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnClienteBuscarCodigoCompleted);
+            }
+            base.InvokeAsync(this.onBeginClienteBuscarCodigoDelegate, null, this.onEndClienteBuscarCodigoDelegate, this.onClienteBuscarCodigoCompletedDelegate, userState);
+        }
+        
         public BrasilDidaticos.Contrato.RetornoCliente ClienteListar(BrasilDidaticos.Contrato.EntradaCliente Cliente) {
             return base.Channel.ClienteListar(Cliente);
         }
@@ -1881,6 +2250,54 @@ namespace BrasilDidaticos.Servico {
             }
             base.InvokeAsync(this.onBeginClienteSalvarDelegate, new object[] {
                         Cliente}, this.onEndClienteSalvarDelegate, this.onClienteSalvarCompletedDelegate, userState);
+        }
+        
+        public string OrcamentoBuscarCodigo() {
+            return base.Channel.OrcamentoBuscarCodigo();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginOrcamentoBuscarCodigo(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginOrcamentoBuscarCodigo(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndOrcamentoBuscarCodigo(System.IAsyncResult result) {
+            return base.Channel.EndOrcamentoBuscarCodigo(result);
+        }
+        
+        private System.IAsyncResult OnBeginOrcamentoBuscarCodigo(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginOrcamentoBuscarCodigo(callback, asyncState);
+        }
+        
+        private object[] OnEndOrcamentoBuscarCodigo(System.IAsyncResult result) {
+            string retVal = this.EndOrcamentoBuscarCodigo(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnOrcamentoBuscarCodigoCompleted(object state) {
+            if ((this.OrcamentoBuscarCodigoCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.OrcamentoBuscarCodigoCompleted(this, new OrcamentoBuscarCodigoCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void OrcamentoBuscarCodigoAsync() {
+            this.OrcamentoBuscarCodigoAsync(null);
+        }
+        
+        public void OrcamentoBuscarCodigoAsync(object userState) {
+            if ((this.onBeginOrcamentoBuscarCodigoDelegate == null)) {
+                this.onBeginOrcamentoBuscarCodigoDelegate = new BeginOperationDelegate(this.OnBeginOrcamentoBuscarCodigo);
+            }
+            if ((this.onEndOrcamentoBuscarCodigoDelegate == null)) {
+                this.onEndOrcamentoBuscarCodigoDelegate = new EndOperationDelegate(this.OnEndOrcamentoBuscarCodigo);
+            }
+            if ((this.onOrcamentoBuscarCodigoCompletedDelegate == null)) {
+                this.onOrcamentoBuscarCodigoCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnOrcamentoBuscarCodigoCompleted);
+            }
+            base.InvokeAsync(this.onBeginOrcamentoBuscarCodigoDelegate, null, this.onEndOrcamentoBuscarCodigoDelegate, this.onOrcamentoBuscarCodigoCompletedDelegate, userState);
         }
         
         public BrasilDidaticos.Contrato.RetornoEstadoOrcamento EstadoOrcamentoListar(BrasilDidaticos.Contrato.EntradaEstadoOrcamento EstadoOrcamento) {

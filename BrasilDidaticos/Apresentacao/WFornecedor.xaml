@@ -58,7 +58,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbFornecedores" DockPanel.Dock="Top" Header="Fornecedores">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgFornecedores" Width="Auto" CanUserAddRows="False" DataContext="{Binding}" >
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgFornecedores" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" DataContext="{Binding}" >
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>

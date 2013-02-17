@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace BrasilDidaticos.Apresentacao
 {
@@ -19,6 +21,12 @@ namespace BrasilDidaticos.Apresentacao
     /// </summary>
     public partial class WOrcamentoCadastro : Window
     {
+        #region "[Constantes]"
+
+        const double TAM_COLUNA_CODIGO = 40;
+
+        #endregion
+
         #region "[Atributos]"
 
         private Contrato.Orcamento _orcamento = null;
@@ -60,7 +68,7 @@ namespace BrasilDidaticos.Apresentacao
         private void ValidarPermissao()
         {
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            txtCodigo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtCodigo.IsEnabled = false;
             dtpData.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             cmbCliente.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             cmbResponsavel.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
@@ -74,16 +82,7 @@ namespace BrasilDidaticos.Apresentacao
         /// </summary>
         private StringBuilder ValidarCampos()
         {
-            StringBuilder strValidacao = new StringBuilder();
-
-            // Verifica se o Código foi informado
-            if (string.IsNullOrWhiteSpace(txtCodigo.Conteudo.ToString()))
-            {
-                txtCodigo.Erro = Visibility.Visible;
-                strValidacao.Append("O campo 'Codigo' não foi informado!\n");
-            }
-            else
-                txtCodigo.Erro = Visibility.Hidden;
+            StringBuilder strValidacao = new StringBuilder();                       
 
             // Verifica se a Nome foi informada
             if (string.IsNullOrWhiteSpace(dtpData.Conteudo.ToString()))
@@ -110,7 +109,7 @@ namespace BrasilDidaticos.Apresentacao
                 strValidacao.Append("O campo 'Responsável' não foi informado!\n");
             }
             else
-                cmbCliente.Erro = Visibility.Hidden;
+                cmbResponsavel.Erro = Visibility.Hidden;
 
             // Verifica se o vendedor foi informado
             if (cmbVendedor.ValorSelecionado == null)
@@ -119,7 +118,7 @@ namespace BrasilDidaticos.Apresentacao
                 strValidacao.Append("O campo 'Vendedor' não foi informado!\n");
             }
             else
-                cmbCliente.Erro = Visibility.Hidden;
+                cmbVendedor.Erro = Visibility.Hidden;
 
             return strValidacao;
         }
@@ -154,10 +153,23 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     MessageBox.Show(retOrcamento.Mensagem, "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
                     salvou = false;
+
+                    if (retOrcamento.Codigo == Contrato.Constantes.COD_REGISTRO_DUPLICADO)
+                    {
+                        gdOrcamentoDados.ColumnDefinitions[1].Width = new GridLength(TAM_COLUNA_CODIGO);
+                    }
                 }
             }
 
             return salvou;
+        }
+
+        private void GerarNovoCodigo()
+        {
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            string retCodigoOrcamento = servBrasilDidaticos.OrcamentoBuscarCodigo();
+            servBrasilDidaticos.Close();
+            txtCodigo.Conteudo = retCodigoOrcamento;
         }
 
         private void PreencherDados(Contrato.Orcamento Orcamento)
@@ -214,11 +226,15 @@ namespace BrasilDidaticos.Apresentacao
 
             if (_orcamento != null)
             {
-                Item.Header = Comum.Util.GroupHeader("Edição","/BrasilDidaticos;component/Imagens/ico_editar.png");
+                Item.Header = Comum.Util.GroupHeader("Edição", "/BrasilDidaticos;component/Imagens/ico_editar.png");
 
                 txtCodigo.Conteudo = _orcamento.Codigo;
                 dtpData.Conteudo = _orcamento.Data.ToShortDateString();
                 txtDesconto.Valor = _orcamento.ValorDesconto;
+            }
+            else
+            {
+                GerarNovoCodigo();
             }
         }
 
@@ -433,6 +449,11 @@ namespace BrasilDidaticos.Apresentacao
             }            
         }
 
+        private void ConfigurarControles()
+        {
+            dtpData.Focus();
+        }
+
         #endregion
 
         #region "[Eventos]"
@@ -445,7 +466,7 @@ namespace BrasilDidaticos.Apresentacao
                 ValidarPermissao();
                 PreencherTela();
                 ListarItens();
-                txtCodigo.txtBox.Focus();
+                ConfigurarControles();
             }
             catch (Exception ex)
             {
@@ -455,6 +476,23 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }            
+        }
+
+        private void btnGerarNovoCodigo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                GerarNovoCodigo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void btnAdicionarProduto_Click(object sender, RoutedEventArgs e)
@@ -546,6 +584,11 @@ namespace BrasilDidaticos.Apresentacao
             e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
         }
 
+        private void dgItens_CurrentCellChanged(object sender, EventArgs e)
+        {
+            dgItens.CommitEdit(DataGridEditingUnit.Row, true);
+        }
+
         private void DataGridCell_NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             if (((DataGridCell)sender).Content.GetType() == typeof(TextBlock))
@@ -593,5 +636,6 @@ namespace BrasilDidaticos.Apresentacao
         }        
       
         #endregion
+        
     }
 }

@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Item">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoItem</returns>
-        public static Contrato.RetornoItem ListarItem(Contrato.EntradaItem entradaItem)
+        internal static Contrato.RetornoItem ListarItem(Contrato.EntradaItem entradaItem)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoItem retItem = new Contrato.RetornoItem();
@@ -97,7 +97,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioTaxa">Recebe os itens do orçamento recuperado do banco</param>
         /// <returns>List<Contrato.Taxa></returns>
-        public static List<Contrato.Item> ListarOrcamentoItem(System.Data.Objects.DataClasses.EntityCollection<Dados.ITEM> lstOrcamentoItem)
+        internal static List<Contrato.Item> ListarOrcamentoItem(System.Data.Objects.DataClasses.EntityCollection<Dados.ITEM> lstOrcamentoItem)
         {
             List<Contrato.Item> lstItem = null;
 

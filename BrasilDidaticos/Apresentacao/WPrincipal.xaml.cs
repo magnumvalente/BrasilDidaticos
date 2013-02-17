@@ -48,6 +48,11 @@ namespace BrasilDidaticos.Apresentacao
             // Permissão Relatórios
             Atacado.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_ATACADO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             Varejo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_VAREJO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+
+            // Permissão Valor Custo DataGrid
+            DataGridColumn dgColuna = null;
+            dgColuna = (from c in dgProdutos.Columns where c.Header.ToString() == "Custo" select c).FirstOrDefault();
+            if (dgColuna != null) dgColuna.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRINCIPAL, Comum.Constantes.VER_CUSTO) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
         private void PreencherDadosFornecedores()
@@ -64,7 +69,7 @@ namespace BrasilDidaticos.Apresentacao
             if (retFornecedor.Fornecedores != null)
             {
                 cmbFornecedor.ComboBox.Items.Clear();
-                cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(),  Content = "Todos" });
+                cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
                 foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores)
                 {
                     cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = fornecedor.Id.ToString(), Content = fornecedor.Nome, Tag = fornecedor });
@@ -103,7 +108,7 @@ namespace BrasilDidaticos.Apresentacao
 
             if (retProduto.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
-                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
+                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, CodigoFornecedor = p.CodigoFornecedor, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
                 foreach (Objeto.Produto p in lstProdutos)
                     dgProdutos.Items.Add(p);
             }
@@ -118,6 +123,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             Produto.Codigo = txtCodigo.Conteudo;
             Produto.Nome = txtNome.Conteudo;
+            Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
             if (cmbFornecedor.ValorSelecionado != null)
                 Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
         }
@@ -222,11 +228,7 @@ namespace BrasilDidaticos.Apresentacao
                 wProduto.Owner = this;
                 wProduto.ShowDialog();
                 if (wProduto.Alterou)
-                    PreencherDadosProdutos();
-
-                //wProduto.ShowActivated = true;
-                //wProduto.Show();
-                //wProduto.WindowClosingEvent += new WProduto.WindowClosing(wProduto_WindowClosingEvent);                
+                    PreencherDadosProdutos();            
             }
             catch (Exception ex)
             {
@@ -259,7 +261,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             try
             {
-                WRelatorioVarejo wRelatorioVarejo = new WRelatorioVarejo();
+                WFiltroRelatorioVarejo wRelatorioVarejo = new WFiltroRelatorioVarejo();
                 wRelatorioVarejo.Owner = this;
                 wRelatorioVarejo.ShowDialog();
             }
@@ -277,7 +279,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             try
             {
-                WRelatorioAtacado wRelatorioAtacado = new WRelatorioAtacado();
+                WFiltroRelatorioAtacado wRelatorioAtacado = new WFiltroRelatorioAtacado();
                 wRelatorioAtacado.Owner = this;
                 wRelatorioAtacado.ShowDialog();
             }
@@ -447,7 +449,6 @@ namespace BrasilDidaticos.Apresentacao
             }
         }                   
 
-        #endregion                
-                
+        #endregion                                
     }
 }

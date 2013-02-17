@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaTaxa.Taxas">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoTaxa</returns>
-        public static Contrato.RetornoTaxa ListarTaxa(Contrato.EntradaTaxa entradaTaxa)
+        internal static Contrato.RetornoTaxa ListarTaxa(Contrato.EntradaTaxa entradaTaxa)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoTaxa retTaxa = new Contrato.RetornoTaxa();
@@ -79,7 +79,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioTaxa">Recebe os taxas do fornecedor recuperado do banco</param>
         /// <returns>List<Contrato.Taxa></returns>
-        public static List<Contrato.Taxa> ListarFornecedorTaxa(System.Data.Objects.DataClasses.EntityCollection<Dados.FORNECEDOR_TAXA> lstFornecedorTaxa)
+        internal static List<Contrato.Taxa> ListarFornecedorTaxa(System.Data.Objects.DataClasses.EntityCollection<Dados.FORNECEDOR_TAXA> lstFornecedorTaxa)
         {
             List<Contrato.Taxa> lstTaxa = null;
 
@@ -96,7 +96,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         Valor = taxa.NUM_VALOR,
                         Desconto = taxa.T_TAXA.BOL_DESCONTO,
                         Prioridade = taxa.ORD_PRIORIDADE,
-                        Ativo = taxa.T_TAXA.BOL_ATIVO                        
+                        Ativo = taxa.T_TAXA.BOL_ATIVO
                     });
                 }
             }
@@ -109,7 +109,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioTaxa">Recebe os taxas do produto recuperado do banco</param>
         /// <returns>List<Contrato.Taxa></returns>
-        public static List<Contrato.Taxa> ListarProdutoTaxa(System.Data.Objects.DataClasses.EntityCollection<Dados.PRODUTO_TAXA> lstProdutoTaxa)
+        internal static List<Contrato.Taxa> ListarProdutoTaxa(System.Data.Objects.DataClasses.EntityCollection<Dados.PRODUTO_TAXA> lstProdutoTaxa)
         {
             List<Contrato.Taxa> lstTaxa = null;
 
@@ -135,11 +135,37 @@ namespace BrasilDidaticos.WcfServico.Negocio
         }
 
         /// <summary>
+        /// Retorna uma lista de taxas
+        /// </summary>
+        /// <param name="lstUsuarioTaxa">Recebe os taxas do produto recuperado do banco</param>
+        /// <returns>List<Contrato.Taxa></returns>
+        internal static Contrato.Taxa BuscarProdutoTaxa(Dados.PRODUTO_TAXA produtoTaxa)
+        {
+            Contrato.Taxa taxa = null;
+
+            if (produtoTaxa != null)
+            {
+                taxa = new Contrato.Taxa
+                {
+                    Id = produtoTaxa.T_TAXA.ID_TAXA,
+                    Nome = produtoTaxa.T_TAXA.NOME_TAXA,
+                    Valor = produtoTaxa.NUM_VALOR,
+                    Desconto = produtoTaxa.T_TAXA.BOL_DESCONTO,
+                    Prioridade = produtoTaxa.ORD_PRIORIDADE,
+                    Ativo = produtoTaxa.T_TAXA.BOL_ATIVO
+                };
+            }
+
+            return taxa;
+        }
+
+
+        /// <summary>
         /// Método para salvar o taxa
         /// </summary>
         /// <param name="Taxas">Objeto com os dados do taxa</param>
         /// <returns>Contrato.RetornoTaxa</returns>
-        public static Contrato.RetornoTaxa SalvarTaxa(Contrato.EntradaTaxa entradaTaxa)
+        internal static Contrato.RetornoTaxa SalvarTaxa(Contrato.EntradaTaxa entradaTaxa)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoTaxa retTaxa = new Contrato.RetornoTaxa();
@@ -231,7 +257,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Taxas">Objeto com os dados do taxa</param>
         /// <returns>Contrato.RetornoTaxa</returns>
-        public static Contrato.RetornoTaxa SalvarTaxaProduto(Guid IdProduto, string UsuarioLogado, Contrato.Taxa Taxa)
+        internal static Contrato.RetornoTaxa SalvarTaxaProduto(Guid IdProduto, string UsuarioLogado, Contrato.Taxa Taxa)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoTaxa retTaxa = new Contrato.RetornoTaxa();

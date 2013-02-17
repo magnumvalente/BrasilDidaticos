@@ -80,10 +80,12 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
-                <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="2" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="30" Grid.Row="0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="300" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MTextBox x:Name="txtCodigoFornecedor" Titulo="Código do Fornecedor:" TamanhoTexto="6" Grid.Row="2" />
+                <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="3" Background="#FFF0F0F0"/>
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes" DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">            
@@ -96,8 +98,9 @@
         </StackPanel>
         <GroupBox Name="GpbProdutos" DockPanel.Dock="Top" Header="Produtos">
             <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgProdutos" Width="Auto" CanUserAddRows="False" SelectionUnit="CellOrRowHeader" ScrollViewer.ScrollChanged="dgProdutos_ScrollChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Fornecedor" Binding="{Binding Fornecedor.Nome}" IsReadOnly="True" />
+                <DataGrid.Columns>                    
+                    <DataGridTextColumn Header="Fornecedor" Binding="{Binding Fornecedor.Nome}" IsReadOnly="True" />                   
+                    <DataGridTextColumn Header="Código do Fornecedor" Binding="{Binding CodigoFornecedor}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Custo" Binding="{Binding ValorCusto, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />

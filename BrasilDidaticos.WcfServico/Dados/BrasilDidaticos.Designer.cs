@@ -46,14 +46,14 @@ namespace BrasilDidaticos.WcfServico.Dados
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class BRASIL_DIDATICOS : ObjectContext
+    internal partial class BRASIL_DIDATICOS : ObjectContext
     {
         #region Constructors
     
         /// <summary>
         /// Initializes a new BRASIL_DIDATICOS object using the connection string found in the 'BRASIL_DIDATICOS' section of the application configuration file.
         /// </summary>
-        public BRASIL_DIDATICOS() : base("name=BRASIL_DIDATICOS", "BRASIL_DIDATICOS")
+        internal BRASIL_DIDATICOS() : base("name=BRASIL_DIDATICOS", "BRASIL_DIDATICOS")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -62,7 +62,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Initialize a new BRASIL_DIDATICOS object.
         /// </summary>
-        public BRASIL_DIDATICOS(string connectionString) : base(connectionString, "BRASIL_DIDATICOS")
+        internal BRASIL_DIDATICOS(string connectionString) : base(connectionString, "BRASIL_DIDATICOS")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -71,7 +71,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Initialize a new BRASIL_DIDATICOS object.
         /// </summary>
-        public BRASIL_DIDATICOS(EntityConnection connection) : base(connection, "BRASIL_DIDATICOS")
+        internal BRASIL_DIDATICOS(EntityConnection connection) : base(connection, "BRASIL_DIDATICOS")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -90,7 +90,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<CLIENTE> T_CLIENTE
+        internal ObjectSet<CLIENTE> T_CLIENTE
         {
             get
             {
@@ -106,7 +106,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<FORNECEDOR> T_FORNECEDOR
+        internal ObjectSet<FORNECEDOR> T_FORNECEDOR
         {
             get
             {
@@ -122,7 +122,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<FORNECEDOR_TAXA> T_FORNECEDOR_TAXA
+        internal ObjectSet<FORNECEDOR_TAXA> T_FORNECEDOR_TAXA
         {
             get
             {
@@ -138,7 +138,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ITEM> T_ITEM
+        internal ObjectSet<ITEM> T_ITEM
         {
             get
             {
@@ -154,7 +154,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ORCAMENTO> T_ORCAMENTO
+        internal ObjectSet<ORCAMENTO> T_ORCAMENTO
         {
             get
             {
@@ -170,7 +170,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PARAMETRO> T_PARAMETRO
+        internal ObjectSet<PARAMETRO> T_PARAMETRO
         {
             get
             {
@@ -186,7 +186,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PERFIL> T_PERFIL
+        internal ObjectSet<PERFIL> T_PERFIL
         {
             get
             {
@@ -202,7 +202,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PERFIL_PERMISSAO> T_PERFIL_PERMISSAO
+        internal ObjectSet<PERFIL_PERMISSAO> T_PERFIL_PERMISSAO
         {
             get
             {
@@ -218,7 +218,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PERMISSAO> T_PERMISSAO
+        internal ObjectSet<PERMISSAO> T_PERMISSAO
         {
             get
             {
@@ -234,7 +234,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PRODUTO> T_PRODUTO
+        internal ObjectSet<PRODUTO> T_PRODUTO
         {
             get
             {
@@ -250,7 +250,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PRODUTO_TAXA> T_PRODUTO_TAXA
+        internal ObjectSet<PRODUTO_TAXA> T_PRODUTO_TAXA
         {
             get
             {
@@ -266,7 +266,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SESSAO> T_SESSAO
+        internal ObjectSet<SESSAO> T_SESSAO
         {
             get
             {
@@ -282,7 +282,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<TAXA> T_TAXA
+        internal ObjectSet<TAXA> T_TAXA
         {
             get
             {
@@ -298,7 +298,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<USUARIO> T_USUARIO
+        internal ObjectSet<USUARIO> T_USUARIO
         {
             get
             {
@@ -314,7 +314,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<USUARIO_PERFIL> T_USUARIO_PERFIL
+        internal ObjectSet<USUARIO_PERFIL> T_USUARIO_PERFIL
         {
             get
             {
@@ -330,7 +330,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<UNIDADE_FEDERATIVA> T_UNIDADE_FEDERATIVA
+        internal ObjectSet<UNIDADE_FEDERATIVA> T_UNIDADE_FEDERATIVA
         {
             get
             {
@@ -346,7 +346,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO
+        internal ObjectSet<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO
         {
             get
             {
@@ -365,7 +365,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_CLIENTE EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_CLIENTE(CLIENTE cLIENTE)
+        internal void AddToT_CLIENTE(CLIENTE cLIENTE)
         {
             base.AddObject("T_CLIENTE", cLIENTE);
         }
@@ -373,7 +373,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_FORNECEDOR EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_FORNECEDOR(FORNECEDOR fORNECEDOR)
+        internal void AddToT_FORNECEDOR(FORNECEDOR fORNECEDOR)
         {
             base.AddObject("T_FORNECEDOR", fORNECEDOR);
         }
@@ -381,7 +381,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_FORNECEDOR_TAXA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_FORNECEDOR_TAXA(FORNECEDOR_TAXA fORNECEDOR_TAXA)
+        internal void AddToT_FORNECEDOR_TAXA(FORNECEDOR_TAXA fORNECEDOR_TAXA)
         {
             base.AddObject("T_FORNECEDOR_TAXA", fORNECEDOR_TAXA);
         }
@@ -389,7 +389,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_ITEM EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_ITEM(ITEM iTEM)
+        internal void AddToT_ITEM(ITEM iTEM)
         {
             base.AddObject("T_ITEM", iTEM);
         }
@@ -397,7 +397,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_ORCAMENTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_ORCAMENTO(ORCAMENTO oRCAMENTO)
+        internal void AddToT_ORCAMENTO(ORCAMENTO oRCAMENTO)
         {
             base.AddObject("T_ORCAMENTO", oRCAMENTO);
         }
@@ -405,7 +405,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_PARAMETRO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_PARAMETRO(PARAMETRO pARAMETRO)
+        internal void AddToT_PARAMETRO(PARAMETRO pARAMETRO)
         {
             base.AddObject("T_PARAMETRO", pARAMETRO);
         }
@@ -413,7 +413,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_PERFIL EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_PERFIL(PERFIL pERFIL)
+        internal void AddToT_PERFIL(PERFIL pERFIL)
         {
             base.AddObject("T_PERFIL", pERFIL);
         }
@@ -421,7 +421,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_PERFIL_PERMISSAO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_PERFIL_PERMISSAO(PERFIL_PERMISSAO pERFIL_PERMISSAO)
+        internal void AddToT_PERFIL_PERMISSAO(PERFIL_PERMISSAO pERFIL_PERMISSAO)
         {
             base.AddObject("T_PERFIL_PERMISSAO", pERFIL_PERMISSAO);
         }
@@ -429,7 +429,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_PERMISSAO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_PERMISSAO(PERMISSAO pERMISSAO)
+        internal void AddToT_PERMISSAO(PERMISSAO pERMISSAO)
         {
             base.AddObject("T_PERMISSAO", pERMISSAO);
         }
@@ -437,7 +437,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_PRODUTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_PRODUTO(PRODUTO pRODUTO)
+        internal void AddToT_PRODUTO(PRODUTO pRODUTO)
         {
             base.AddObject("T_PRODUTO", pRODUTO);
         }
@@ -445,7 +445,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_PRODUTO_TAXA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_PRODUTO_TAXA(PRODUTO_TAXA pRODUTO_TAXA)
+        internal void AddToT_PRODUTO_TAXA(PRODUTO_TAXA pRODUTO_TAXA)
         {
             base.AddObject("T_PRODUTO_TAXA", pRODUTO_TAXA);
         }
@@ -453,7 +453,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_SESSAO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_SESSAO(SESSAO sESSAO)
+        internal void AddToT_SESSAO(SESSAO sESSAO)
         {
             base.AddObject("T_SESSAO", sESSAO);
         }
@@ -461,7 +461,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_TAXA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_TAXA(TAXA tAXA)
+        internal void AddToT_TAXA(TAXA tAXA)
         {
             base.AddObject("T_TAXA", tAXA);
         }
@@ -469,7 +469,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_USUARIO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_USUARIO(USUARIO uSUARIO)
+        internal void AddToT_USUARIO(USUARIO uSUARIO)
         {
             base.AddObject("T_USUARIO", uSUARIO);
         }
@@ -477,7 +477,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_USUARIO_PERFIL EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_USUARIO_PERFIL(USUARIO_PERFIL uSUARIO_PERFIL)
+        internal void AddToT_USUARIO_PERFIL(USUARIO_PERFIL uSUARIO_PERFIL)
         {
             base.AddObject("T_USUARIO_PERFIL", uSUARIO_PERFIL);
         }
@@ -485,7 +485,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_UNIDADE_FEDERATIVA EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_UNIDADE_FEDERATIVA(UNIDADE_FEDERATIVA uNIDADE_FEDERATIVA)
+        internal void AddToT_UNIDADE_FEDERATIVA(UNIDADE_FEDERATIVA uNIDADE_FEDERATIVA)
         {
             base.AddObject("T_UNIDADE_FEDERATIVA", uNIDADE_FEDERATIVA);
         }
@@ -493,9 +493,32 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// Deprecated Method for adding a new object to the T_ESTADO_ORCAMENTO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToT_ESTADO_ORCAMENTO(ESTADO_ORCAMENTO eSTADO_ORCAMENTO)
+        internal void AddToT_ESTADO_ORCAMENTO(ESTADO_ORCAMENTO eSTADO_ORCAMENTO)
         {
             base.AddObject("T_ESTADO_ORCAMENTO", eSTADO_ORCAMENTO);
+        }
+
+        #endregion
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="p_TIPO_CODIGO">No Metadata Documentation available.</param>
+        /// <param name="p_CODIGO">No Metadata Documentation available.</param>
+        internal int RETORNAR_CODIGO(global::System.String p_TIPO_CODIGO, ObjectParameter p_CODIGO)
+        {
+            ObjectParameter p_TIPO_CODIGOParameter;
+            if (p_TIPO_CODIGO != null)
+            {
+                p_TIPO_CODIGOParameter = new ObjectParameter("P_TIPO_CODIGO", p_TIPO_CODIGO);
+            }
+            else
+            {
+                p_TIPO_CODIGOParameter = new ObjectParameter("P_TIPO_CODIGO", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("RETORNAR_CODIGO", p_TIPO_CODIGOParameter, p_CODIGO);
         }
 
         #endregion
@@ -512,7 +535,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="CLIENTE")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class CLIENTE : EntityObject
+    internal partial class CLIENTE : EntityObject
     {
         #region Factory Method
     
@@ -526,7 +549,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
-        public static CLIENTE CreateCLIENTE(global::System.Guid iD_CLIENTE, global::System.String nOME_CLIENTE, global::System.Boolean bOL_PESSOA_FISICA, global::System.String cPF_CNJP_CLIENTE, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Boolean bOL_ATIVO)
+        internal static CLIENTE CreateCLIENTE(global::System.Guid iD_CLIENTE, global::System.String nOME_CLIENTE, global::System.Boolean bOL_PESSOA_FISICA, global::System.String cPF_CNJP_CLIENTE, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Boolean bOL_ATIVO)
         {
             CLIENTE cLIENTE = new CLIENTE();
             cLIENTE.ID_CLIENTE = iD_CLIENTE;
@@ -547,7 +570,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_CLIENTE
+        internal global::System.Guid ID_CLIENTE
         {
             get
             {
@@ -574,7 +597,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String COD_CLIENTE
+        internal global::System.String COD_CLIENTE
         {
             get
             {
@@ -598,7 +621,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_CLIENTE
+        internal global::System.String NOME_CLIENTE
         {
             get
             {
@@ -622,7 +645,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String CAIXA_ESCOLAR
+        internal global::System.String CAIXA_ESCOLAR
         {
             get
             {
@@ -646,7 +669,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_PESSOA_FISICA
+        internal global::System.Boolean BOL_PESSOA_FISICA
         {
             get
             {
@@ -670,7 +693,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String CPF_CNJP_CLIENTE
+        internal global::System.String CPF_CNJP_CLIENTE
         {
             get
             {
@@ -694,7 +717,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_INSCRICAO_ESTADUAL
+        internal global::System.String DES_INSCRICAO_ESTADUAL
         {
             get
             {
@@ -718,7 +741,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String NUM_TELEFONE
+        internal global::System.String NUM_TELEFONE
         {
             get
             {
@@ -742,7 +765,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String NUM_CELULAR
+        internal global::System.String NUM_CELULAR
         {
             get
             {
@@ -766,7 +789,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_ENDERECO
+        internal global::System.String DES_ENDERECO
         {
             get
             {
@@ -790,7 +813,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> NUM_ENDERECO
+        internal Nullable<global::System.Int32> NUM_ENDERECO
         {
             get
             {
@@ -814,7 +837,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String CMP_ENDERECO
+        internal global::System.String CMP_ENDERECO
         {
             get
             {
@@ -838,7 +861,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String NUM_CEP
+        internal global::System.String NUM_CEP
         {
             get
             {
@@ -862,7 +885,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_BAIRRO
+        internal global::System.String DES_BAIRRO
         {
             get
             {
@@ -886,7 +909,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_CIDADE
+        internal global::System.String DES_CIDADE
         {
             get
             {
@@ -910,7 +933,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String COD_ESTADO
+        internal global::System.String COD_ESTADO
         {
             get
             {
@@ -934,7 +957,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_ESTADO
+        internal global::System.String DES_ESTADO
         {
             get
             {
@@ -958,7 +981,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_EMAIL
+        internal global::System.String DES_EMAIL
         {
             get
             {
@@ -982,7 +1005,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -1006,7 +1029,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -1030,7 +1053,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> ID_CLIENTE_MATRIZ
+        internal Nullable<global::System.Guid> ID_CLIENTE_MATRIZ
         {
             get
             {
@@ -1054,7 +1077,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -1084,7 +1107,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_CLIENTE_MATRIZ_T_CLIENTE", "T_CLIENTE1")]
-        public EntityCollection<CLIENTE> T_CLIENTE_FILHO
+        internal EntityCollection<CLIENTE> T_CLIENTE_FILHO
         {
             get
             {
@@ -1106,7 +1129,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_CLIENTE_MATRIZ_T_CLIENTE", "T_CLIENTE")]
-        public CLIENTE T_CLIENTE_MATRIZ
+        internal CLIENTE T_CLIENTE_MATRIZ
         {
             get
             {
@@ -1122,7 +1145,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<CLIENTE> T_CLIENTE_MATRIZReference
+        internal EntityReference<CLIENTE> T_CLIENTE_MATRIZReference
         {
             get
             {
@@ -1144,7 +1167,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_CLIENTE", "T_ORCAMENTO")]
-        public EntityCollection<ORCAMENTO> T_ORCAMENTO
+        internal EntityCollection<ORCAMENTO> T_ORCAMENTO
         {
             get
             {
@@ -1168,7 +1191,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="ESTADO_ORCAMENTO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ESTADO_ORCAMENTO : EntityObject
+    internal partial class ESTADO_ORCAMENTO : EntityObject
     {
         #region Factory Method
     
@@ -1179,7 +1202,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="cOD_ESTADO_ORCAMENTO">Initial value of the COD_ESTADO_ORCAMENTO property.</param>
         /// <param name="nOME_ESTADO_ORCAMENTO">Initial value of the NOME_ESTADO_ORCAMENTO property.</param>
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
-        public static ESTADO_ORCAMENTO CreateESTADO_ORCAMENTO(global::System.Guid iD_ESTADO_ORCAMENTO, global::System.String cOD_ESTADO_ORCAMENTO, global::System.String nOME_ESTADO_ORCAMENTO, global::System.Boolean bOL_ATIVO)
+        internal static ESTADO_ORCAMENTO CreateESTADO_ORCAMENTO(global::System.Guid iD_ESTADO_ORCAMENTO, global::System.String cOD_ESTADO_ORCAMENTO, global::System.String nOME_ESTADO_ORCAMENTO, global::System.Boolean bOL_ATIVO)
         {
             ESTADO_ORCAMENTO eSTADO_ORCAMENTO = new ESTADO_ORCAMENTO();
             eSTADO_ORCAMENTO.ID_ESTADO_ORCAMENTO = iD_ESTADO_ORCAMENTO;
@@ -1197,7 +1220,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_ESTADO_ORCAMENTO
+        internal global::System.Guid ID_ESTADO_ORCAMENTO
         {
             get
             {
@@ -1224,7 +1247,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String COD_ESTADO_ORCAMENTO
+        internal global::System.String COD_ESTADO_ORCAMENTO
         {
             get
             {
@@ -1248,7 +1271,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_ESTADO_ORCAMENTO
+        internal global::System.String NOME_ESTADO_ORCAMENTO
         {
             get
             {
@@ -1272,7 +1295,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -1296,7 +1319,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> ID_ESTADO_ORCAMENTO_ANTERIOR
+        internal Nullable<global::System.Guid> ID_ESTADO_ORCAMENTO_ANTERIOR
         {
             get
             {
@@ -1320,7 +1343,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> ID_ESTADO_ORCAMENTO_SUCESSOR
+        internal Nullable<global::System.Guid> ID_ESTADO_ORCAMENTO_SUCESSOR
         {
             get
             {
@@ -1350,7 +1373,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_ORCAMENTO_T_ESTADO_ORCAMENTO_ANTERIOR", "T_ESTADO_ORCAMENTO1")]
-        public EntityCollection<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_ANTERIORES
+        internal EntityCollection<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_ANTERIORES
         {
             get
             {
@@ -1372,7 +1395,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_ORCAMENTO_T_ESTADO_ORCAMENTO_ANTERIOR", "T_ESTADO_ORCAMENTO")]
-        public ESTADO_ORCAMENTO T_ESTADO_ORCAMENTO_ANTERIOR
+        internal ESTADO_ORCAMENTO T_ESTADO_ORCAMENTO_ANTERIOR
         {
             get
             {
@@ -1388,7 +1411,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_ANTERIORReference
+        internal EntityReference<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_ANTERIORReference
         {
             get
             {
@@ -1410,7 +1433,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_ORCAMENTO_T_ESTADO_ORCAMENTO_SUCESSOR", "T_ESTADO_ORCAMENTO1")]
-        public EntityCollection<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_SECESSORES
+        internal EntityCollection<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_SECESSORES
         {
             get
             {
@@ -1432,7 +1455,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_ORCAMENTO_T_ESTADO_ORCAMENTO_SUCESSOR", "T_ESTADO_ORCAMENTO")]
-        public ESTADO_ORCAMENTO T_ESTADO_ORCAMENTO_SUCESSOR
+        internal ESTADO_ORCAMENTO T_ESTADO_ORCAMENTO_SUCESSOR
         {
             get
             {
@@ -1448,7 +1471,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_SUCESSORReference
+        internal EntityReference<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTO_SUCESSORReference
         {
             get
             {
@@ -1470,7 +1493,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_ESTADO_ORCAMENTO", "ORCAMENTO")]
-        public EntityCollection<ORCAMENTO> T_ORCAMENTO
+        internal EntityCollection<ORCAMENTO> T_ORCAMENTO
         {
             get
             {
@@ -1494,7 +1517,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="FORNECEDOR")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class FORNECEDOR : EntityObject
+    internal partial class FORNECEDOR : EntityObject
     {
         #region Factory Method
     
@@ -1508,7 +1531,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
-        public static FORNECEDOR CreateFORNECEDOR(global::System.Guid iD_FORNECEDOR, global::System.String cOD_FORNECEDOR, global::System.String nOME_FORNECEDOR, global::System.Boolean bOL_PESSOA_FISICA, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
+        internal static FORNECEDOR CreateFORNECEDOR(global::System.Guid iD_FORNECEDOR, global::System.String cOD_FORNECEDOR, global::System.String nOME_FORNECEDOR, global::System.Boolean bOL_PESSOA_FISICA, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
         {
             FORNECEDOR fORNECEDOR = new FORNECEDOR();
             fORNECEDOR.ID_FORNECEDOR = iD_FORNECEDOR;
@@ -1529,7 +1552,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_FORNECEDOR
+        internal global::System.Guid ID_FORNECEDOR
         {
             get
             {
@@ -1556,7 +1579,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String COD_FORNECEDOR
+        internal global::System.String COD_FORNECEDOR
         {
             get
             {
@@ -1580,7 +1603,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_FORNECEDOR
+        internal global::System.String NOME_FORNECEDOR
         {
             get
             {
@@ -1604,7 +1627,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_PESSOA_FISICA
+        internal global::System.Boolean BOL_PESSOA_FISICA
         {
             get
             {
@@ -1628,7 +1651,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String CPF_CNJP_FORNECEDOR
+        internal global::System.String CPF_CNJP_FORNECEDOR
         {
             get
             {
@@ -1652,7 +1675,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> NUM_VALOR_VAREJO
+        internal Nullable<global::System.Decimal> NUM_VALOR_VAREJO
         {
             get
             {
@@ -1676,7 +1699,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> NUM_VALOR_ATACADO
+        internal Nullable<global::System.Decimal> NUM_VALOR_ATACADO
         {
             get
             {
@@ -1700,7 +1723,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -1724,7 +1747,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -1748,7 +1771,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -1778,7 +1801,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_FORNECEDOR_TAXA_T_FORNECEDOR", "T_FORNECEDOR_TAXA")]
-        public EntityCollection<FORNECEDOR_TAXA> T_FORNECEDOR_TAXA
+        internal EntityCollection<FORNECEDOR_TAXA> T_FORNECEDOR_TAXA
         {
             get
             {
@@ -1800,7 +1823,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_T_FORNECEDOR", "T_PRODUTO")]
-        public EntityCollection<PRODUTO> T_PRODUTO
+        internal EntityCollection<PRODUTO> T_PRODUTO
         {
             get
             {
@@ -1824,7 +1847,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="FORNECEDOR_TAXA")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class FORNECEDOR_TAXA : EntityObject
+    internal partial class FORNECEDOR_TAXA : EntityObject
     {
         #region Factory Method
     
@@ -1838,7 +1861,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="oRD_PRIORIDADE">Initial value of the ORD_PRIORIDADE property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
-        public static FORNECEDOR_TAXA CreateFORNECEDOR_TAXA(global::System.Guid iD_FORNECEDOR_TAXA, global::System.Guid iD_FORNECEDOR, global::System.Guid iD_TAXA, global::System.Decimal nUM_VALOR, global::System.Int16 oRD_PRIORIDADE, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
+        internal static FORNECEDOR_TAXA CreateFORNECEDOR_TAXA(global::System.Guid iD_FORNECEDOR_TAXA, global::System.Guid iD_FORNECEDOR, global::System.Guid iD_TAXA, global::System.Decimal nUM_VALOR, global::System.Int16 oRD_PRIORIDADE, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
         {
             FORNECEDOR_TAXA fORNECEDOR_TAXA = new FORNECEDOR_TAXA();
             fORNECEDOR_TAXA.ID_FORNECEDOR_TAXA = iD_FORNECEDOR_TAXA;
@@ -1859,7 +1882,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_FORNECEDOR_TAXA
+        internal global::System.Guid ID_FORNECEDOR_TAXA
         {
             get
             {
@@ -1886,7 +1909,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_FORNECEDOR
+        internal global::System.Guid ID_FORNECEDOR
         {
             get
             {
@@ -1910,7 +1933,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_TAXA
+        internal global::System.Guid ID_TAXA
         {
             get
             {
@@ -1934,7 +1957,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal NUM_VALOR
+        internal global::System.Decimal NUM_VALOR
         {
             get
             {
@@ -1958,7 +1981,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int16 ORD_PRIORIDADE
+        internal global::System.Int16 ORD_PRIORIDADE
         {
             get
             {
@@ -1982,7 +2005,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -2006,7 +2029,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -2036,7 +2059,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_FORNECEDOR_TAXA_T_FORNECEDOR", "T_FORNECEDOR")]
-        public FORNECEDOR T_FORNECEDOR
+        internal FORNECEDOR T_FORNECEDOR
         {
             get
             {
@@ -2052,7 +2075,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<FORNECEDOR> T_FORNECEDORReference
+        internal EntityReference<FORNECEDOR> T_FORNECEDORReference
         {
             get
             {
@@ -2074,7 +2097,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_FORNECEDOR_TAXA_T_TAXA", "T_TAXA")]
-        public TAXA T_TAXA
+        internal TAXA T_TAXA
         {
             get
             {
@@ -2090,7 +2113,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<TAXA> T_TAXAReference
+        internal EntityReference<TAXA> T_TAXAReference
         {
             get
             {
@@ -2114,7 +2137,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="ITEM")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ITEM : EntityObject
+    internal partial class ITEM : EntityObject
     {
         #region Factory Method
     
@@ -2129,7 +2152,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="nUM_VALOR_UNITARIO">Initial value of the NUM_VALOR_UNITARIO property.</param>
-        public static ITEM CreateITEM(global::System.Guid iD_ITEM, global::System.Guid iD_PRODUTO, global::System.Guid iD_ORCAMENTO, global::System.Decimal nUM_VALOR_CUSTO, global::System.Int32 nUM_QUANTIDADE, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Decimal nUM_VALOR_UNITARIO)
+        internal static ITEM CreateITEM(global::System.Guid iD_ITEM, global::System.Guid iD_PRODUTO, global::System.Guid iD_ORCAMENTO, global::System.Decimal nUM_VALOR_CUSTO, global::System.Int32 nUM_QUANTIDADE, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Decimal nUM_VALOR_UNITARIO)
         {
             ITEM iTEM = new ITEM();
             iTEM.ID_ITEM = iD_ITEM;
@@ -2151,7 +2174,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_ITEM
+        internal global::System.Guid ID_ITEM
         {
             get
             {
@@ -2178,7 +2201,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PRODUTO
+        internal global::System.Guid ID_PRODUTO
         {
             get
             {
@@ -2202,7 +2225,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_ORCAMENTO
+        internal global::System.Guid ID_ORCAMENTO
         {
             get
             {
@@ -2226,7 +2249,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal NUM_VALOR_CUSTO
+        internal global::System.Decimal NUM_VALOR_CUSTO
         {
             get
             {
@@ -2250,7 +2273,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> NUM_DESCONTO
+        internal Nullable<global::System.Decimal> NUM_DESCONTO
         {
             get
             {
@@ -2274,7 +2297,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 NUM_QUANTIDADE
+        internal global::System.Int32 NUM_QUANTIDADE
         {
             get
             {
@@ -2298,7 +2321,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -2322,7 +2345,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -2346,7 +2369,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String DES_ITEM
+        internal global::System.String DES_ITEM
         {
             get
             {
@@ -2370,7 +2393,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal NUM_VALOR_UNITARIO
+        internal global::System.Decimal NUM_VALOR_UNITARIO
         {
             get
             {
@@ -2400,7 +2423,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_ORCAMENTO", "T_ORCAMENTO")]
-        public ORCAMENTO T_ORCAMENTO
+        internal ORCAMENTO T_ORCAMENTO
         {
             get
             {
@@ -2416,7 +2439,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ORCAMENTO> T_ORCAMENTOReference
+        internal EntityReference<ORCAMENTO> T_ORCAMENTOReference
         {
             get
             {
@@ -2438,7 +2461,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_PRODUTO", "T_PRODUTO")]
-        public PRODUTO T_PRODUTO
+        internal PRODUTO T_PRODUTO
         {
             get
             {
@@ -2454,7 +2477,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<PRODUTO> T_PRODUTOReference
+        internal EntityReference<PRODUTO> T_PRODUTOReference
         {
             get
             {
@@ -2478,7 +2501,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="ORCAMENTO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ORCAMENTO : EntityObject
+    internal partial class ORCAMENTO : EntityObject
     {
         #region Factory Method
     
@@ -2494,7 +2517,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="iD_USUARIO_VENDEDOR">Initial value of the ID_USUARIO_VENDEDOR property.</param>
         /// <param name="iD_ESTADO_ORCAMENTO">Initial value of the ID_ESTADO_ORCAMENTO property.</param>
-        public static ORCAMENTO CreateORCAMENTO(global::System.Guid iD_ORCAMENTO, global::System.String cOD_ORCAMENTO, global::System.DateTime dATA_ORCAMENTO, global::System.Guid iD_CLIENTE, global::System.Guid iD_USUARIO_RESPONSAVEL, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO, global::System.Guid iD_USUARIO_VENDEDOR, global::System.Guid iD_ESTADO_ORCAMENTO)
+        internal static ORCAMENTO CreateORCAMENTO(global::System.Guid iD_ORCAMENTO, global::System.String cOD_ORCAMENTO, global::System.DateTime dATA_ORCAMENTO, global::System.Guid iD_CLIENTE, global::System.Guid iD_USUARIO_RESPONSAVEL, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO, global::System.Guid iD_USUARIO_VENDEDOR, global::System.Guid iD_ESTADO_ORCAMENTO)
         {
             ORCAMENTO oRCAMENTO = new ORCAMENTO();
             oRCAMENTO.ID_ORCAMENTO = iD_ORCAMENTO;
@@ -2517,7 +2540,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_ORCAMENTO
+        internal global::System.Guid ID_ORCAMENTO
         {
             get
             {
@@ -2544,7 +2567,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String COD_ORCAMENTO
+        internal global::System.String COD_ORCAMENTO
         {
             get
             {
@@ -2568,7 +2591,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ORCAMENTO
+        internal global::System.DateTime DATA_ORCAMENTO
         {
             get
             {
@@ -2592,7 +2615,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_CLIENTE
+        internal global::System.Guid ID_CLIENTE
         {
             get
             {
@@ -2616,7 +2639,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_USUARIO_RESPONSAVEL
+        internal global::System.Guid ID_USUARIO_RESPONSAVEL
         {
             get
             {
@@ -2640,7 +2663,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> NUM_DESCONTO
+        internal Nullable<global::System.Decimal> NUM_DESCONTO
         {
             get
             {
@@ -2664,7 +2687,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -2688,7 +2711,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -2712,7 +2735,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_USUARIO_VENDEDOR
+        internal global::System.Guid ID_USUARIO_VENDEDOR
         {
             get
             {
@@ -2736,7 +2759,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_ESTADO_ORCAMENTO
+        internal global::System.Guid ID_ESTADO_ORCAMENTO
         {
             get
             {
@@ -2766,7 +2789,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_CLIENTE", "T_CLIENTE")]
-        public CLIENTE T_CLIENTE
+        internal CLIENTE T_CLIENTE
         {
             get
             {
@@ -2782,7 +2805,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<CLIENTE> T_CLIENTEReference
+        internal EntityReference<CLIENTE> T_CLIENTEReference
         {
             get
             {
@@ -2804,7 +2827,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_ORCAMENTO", "T_ITEM")]
-        public EntityCollection<ITEM> T_ITEM
+        internal EntityCollection<ITEM> T_ITEM
         {
             get
             {
@@ -2826,7 +2849,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_USUARIO", "T_USUARIO")]
-        public USUARIO T_USUARIO_RESPOSANVEL
+        internal USUARIO T_USUARIO_RESPOSANVEL
         {
             get
             {
@@ -2842,7 +2865,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<USUARIO> T_USUARIO_RESPOSANVELReference
+        internal EntityReference<USUARIO> T_USUARIO_RESPOSANVELReference
         {
             get
             {
@@ -2864,7 +2887,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_ESTADO_ORCAMENTO", "T_ESTADO_ORCAMENTO")]
-        public ESTADO_ORCAMENTO T_ESTADO_ORCAMENTO
+        internal ESTADO_ORCAMENTO T_ESTADO_ORCAMENTO
         {
             get
             {
@@ -2880,7 +2903,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTOReference
+        internal EntityReference<ESTADO_ORCAMENTO> T_ESTADO_ORCAMENTOReference
         {
             get
             {
@@ -2902,7 +2925,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_USUARIO_VENDEDOR", "USUARIO")]
-        public USUARIO T_USUARIO_VENDEDOR
+        internal USUARIO T_USUARIO_VENDEDOR
         {
             get
             {
@@ -2918,7 +2941,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<USUARIO> T_USUARIO_VENDEDORReference
+        internal EntityReference<USUARIO> T_USUARIO_VENDEDORReference
         {
             get
             {
@@ -2942,7 +2965,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PARAMETRO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class PARAMETRO : EntityObject
+    internal partial class PARAMETRO : EntityObject
     {
         #region Factory Method
     
@@ -2956,7 +2979,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="vALOR_PARAMETRO">Initial value of the VALOR_PARAMETRO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
-        public static PARAMETRO CreatePARAMETRO(global::System.Guid iD_PARAMETRO, global::System.String cOD_PARAMETRO, global::System.String nOME_PARAMETRO, global::System.String tIPO_PARAMETRO, global::System.String vALOR_PARAMETRO, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
+        internal static PARAMETRO CreatePARAMETRO(global::System.Guid iD_PARAMETRO, global::System.String cOD_PARAMETRO, global::System.String nOME_PARAMETRO, global::System.String tIPO_PARAMETRO, global::System.String vALOR_PARAMETRO, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
         {
             PARAMETRO pARAMETRO = new PARAMETRO();
             pARAMETRO.ID_PARAMETRO = iD_PARAMETRO;
@@ -2977,7 +3000,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PARAMETRO
+        internal global::System.Guid ID_PARAMETRO
         {
             get
             {
@@ -3004,7 +3027,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String COD_PARAMETRO
+        internal global::System.String COD_PARAMETRO
         {
             get
             {
@@ -3028,7 +3051,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_PARAMETRO
+        internal global::System.String NOME_PARAMETRO
         {
             get
             {
@@ -3052,7 +3075,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String TIPO_PARAMETRO
+        internal global::System.String TIPO_PARAMETRO
         {
             get
             {
@@ -3076,7 +3099,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String VALOR_PARAMETRO
+        internal global::System.String VALOR_PARAMETRO
         {
             get
             {
@@ -3100,7 +3123,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -3124,7 +3147,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -3153,7 +3176,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PERFIL")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class PERFIL : EntityObject
+    internal partial class PERFIL : EntityObject
     {
         #region Factory Method
     
@@ -3164,7 +3187,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="cOD_PERFIL">Initial value of the COD_PERFIL property.</param>
         /// <param name="nOME_PERFIL">Initial value of the NOME_PERFIL property.</param>
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
-        public static PERFIL CreatePERFIL(global::System.Guid iD_PERFIL, global::System.String cOD_PERFIL, global::System.String nOME_PERFIL, global::System.Boolean bOL_ATIVO)
+        internal static PERFIL CreatePERFIL(global::System.Guid iD_PERFIL, global::System.String cOD_PERFIL, global::System.String nOME_PERFIL, global::System.Boolean bOL_ATIVO)
         {
             PERFIL pERFIL = new PERFIL();
             pERFIL.ID_PERFIL = iD_PERFIL;
@@ -3182,7 +3205,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PERFIL
+        internal global::System.Guid ID_PERFIL
         {
             get
             {
@@ -3209,7 +3232,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String COD_PERFIL
+        internal global::System.String COD_PERFIL
         {
             get
             {
@@ -3233,7 +3256,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_PERFIL
+        internal global::System.String NOME_PERFIL
         {
             get
             {
@@ -3257,7 +3280,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -3281,7 +3304,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -3305,7 +3328,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> DATA_ATUALIZACAO
+        internal Nullable<global::System.DateTime> DATA_ATUALIZACAO
         {
             get
             {
@@ -3335,7 +3358,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PERFIL_PERMISSAO_T_PERFIL", "T_PERFIL_PERMISSAO")]
-        public EntityCollection<PERFIL_PERMISSAO> T_PERFIL_PERMISSAO
+        internal EntityCollection<PERFIL_PERMISSAO> T_PERFIL_PERMISSAO
         {
             get
             {
@@ -3357,7 +3380,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_USUARIO_PERFIL_T_PERFIL", "T_USUARIO_PERFIL")]
-        public EntityCollection<USUARIO_PERFIL> T_USUARIO_PERFIL
+        internal EntityCollection<USUARIO_PERFIL> T_USUARIO_PERFIL
         {
             get
             {
@@ -3381,7 +3404,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PERFIL_PERMISSAO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class PERFIL_PERMISSAO : EntityObject
+    internal partial class PERFIL_PERMISSAO : EntityObject
     {
         #region Factory Method
     
@@ -3393,7 +3416,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="iD_PERMISSAO">Initial value of the ID_PERMISSAO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
-        public static PERFIL_PERMISSAO CreatePERFIL_PERMISSAO(global::System.Guid iD_PERFIL_PERMISSAO, global::System.Guid iD_PERFIL, global::System.Guid iD_PERMISSAO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
+        internal static PERFIL_PERMISSAO CreatePERFIL_PERMISSAO(global::System.Guid iD_PERFIL_PERMISSAO, global::System.Guid iD_PERFIL, global::System.Guid iD_PERMISSAO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
         {
             PERFIL_PERMISSAO pERFIL_PERMISSAO = new PERFIL_PERMISSAO();
             pERFIL_PERMISSAO.ID_PERFIL_PERMISSAO = iD_PERFIL_PERMISSAO;
@@ -3412,7 +3435,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PERFIL_PERMISSAO
+        internal global::System.Guid ID_PERFIL_PERMISSAO
         {
             get
             {
@@ -3439,7 +3462,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PERFIL
+        internal global::System.Guid ID_PERFIL
         {
             get
             {
@@ -3463,7 +3486,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PERMISSAO
+        internal global::System.Guid ID_PERMISSAO
         {
             get
             {
@@ -3487,7 +3510,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -3511,7 +3534,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -3541,7 +3564,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PERFIL_PERMISSAO_T_PERFIL", "T_PERFIL")]
-        public PERFIL T_PERFIL
+        internal PERFIL T_PERFIL
         {
             get
             {
@@ -3557,7 +3580,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<PERFIL> T_PERFILReference
+        internal EntityReference<PERFIL> T_PERFILReference
         {
             get
             {
@@ -3579,7 +3602,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PERFIL_PERMISSAO_T_PERMISSAO", "T_PERMISSAO")]
-        public PERMISSAO T_PERMISSAO
+        internal PERMISSAO T_PERMISSAO
         {
             get
             {
@@ -3595,7 +3618,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<PERMISSAO> T_PERMISSAOReference
+        internal EntityReference<PERMISSAO> T_PERMISSAOReference
         {
             get
             {
@@ -3619,7 +3642,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PERMISSAO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class PERMISSAO : EntityObject
+    internal partial class PERMISSAO : EntityObject
     {
         #region Factory Method
     
@@ -3629,7 +3652,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="iD_PERMISSAO">Initial value of the ID_PERMISSAO property.</param>
         /// <param name="nOME_PERMISSAO">Initial value of the NOME_PERMISSAO property.</param>
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
-        public static PERMISSAO CreatePERMISSAO(global::System.Guid iD_PERMISSAO, global::System.String nOME_PERMISSAO, global::System.Boolean bOL_ATIVO)
+        internal static PERMISSAO CreatePERMISSAO(global::System.Guid iD_PERMISSAO, global::System.String nOME_PERMISSAO, global::System.Boolean bOL_ATIVO)
         {
             PERMISSAO pERMISSAO = new PERMISSAO();
             pERMISSAO.ID_PERMISSAO = iD_PERMISSAO;
@@ -3646,7 +3669,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PERMISSAO
+        internal global::System.Guid ID_PERMISSAO
         {
             get
             {
@@ -3673,7 +3696,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_PERMISSAO
+        internal global::System.String NOME_PERMISSAO
         {
             get
             {
@@ -3697,7 +3720,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -3727,7 +3750,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PERFIL_PERMISSAO_T_PERMISSAO", "T_PERFIL_PERMISSAO")]
-        public EntityCollection<PERFIL_PERMISSAO> T_PERFIL_PERMISSAO
+        internal EntityCollection<PERFIL_PERMISSAO> T_PERFIL_PERMISSAO
         {
             get
             {
@@ -3751,7 +3774,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PRODUTO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class PRODUTO : EntityObject
+    internal partial class PRODUTO : EntityObject
     {
         #region Factory Method
     
@@ -3765,7 +3788,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="nUM_VALOR">Initial value of the NUM_VALOR property.</param>
-        public static PRODUTO CreatePRODUTO(global::System.Guid iD_PRODUTO, global::System.Guid iD_FORNECEDOR, global::System.String nOME_PRODUTO, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Decimal nUM_VALOR)
+        internal static PRODUTO CreatePRODUTO(global::System.Guid iD_PRODUTO, global::System.Guid iD_FORNECEDOR, global::System.String nOME_PRODUTO, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Decimal nUM_VALOR)
         {
             PRODUTO pRODUTO = new PRODUTO();
             pRODUTO.ID_PRODUTO = iD_PRODUTO;
@@ -3786,7 +3809,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PRODUTO
+        internal global::System.Guid ID_PRODUTO
         {
             get
             {
@@ -3813,7 +3836,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_FORNECEDOR
+        internal global::System.Guid ID_FORNECEDOR
         {
             get
             {
@@ -3837,7 +3860,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String COD_PRODUTO
+        internal global::System.String COD_PRODUTO
         {
             get
             {
@@ -3861,7 +3884,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_PRODUTO
+        internal global::System.String NOME_PRODUTO
         {
             get
             {
@@ -3885,7 +3908,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String NCM_PRODUTO
+        internal global::System.String NCM_PRODUTO
         {
             get
             {
@@ -3909,7 +3932,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -3933,7 +3956,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -3957,7 +3980,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -3981,7 +4004,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal NUM_VALOR
+        internal global::System.Decimal NUM_VALOR
         {
             get
             {
@@ -3999,6 +4022,30 @@ namespace BrasilDidaticos.WcfServico.Dados
         private global::System.Decimal _NUM_VALOR;
         partial void OnNUM_VALORChanging(global::System.Decimal value);
         partial void OnNUM_VALORChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        internal global::System.String COD_PRODUTO_FORNECEDOR
+        {
+            get
+            {
+                return _COD_PRODUTO_FORNECEDOR;
+            }
+            set
+            {
+                OnCOD_PRODUTO_FORNECEDORChanging(value);
+                ReportPropertyChanging("COD_PRODUTO_FORNECEDOR");
+                _COD_PRODUTO_FORNECEDOR = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("COD_PRODUTO_FORNECEDOR");
+                OnCOD_PRODUTO_FORNECEDORChanged();
+            }
+        }
+        private global::System.String _COD_PRODUTO_FORNECEDOR;
+        partial void OnCOD_PRODUTO_FORNECEDORChanging(global::System.String value);
+        partial void OnCOD_PRODUTO_FORNECEDORChanged();
 
         #endregion
     
@@ -4011,7 +4058,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_T_FORNECEDOR", "T_FORNECEDOR")]
-        public FORNECEDOR T_FORNECEDOR
+        internal FORNECEDOR T_FORNECEDOR
         {
             get
             {
@@ -4027,7 +4074,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<FORNECEDOR> T_FORNECEDORReference
+        internal EntityReference<FORNECEDOR> T_FORNECEDORReference
         {
             get
             {
@@ -4049,7 +4096,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_PRODUTO", "T_ITEM")]
-        public EntityCollection<ITEM> T_ITEM
+        internal EntityCollection<ITEM> T_ITEM
         {
             get
             {
@@ -4071,7 +4118,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_TAXA_T_PRODUTO", "T_PRODUTO_TAXA")]
-        public EntityCollection<PRODUTO_TAXA> T_PRODUTO_TAXA
+        internal EntityCollection<PRODUTO_TAXA> T_PRODUTO_TAXA
         {
             get
             {
@@ -4095,7 +4142,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PRODUTO_TAXA")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class PRODUTO_TAXA : EntityObject
+    internal partial class PRODUTO_TAXA : EntityObject
     {
         #region Factory Method
     
@@ -4109,7 +4156,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="oRD_PRIORIDADE">Initial value of the ORD_PRIORIDADE property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
-        public static PRODUTO_TAXA CreatePRODUTO_TAXA(global::System.Guid iD_PRODUTO_TAXA, global::System.Guid iD_PRODUTO, global::System.Guid iD_TAXA, global::System.Decimal nUM_VALOR, global::System.Int16 oRD_PRIORIDADE, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
+        internal static PRODUTO_TAXA CreatePRODUTO_TAXA(global::System.Guid iD_PRODUTO_TAXA, global::System.Guid iD_PRODUTO, global::System.Guid iD_TAXA, global::System.Decimal nUM_VALOR, global::System.Int16 oRD_PRIORIDADE, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
         {
             PRODUTO_TAXA pRODUTO_TAXA = new PRODUTO_TAXA();
             pRODUTO_TAXA.ID_PRODUTO_TAXA = iD_PRODUTO_TAXA;
@@ -4130,7 +4177,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PRODUTO_TAXA
+        internal global::System.Guid ID_PRODUTO_TAXA
         {
             get
             {
@@ -4157,7 +4204,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PRODUTO
+        internal global::System.Guid ID_PRODUTO
         {
             get
             {
@@ -4181,7 +4228,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_TAXA
+        internal global::System.Guid ID_TAXA
         {
             get
             {
@@ -4205,7 +4252,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal NUM_VALOR
+        internal global::System.Decimal NUM_VALOR
         {
             get
             {
@@ -4229,7 +4276,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int16 ORD_PRIORIDADE
+        internal global::System.Int16 ORD_PRIORIDADE
         {
             get
             {
@@ -4253,7 +4300,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -4277,7 +4324,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -4307,7 +4354,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_TAXA_T_PRODUTO", "T_PRODUTO")]
-        public PRODUTO T_PRODUTO
+        internal PRODUTO T_PRODUTO
         {
             get
             {
@@ -4323,7 +4370,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<PRODUTO> T_PRODUTOReference
+        internal EntityReference<PRODUTO> T_PRODUTOReference
         {
             get
             {
@@ -4345,7 +4392,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_TAXA_T_TAXA", "T_TAXA")]
-        public TAXA T_TAXA
+        internal TAXA T_TAXA
         {
             get
             {
@@ -4361,7 +4408,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<TAXA> T_TAXAReference
+        internal EntityReference<TAXA> T_TAXAReference
         {
             get
             {
@@ -4385,7 +4432,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="SESSAO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class SESSAO : EntityObject
+    internal partial class SESSAO : EntityObject
     {
         #region Factory Method
     
@@ -4396,7 +4443,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="dATA_LOGIN">Initial value of the DATA_LOGIN property.</param>
         /// <param name="dES_CHAVE">Initial value of the DES_CHAVE property.</param>
-        public static SESSAO CreateSESSAO(global::System.Guid iD_SESSAO, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_LOGIN, global::System.String dES_CHAVE)
+        internal static SESSAO CreateSESSAO(global::System.Guid iD_SESSAO, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_LOGIN, global::System.String dES_CHAVE)
         {
             SESSAO sESSAO = new SESSAO();
             sESSAO.ID_SESSAO = iD_SESSAO;
@@ -4414,7 +4461,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_SESSAO
+        internal global::System.Guid ID_SESSAO
         {
             get
             {
@@ -4441,7 +4488,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -4465,7 +4512,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_LOGIN
+        internal global::System.DateTime DATA_LOGIN
         {
             get
             {
@@ -4489,7 +4536,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String DES_CHAVE
+        internal global::System.String DES_CHAVE
         {
             get
             {
@@ -4518,7 +4565,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="TAXA")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class TAXA : EntityObject
+    internal partial class TAXA : EntityObject
     {
         #region Factory Method
     
@@ -4530,7 +4577,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
-        public static TAXA CreateTAXA(global::System.Guid iD_TAXA, global::System.String nOME_TAXA, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
+        internal static TAXA CreateTAXA(global::System.Guid iD_TAXA, global::System.String nOME_TAXA, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
         {
             TAXA tAXA = new TAXA();
             tAXA.ID_TAXA = iD_TAXA;
@@ -4549,7 +4596,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_TAXA
+        internal global::System.Guid ID_TAXA
         {
             get
             {
@@ -4576,7 +4623,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_TAXA
+        internal global::System.String NOME_TAXA
         {
             get
             {
@@ -4600,7 +4647,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> BOL_FORNECEDOR
+        internal Nullable<global::System.Boolean> BOL_FORNECEDOR
         {
             get
             {
@@ -4624,7 +4671,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> BOL_PRODUTO
+        internal Nullable<global::System.Boolean> BOL_PRODUTO
         {
             get
             {
@@ -4648,7 +4695,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> BOL_DESCONTO
+        internal Nullable<global::System.Boolean> BOL_DESCONTO
         {
             get
             {
@@ -4672,7 +4719,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -4696,7 +4743,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -4720,7 +4767,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -4750,7 +4797,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_FORNECEDOR_TAXA_T_TAXA", "T_FORNECEDOR_TAXA")]
-        public EntityCollection<FORNECEDOR_TAXA> T_FORNECEDOR_TAXA
+        internal EntityCollection<FORNECEDOR_TAXA> T_FORNECEDOR_TAXA
         {
             get
             {
@@ -4772,7 +4819,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_TAXA_T_TAXA", "T_PRODUTO_TAXA")]
-        public EntityCollection<PRODUTO_TAXA> T_PRODUTO_TAXA
+        internal EntityCollection<PRODUTO_TAXA> T_PRODUTO_TAXA
         {
             get
             {
@@ -4796,7 +4843,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="UNIDADE_FEDERATIVA")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class UNIDADE_FEDERATIVA : EntityObject
+    internal partial class UNIDADE_FEDERATIVA : EntityObject
     {
         #region Factory Method
     
@@ -4806,7 +4853,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="iD_UNIDADE_FEDERATIVA">Initial value of the ID_UNIDADE_FEDERATIVA property.</param>
         /// <param name="cOD_UNIDADE_FEDERATIVA">Initial value of the COD_UNIDADE_FEDERATIVA property.</param>
         /// <param name="nOME_UNIDADE_FEDERATIVA">Initial value of the NOME_UNIDADE_FEDERATIVA property.</param>
-        public static UNIDADE_FEDERATIVA CreateUNIDADE_FEDERATIVA(global::System.Guid iD_UNIDADE_FEDERATIVA, global::System.String cOD_UNIDADE_FEDERATIVA, global::System.String nOME_UNIDADE_FEDERATIVA)
+        internal static UNIDADE_FEDERATIVA CreateUNIDADE_FEDERATIVA(global::System.Guid iD_UNIDADE_FEDERATIVA, global::System.String cOD_UNIDADE_FEDERATIVA, global::System.String nOME_UNIDADE_FEDERATIVA)
         {
             UNIDADE_FEDERATIVA uNIDADE_FEDERATIVA = new UNIDADE_FEDERATIVA();
             uNIDADE_FEDERATIVA.ID_UNIDADE_FEDERATIVA = iD_UNIDADE_FEDERATIVA;
@@ -4823,7 +4870,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_UNIDADE_FEDERATIVA
+        internal global::System.Guid ID_UNIDADE_FEDERATIVA
         {
             get
             {
@@ -4850,7 +4897,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String COD_UNIDADE_FEDERATIVA
+        internal global::System.String COD_UNIDADE_FEDERATIVA
         {
             get
             {
@@ -4874,7 +4921,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_UNIDADE_FEDERATIVA
+        internal global::System.String NOME_UNIDADE_FEDERATIVA
         {
             get
             {
@@ -4903,7 +4950,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="USUARIO")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class USUARIO : EntityObject
+    internal partial class USUARIO : EntityObject
     {
         #region Factory Method
     
@@ -4917,7 +4964,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="uSUARIO_LOGADO">Initial value of the USUARIO_LOGADO property.</param>
-        public static USUARIO CreateUSUARIO(global::System.Guid iD_USUARIO, global::System.String nOME_USUARIO, global::System.String lOGIN_USUARIO, global::System.String sENHA_USUARIO, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String uSUARIO_LOGADO)
+        internal static USUARIO CreateUSUARIO(global::System.Guid iD_USUARIO, global::System.String nOME_USUARIO, global::System.String lOGIN_USUARIO, global::System.String sENHA_USUARIO, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String uSUARIO_LOGADO)
         {
             USUARIO uSUARIO = new USUARIO();
             uSUARIO.ID_USUARIO = iD_USUARIO;
@@ -4938,7 +4985,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_USUARIO
+        internal global::System.Guid ID_USUARIO
         {
             get
             {
@@ -4965,7 +5012,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String NOME_USUARIO
+        internal global::System.String NOME_USUARIO
         {
             get
             {
@@ -4989,7 +5036,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -5013,7 +5060,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String SENHA_USUARIO
+        internal global::System.String SENHA_USUARIO
         {
             get
             {
@@ -5037,7 +5084,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean BOL_ATIVO
+        internal global::System.Boolean BOL_ATIVO
         {
             get
             {
@@ -5061,7 +5108,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -5085,7 +5132,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String USUARIO_LOGADO
+        internal global::System.String USUARIO_LOGADO
         {
             get
             {
@@ -5115,7 +5162,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_USUARIO", "T_ORCAMENTO")]
-        public EntityCollection<ORCAMENTO> T_ORCAMENTO_T_USUARIO_RESPONSAVEL
+        internal EntityCollection<ORCAMENTO> T_ORCAMENTO_T_USUARIO_RESPONSAVEL
         {
             get
             {
@@ -5137,7 +5184,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_USUARIO_PERFIL_T_USUARIO", "T_USUARIO_PERFIL")]
-        public EntityCollection<USUARIO_PERFIL> T_USUARIO_PERFIL
+        internal EntityCollection<USUARIO_PERFIL> T_USUARIO_PERFIL
         {
             get
             {
@@ -5159,7 +5206,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ORCAMENTO_T_USUARIO_VENDEDOR", "ORCAMENTO")]
-        public EntityCollection<ORCAMENTO> T_ORCAMENTO_T_USUARIO_VENDEDOR
+        internal EntityCollection<ORCAMENTO> T_ORCAMENTO_T_USUARIO_VENDEDOR
         {
             get
             {
@@ -5183,7 +5230,7 @@ namespace BrasilDidaticos.WcfServico.Dados
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="USUARIO_PERFIL")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class USUARIO_PERFIL : EntityObject
+    internal partial class USUARIO_PERFIL : EntityObject
     {
         #region Factory Method
     
@@ -5195,7 +5242,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="iD_PERFIL">Initial value of the ID_PERFIL property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
-        public static USUARIO_PERFIL CreateUSUARIO_PERFIL(global::System.Guid iD_USUARIO_PERFIL, global::System.Guid iD_USUARIO, global::System.Guid iD_PERFIL, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
+        internal static USUARIO_PERFIL CreateUSUARIO_PERFIL(global::System.Guid iD_USUARIO_PERFIL, global::System.Guid iD_USUARIO, global::System.Guid iD_PERFIL, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
         {
             USUARIO_PERFIL uSUARIO_PERFIL = new USUARIO_PERFIL();
             uSUARIO_PERFIL.ID_USUARIO_PERFIL = iD_USUARIO_PERFIL;
@@ -5214,7 +5261,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_USUARIO_PERFIL
+        internal global::System.Guid ID_USUARIO_PERFIL
         {
             get
             {
@@ -5241,7 +5288,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_USUARIO
+        internal global::System.Guid ID_USUARIO
         {
             get
             {
@@ -5265,7 +5312,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid ID_PERFIL
+        internal global::System.Guid ID_PERFIL
         {
             get
             {
@@ -5289,7 +5336,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DATA_ATUALIZACAO
+        internal global::System.DateTime DATA_ATUALIZACAO
         {
             get
             {
@@ -5313,7 +5360,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String LOGIN_USUARIO
+        internal global::System.String LOGIN_USUARIO
         {
             get
             {
@@ -5343,7 +5390,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_USUARIO_PERFIL_T_PERFIL", "T_PERFIL")]
-        public PERFIL T_PERFIL
+        internal PERFIL T_PERFIL
         {
             get
             {
@@ -5359,7 +5406,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<PERFIL> T_PERFILReference
+        internal EntityReference<PERFIL> T_PERFILReference
         {
             get
             {
@@ -5381,7 +5428,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_USUARIO_PERFIL_T_USUARIO", "T_USUARIO")]
-        public USUARIO T_USUARIO
+        internal USUARIO T_USUARIO
         {
             get
             {
@@ -5397,7 +5444,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<USUARIO> T_USUARIOReference
+        internal EntityReference<USUARIO> T_USUARIOReference
         {
             get
             {

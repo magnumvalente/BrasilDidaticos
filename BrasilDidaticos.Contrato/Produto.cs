@@ -34,6 +34,13 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
+        public string CodigoFornecedor
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public bool Ativo
         {
             get;
@@ -63,6 +70,13 @@ namespace BrasilDidaticos.Contrato
 
         [DataMember]
         public Fornecedor Fornecedor
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public List<Fornecedor> Fornecedores
         {
             get;
             set;

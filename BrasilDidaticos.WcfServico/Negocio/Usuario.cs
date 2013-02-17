@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaUsuario">Objeto com os dados do usuário a Logar</param>
         /// <returns>Contrato.RetornoUsuario</returns>
-        public static Contrato.RetornoUsuario Logar(Contrato.EntradaUsuario entradaUsuario)
+        internal static Contrato.RetornoUsuario Logar(Contrato.EntradaUsuario entradaUsuario)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoUsuario retUsuario = new Contrato.RetornoUsuario();
@@ -80,7 +80,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Usuario">Objeto com o identificador do usuário</param>
         /// <returns>Contrato.RetornoUsuario</returns>
-        public static Contrato.Usuario BuscarUsuario(Dados.USUARIO usuario)
+        internal static Contrato.Usuario BuscarUsuario(Dados.USUARIO usuario)
         {
             // Objeto que recebe o retorno do método
             Contrato.Usuario retUsuario = new Contrato.Usuario();
@@ -107,7 +107,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaUsuario">Objeto com os dados do usuário a listar</param>
         /// <returns>Contrato.RetornoUsuario</returns>
-        public static Contrato.RetornoUsuario ListarUsuario(Contrato.EntradaUsuario entradaUsuario)
+        internal static Contrato.RetornoUsuario ListarUsuario(Contrato.EntradaUsuario entradaUsuario)
         {
 
             // Objeto que recebe o retorno do método
@@ -199,7 +199,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaUsuario">Objeto com os dados do usuário a Logar</param>
         /// <returns>Contrato.RetornoUsuario</returns>
-        public static Contrato.RetornoUsuario SalvarUsuario(Contrato.EntradaUsuario entradaUsuario)
+        internal static Contrato.RetornoUsuario SalvarUsuario(Contrato.EntradaUsuario entradaUsuario)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoUsuario retUsuario = new Contrato.RetornoUsuario();

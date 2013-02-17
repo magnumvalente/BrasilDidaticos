@@ -24,6 +24,12 @@ namespace BrasilDidaticos.Apresentacao
 
         #endregion
 
+        #region "[Propriedades]"
+
+        public List<Contrato.Produto> Produtos;
+
+        #endregion
+
         #region "[Metodos]"
 
         public WRelatorioAtacado()
@@ -38,71 +44,17 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         private void ListarProdutos()
-        {
-            ListarProdutos(false);
-        }
-
-        private void ListarProdutos(bool mostrarMsgVazio)
-        {
-            Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
-            entradaProduto.Chave = Comum.Util.Chave;
-            entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaProduto.Produto = new Contrato.Produto();
-
-            Contrato.EntradaParametro entradaParametro = new Contrato.EntradaParametro();
-            entradaParametro.Chave = Comum.Util.Chave;
-            entradaParametro.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-
-            PreencherFiltro(entradaProduto.Produto);
-
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);            
-            Contrato.RetornoParametro retParametro = servBrasilDidaticos.ParametroListar(entradaParametro);
-            servBrasilDidaticos.Close();
-            
+        {          
             List<Objeto.Produto> lstProdutos = null;
             this._reportViewer.LocalReport.DataSources.Clear();
 
-            if (retProduto.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            if (Produtos != null && Produtos.Count > 0)
             {
-                lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
+                lstProdutos = (from p in Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
                 this._reportViewer.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("Produto", lstProdutos));
                 this._reportViewer.RefreshReport();
             }
-
-            if (mostrarMsgVazio && retProduto.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
-                MessageBox.Show(retProduto.Mensagem, "Relatório Atacado", MessageBoxButton.OK, MessageBoxImage.Information);                              
         }
-
-        private void PreencherFornecedores()
-        {
-            Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
-            entradaFornecedor.Chave = Comum.Util.Chave;
-            entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
-
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
-            servBrasilDidaticos.Close();
-
-            if (retFornecedor.Fornecedores != null)
-            {
-                cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
-                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores)
-                {
-                    cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = fornecedor.Id.ToString(), Content = fornecedor.Nome, Tag = fornecedor });
-                }
-            }
-        }
-
-        private void PreencherFiltro(Contrato.Produto Produto)
-        {
-            Produto.Codigo = txtCodigo.Conteudo;
-            Produto.Nome = txtNome.Conteudo;
-            if (cmbFornecedor.ValorSelecionado != null)
-                Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
-            Produto.Ativo = (bool)chkAtivo.Selecionado;
-        } 
 
         #endregion
 
@@ -114,8 +66,7 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Wait;
                 ValidarPermissao();
-                PreencherFornecedores();
-                txtCodigo.txtBox.Focus();
+                ListarProdutos();
             }
             catch (Exception ex)
             {
@@ -125,23 +76,6 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }   
-        }
-
-        private void btnBuscar_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                this.Cursor = Cursors.Wait;
-                ListarProdutos(true);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Relatório Atacado", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Arrow;
-            }            
         }
 
         private void ReportViewer_Load(object sender, EventArgs e)

@@ -52,7 +52,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbPerfis" DockPanel.Dock="Top" Header="Perfis">
-            <DataGrid DockPanel.Dock="Bottom" Name="dgPerfis" AutoGenerateColumns="False" Width="Auto" CanUserAddRows="False">
+            <DataGrid DockPanel.Dock="Bottom" Name="dgPerfis" AutoGenerateColumns="False" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" >
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>

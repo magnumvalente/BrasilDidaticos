@@ -6,14 +6,14 @@ using BrasilDidaticos.WcfServico;
 
 namespace BrasilDidaticos.WcfServico.Negocio
 {
-    public static class UnidadeFederativa
+    internal static class UnidadeFederativa
     {
         /// <summary>
         /// Método para buscar a unidade federativa
         /// </summary>
         /// <param name="codigoUnidade">Código da unidade federativa do cliente</param>
         /// <returns>Contrato.UnidadeFederativa</returns>
-        public static Contrato.UnidadeFederativa BuscarUnidadeFederativa(string codigoUnidade)
+        internal static Contrato.UnidadeFederativa BuscarUnidadeFederativa(string codigoUnidade)
         {
             // Objeto que recebe o retorno do método
             Contrato.UnidadeFederativa retUf = new Contrato.UnidadeFederativa();
@@ -43,7 +43,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// Método para retornar as unidades federativas
         /// </summary>        
         /// <returns>List<Contrato.UnidadeFederativa></returns>
-        public static Contrato.RetornoUnidadeFederativa ListarUnidadeFederativa()
+        internal static Contrato.RetornoUnidadeFederativa ListarUnidadeFederativa()
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoUnidadeFederativa retUnidadeFederativa = new Contrato.RetornoUnidadeFederativa();

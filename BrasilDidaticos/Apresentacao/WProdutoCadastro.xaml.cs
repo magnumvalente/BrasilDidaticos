@@ -18,6 +18,10 @@ namespace BrasilDidaticos.Apresentacao
     /// </summary>
     public partial class WProdutoCadastro : Window
     {
+        #region"[Constantes]"
+        const double TAM_COLUNA_CODIGO = 40;
+        #endregion
+
         #region "[Atributos]"
 
         private Contrato.Produto _produto = null;
@@ -60,7 +64,7 @@ namespace BrasilDidaticos.Apresentacao
         private void ValidarPermissao()
         {
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            txtCodigo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtCodigo.IsEnabled = false;
             txtNome.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             cmbFornecedor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtNcm.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
@@ -77,13 +81,13 @@ namespace BrasilDidaticos.Apresentacao
             StringBuilder strValidacao = new StringBuilder();
 
             // Verifica se o Código foi informado
-            if (string.IsNullOrWhiteSpace(txtCodigo.Conteudo.ToString()))
+            if (string.IsNullOrWhiteSpace(txtCodigoFornecedor.Conteudo.ToString()))
             {
-                txtCodigo.Erro = Visibility.Visible;
-                strValidacao.Append("O campo 'Codigo' não foi informado!\n");
+                txtCodigoFornecedor.Erro = Visibility.Visible;
+                strValidacao.Append("O campo 'Código Fornecedor' não foi informado!\n");
             }
             else
-                txtCodigo.Erro = Visibility.Hidden;
+                txtCodigoFornecedor.Erro = Visibility.Hidden;
 
             // Verifica se a Nome foi informada
             if (string.IsNullOrWhiteSpace(txtNome.Conteudo.ToString()))
@@ -136,6 +140,11 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     MessageBox.Show(retProduto.Mensagem, "Produto", MessageBoxButton.OK, MessageBoxImage.Error);
                     salvou = false;
+
+                    if (retProduto.Codigo == Contrato.Constantes.COD_REGISTRO_DUPLICADO)
+                    {
+                        gdProdutoDados.ColumnDefinitions[1].Width = new GridLength(TAM_COLUNA_CODIGO);
+                    }
                 }
             }
 
@@ -145,6 +154,7 @@ namespace BrasilDidaticos.Apresentacao
         private void PreencherDados(Contrato.Produto Produto)
         {
             Produto.Codigo = txtCodigo.Conteudo;
+            Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
             Produto.Nome = txtNome.Conteudo;
             Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
             Produto.Ncm = txtNcm.Conteudo;
@@ -180,14 +190,27 @@ namespace BrasilDidaticos.Apresentacao
 
             if (_produto != null)
             {
-                Item.Header = Comum.Util.GroupHeader("Edição","/BrasilDidaticos;component/Imagens/ico_editar.png");
+                Item.Header = Comum.Util.GroupHeader("Edição", "/BrasilDidaticos;component/Imagens/ico_editar.png");
 
                 txtCodigo.Conteudo = _produto.Codigo;
+                txtCodigoFornecedor.Conteudo = _produto.CodigoFornecedor;
                 txtNome.Conteudo = _produto.Nome;
                 txtNcm.Conteudo = _produto.Ncm;
                 txtValor.Valor = Produto.ValorBase;
                 chkAtivo.Selecionado = _produto.Ativo;
             }
+            else
+            {
+                GerarNovoCodigo();
+            }
+        }
+
+        private void GerarNovoCodigo()
+        {
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            string retCodigoProduto = servBrasilDidaticos.ProdutoBuscarCodigo();
+            servBrasilDidaticos.Close();
+            txtCodigo.Conteudo = retCodigoProduto;
         }
 
         private void PreencherFornecedores()
@@ -316,7 +339,7 @@ namespace BrasilDidaticos.Apresentacao
                 ValidarPermissao();
                 PreencherDadosTela();
                 ListarTaxas();
-                txtCodigo.txtBox.Focus();
+                txtNome.txtBox.Focus();
             }
             catch (Exception ex)
             {
@@ -326,6 +349,23 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }            
+        }
+
+        private void btnGerarNovoCodigo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                GerarNovoCodigo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Produto", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)

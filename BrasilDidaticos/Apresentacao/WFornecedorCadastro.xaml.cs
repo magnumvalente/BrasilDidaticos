@@ -14,13 +14,14 @@ using System.Windows.Shapes;
 namespace BrasilDidaticos.Apresentacao
 {
     /// <summary>
-    /// Interaction logic for Fornecedor.xaml
+    /// Interaction logic for WFornecedorCadastro.xaml
     /// </summary>
     public partial class WFornecedorCadastro : Window
     {
-        #region "[CONSTANTES]"
+        #region "[Constantes]"
 
-        private int MAX_ITEM_REMOVE = 100;
+        const int MAX_ITEM_REMOVE = 100;
+        const double TAM_COLUNA_CODIGO = 40;
 
         #endregion
 
@@ -71,7 +72,7 @@ namespace BrasilDidaticos.Apresentacao
             btnImportarProduto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_IMPORTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             gpbTaxas.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
-            txtCodigo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtCodigo.IsEnabled = false;
             txtNome.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_MODIFICAR);
             rlbPessoa.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtCPFCNP.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_MODIFICAR);
@@ -87,16 +88,7 @@ namespace BrasilDidaticos.Apresentacao
         private StringBuilder ValidarCampos()
         {
             StringBuilder strValidacao = new StringBuilder();
-
-            // Verifica se o Código foi informado
-            if (string.IsNullOrWhiteSpace(txtCodigo.Conteudo.ToString()))
-            {
-                txtCodigo.Erro = Visibility.Visible;
-                strValidacao.Append("O campo 'Codigo' não foi informado!\n");
-            }
-            else
-                txtCodigo.Erro = Visibility.Hidden;
-
+                        
             // Verifica se a Nome foi informada
             if (string.IsNullOrWhiteSpace(txtNome.Conteudo.ToString()))
             {
@@ -160,12 +152,25 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     MessageBox.Show(retFornecedor.Mensagem, "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
                     salvou = false;
+
+                    if (retFornecedor.Codigo == Contrato.Constantes.COD_REGISTRO_DUPLICADO)
+                    {
+                        gdFornecedorDados.ColumnDefinitions[1].Width = new GridLength(TAM_COLUNA_CODIGO);
+                    }
                 }
 
                 servBrasilDidaticos.Close();
             }
 
             return salvou;
+        }
+
+        private void GerarNovoCodigo()
+        {
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            string retCodigoFornecedor = servBrasilDidaticos.FornecedorBuscarCodigo();
+            servBrasilDidaticos.Close();
+            txtCodigo.Conteudo = retCodigoFornecedor;
         }
 
         private void PreencherFornecedor(Contrato.Fornecedor Fornecedor)
@@ -220,6 +225,10 @@ namespace BrasilDidaticos.Apresentacao
                 txtValorAtacado.Valor = _fornecedor.ValorPercentagemAtacado;
                 txtValorVarejo.Valor = _fornecedor.ValorPercentagemVarejo;
                 chkAtivo.Selecionado = _fornecedor.Ativo;
+            }
+            else
+            {
+                GerarNovoCodigo();
             }
         }
 
@@ -279,11 +288,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void ConfigurarControles()
         {
-            txtValorAtacado.txtDecimalUpDown.FormatString = "P";
-            txtValorAtacado.txtDecimalUpDown.Increment = (decimal).0001;
-            txtValorVarejo.txtDecimalUpDown.FormatString = "P";
-            txtValorVarejo.txtDecimalUpDown.Increment = (decimal).0001;
-            txtCodigo.txtBox.Focus();
+            txtNome.txtBox.Focus();
         }
         
         private void ImportarProduto()
@@ -320,7 +325,24 @@ namespace BrasilDidaticos.Apresentacao
                 this.Cursor = Cursors.Arrow;
             }            
         }
-        
+
+        private void btnGerarNovoCodigo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                GerarNovoCodigo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
         private void btnImportarProduto_Click(object sender, RoutedEventArgs e)
         {
             try

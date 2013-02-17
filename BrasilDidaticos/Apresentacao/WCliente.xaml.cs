@@ -25,6 +25,11 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            txtCodigo.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
@@ -60,6 +65,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             Cliente.Codigo = txtCodigo.Conteudo;
             Cliente.Nome = txtNome.Conteudo;
+            Cliente.CaixaEscolar = txtCaixaEscolar.Conteudo;
             if (rlbPessoa.ListBox.SelectedValue != null)
                 Cliente.Tipo = (Contrato.Enumeradores.Pessoa)rlbPessoa.ListBox.SelectedValue;
             Cliente.Cpf_Cnpj = txtCPFCNP.Valor != null ? txtCPFCNP.Valor.ToString() : string.Empty;
@@ -105,7 +111,7 @@ namespace BrasilDidaticos.Apresentacao
                 ValidarPermissao();
                 PreencherPessoa();
                 ListarClientes();
-                txtCodigo.txtBox.Focus();
+                ConfigurarControles();                
             }
             catch (Exception ex)
             {
@@ -204,7 +210,6 @@ namespace BrasilDidaticos.Apresentacao
             } 
         }
 
-        #endregion        
-         
+        #endregion                 
     }
 }

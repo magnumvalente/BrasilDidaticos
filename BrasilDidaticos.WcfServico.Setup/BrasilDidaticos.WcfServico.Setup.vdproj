@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_680CC7AB834DAB452F2C8E14A1DF3F39"
+        "MsmKey" = "8:_59AECEE8D542382420CBE3D77D5D8E82"
         "OwnerKey" = "8:_25FF9B736D0F4F92B65C0C204ED23329"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -34,7 +34,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_680CC7AB834DAB452F2C8E14A1DF3F39"
+        "OwnerKey" = "8:_59AECEE8D542382420CBE3D77D5D8E82"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -147,14 +147,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_680CC7AB834DAB452F2C8E14A1DF3F39"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_59AECEE8D542382420CBE3D77D5D8E82"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:BrasilDidaticos.Contrato, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_680CC7AB834DAB452F2C8E14A1DF3F39"
+                    "_59AECEE8D542382420CBE3D77D5D8E82"
                     {
                     "Name" = "8:BrasilDidaticos.Contrato.dll"
                     "Attributes" = "3:512"
@@ -267,15 +267,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BrasilDidaticos.WcfServico"
-        "ProductCode" = "8:{78D15C64-9DAF-41DE-8F10-1AC703ACD605}"
-        "PackageCode" = "8:{2A3D295D-5C7E-46B0-ADE6-8036E26A864D}"
+        "ProductCode" = "8:{1736AC53-4708-4790-BA01-0A1BCFF4A246}"
+        "PackageCode" = "8:{7DBEE993-A3A0-4B7F-B2C9-DD9CC0EDCBA4}"
         "UpgradeCode" = "8:{EE899FC4-2044-4F06-B956-A7511AECB475}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:GDM Soluções em Informática"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

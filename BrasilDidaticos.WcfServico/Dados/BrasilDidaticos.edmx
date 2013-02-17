@@ -196,10 +196,10 @@
             <PropertyRef Name="ID_PARAMETRO" />
           </Key>
           <Property Name="ID_PARAMETRO" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="COD_PARAMETRO" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="COD_PARAMETRO" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="NOME_PARAMETRO" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="TIPO_PARAMETRO" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="VALOR_PARAMETRO" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VALOR_PARAMETRO" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
         </EntityType>
@@ -238,7 +238,8 @@
           </Key>
           <Property Name="ID_PRODUTO" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ID_FORNECEDOR" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="COD_PRODUTO" Type="varchar" MaxLength="20" />
+          <Property Name="COD_PRODUTO" Type="varchar" MaxLength="10" />
+          <Property Name="COD_PRODUTO_FORNECEDOR" Type="varchar" MaxLength="20" />
           <Property Name="NOME_PRODUTO" Type="varchar" MaxLength="300" />
           <Property Name="NCM_PRODUTO" Type="varchar" MaxLength="20" />
           <Property Name="BOL_ATIVO" Type="bit" Nullable="false" />
@@ -526,6 +527,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="P_RETORNAR_CODIGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="P_TIPO_CODIGO" Type="varchar" Mode="In" />
+          <Parameter Name="P_CODIGO" Type="int" Mode="InOut" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -620,6 +625,10 @@
             <End Role="USUARIO" EntitySet="T_USUARIO" />
             <End Role="ORCAMENTO" EntitySet="T_ORCAMENTO" />
           </AssociationSet>
+          <FunctionImport Name="RETORNAR_CODIGO">
+            <Parameter Name="P_TIPO_CODIGO" Mode="In" Type="String" />
+            <Parameter Name="P_CODIGO" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CLIENTE">
           <Key>
@@ -781,6 +790,7 @@
           <NavigationProperty Name="T_FORNECEDOR" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_T_FORNECEDOR" FromRole="T_PRODUTO" ToRole="T_FORNECEDOR" />
           <NavigationProperty Name="T_ITEM" Relationship="BrasilDidaticosModel.FK_T_ITEM_T_PRODUTO" FromRole="T_PRODUTO" ToRole="T_ITEM" />
           <NavigationProperty Name="T_PRODUTO_TAXA" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_PRODUTO" FromRole="T_PRODUTO" ToRole="T_PRODUTO_TAXA" />
+          <Property Type="String" Name="COD_PRODUTO_FORNECEDOR" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRODUTO_TAXA">
           <Key>
@@ -1192,7 +1202,8 @@
             <ScalarProperty Name="BOL_ATIVO" ColumnName="BOL_ATIVO" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="T_PRODUTO"><EntityTypeMapping TypeName="BrasilDidaticosModel.PRODUTO"><MappingFragment StoreEntitySet="T_PRODUTO">
-            <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
+            <ScalarProperty Name="COD_PRODUTO_FORNECEDOR" ColumnName="COD_PRODUTO_FORNECEDOR" />
+                <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
             <ScalarProperty Name="ID_FORNECEDOR" ColumnName="ID_FORNECEDOR" />
             <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
             <ScalarProperty Name="NOME_PRODUTO" ColumnName="NOME_PRODUTO" />
@@ -1264,6 +1275,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RETORNAR_CODIGO" FunctionName="BrasilDidaticosModel.Store.P_RETORNAR_CODIGO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1278,7 +1290,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>

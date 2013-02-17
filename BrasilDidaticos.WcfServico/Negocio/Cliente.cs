@@ -9,11 +9,32 @@ namespace BrasilDidaticos.WcfServico.Negocio
     static class Cliente
     {
         /// <summary>
+        /// Método para buscar o código do cliente
+        /// </summary>        
+        /// <returns>string</returns>
+        internal static string BuscarCodigoCliente()
+        {
+            // Objeto que recebe o retorno do método
+            string retCodigoCliente = string.Empty;
+
+            // Loga no banco de dados
+            Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+            System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_CLIENTE, objCodigoOrcamento);
+
+            // Recupera o código do fornecedor
+            retCodigoCliente = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_CLIENTE);
+
+            // retorna os dados
+            return retCodigoCliente;
+        }
+
+        /// <summary>
         /// Método para buscar o cliente
         /// </summary>
         /// <param name="Cliente">Objeto com o identificador do cliente</param>
         /// <returns>Contrato.Cliente</returns>
-        public static Contrato.Cliente BuscarCliente(Dados.CLIENTE cliente)
+        internal static Contrato.Cliente BuscarCliente(Dados.CLIENTE cliente)
         {
             // Objeto que recebe o retorno do método
             Contrato.Cliente retCliente = new Contrato.Cliente();
@@ -53,7 +74,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Cliente">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoCliente</returns>
-        public static Contrato.RetornoCliente ListarCliente(Contrato.EntradaCliente entradaCliente)
+        internal static Contrato.RetornoCliente ListarCliente(Contrato.EntradaCliente entradaCliente)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoCliente retCliente = new Contrato.RetornoCliente();
@@ -68,13 +89,14 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
                                                 
                 // Busca o cliente no banco
-                List<Dados.CLIENTE> lstClientes = (from f in context.T_CLIENTE
+                List<Dados.CLIENTE> lstClientes = (from c in context.T_CLIENTE
                                                           where
-                                                                (entradaCliente.Cliente.Codigo == null || entradaCliente.Cliente.Codigo == string.Empty || f.COD_CLIENTE.StartsWith(entradaCliente.Cliente.Codigo))
-                                                             && (entradaCliente.Cliente.Nome == null || entradaCliente.Cliente.Nome == string.Empty || f.NOME_CLIENTE.ToLower().Contains(entradaCliente.Cliente.Nome.ToLower()))
-                                                             && (entradaCliente.Cliente.Tipo == null || f.BOL_PESSOA_FISICA == (entradaCliente.Cliente.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
-                                                             && (entradaCliente.Cliente.Cpf_Cnpj == null || entradaCliente.Cliente.Cpf_Cnpj == string.Empty || f.CPF_CNJP_CLIENTE != null && f.CPF_CNJP_CLIENTE.StartsWith(entradaCliente.Cliente.Cpf_Cnpj))
-                                                          select f).ToList();
+                                                                (entradaCliente.Cliente.Codigo == null || entradaCliente.Cliente.Codigo == string.Empty || c.COD_CLIENTE.ToLower().Contains(entradaCliente.Cliente.Codigo.ToLower()))
+                                                             && (entradaCliente.Cliente.Nome == null || entradaCliente.Cliente.Nome == string.Empty || c.NOME_CLIENTE.ToLower().Contains(entradaCliente.Cliente.Nome.ToLower()))
+                                                             && (entradaCliente.Cliente.CaixaEscolar == null || entradaCliente.Cliente.CaixaEscolar == string.Empty || c.CAIXA_ESCOLAR.ToLower().Contains(entradaCliente.Cliente.CaixaEscolar.ToLower()))
+                                                             && (entradaCliente.Cliente.Tipo == null || c.BOL_PESSOA_FISICA == (entradaCliente.Cliente.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
+                                                             && (entradaCliente.Cliente.Cpf_Cnpj == null || entradaCliente.Cliente.Cpf_Cnpj == string.Empty || c.CPF_CNJP_CLIENTE != null && c.CPF_CNJP_CLIENTE.StartsWith(entradaCliente.Cliente.Cpf_Cnpj))
+                                                          select c).ToList();
                                
                 // Verifica se foi encontrado algum registro
                 if (lstClientes.Count > 0)
@@ -131,7 +153,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaCliente">Objeto com os dados do cliente</param>
         /// <returns>Contrato.RetornoCliente</returns>
-        public static Contrato.RetornoCliente SalvarCliente(Contrato.EntradaCliente entradaCliente)
+        internal static Contrato.RetornoCliente SalvarCliente(Contrato.EntradaCliente entradaCliente)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoCliente retCliente = new Contrato.RetornoCliente();
@@ -191,18 +213,29 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             lstClientes.First().NUM_CEP = entradaCliente.Cliente.Cep;
                             lstClientes.First().DES_BAIRRO = entradaCliente.Cliente.Bairro;
                             lstClientes.First().DES_CIDADE = entradaCliente.Cliente.Cidade;
-                            lstClientes.First().COD_ESTADO = entradaCliente.Cliente.Uf.Codigo;
-                            lstClientes.First().DES_ESTADO  = entradaCliente.Cliente.Uf.Nome;
+                            lstClientes.First().COD_ESTADO = entradaCliente.Cliente.Uf == null ? null : entradaCliente.Cliente.Uf.Codigo;
+                            lstClientes.First().DES_ESTADO = entradaCliente.Cliente.Uf == null ? null : entradaCliente.Cliente.Uf.Nome;
                             lstClientes.First().DATA_ATUALIZACAO = DateTime.Now;
                             lstClientes.First().LOGIN_USUARIO = entradaCliente.UsuarioLogado;
                             lstClientes.First().ID_CLIENTE_MATRIZ = entradaCliente.Cliente.ClienteMatriz != null ? entradaCliente.Cliente.ClienteMatriz.Id: Guid.Empty;
                         }
                         else
                         {
+                            // Recupera o código do cliente
+                            string codigoCliente = string.Empty;
+                            if (entradaCliente.Cliente.Codigo != string.Empty)
+                                codigoCliente = entradaCliente.Cliente.Codigo;
+                            else
+                            {
+                                System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_CLIENTE, objCodigoOrcamento);
+                                codigoCliente = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_CLIENTE);
+                            }
+
                             // Cria o cliente
                             Dados.CLIENTE tCliente = new Dados.CLIENTE();
                             tCliente.ID_CLIENTE = Guid.NewGuid();
-                            tCliente.COD_CLIENTE = entradaCliente.Cliente.Codigo;
+                            tCliente.COD_CLIENTE = codigoCliente;
                             tCliente.NOME_CLIENTE = entradaCliente.Cliente.Nome;
                             tCliente.BOL_ATIVO = entradaCliente.Cliente.Ativo;
                             tCliente.CAIXA_ESCOLAR = entradaCliente.Cliente.CaixaEscolar;
@@ -218,8 +251,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tCliente.NUM_CEP = entradaCliente.Cliente.Cep;
                             tCliente.DES_BAIRRO = entradaCliente.Cliente.Bairro;
                             tCliente.DES_CIDADE = entradaCliente.Cliente.Cidade;
-                            tCliente.COD_ESTADO = entradaCliente.Cliente.Uf.Codigo;
-                            tCliente.DES_ESTADO = entradaCliente.Cliente.Uf.Nome;                      
+                            tCliente.COD_ESTADO = entradaCliente.Cliente.Uf == null ? null : entradaCliente.Cliente.Uf.Codigo;
+                            tCliente.DES_ESTADO = entradaCliente.Cliente.Uf == null ? null : entradaCliente.Cliente.Uf.Nome;                      
                             tCliente.DATA_ATUALIZACAO = DateTime.Now;
                             tCliente.LOGIN_USUARIO = entradaCliente.UsuarioLogado;
                             tCliente.ID_CLIENTE_MATRIZ = entradaCliente.Cliente.ClienteMatriz != null ? entradaCliente.Cliente.ClienteMatriz.Id : Guid.Empty;
@@ -256,11 +289,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         {
             // Cria a variável de retorno
             string strRetorno = string.Empty;
-
-            // Verifica se o Código foi preenchido
-            if (string.IsNullOrWhiteSpace(Cliente.Codigo))
-                strRetorno = "O campo 'Codigo' não foi informado!\n";
-
+                        
             // Verifica se a Nome foi preenchida
             if (string.IsNullOrWhiteSpace(Cliente.Nome))
                 strRetorno += "O campo 'Nome' não foi informado!\n";

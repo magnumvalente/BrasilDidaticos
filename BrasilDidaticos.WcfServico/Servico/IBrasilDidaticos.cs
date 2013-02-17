@@ -9,7 +9,7 @@ namespace BrasilDidaticos.WcfServico.Servico
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IBrasilDidaticos
+    internal interface IBrasilDidaticos
     {
         [OperationContract]
         string TestarServico(string NomeHost);
@@ -42,7 +42,10 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoTaxa TaxaListar(Contrato.EntradaTaxa Taxa);
 
         [OperationContract]
-        Contrato.RetornoTaxa TaxaSalvar(Contrato.EntradaTaxa Taxa); 
+        Contrato.RetornoTaxa TaxaSalvar(Contrato.EntradaTaxa Taxa);
+
+        [OperationContract]
+        string FornecedorBuscarCodigo();
 
         [OperationContract]
         Contrato.RetornoFornecedor FornecedorListar(Contrato.EntradaFornecedor Fornecedor);
@@ -51,7 +54,13 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoFornecedor FornecedorSalvar(Contrato.EntradaFornecedor Fornecedor);
 
         [OperationContract]
+        string ProdutoBuscarCodigo();
+
+        [OperationContract]
         Contrato.RetornoProduto ProdutoListar(Contrato.EntradaProduto Produto);
+
+        [OperationContract]
+        Contrato.RetornoProduto ProdutoListarRelatorio(Contrato.EntradaProduto Produto);
 
         [OperationContract]
         Contrato.RetornoProduto ProdutoSalvar(Contrato.EntradaProduto Produto);
@@ -66,10 +75,16 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoParametro ParametrosSalvar(Contrato.EntradaParametros Parametros);
 
         [OperationContract]
+        string ClienteBuscarCodigo();
+
+        [OperationContract]
         Contrato.RetornoCliente ClienteListar(Contrato.EntradaCliente Cliente);
 
         [OperationContract]
         Contrato.RetornoCliente ClienteSalvar(Contrato.EntradaCliente Cliente);
+
+        [OperationContract]
+        string OrcamentoBuscarCodigo();
 
         [OperationContract]
         Contrato.RetornoEstadoOrcamento EstadoOrcamentoListar(Contrato.EntradaEstadoOrcamento EstadoOrcamento);

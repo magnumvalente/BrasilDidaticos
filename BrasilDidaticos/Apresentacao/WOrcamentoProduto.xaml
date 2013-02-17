@@ -27,16 +27,18 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
-                <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="2" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="30" Grid.Row="0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="300" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MTextBox x:Name="txtCodigoFornecedor" Titulo="Código do Fornecedor:" TamanhoTexto="6" Grid.Row="2" />
+                <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="3" Background="#FFF0F0F0"/>
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
-            <Button Grid.Column="2" Name="btnAdicionar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="False" Margin="0,0,5,0" Click="btnAdicionar_Click" >
+            <Button Grid.Column="2" Name="btnAdicionar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" IsDefault="False" Margin="0,0,5,0" Click="btnAdicionar_Click" >
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Margin="0,0,5,0" />
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_produto_adicionar.png" Margin="0,0,5,0" />
                     <TextBlock Text="Adicionar"/>
                 </StackPanel>
             </Button>
@@ -54,7 +56,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbProdutos" DockPanel.Dock="Top" Header="Produtos">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgProdutos" Width="Auto" CanUserAddRows="False" ScrollViewer.ScrollChanged="dgProdutos_ScrollChanged">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgProdutos" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" ScrollViewer.ScrollChanged="dgProdutos_ScrollChanged">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
@@ -75,9 +77,10 @@
                 </DataGrid.ItemContainerStyle>
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="Selecionado" Binding="{Binding Selecionado}" CanUserSort="False" CanUserReorder="False" />
-                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Fornecedor" Binding="{Binding Fornecedor.Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Código do Fornecedor" Binding="{Binding CodigoFornecedor}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />                    
                     <DataGridTextColumn Header="Atacado" Binding="{Binding ValorAtacado, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Varejo" Binding="{Binding ValorVarejo, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
                 </DataGrid.Columns>

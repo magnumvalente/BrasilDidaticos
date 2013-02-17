@@ -68,6 +68,11 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Taxa.SalvarTaxa(Taxa);
         }
 
+        public string FornecedorBuscarCodigo()
+        {
+            return Negocio.Fornecedor.BuscarCodigoFornecedor();
+        }
+
         public Contrato.RetornoFornecedor FornecedorListar(Contrato.EntradaFornecedor Fornecedor)
         {
             return Negocio.Fornecedor.ListarFornecedor(Fornecedor);
@@ -78,9 +83,19 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Fornecedor.SalvarFornecedor(Fornecedor);
         }
 
+        public string ProdutoBuscarCodigo()
+        {
+            return Negocio.Produto.BuscarCodigoProduto();
+        }
+
         public Contrato.RetornoProduto ProdutoListar(Contrato.EntradaProduto Produto)
         {
             return Negocio.Produto.ListarProduto(Produto);
+        }
+
+        public Contrato.RetornoProduto ProdutoListarRelatorio(Contrato.EntradaProduto Produto)
+        {
+            return Negocio.Produto.ListarProdutoRelatorio(Produto);
         }
 
         public Contrato.RetornoProduto ProdutoSalvar(Contrato.EntradaProduto Produto)
@@ -91,6 +106,11 @@ namespace BrasilDidaticos.WcfServico.Servico
         public Contrato.RetornoProduto ProdutosSalvar(Contrato.EntradaProdutos Produtos)
         {
             return Negocio.Produto.SalvarProdutos(Produtos);
+        }
+
+        public string ClienteBuscarCodigo()
+        {
+            return Negocio.Cliente.BuscarCodigoCliente();
         }
 
         public Contrato.RetornoCliente ClienteListar(Contrato.EntradaCliente Cliente)
@@ -111,6 +131,11 @@ namespace BrasilDidaticos.WcfServico.Servico
         public Contrato.RetornoParametro ParametrosSalvar(Contrato.EntradaParametros Parametros)
         {
             return Negocio.Parametro.SalvarParametros(Parametros);
+        }
+
+        public string OrcamentoBuscarCodigo()
+        {
+            return Negocio.Orcamento.BuscarCodigoOrcamento();
         }
 
         public Contrato.RetornoOrcamento OrcamentoListar(Contrato.EntradaOrcamento Orcamento)

@@ -13,9 +13,11 @@ namespace BrasilDidaticos.Comum
         public const string PERMISSAO_MODIFICAR = "MODIFICAR";
         public const string PERMISSAO_CONSULTAR = "CONSULTAR";
         public const string PERMISSAO_IMPORTAR = "IMPORTAR";
+        public const string VER_CUSTO = "VER_CUSTO";
         public const string PERMISSAO_DESBLOQUEAR_USUARIO = "DESBLOQUEAR_USUARIO";
 
-        public const string TELA_USUARIO = "USUARIO";        
+        public const string TELA_PRINCIPAL = "PRINCIPAL";
+        public const string TELA_USUARIO = "USUARIO";
         public const string TELA_PERFIL = "PERFIL";
         public const string TELA_FORNECEDOR = "FORNECEDOR";
         public const string TELA_ORCAMENTO = "ORCAMENTO";
@@ -35,5 +37,9 @@ namespace BrasilDidaticos.Comum
         public const string PARAMETRO_COD_PERFIL_ORCAMENTISTA = "COD_PERFIL_ORCAMENTISTA";
 
         public const string CEP_CODIGO_FILIACAO = "A1C70368-E6DC-4D1A-B562-46004AA53408";
+
+        public const string STRING_FORMAT_MOEDA = "C2";
+        public const string STRING_FORMAT_DECIMAL = "F2";
+        public const string STRING_FORMAT_PORCENTAGEM = "P2";
     }
 }

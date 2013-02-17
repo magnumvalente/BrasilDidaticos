@@ -111,6 +111,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Apresentacao\Controler\MDecimalTextBox.xaml.cs">
+      <DependentUpon>MDecimalTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Apresentacao\Controler\MDatePicker.xaml.cs">
       <DependentUpon>MDatePicker.xaml</DependentUpon>
     </Compile>
@@ -132,11 +135,17 @@
     <Compile Include="Apresentacao\Controler\MCheckBox.xaml.cs">
       <DependentUpon>MCheckBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\Cliente.xaml.cs">
-      <DependentUpon>Cliente.xaml</DependentUpon>
+    <Compile Include="Apresentacao\WFiltroRelatorioVarejo.xaml.cs">
+      <DependentUpon>WFiltroRelatorioVarejo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\ClienteCadastro.xaml.cs">
-      <DependentUpon>ClienteCadastro.xaml</DependentUpon>
+    <Compile Include="Apresentacao\WFiltroRelatorioAtacado.xaml.cs">
+      <DependentUpon>WFiltroRelatorioAtacado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WCliente.xaml.cs">
+      <DependentUpon>WCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WClienteCadastro.xaml.cs">
+      <DependentUpon>WClienteCadastro.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\WRelatorioOrcamentoCusto.xaml.cs">
       <DependentUpon>WRelatorioOrcamentoCusto.xaml</DependentUpon>
@@ -186,9 +195,6 @@
     <Compile Include="Apresentacao\WPerfil.xaml.cs">
       <DependentUpon>WPerfil.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\Teste.xaml.cs">
-      <DependentUpon>Teste.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Apresentacao\WUsuarioCadastro.xaml.cs">
       <DependentUpon>WUsuarioCadastro.xaml</DependentUpon>
     </Compile>
@@ -200,6 +206,7 @@
     </Compile>
     <Compile Include="Comum\EnterKeyTransversal.cs" />
     <Compile Include="Comum\ExtraWindowStyles.cs" />
+    <Compile Include="Objeto\Fornecedor.cs" />
     <Compile Include="Objeto\Produto.cs" />
     <Compile Include="Objeto\Taxa.cs" />
     <Compile Include="Objeto\Permissao.cs" />
@@ -222,6 +229,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="Apresentacao\Controler\MDecimalTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Apresentacao\Controler\MDatePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -258,11 +269,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Apresentacao\Cliente.xaml">
+    <Page Include="Apresentacao\WFiltroRelatorioVarejo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Apresentacao\ClienteCadastro.xaml">
+    <Page Include="Apresentacao\WFiltroRelatorioAtacado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WCliente.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WClienteCadastro.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -329,10 +348,6 @@
     <Page Include="Apresentacao\WPerfil.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Apresentacao\Teste.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Apresentacao\WUsuarioCadastro.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -420,6 +435,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Imagens\ico_produto_adicionar.png" />
+    <Resource Include="Imagens\ico_atualizar.png" />
     <Content Include="Relatorio\RelatorioOrcamento.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

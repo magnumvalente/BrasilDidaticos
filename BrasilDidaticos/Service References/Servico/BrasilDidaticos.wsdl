@@ -73,6 +73,12 @@
   <wsdl:message name="IBrasilDidaticos_TaxaSalvar_OutputMessage">
     <wsdl:part name="parameters" element="tns:TaxaSalvarResponse" />
   </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_FornecedorBuscarCodigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:FornecedorBuscarCodigo" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_FornecedorBuscarCodigo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FornecedorBuscarCodigoResponse" />
+  </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_FornecedorListar_InputMessage">
     <wsdl:part name="parameters" element="tns:FornecedorListar" />
   </wsdl:message>
@@ -85,11 +91,23 @@
   <wsdl:message name="IBrasilDidaticos_FornecedorSalvar_OutputMessage">
     <wsdl:part name="parameters" element="tns:FornecedorSalvarResponse" />
   </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoBuscarCodigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoBuscarCodigo" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoBuscarCodigo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoBuscarCodigoResponse" />
+  </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_ProdutoListar_InputMessage">
     <wsdl:part name="parameters" element="tns:ProdutoListar" />
   </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_ProdutoListar_OutputMessage">
     <wsdl:part name="parameters" element="tns:ProdutoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoListarRelatorio_InputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoListarRelatorio" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ProdutoListarRelatorio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ProdutoListarRelatorioResponse" />
   </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_ProdutoSalvar_InputMessage">
     <wsdl:part name="parameters" element="tns:ProdutoSalvar" />
@@ -115,6 +133,12 @@
   <wsdl:message name="IBrasilDidaticos_ParametrosSalvar_OutputMessage">
     <wsdl:part name="parameters" element="tns:ParametrosSalvarResponse" />
   </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ClienteBuscarCodigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClienteBuscarCodigo" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_ClienteBuscarCodigo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClienteBuscarCodigoResponse" />
+  </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_ClienteListar_InputMessage">
     <wsdl:part name="parameters" element="tns:ClienteListar" />
   </wsdl:message>
@@ -126,6 +150,12 @@
   </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_ClienteSalvar_OutputMessage">
     <wsdl:part name="parameters" element="tns:ClienteSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_OrcamentoBuscarCodigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:OrcamentoBuscarCodigo" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_OrcamentoBuscarCodigo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OrcamentoBuscarCodigoResponse" />
   </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_EstadoOrcamentoListar_InputMessage">
     <wsdl:part name="parameters" element="tns:EstadoOrcamentoListar" />
@@ -196,6 +226,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/TaxaSalvar" message="tns:IBrasilDidaticos_TaxaSalvar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/TaxaSalvarResponse" message="tns:IBrasilDidaticos_TaxaSalvar_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FornecedorBuscarCodigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigo" message="tns:IBrasilDidaticos_FornecedorBuscarCodigo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigoResponse" message="tns:IBrasilDidaticos_FornecedorBuscarCodigo_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FornecedorListar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorListar" message="tns:IBrasilDidaticos_FornecedorListar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorListarResponse" message="tns:IBrasilDidaticos_FornecedorListar_OutputMessage" />
@@ -204,9 +238,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorSalvar" message="tns:IBrasilDidaticos_FornecedorSalvar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/FornecedorSalvarResponse" message="tns:IBrasilDidaticos_FornecedorSalvar_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ProdutoBuscarCodigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigo" message="tns:IBrasilDidaticos_ProdutoBuscarCodigo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigoResponse" message="tns:IBrasilDidaticos_ProdutoBuscarCodigo_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ProdutoListar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoListar" message="tns:IBrasilDidaticos_ProdutoListar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoListarResponse" message="tns:IBrasilDidaticos_ProdutoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ProdutoListarRelatorio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorio" message="tns:IBrasilDidaticos_ProdutoListarRelatorio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorioResponse" message="tns:IBrasilDidaticos_ProdutoListarRelatorio_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ProdutoSalvar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ProdutoSalvar" message="tns:IBrasilDidaticos_ProdutoSalvar_InputMessage" />
@@ -224,6 +266,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ParametrosSalvar" message="tns:IBrasilDidaticos_ParametrosSalvar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ParametrosSalvarResponse" message="tns:IBrasilDidaticos_ParametrosSalvar_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ClienteBuscarCodigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigo" message="tns:IBrasilDidaticos_ClienteBuscarCodigo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigoResponse" message="tns:IBrasilDidaticos_ClienteBuscarCodigo_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ClienteListar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteListar" message="tns:IBrasilDidaticos_ClienteListar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteListarResponse" message="tns:IBrasilDidaticos_ClienteListar_OutputMessage" />
@@ -231,6 +277,10 @@
     <wsdl:operation name="ClienteSalvar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteSalvar" message="tns:IBrasilDidaticos_ClienteSalvar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/ClienteSalvarResponse" message="tns:IBrasilDidaticos_ClienteSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrcamentoBuscarCodigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigo" message="tns:IBrasilDidaticos_OrcamentoBuscarCodigo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigoResponse" message="tns:IBrasilDidaticos_OrcamentoBuscarCodigo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EstadoOrcamentoListar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/EstadoOrcamentoListar" message="tns:IBrasilDidaticos_EstadoOrcamentoListar_InputMessage" />
@@ -350,6 +400,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FornecedorBuscarCodigo">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/FornecedorBuscarCodigo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FornecedorListar">
       <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/FornecedorListar" style="document" />
       <wsdl:input>
@@ -368,8 +427,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ProdutoBuscarCodigo">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ProdutoBuscarCodigo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ProdutoListar">
       <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ProdutoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProdutoListarRelatorio">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ProdutoListarRelatorio" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -413,6 +490,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ClienteBuscarCodigo">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ClienteBuscarCodigo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ClienteListar">
       <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ClienteListar" style="document" />
       <wsdl:input>
@@ -424,6 +510,15 @@
     </wsdl:operation>
     <wsdl:operation name="ClienteSalvar">
       <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/ClienteSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrcamentoBuscarCodigo">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/OrcamentoBuscarCodigo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

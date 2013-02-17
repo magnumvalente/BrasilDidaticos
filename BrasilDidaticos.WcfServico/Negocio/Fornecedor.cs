@@ -9,11 +9,32 @@ namespace BrasilDidaticos.WcfServico.Negocio
     static class Fornecedor
     {
         /// <summary>
+        /// Método para buscar o código do fornecedor
+        /// </summary>        
+        /// <returns>string</returns>
+        internal static string BuscarCodigoFornecedor()
+        {
+            // Objeto que recebe o retorno do método
+            string retCodigoFornecedor = string.Empty;
+
+            // Loga no banco de dados
+            Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+            System.Data.Objects.ObjectParameter objCodigoFornecedor = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_FORNECEDOR, objCodigoFornecedor);
+
+            // Recupera o código do fornecedor
+            retCodigoFornecedor = Util.RecuperaCodigo((int)objCodigoFornecedor.Value, Contrato.Constantes.TIPO_COD_FORNECEDOR);
+
+            // retorna os dados
+            return retCodigoFornecedor;
+        }
+
+        /// <summary>
         /// Método para buscar o fornecedor
         /// </summary>
         /// <param name="Fornecedor">Objeto com o identificador do fornecedor</param>
         /// <returns>Contrato.RetornoFornecedor</returns>
-        public static Contrato.Fornecedor BuscarFornecedor(Dados.FORNECEDOR fornecedor)
+        internal static Contrato.Fornecedor BuscarFornecedor(Dados.FORNECEDOR fornecedor)
         {
             // Objeto que recebe o retorno do método
             Contrato.Fornecedor retFornecedor = new Contrato.Fornecedor();
@@ -44,7 +65,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Fornecedor">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoFornecedor</returns>
-        public static Contrato.RetornoFornecedor ListarFornecedor(Contrato.EntradaFornecedor entradaFornecedor)
+        internal static Contrato.RetornoFornecedor ListarFornecedor(Contrato.EntradaFornecedor entradaFornecedor)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoFornecedor retFornecedor = new Contrato.RetornoFornecedor();
@@ -113,7 +134,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaFornecedor">Objeto com os dados do fornecedor</param>
         /// <returns>Contrato.RetornoFornecedor</returns>
-        public static Contrato.RetornoFornecedor SalvarFornecedor(Contrato.EntradaFornecedor entradaFornecedor)
+        internal static Contrato.RetornoFornecedor SalvarFornecedor(Contrato.EntradaFornecedor entradaFornecedor)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoFornecedor retFornecedor = new Contrato.RetornoFornecedor();
@@ -183,7 +204,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 {
                                     // Verifica se é para atualizar os produtos
                                     if (!atualizarProdutos)
-                                        atualizarProdutos = (from ft in lstFornecedores.First().T_FORNECEDOR_TAXA where ft.ID_TAXA == t.Id && ft.NUM_VALOR != t.Valor select ft).Count() > 0;
+                                        atualizarProdutos = (from ft in lstFornecedores.First().T_FORNECEDOR_TAXA where ft.ID_TAXA == t.Id && (ft.NUM_VALOR != t.Valor || ft.ORD_PRIORIDADE != t.Prioridade) select ft).Count() > 0;
                                     else
                                         break;
                                 }
@@ -204,10 +225,21 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         }
                         else
                         {
+                            // Recupera o código do cliente
+                            string codigoFornecedor = string.Empty;
+                            if (entradaFornecedor.Fornecedor.Codigo != string.Empty)
+                                codigoFornecedor = entradaFornecedor.Fornecedor.Codigo;
+                            else
+                            {
+                                System.Data.Objects.ObjectParameter objCodigoFornecedor = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_FORNECEDOR, objCodigoFornecedor);
+                                codigoFornecedor = Util.RecuperaCodigo((int)objCodigoFornecedor.Value, Contrato.Constantes.TIPO_COD_FORNECEDOR);
+                            }
+
                             // Cria o fornecedor
                             Dados.FORNECEDOR tFornecedor = new Dados.FORNECEDOR();
                             tFornecedor.ID_FORNECEDOR = Guid.NewGuid();
-                            tFornecedor.COD_FORNECEDOR = entradaFornecedor.Fornecedor.Codigo;
+                            tFornecedor.COD_FORNECEDOR = codigoFornecedor;
                             tFornecedor.NOME_FORNECEDOR = entradaFornecedor.Fornecedor.Nome;
                             tFornecedor.BOL_PESSOA_FISICA = entradaFornecedor.Fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false;
                             tFornecedor.CPF_CNJP_FORNECEDOR = entradaFornecedor.Fornecedor.Cpf_Cnpj;
@@ -313,11 +345,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         private static string ValidarFornecedorPreenchido(Contrato.Fornecedor Fornecedor)
         {
             // Cria a variável de retorno
-            string strRetorno = string.Empty;
-
-            // Verifica se o Codigo foi preenchido
-            if (string.IsNullOrWhiteSpace(Fornecedor.Codigo))
-                strRetorno = "O campo 'Codigo' não foi informado!\n";
+            string strRetorno = string.Empty;                        
 
             // Verifica se a Nome foi preenchida
             if (string.IsNullOrWhiteSpace(Fornecedor.Nome))

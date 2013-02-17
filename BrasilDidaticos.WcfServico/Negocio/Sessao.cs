@@ -6,14 +6,14 @@ using BrasilDidaticos.WcfServico;
 
 namespace BrasilDidaticos.WcfServico.Negocio
 {
-    public static class Sessao
+    internal static class Sessao
     {
         /// <summary>
         /// Método para logar na aplicação
         /// </summary>
         /// <param name="Sessao">Objeto com os dados da sessão a validar</param>
         /// <returns>Contrato.RetornoSessao</returns>
-        public static Contrato.RetornoSessao ValidarSessao(Contrato.Sessao Sessao)
+        internal static Contrato.RetornoSessao ValidarSessao(Contrato.Sessao Sessao)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoSessao retSessao = new Contrato.RetornoSessao();
@@ -60,7 +60,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Sessao">Objeto com os dados da sessão a listar</param>
         /// <returns>Contrato.RetornoSessao</returns>
-        public static Contrato.RetornoSessao ListarSessao(Contrato.Sessao Sessao)
+        internal static Contrato.RetornoSessao ListarSessao(Contrato.Sessao Sessao)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoSessao retSessao = new Contrato.RetornoSessao();
@@ -107,7 +107,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Sessao">Objeto com os dados da sessão</param>
         /// <returns>Contrato.RetornoSessao</returns>
-        public static Contrato.RetornoSessao SalvarSessao(Contrato.Sessao Sessao)
+        internal static Contrato.RetornoSessao SalvarSessao(Contrato.Sessao Sessao)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoSessao retSessao = new Contrato.RetornoSessao();
@@ -168,7 +168,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Sessao">Objeto com os dados do usuário a Logar</param>
         /// <returns>Contrato.RetornoFornecedor</returns>
-        public static Contrato.RetornoSessao ExcluirSessao(Contrato.Sessao Sessao)
+        internal static Contrato.RetornoSessao ExcluirSessao(Contrato.Sessao Sessao)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoSessao retSessao = new Contrato.RetornoSessao();

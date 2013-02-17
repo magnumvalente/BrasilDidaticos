@@ -18,8 +18,6 @@ namespace BrasilDidaticos.Apresentacao
     /// </summary>
     public partial class WProduto : Window
     {
-        //public delegate void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e);
-        //public event WindowClosing WindowClosingEvent;
 
         #region "[Atributos]"
 
@@ -110,6 +108,7 @@ namespace BrasilDidaticos.Apresentacao
         private void PreencherFiltro(Contrato.Produto Produto)
         {
             Produto.Codigo = txtCodigo.Conteudo;
+            Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
             Produto.Nome = txtNome.Conteudo;
             if (cmbFornecedor.ValorSelecionado != null)
                 Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
@@ -269,40 +268,23 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }
+        }         
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
-
-         //private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-         //{
-         //    try
-         //    {
-         //        if (WindowClosingEvent != null)
-         //            WindowClosingEvent(sender, e);
-         //    }
-         //    catch (Exception ex)
-         //    {
-         //        throw ex;
-         //    }
-         //    finally
-         //    {
-         //        this.Cursor = Cursors.Arrow;
-         //    }
-         //}
-
-         private void btnCancelar_Click(object sender, RoutedEventArgs e)
-         {
-             try
-             {
-                 this.Close();
-             }
-             catch (Exception ex)
-             {
-                 throw ex;
-             }
-             finally
-             {
-                 this.Cursor = Cursors.Arrow;
-             }
-         }
         
         #endregion
                  

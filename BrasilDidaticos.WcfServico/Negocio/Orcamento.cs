@@ -8,13 +8,33 @@ namespace BrasilDidaticos.WcfServico.Negocio
 {
     static class Orcamento
     {
+        /// <summary>
+        /// Método para buscar o código do orçamento
+        /// </summary>        
+        /// <returns>string</returns>
+        internal static string BuscarCodigoOrcamento()
+        {
+            // Objeto que recebe o retorno do método
+            string retCodigoOrcamento = string.Empty;
+
+            // Loga no banco de dados
+            Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+            System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_ORCAMENTO, objCodigoOrcamento);
+
+            // Recupera o código do fornecedor
+            retCodigoOrcamento = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_ORCAMENTO);
+
+            // retorna os dados
+            return retCodigoOrcamento;
+        }
 
         /// <summary>
         /// Método para buscar o orçamento
         /// </summary>
         /// <param name="Orcamento">Objeto com o identificador do orçamento</param>
         /// <returns>Contrato.RetornoOrcamento</returns>
-        public static Contrato.Orcamento BuscarOrcamento(Dados.ORCAMENTO orcamento)
+        internal static Contrato.Orcamento BuscarOrcamento(Dados.ORCAMENTO orcamento)
         {
             // retorna os dados
             return BuscarOrcamento(orcamento, true);
@@ -26,7 +46,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// <param name="Orcamento">Objeto com o identificador do orçamento</param>
         /// <param name="carregarItens">Define se vai carregar os itens</param>
         /// <returns>Contrato.RetornoOrcamento</returns>
-        public static Contrato.Orcamento BuscarOrcamento(Dados.ORCAMENTO orcamento, bool carregarItens)
+        internal static Contrato.Orcamento BuscarOrcamento(Dados.ORCAMENTO orcamento, bool carregarItens)
         {
             // Objeto que recebe o retorno do método
             Contrato.Orcamento retOrcamento = new Contrato.Orcamento();
@@ -57,7 +77,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Orcamento">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoOrcamento</returns>
-        public static Contrato.RetornoOrcamento ListarOrcamento(Contrato.EntradaOrcamento entradaOrcamento)
+        internal static Contrato.RetornoOrcamento ListarOrcamento(Contrato.EntradaOrcamento entradaOrcamento)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoOrcamento retOrcamento = new Contrato.RetornoOrcamento();
@@ -150,7 +170,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaOrcamento">Objeto com os dados do orcamento</param>
         /// <returns>Contrato.RetornoOrcamento</returns>
-        public static Contrato.RetornoOrcamento SalvarOrcamento(Contrato.EntradaOrcamento entradaOrcamento)
+        internal static Contrato.RetornoOrcamento SalvarOrcamento(Contrato.EntradaOrcamento entradaOrcamento)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoOrcamento retOrcamento = new Contrato.RetornoOrcamento();
@@ -235,10 +255,21 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         }
                         else
                         {
+                            // Recupera o código do orçamento
+                            string codigoOrcamento = string.Empty;
+                            if (entradaOrcamento.Orcamento.Codigo != string.Empty)
+                                codigoOrcamento = entradaOrcamento.Orcamento.Codigo;
+                            else
+                            {
+                                System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_ORCAMENTO, objCodigoOrcamento);
+                                codigoOrcamento = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_ORCAMENTO);
+                            }
+
                             // Cria o orcamento
                             Dados.ORCAMENTO tOrcamento = new Dados.ORCAMENTO();
                             tOrcamento.ID_ORCAMENTO = Guid.NewGuid();
-                            tOrcamento.COD_ORCAMENTO = entradaOrcamento.Orcamento.Codigo;
+                            tOrcamento.COD_ORCAMENTO = codigoOrcamento;
                             tOrcamento.DATA_ORCAMENTO = entradaOrcamento.Orcamento.Data;
                             tOrcamento.ID_CLIENTE = entradaOrcamento.Orcamento.Cliente.Id;
                             tOrcamento.ID_ESTADO_ORCAMENTO = entradaOrcamento.Orcamento.Estado.Id;
@@ -302,10 +333,6 @@ namespace BrasilDidaticos.WcfServico.Negocio
         {
             // Cria a variável de retorno
             string strRetorno = string.Empty;
-
-            // Verifica se o Codigo foi preenchido
-            if (string.IsNullOrWhiteSpace(Orcamento.Codigo))
-                strRetorno = "O campo 'Codigo' não foi informado!\n";
 
             // Verifica se a Data foi preenchida
             if (Orcamento.Data == null)

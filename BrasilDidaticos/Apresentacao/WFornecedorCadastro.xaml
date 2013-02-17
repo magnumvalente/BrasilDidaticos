@@ -16,14 +16,14 @@
             <Image Source="/BrasilDidaticos;component/Imagens/ico_wfornecedor.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock Text="FORNECEDOR" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
         </StackPanel>
-        <GroupBox Name="Item" DockPanel.Dock="Top" Width="400" Margin="0,10,0,0">
+        <GroupBox Name="Item" DockPanel.Dock="Top" Width="440" Margin="0,10,0,0">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Width="16" Height="16" />
                     <TextBlock Text="Novo" VerticalAlignment="Center" Margin="5"/>
                 </StackPanel>
             </GroupBox.Header>
-        <Grid Name="gdFornecedorDados" DockPanel.Dock="Top" Margin="0,10,0,0">
+            <Grid Name="gdFornecedorDados" MinWidth="400" DockPanel.Dock="Top" Margin="0,10,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />                
@@ -31,14 +31,23 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />                
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="400" MaxWidth="Infinity"></ColumnDefinition>
+                <ColumnDefinition Width="0"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
+            <Button Grid.Row="0" Grid.Column="1" Name="btnGerarNovoCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" Click="btnGerarNovoCodigo_Click" ToolTip="Gerar Novo Código" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
+                </StackPanel>
+            </Button>
             <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
             <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="2" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" />
             <my:MMaskTextBox x:Name="txtCPFCNP" Titulo="CPF / CNPJ:" Grid.Row="3" Background="#FFF0F0F0" />
-            <my:MDecimalUpDown x:Name="txtValorAtacado" Titulo="Porcentagem Atacado:" Grid.Row="4" />
-            <my:MDecimalUpDown x:Name="txtValorVarejo" Titulo="Porcentagem Varejo:" Grid.Row="5" Background="#FFF0F0F0" />
+            <my:MDecimalTextBox x:Name="txtValorAtacado" Titulo="Porcentagem Atacado:" Grid.Row="4" FomartString="P" />
+            <my:MDecimalTextBox x:Name="txtValorVarejo" Titulo="Porcentagem Varejo:" Grid.Row="5" FomartString="P" Background="#FFF0F0F0" />
             <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="6" Selecionado="True" />
         </Grid>
         </GroupBox>
@@ -63,7 +72,7 @@
             </Button>
         </StackPanel>        
         <GroupBox Name="gpbTaxas" DockPanel.Dock="Top" Header="Taxas">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgTaxas" Width="Auto" DataContext="{Binding}" CanUserAddRows="False" SelectionMode="Single">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgTaxas" Width="Auto" DataContext="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>

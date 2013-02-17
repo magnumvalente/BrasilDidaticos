@@ -52,7 +52,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbTaxas" DockPanel.Dock="Top" Header="Taxas">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgTaxas" Width="Auto" CanUserAddRows="False" >
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgTaxas" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" >
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>

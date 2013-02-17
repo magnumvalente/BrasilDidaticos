@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaPermissao.Permissoes">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoPermissao</returns>
-        public static Contrato.RetornoPermissao ListarPermissao(Contrato.EntradaPermissao entradaPermissao)
+        internal static Contrato.RetornoPermissao ListarPermissao(Contrato.EntradaPermissao entradaPermissao)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoPermissao retPermissao = new Contrato.RetornoPermissao();
@@ -73,7 +73,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioPermissao">Recebe os permissaos do usuário recuperado do banco</param>
         /// <returns>List<Contrato.Permissao></returns>
-        public static List<Contrato.Permissao> ListarPerfilPermissao(System.Data.Objects.DataClasses.EntityCollection<Dados.PERFIL_PERMISSAO> lstPerfilPermissao)
+        internal static List<Contrato.Permissao> ListarPerfilPermissao(System.Data.Objects.DataClasses.EntityCollection<Dados.PERFIL_PERMISSAO> lstPerfilPermissao)
         {
             List<Contrato.Permissao> lstPermissao = null;
 

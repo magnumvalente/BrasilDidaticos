@@ -24,7 +24,7 @@
   <xs:element name="Entrada" nillable="true" type="tns:Entrada" />
   <xs:complexType name="Usuario">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Ativo" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
@@ -251,6 +251,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
       <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodigoFornecedor" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Fornecedor" nillable="true" type="tns:Fornecedor" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Ncm" nillable="true" type="xs:string" />
@@ -413,10 +414,12 @@
   <xs:element name="EntradaEstadoOrcamento" nillable="true" type="tns:EntradaEstadoOrcamento" />
   <xs:complexType name="EstadoOrcamento">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Anterior" nillable="true" type="tns:EstadoOrcamento" />
+      <xs:element minOccurs="0" name="Ativo" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sucessor" nillable="true" type="tns:EstadoOrcamento" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EstadoOrcamento" nillable="true" type="tns:EstadoOrcamento" />
@@ -454,8 +457,8 @@
       <xs:element minOccurs="0" name="Estado" nillable="true" type="tns:EstadoOrcamento" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Itens" nillable="true" type="tns:ArrayOfItem" />
-      <xs:element minOccurs="0" name="PercentagemDesconto" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Responsavel" nillable="true" type="tns:Usuario" />
+      <xs:element minOccurs="0" name="ValorDesconto" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Vendedor" nillable="true" type="tns:Usuario" />
     </xs:sequence>
   </xs:complexType>
@@ -468,13 +471,14 @@
   <xs:element name="ArrayOfItem" nillable="true" type="tns:ArrayOfItem" />
   <xs:complexType name="Item">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Descricao" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Orcamento" nillable="true" type="tns:Orcamento" />
-      <xs:element minOccurs="0" name="PercentagemDesconto" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Produto" nillable="true" type="tns:Produto" />
       <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
       <xs:element minOccurs="0" name="ValorCusto" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ValorReal" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorDesconto" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorUnitario" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Item" nillable="true" type="tns:Item" />

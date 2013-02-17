@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaPerfil.Perfis">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoPerfil</returns>
-        public static Contrato.RetornoPerfil ListarPerfil(Contrato.EntradaPerfil entradaPerfil)
+        internal static Contrato.RetornoPerfil ListarPerfil(Contrato.EntradaPerfil entradaPerfil)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoPerfil retPerfil = new Contrato.RetornoPerfil();
@@ -75,7 +75,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioPerfil">Recebe os perfils do usuário recuperado do banco</param>
         /// <returns>List<Contrato.Perfil></returns>
-        public static List<Contrato.Perfil> ListarUsuarioPerfil(System.Data.Objects.DataClasses.EntityCollection<Dados.USUARIO_PERFIL> lstUsuarioPerfil)
+        internal static List<Contrato.Perfil> ListarUsuarioPerfil(System.Data.Objects.DataClasses.EntityCollection<Dados.USUARIO_PERFIL> lstUsuarioPerfil)
         {
             List<Contrato.Perfil> lstPerfil = null;
 
@@ -104,7 +104,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Perfis">Objeto com os dados do perfil</param>
         /// <returns>Contrato.RetornoPerfil</returns>
-        public static Contrato.RetornoPerfil SalvarPerfil(Contrato.EntradaPerfil entradaPerfil)
+        internal static Contrato.RetornoPerfil SalvarPerfil(Contrato.EntradaPerfil entradaPerfil)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoPerfil retPerfil = new Contrato.RetornoPerfil();

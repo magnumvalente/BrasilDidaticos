@@ -48,7 +48,7 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                cmbComboBox = value;
+                cmbComboBox = (ComboBox)value;
             }
             get
             {

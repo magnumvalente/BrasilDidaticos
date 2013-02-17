@@ -37,9 +37,15 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="0"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" Grid.Column="0"/>
+                <Button Grid.Row="0" Grid.Column="1" Name="btnGerarNovoCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" Click="btnGerarNovoCodigo_Click" ToolTip="Gerar Novo Código" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
+                    </StackPanel>
+                </Button>
                 <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1"  Grid.Column="0"/>
                 <my:MTextBox x:Name="txtCaixaEscolar" Titulo="Caixa Escolar:" Grid.Row="2"  Grid.Column="0"/>
                 <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="3"  Grid.Column="0" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" />
@@ -48,14 +54,14 @@
                 <my:MMaskTextBox x:Name="txtTelefone" Titulo="Telefone:" Grid.Row="6" Grid.Column="0"/>
                 <my:MMaskTextBox x:Name="txtCelular" Titulo="Celular:" Grid.Row="7" Grid.Column="0"/>
                 <my:MTextBox x:Name="txtEmail" Titulo="Email:" Grid.Row="8" Grid.Column="0"/>
-                <my:MComboBox x:Name="cmbClienteMatriz" Titulo="Matriz:" Grid.Row="0" Grid.Column="1"/>
-                <my:MMaskTextBox x:Name="txtCep" Titulo="CEP:" Grid.Row="1" Grid.Column="1" LostFocus="txtCep_LostFocus" />
-                <my:MTextBox x:Name="txtEndereco" Titulo="Endereço:" Grid.Row="2" Grid.Column="1"/>
-                <my:MTextBox x:Name="txtNumero" Titulo="Número:" PreviewTextInput="NumericOnly" Grid.Row="3" Grid.Column="1"/>
-                <my:MTextBox x:Name="txtComplemento" Titulo="Complemento:" Grid.Row="4"  Grid.Column="1"/>
-                <my:MTextBox x:Name="txtBairro" Titulo="Bairro:" Grid.Row="5" Grid.Column="1"/>
-                <my:MTextBox x:Name="txtCidade" Titulo="Cidade:" Grid.Row="6" Grid.Column="1"/>
-                <my:MComboBox x:Name="cmbEstado" Titulo="Estado:" Grid.Row="7" Grid.Column="1" />
+                <my:MComboBox x:Name="cmbClienteMatriz" Titulo="Matriz:" Grid.Row="0" Grid.Column="2"/>
+                <my:MMaskTextBox x:Name="txtCep" Titulo="CEP:" Grid.Row="1" Grid.Column="2" LostFocus="txtCep_LostFocus" />
+                <my:MTextBox x:Name="txtEndereco" Titulo="Endereço:" Grid.Row="2" Grid.Column="2"/>
+                <my:MTextBox x:Name="txtNumero" Titulo="Número:" PreviewTextInput="NumericOnly" Grid.Row="3" Grid.Column="2"/>
+                <my:MTextBox x:Name="txtComplemento" Titulo="Complemento:" Grid.Row="4"  Grid.Column="2"/>
+                <my:MTextBox x:Name="txtBairro" Titulo="Bairro:" Grid.Row="5" Grid.Column="2"/>
+                <my:MTextBox x:Name="txtCidade" Titulo="Cidade:" Grid.Row="6" Grid.Column="2"/>
+                <my:MComboBox x:Name="cmbEstado" Titulo="Estado:" Grid.Row="7" Grid.Column="2" />
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">

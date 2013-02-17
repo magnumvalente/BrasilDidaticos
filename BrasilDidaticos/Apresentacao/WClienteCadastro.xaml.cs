@@ -14,10 +14,16 @@ using System.Windows.Shapes;
 namespace BrasilDidaticos.Apresentacao
 {
     /// <summary>
-    /// Interaction logic for Cliente.xaml
+    /// Interaction logic for WClienteCadastro.xaml
     /// </summary>
     public partial class WClienteCadastro : Window
     {
+        #region "[Constantes]"
+                
+        const double TAM_COLUNA_CODIGO = 40;
+
+        #endregion
+
         #region "[Atributos]"
 
         private Contrato.Cliente _cliente = null;
@@ -62,7 +68,7 @@ namespace BrasilDidaticos.Apresentacao
             // Permissão módulos operacionais sistema
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             // Desabilita ou habilita os controles da tela
-            txtCodigo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtCodigo.IsEnabled = false;
             txtNome.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_MODIFICAR);
             rlbPessoa.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtCPFCNP.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_MODIFICAR);
@@ -87,16 +93,7 @@ namespace BrasilDidaticos.Apresentacao
         private StringBuilder ValidarCampos()
         {
             StringBuilder strValidacao = new StringBuilder();
-
-            // Verifica se o Código foi informado
-            if (string.IsNullOrWhiteSpace(txtCodigo.Conteudo.ToString()))
-            {
-                txtCodigo.Erro = Visibility.Visible;
-                strValidacao.Append("O campo 'Codigo' não foi informado!\n");
-            }
-            else
-                txtCodigo.Erro = Visibility.Hidden;
-
+            
             // Verifica se a Nome foi informada
             if (string.IsNullOrWhiteSpace(txtNome.Conteudo.ToString()))
             {
@@ -139,10 +136,23 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     MessageBox.Show(retCliente.Mensagem, "Cliente", MessageBoxButton.OK, MessageBoxImage.Error);
                     salvou = false;
+
+                    if (retCliente.Codigo == Contrato.Constantes.COD_REGISTRO_DUPLICADO)
+                    {
+                        gdClienteDados.ColumnDefinitions[1].Width = new GridLength(TAM_COLUNA_CODIGO);
+                    }
                 }
             }
 
             return salvou;
+        }
+
+        private void GerarNovoCodigo()
+        {
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            string retCodigoCliente = servBrasilDidaticos.ClienteBuscarCodigo();
+            servBrasilDidaticos.Close();
+            txtCodigo.Conteudo = retCodigoCliente;
         }
 
         private void PreencherCliente(Contrato.Cliente Cliente)
@@ -198,6 +208,10 @@ namespace BrasilDidaticos.Apresentacao
                 txtBairro.Conteudo = _cliente.Bairro;
                 txtCidade.Conteudo = _cliente.Cidade;
                 cmbEstado.ValorSelecionado = _cliente.Uf;
+            }
+            else
+            {
+                GerarNovoCodigo();
             }
         }
 
@@ -279,7 +293,7 @@ namespace BrasilDidaticos.Apresentacao
         
         private void ConfigurarControles()
         {
-            txtCodigo.txtBox.Focus();
+            txtNome.txtBox.Focus();
         }
 
         #endregion
@@ -303,6 +317,23 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }            
+        }
+
+        private void btnGerarNovoCodigo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                GerarNovoCodigo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Cliente", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
@@ -422,8 +453,6 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         #endregion
-
-
-
+        
     }
 }

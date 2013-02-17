@@ -48,7 +48,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbPermissoes" DockPanel.Dock="Top" Header="Permissões">
-            <DataGrid DockPanel.Dock="Bottom" Name="dgPermissoes" AutoGenerateColumns="False" Width="Auto" CanUserAddRows="False">
+            <DataGrid DockPanel.Dock="Bottom" Name="dgPermissoes" AutoGenerateColumns="False" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>

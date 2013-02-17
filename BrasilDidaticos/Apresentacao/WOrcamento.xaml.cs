@@ -49,6 +49,12 @@ namespace BrasilDidaticos.Apresentacao
             // Permissão módulos operacionais sistema
             btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+
+            // Permissão Valor Custo DataGrid
+            DataGridColumn dgColuna = null;
+            dgColuna = dgOrcamentos.Columns[6];
+            if (dgColuna != null) dgColuna.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.VER_CUSTO) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+
         }
 
         private void ListarOrcamentos()
@@ -234,6 +240,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             WOrcamentoCadastro orcamentoCadastro = new WOrcamentoCadastro();
             orcamentoCadastro.Orcamento = produto;
+            orcamentoCadastro.Owner = this;
             orcamentoCadastro.ShowDialog();
 
             if (!orcamentoCadastro.Cancelou)

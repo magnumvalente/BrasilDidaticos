@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaParametro.Parametros">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoParametro</returns>
-        public static Contrato.RetornoParametro ListarParametro(Contrato.EntradaParametro entradaParametro)
+        internal static Contrato.RetornoParametro ListarParametro(Contrato.EntradaParametro entradaParametro)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoParametro retParametro = new Contrato.RetornoParametro();
@@ -73,7 +73,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Parametros">Objeto com os dados do parametro</param>
         /// <returns>Contrato.RetornoParametro</returns>
-        public static Contrato.RetornoParametro SalvarParametros(Contrato.EntradaParametros entradaParametros)
+        internal static Contrato.RetornoParametro SalvarParametros(Contrato.EntradaParametros entradaParametros)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoParametro retParametro = new Contrato.RetornoParametro();
@@ -116,7 +116,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// <param name="Parametro">Objeto com os dados do parametro</param>
         /// <param name="usuarioLogado">Nome do usuário Logado</param>
         /// <returns>Contrato.RetornoParametro</returns>
-        public static Contrato.RetornoParametro SalvarParametro(Contrato.Parametro Parametro, string usuarioLogado)
+        internal static Contrato.RetornoParametro SalvarParametro(Contrato.Parametro Parametro, string usuarioLogado)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoParametro retParametro = new Contrato.RetornoParametro();

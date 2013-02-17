@@ -9,11 +9,33 @@ namespace BrasilDidaticos.WcfServico.Negocio
     static class Produto
     {
         /// <summary>
+        /// Método para buscar o código do produto
+        /// </summary>        
+        /// <returns>string</returns>
+        internal static string BuscarCodigoProduto()
+        {
+            // Objeto que recebe o retorno do método
+            string retCodigoProduto = string.Empty;
+
+            // Loga no banco de dados
+            Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+            System.Data.Objects.ObjectParameter objCodigoProduto = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_PRODUTO, objCodigoProduto);
+
+            // Recupera o código do produto
+            retCodigoProduto = Util.RecuperaCodigo((int)objCodigoProduto.Value, Contrato.Constantes.TIPO_COD_PRODUTO);
+
+
+            // retorna os dados
+            return retCodigoProduto;
+        }
+
+        /// <summary>
         /// Método para buscar o produto
         /// </summary>
         /// <param name="Fornecedor">Objeto com o identificador do produto</param>
         /// <returns>Contrato.RetornoProduto</returns>
-        public static Contrato.Produto BuscarProduto(Dados.PRODUTO produto)
+        internal static Contrato.Produto BuscarProduto(Dados.PRODUTO produto)
         {
             // Objeto que recebe o retorno do método
             Contrato.Produto retProduto = new Contrato.Produto();
@@ -26,6 +48,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     Id = produto.ID_PRODUTO,
                     Nome = produto.NOME_PRODUTO,
                     Codigo = produto.COD_PRODUTO,
+                    CodigoFornecedor = produto.COD_PRODUTO_FORNECEDOR,
                     ValorBase = produto.NUM_VALOR,
                     Ncm = produto.NCM_PRODUTO,
                     Fornecedor = Negocio.Fornecedor.BuscarFornecedor(produto.T_FORNECEDOR),                    
@@ -37,13 +60,13 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // retorna os dados
             return retProduto;
         }
-
+        
         /// <summary>
         /// Método para listar os produtos
         /// </summary>
         /// <param name="Produto">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoProduto</returns>
-        public static Contrato.RetornoProduto ListarProduto(Contrato.EntradaProduto entradaProduto)
+        internal static Contrato.RetornoProduto ListarProduto(Contrato.EntradaProduto entradaProduto)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
@@ -58,6 +81,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Codigo))
                 {
                     entradaProduto.Produto.Codigo = string.Empty;
+                }
+
+                // Verifica se o código não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.CodigoFornecedor))
+                {
+                    entradaProduto.Produto.CodigoFornecedor = string.Empty;
                 }
 
                 // Verifica se o nome não foi informado
@@ -80,10 +109,11 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     
                 if (entradaProduto.Paginar)
                 {
-                    lstProdutos = (from p in context.T_PRODUTO
+                    lstProdutos = (from p in context.T_PRODUTO                                   
                                     where 
                                     (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
-                                    && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.StartsWith(entradaProduto.Produto.Codigo))
+                                    && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.ToLower().Contains(entradaProduto.Produto.Codigo.ToLower()))
+                                    && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.ToLower().Contains(entradaProduto.Produto.CodigoFornecedor.ToLower()))
                                     && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.ToLower().Contains(entradaProduto.Produto.Nome.ToLower()))
                                     && (entradaProduto.Produto.Fornecedor.Id == Guid.Empty || p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id)
                                     select p
@@ -114,6 +144,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             Id = produto.ID_PRODUTO,
                             Nome = produto.NOME_PRODUTO,
                             Codigo = produto.COD_PRODUTO,
+                            CodigoFornecedor = produto.COD_PRODUTO_FORNECEDOR,
                             ValorBase = produto.NUM_VALOR,
                             Ncm = produto.NCM_PRODUTO,
                             Ativo = produto.BOL_ATIVO,
@@ -141,11 +172,115 @@ namespace BrasilDidaticos.WcfServico.Negocio
         }
 
         /// <summary>
+        /// Método para listar os produtos para relatórios
+        /// </summary>
+        /// <param name="Produto">Objeto com os dados do filtro</param>
+        /// <returns>Contrato.RetornoProduto</returns>
+        internal static Contrato.RetornoProduto ListarProdutoRelatorio(Contrato.EntradaProduto entradaProduto)
+        {
+            // Objeto que recebe o retorno do método
+            Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
+
+            // Objeto que recebe o retorno da sessão
+            Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaProduto.UsuarioLogado, Chave = entradaProduto.Chave });
+
+            // Verifica se o usuário está autenticado
+            if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            {
+                // Verifica se o código não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Codigo))
+                {
+                    entradaProduto.Produto.Codigo = string.Empty;
+                }
+
+                // Verifica se o código não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.CodigoFornecedor))
+                {
+                    entradaProduto.Produto.CodigoFornecedor = string.Empty;
+                }
+
+                // Verifica se o nome não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Nome))
+                {
+                    entradaProduto.Produto.Nome = string.Empty;
+                }
+                
+                // Loga no banco de dados
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+
+                // Busca o produto no banco
+                var lstProdutos = (from p in context.T_PRODUTO
+                                   join t in context.T_PRODUTO_TAXA on p.ID_PRODUTO equals t.ID_PRODUTO
+                                   where
+                                   (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
+                                   && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.StartsWith(entradaProduto.Produto.Codigo))
+                                   && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.ToLower().Contains(entradaProduto.Produto.Nome.ToLower()))
+                                   select new { p, t}
+                                ).ToList();
+                
+                // Verifica se existe fornecedores
+                if (entradaProduto.Produto.Fornecedores != null)
+                {
+                    List<Guid> IdsFornecedores = entradaProduto.Produto.Fornecedores.Select(f => f.Id).ToList();
+                    lstProdutos = lstProdutos.Where(p => IdsFornecedores.Contains(p.p.ID_FORNECEDOR)).ToList();
+                }
+
+                // Verifica se foi encontrado algum registro
+                if (lstProdutos.Count > 0)
+                {
+                    // Preenche o objeto de retorno
+                    retProduto.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
+                    retProduto.Produtos = new List<Contrato.Produto>();
+                    foreach (var item in lstProdutos)
+                    {
+                        Contrato.Produto prod = retProduto.Produtos.Where(p => p.Id == item.p.ID_PRODUTO).FirstOrDefault();
+
+                        if (prod == null)
+                        {
+                            retProduto.Produtos.Add(new Contrato.Produto()
+                            {
+                                Id = item.p.ID_PRODUTO,
+                                Nome = item.p.NOME_PRODUTO,
+                                Codigo = item.p.COD_PRODUTO,
+                                CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                                ValorBase = item.p.NUM_VALOR,
+                                Ncm = item.p.NCM_PRODUTO,
+                                Ativo = item.p.BOL_ATIVO,
+                                Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
+                                Taxas = new List<Contrato.Taxa>()
+                            });
+                            retProduto.Produtos.Last().Taxas.Add(Negocio.Taxa.BuscarProdutoTaxa(item.t));
+                        }
+                        else
+                        {
+                            prod.Taxas.Add(Negocio.Taxa.BuscarProdutoTaxa(item.t));
+                        }
+                    };
+                }
+                else
+                {
+                    // Preenche o objeto de retorno
+                    retProduto.Codigo = Contrato.Constantes.COD_RETORNO_VAZIO;
+                    retProduto.Mensagem = "Não existe dados para o filtro informado.";
+                }
+            }
+            else
+            {
+                // retorna quando o usuário não está autenticado
+                retProduto.Codigo = retSessao.Codigo;
+                retProduto.Mensagem = retSessao.Mensagem;
+            }
+
+            // retorna os dados
+            return retProduto;
+        }
+
+        /// <summary>
         /// Método para salvar o produto
         /// </summary>
         /// <param name="entradaProduto">Objeto com os dados do produto</param>
         /// <returns>Contrato.RetornoProduto</returns>
-        public static Contrato.RetornoProduto SalvarProduto(Contrato.EntradaProduto entradaProduto)
+        internal static Contrato.RetornoProduto SalvarProduto(Contrato.EntradaProduto entradaProduto)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
@@ -191,6 +326,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             // Atualiza o produto                            
                             lstProdutos.First().NOME_PRODUTO = entradaProduto.Produto.Nome;
                             lstProdutos.First().NUM_VALOR = entradaProduto.Produto.ValorBase;
+                            lstProdutos.First().COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
                             lstProdutos.First().ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
                             lstProdutos.First().NCM_PRODUTO = entradaProduto.Produto.Ncm;
                             lstProdutos.First().BOL_ATIVO = entradaProduto.Produto.Ativo;
@@ -225,10 +361,22 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         }
                         else
                         {
+                            // Recupera o código do produto
+                            string codigoProduto = string.Empty;
+                            if (entradaProduto.Produto.Codigo != string.Empty)
+                                codigoProduto = entradaProduto.Produto.Codigo;
+                            else
+                            {
+                                System.Data.Objects.ObjectParameter objCodigoProduto = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_PRODUTO, objCodigoProduto);
+                                codigoProduto = Util.RecuperaCodigo((int)objCodigoProduto.Value, Contrato.Constantes.TIPO_COD_PRODUTO);
+                            }
+
                             // Cria o produto
                             Dados.PRODUTO tProduto = new Dados.PRODUTO();
                             tProduto.ID_PRODUTO = Guid.NewGuid();
-                            tProduto.COD_PRODUTO = entradaProduto.Produto.Codigo;
+                            tProduto.COD_PRODUTO = codigoProduto;
+                            tProduto.COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
                             tProduto.NOME_PRODUTO = entradaProduto.Produto.Nome;
                             tProduto.ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
                             tProduto.NCM_PRODUTO = entradaProduto.Produto.Ncm;
@@ -284,7 +432,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaProduto">Objeto com os dados do produto</param>
         /// <returns>Contrato.RetornoProduto</returns>
-        public static Contrato.RetornoProduto SalvarProdutos(Contrato.EntradaProdutos entradaProdutos)
+        internal static Contrato.RetornoProduto SalvarProdutos(Contrato.EntradaProdutos entradaProdutos)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
@@ -333,6 +481,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 // Atualiza o produto
                                 lstProdutos.First().NUM_VALOR = produto.ValorBase;
                                 lstProdutos.First().ID_FORNECEDOR = entradaProdutos.Fornecedor.Id;
+                                lstProdutos.First().COD_PRODUTO_FORNECEDOR = produto.CodigoFornecedor;
                                 lstProdutos.First().NCM_PRODUTO = produto.Ncm;
                                 lstProdutos.First().BOL_ATIVO = (bool)entradaProdutos.Fornecedor.Ativo;
                                 lstProdutos.First().DATA_ATUALIZACAO = DateTime.Now;
@@ -355,6 +504,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 tProduto.ID_PRODUTO = Guid.NewGuid();
                                 tProduto.COD_PRODUTO = produto.Codigo;
                                 tProduto.NOME_PRODUTO = produto.Nome;
+                                tProduto.COD_PRODUTO_FORNECEDOR = produto.CodigoFornecedor;
                                 tProduto.ID_FORNECEDOR = entradaProdutos.Fornecedor.Id;
                                 tProduto.NUM_VALOR = produto.ValorBase;
                                 tProduto.NCM_PRODUTO = produto.Ncm;
@@ -416,8 +566,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
             string strRetorno = string.Empty;
 
             // Verifica se o Codigo foi preenchido
-            if (string.IsNullOrWhiteSpace(Produto.Codigo))
-                strRetorno = "O campo 'Codigo' não foi informado!\n";
+            if (string.IsNullOrWhiteSpace(Produto.CodigoFornecedor))
+                strRetorno = "O campo 'Código Fornecedor' não foi informado!\n";
 
             // Verifica se a Nome foi preenchida
             if (string.IsNullOrWhiteSpace(Produto.Nome))

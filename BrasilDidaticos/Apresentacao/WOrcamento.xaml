@@ -60,7 +60,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbOrcamentos" DockPanel.Dock="Top" Header="Orcamentos">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgOrcamentos" Width="Auto" CanUserAddRows="False" ScrollViewer.ScrollChanged="dgOrcamentos_ScrollChanged">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgOrcamentos" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" ScrollViewer.ScrollChanged="dgOrcamentos_ScrollChanged">
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
@@ -83,14 +83,14 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="btnVer" Content="Ver" HorizontalAlignment="center" Click="btnVer_Click" />
+                                <Button Name="btnVerOrcamento" Content="Ver" HorizontalAlignment="center" Click="btnVer_Click" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="btnCusto" Content="Custo" HorizontalAlignment="center" Click="btnCusto_Click" />
+                                <Button Name="btnVerCusto" Content="Custo" HorizontalAlignment="center" Click="btnCusto_Click" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

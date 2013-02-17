@@ -16,14 +16,14 @@
             <Image Source="/BrasilDidaticos;component/Imagens/ico_wproduto.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock Text="PRODUTO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
         </StackPanel>
-        <GroupBox Name="Item" DockPanel.Dock="Top" Width="400" Margin="0,10,0,0">
+        <GroupBox Name="Item" DockPanel.Dock="Top" Width="440" Margin="0,10,0,0">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Width="16" Height="16" />
                     <TextBlock Text="Novo" VerticalAlignment="Center" Margin="5"/>
                 </StackPanel>
             </GroupBox.Header>
-            <Grid Name="gdProdutoDados" DockPanel.Dock="Top" Margin="0,10,0,0">
+            <Grid Name="gdProdutoDados" MinWidth="400" DockPanel.Dock="Top" Margin="0,10,0,0">               
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
@@ -31,16 +31,27 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="400" MaxWidth="Infinity"></ColumnDefinition>
+                    <ColumnDefinition Width="0"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
+                <Button Grid.Row="0" Grid.Column="1" Name="btnGerarNovoCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" Click="btnGerarNovoCodigo_Click" ToolTip="Gerar Novo Código" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
+                    </StackPanel>
+                </Button>
                 <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
                 <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="2" SelectionChangedEvent="cmbFornecedor_SelectionChangedEvent" />
-                <my:MDecimalUpDown x:Name="txtValor" Titulo="Valor:" Grid.Row="3" Background="#FFF0F0F0" />
-                <my:MTextBox x:Name="txtNcm" Titulo="NCM:" Grid.Row="4" />
-                <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="5" Background="#FFF0F0F0" Selecionado="True" />
+                <my:MTextBox x:Name="txtCodigoFornecedor" Titulo="Código do Fornecedor:" Background="#FFF0F0F0" Grid.Row="3" />
+                <my:MDecimalTextBox x:Name="txtValor" Titulo="Valor:" Grid.Row="4" FomartString="C2"/>
+                <my:MTextBox x:Name="txtNcm" Titulo="NCM:" Grid.Row="5"  Background="#FFF0F0F0" />
+                <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="6" Selecionado="True" />
             </Grid>
         </GroupBox>
-        <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
+        <StackPanel Name="stpBotoes" DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
             <Button Grid.Column="2" Name="btnSalvar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="True" Margin="0,0,5,0" Click="btnSalvar_Click" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_gravar.png" Margin="0,0,5,0" />
@@ -55,7 +66,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbTaxas" DockPanel.Dock="Top" Header="Taxas">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgTaxas" Width="Auto" DataContext="{Binding}" CanUserAddRows="False">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgTaxas" Width="Auto" DataContext="{Binding}" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>

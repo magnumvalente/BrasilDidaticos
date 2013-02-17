@@ -28,11 +28,13 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
                 <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="2" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" />
-                <my:MMaskTextBox x:Name="txtCPFCNP" Titulo="CPF / CNPJ:" Grid.Row="3" Background="#FFF0F0F0" />
+                <my:MTextBox x:Name="txtCaixaEscolar" Titulo="CaixaEscolar:" Grid.Row="2" />
+                <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="3" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" Background="#FFF0F0F0"/>
+                <my:MMaskTextBox x:Name="txtCPFCNP" Titulo="CPF / CNPJ:" Grid.Row="4" />
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
@@ -56,7 +58,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbClientes" DockPanel.Dock="Top" Header="Clientes">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgClientes" Width="Auto" CanUserAddRows="False" DataContext="{Binding}" >
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgClientes" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" DataContext="{Binding}" >
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>

@@ -13,7 +13,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="entradaEstadoOrcamento.Permissoes">Objeto com os dados do filtro</param>
         /// <returns>Contrato.RetornoEstadoOrcamento</returns>
-        public static Contrato.RetornoEstadoOrcamento ListarEstadoOrcamento(Contrato.EntradaEstadoOrcamento entradaEstadoOrcamento)
+        internal static Contrato.RetornoEstadoOrcamento ListarEstadoOrcamento(Contrato.EntradaEstadoOrcamento entradaEstadoOrcamento)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoEstadoOrcamento retEstadoOrcamento = new Contrato.RetornoEstadoOrcamento();
@@ -75,7 +75,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="estadoOrcamento">Recebe o estado do orcamento recuperado do banco</param>
         /// <returns>Contrato.EstadoOrcamento</returns>
-        public static Contrato.EstadoOrcamento BuscarOrcamentoEstadoOrcamento(Dados.ESTADO_ORCAMENTO estadoOrcamento)
+        internal static Contrato.EstadoOrcamento BuscarOrcamentoEstadoOrcamento(Dados.ESTADO_ORCAMENTO estadoOrcamento)
         {
             // Objeto que recebe o retorno do método
             Contrato.EstadoOrcamento retEstadoOrcamento = new Contrato.EstadoOrcamento();

@@ -19,8 +19,6 @@ namespace BrasilDidaticos.Apresentacao
     /// </summary>
     public partial class WOrcamentoProduto : Window
     {
-        //public delegate void AdicionarClick(object sender, RoutedEventArgs e);
-        //public event AdicionarClick AdicionarClickEvent;
 
         #region "[Atributos]"
 
@@ -58,8 +56,8 @@ namespace BrasilDidaticos.Apresentacao
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
-            btnAdicionar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnAdicionar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
         private void ListarProdutos()
@@ -128,6 +126,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             Produto.Codigo = txtCodigo.Conteudo;
             Produto.Nome = txtNome.Conteudo;
+            Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
             if (cmbFornecedor.ValorSelecionado != null)
                 Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
             Produto.Ativo = true;
@@ -215,7 +214,7 @@ namespace BrasilDidaticos.Apresentacao
             finally
             {
                 this.Cursor = Cursors.Arrow;
-            }            
+            }
         }
 
         private void dgProdutos_ScrollChanged(object sender, ScrollChangedEventArgs e)
