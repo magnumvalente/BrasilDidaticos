@@ -36,7 +36,7 @@ namespace BrasilDidaticos.Apresentacao.Controler
             }
         }
 
-        public string FomartString
+        public string FormatString
         {
             set
             {
@@ -46,6 +46,8 @@ namespace BrasilDidaticos.Apresentacao.Controler
                     _formatString = value;
                 else if (value.StartsWith(Comum.Constantes.STRING_FORMAT_PORCENTAGEM.ElementAt(0).ToString()))
                     _formatString = value;
+
+                txtDecimalTextBox.Text = _valor.HasValue ? _valor.Value.ToString(_formatString) : string.Empty;
             }
             get
             {
@@ -81,11 +83,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                lblDecimalUpDown.Width = value;
+                gdControle.ColumnDefinitions[0].Width = new GridLength(value);
             }
             get
             {
-                return lblDecimalUpDown.Width;
+                return gdControle.ColumnDefinitions[0].Width.Value;
             }
         }
 
@@ -93,11 +95,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                txtDecimalTextBox.Width = value;
+                gdControle.ColumnDefinitions[1].Width = new GridLength(value);
             }
             get
             {
-                return txtDecimalTextBox.Width;
+                return gdControle.ColumnDefinitions[1].Width.Value;
             }
         }
 
@@ -105,10 +107,10 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                bool valorAlterado = value != _valor && _valor.HasValue;
+                bool valorAlterado = value != _valor;
                 
                 if (value.HasValue)
-                    _valor = value.Value;
+                    _valor = value;
                 else
                     _valor = null;
 
@@ -160,7 +162,9 @@ namespace BrasilDidaticos.Apresentacao.Controler
                 if (_formatString.StartsWith(Comum.Constantes.STRING_FORMAT_PORCENTAGEM.ElementAt(0).ToString()))
                     Valor = decimal.Parse(((TextBox)sender).Text.Replace("%",string.Empty).Trim());
                 else if (_formatString.StartsWith(Comum.Constantes.STRING_FORMAT_MOEDA.ElementAt(0).ToString()))
-                    Valor = decimal.Parse(((TextBox)sender).Text.Replace("R$",string.Empty).Trim());                
+                    Valor = decimal.Parse(((TextBox)sender).Text.Replace("R$",string.Empty).Trim());
+                else if (_formatString.StartsWith(Comum.Constantes.STRING_FORMAT_DECIMAL.ElementAt(0).ToString()))
+                    Valor = decimal.Parse(((TextBox)sender).Text.Trim()); 
             }
             else
                 Valor = null;

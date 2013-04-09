@@ -86,7 +86,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaOrcamento.UsuarioLogado, Chave = entradaOrcamento.Chave });
             
             // Verifica se o usuário está autenticado
-            if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            if (0 == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
                 // Verifica se o código não foi informado
                 if (string.IsNullOrWhiteSpace(entradaOrcamento.Orcamento.Codigo))
@@ -100,6 +100,24 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     entradaOrcamento.Orcamento.Cliente = new Contrato.Cliente();
                 }
 
+                // Verifica se o Vendedor não foi informado
+                if (entradaOrcamento.Orcamento.Vendedor == null)
+                {
+                    entradaOrcamento.Orcamento.Vendedor = new Contrato.Usuario();
+                }
+
+                // Verifica se o Responsável não foi informado
+                if (entradaOrcamento.Orcamento.Responsavel == null)
+                {
+                    entradaOrcamento.Orcamento.Responsavel = new Contrato.Usuario();
+                }
+
+                // Verifica se o estado do orçamento não foi informado
+                if (entradaOrcamento.Orcamento.Estado == null)
+                {
+                    entradaOrcamento.Orcamento.Estado = new Contrato.EstadoOrcamento();
+                }
+
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
                                                 
@@ -110,8 +128,11 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     lstOrcamentos = (from o in context.T_ORCAMENTO
                                     where 
-                                        (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.StartsWith(entradaOrcamento.Orcamento.Codigo))                                    
+                                        (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.StartsWith(entradaOrcamento.Orcamento.Codigo))
                                     &&  (entradaOrcamento.Orcamento.Cliente.Id == Guid.Empty || o.ID_CLIENTE == entradaOrcamento.Orcamento.Cliente.Id)
+                                    &&  (entradaOrcamento.Orcamento.Vendedor.Id == Guid.Empty || o.ID_USUARIO_VENDEDOR == entradaOrcamento.Orcamento.Vendedor.Id)
+                                    &&  (entradaOrcamento.Orcamento.Responsavel.Id == Guid.Empty || o.ID_USUARIO_RESPONSAVEL == entradaOrcamento.Orcamento.Responsavel.Id)
+                                    &&  (entradaOrcamento.Orcamento.Estado.Id == Guid.Empty || o.ID_ESTADO_ORCAMENTO == entradaOrcamento.Orcamento.Estado.Id)                                    
                                     select o                                                           
                                     ).OrderBy(o => o.DATA_ORCAMENTO).Skip(entradaOrcamento.PosicaoUltimoItem).Take(entradaOrcamento.CantidadeItens).ToList();
                 }

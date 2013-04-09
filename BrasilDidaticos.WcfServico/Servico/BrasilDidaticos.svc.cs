@@ -78,6 +78,11 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Fornecedor.ListarFornecedor(Fornecedor);
         }
 
+        public Contrato.RetornoFornecedor FornecedorListar2(Contrato.EntradaFornecedor Fornecedor)
+        {
+            return Negocio.Fornecedor.ListarFornecedor2(Fornecedor);
+        }
+
         public Contrato.RetornoFornecedor FornecedorSalvar(Contrato.EntradaFornecedor Fornecedor)
         {
             return Negocio.Fornecedor.SalvarFornecedor(Fornecedor);
@@ -91,6 +96,11 @@ namespace BrasilDidaticos.WcfServico.Servico
         public Contrato.RetornoProduto ProdutoListar(Contrato.EntradaProduto Produto)
         {
             return Negocio.Produto.ListarProduto(Produto);
+        }
+
+        public Contrato.RetornoProduto ProdutoListar2(Contrato.EntradaProduto Produto)
+        {
+            return Negocio.Produto.ListarProduto2(Produto);
         }
 
         public Contrato.RetornoProduto ProdutoListarRelatorio(Contrato.EntradaProduto Produto)

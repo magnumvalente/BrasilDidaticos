@@ -20,6 +20,10 @@
           <DataField>Codigo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CodigoFornecedor">
+          <DataField>CodigoFornecedor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Fornecedor">
           <DataField>Fornecedor</DataField>
           <rd:TypeName>BrasilDidaticos.Contrato.Fornecedor</rd:TypeName>
@@ -31,6 +35,10 @@
         <Field Name="Id">
           <DataField>Id</DataField>
           <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="Ncm">
+          <DataField>Ncm</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Nome">
           <DataField>Nome</DataField>
@@ -74,16 +82,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.5748in</Width>
+              <Width>1.23313in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>1.10092in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.75591in</Width>
+              <Width>0.81758in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.1811in</Width>
+              <Width>2.42258in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.06443in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -109,6 +120,38 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Cod. Fornecedor</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -255,6 +298,36 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="CodigoFornecedor">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!CodigoFornecedor.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>CodigoFornecedor</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Codigo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -358,15 +431,33 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember>
-              <KeepWithGroup>After</KeepWithGroup>
-            </TablixMember>
-            <TablixMember>
-              <Group Name="Details" />
+              <Group Name="Group1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!FornecedorNome.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!FornecedorNome.Value</Value>
+                </SortExpression>
+              </SortExpressions>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Nome.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                </TablixMember>
+              </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
@@ -376,15 +467,15 @@
         <DataSetName>Produto</DataSetName>
         <SortExpressions>
           <SortExpression>
-            <Value>=Fields!Nome.Value</Value>
+            <Value>=Fields!FornecedorNome.Value</Value>
           </SortExpression>
           <SortExpression>
-            <Value>=Fields!FornecedorNome.Value</Value>
+            <Value>=Fields!Nome.Value</Value>
           </SortExpression>
         </SortExpressions>
         <Left>0.2cm</Left>
         <Height>1.2cm</Height>
-        <Width>16.49999cm</Width>
+        <Width>16.86215cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -397,12 +488,12 @@
       <Border />
     </Style>
   </Body>
-  <Width>6.6805in</Width>
+  <Width>6.7683in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
+    <RightMargin>1cm</RightMargin>
     <TopMargin>2cm</TopMargin>
     <BottomMargin>2cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>

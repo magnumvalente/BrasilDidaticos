@@ -202,6 +202,7 @@
           <Property Name="VALOR_PARAMETRO" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
+          <Property Name="NUM_ORDEM" Type="int" />
         </EntityType>
         <EntityType Name="T_PERFIL">
           <Key>
@@ -238,7 +239,6 @@
           </Key>
           <Property Name="ID_PRODUTO" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ID_FORNECEDOR" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="COD_PRODUTO" Type="varchar" MaxLength="10" />
           <Property Name="COD_PRODUTO_FORNECEDOR" Type="varchar" MaxLength="20" />
           <Property Name="NOME_PRODUTO" Type="varchar" MaxLength="300" />
           <Property Name="NCM_PRODUTO" Type="varchar" MaxLength="20" />
@@ -246,6 +246,7 @@
           <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
           <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="NUM_VALOR" Type="money" Nullable="false" />
+          <Property Name="COD_PRODUTO" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="T_PRODUTO_TAXA">
           <Key>
@@ -739,6 +740,7 @@
           <Property Name="VALOR_PARAMETRO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="LOGIN_USUARIO" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="DATA_ATUALIZACAO" Type="DateTime" Nullable="false" />
+          <Property Type="Int32" Name="NUM_ORDEM" />
         </EntityType>
         <EntityType Name="PERFIL">
           <Key>
@@ -1173,7 +1175,8 @@
             <ScalarProperty Name="DATA_ATUALIZACAO" ColumnName="DATA_ATUALIZACAO" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="T_PARAMETRO"><EntityTypeMapping TypeName="BrasilDidaticosModel.PARAMETRO"><MappingFragment StoreEntitySet="T_PARAMETRO">
-            <ScalarProperty Name="ID_PARAMETRO" ColumnName="ID_PARAMETRO" />
+            <ScalarProperty Name="NUM_ORDEM" ColumnName="NUM_ORDEM" />
+                <ScalarProperty Name="ID_PARAMETRO" ColumnName="ID_PARAMETRO" />
             <ScalarProperty Name="COD_PARAMETRO" ColumnName="COD_PARAMETRO" />
             <ScalarProperty Name="NOME_PARAMETRO" ColumnName="NOME_PARAMETRO" />
             <ScalarProperty Name="TIPO_PARAMETRO" ColumnName="TIPO_PARAMETRO" />

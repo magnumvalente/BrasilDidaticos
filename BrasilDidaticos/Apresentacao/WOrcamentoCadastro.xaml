@@ -16,7 +16,7 @@
             <Image Source="/BrasilDidaticos;component/Imagens/ico_worcamento.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock Text="ORÇAMENTO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
         </StackPanel>
-        <GroupBox Name="Item" DockPanel.Dock="Top" Width="440" Margin="0,10,0,0">
+        <GroupBox Name="Item" DockPanel.Dock="Top" Width="460" Margin="0,10,0,0">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Width="16" Height="16" />
@@ -38,19 +38,19 @@
                     <ColumnDefinition Width="*" MinWidth="400" MaxWidth="Infinity"></ColumnDefinition>
                     <ColumnDefinition Width="0"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" WidthTitulo="100" WidthConteudo="90" Grid.Row="0" />
                 <Button Grid.Row="0" Grid.Column="1" Name="btnGerarNovoCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" Click="btnGerarNovoCodigo_Click" ToolTip="Gerar Novo Código" >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
                     </StackPanel>
                 </Button>
-                <my:MDatePicker x:Name="dtpData" Titulo="Data:" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MComboBox x:Name="cmbCliente" Titulo="Cliente:" Grid.Row="2" />
-                <my:MComboBox x:Name="cmbResponsavel" Titulo="Responsável:" Grid.Row="3" Background="#FFF0F0F0" />
-                <my:MComboBox x:Name="cmbVendedor" Titulo="Vendedor:" Grid.Row="4" />
-                <my:MDecimalUpDown x:Name="txtDesconto" Titulo="Desconto:" Grid.Row="5" Background="#FFF0F0F0" />
-                <my:MRadioListBox x:Name="rlbTipoOrcamento" Titulo="Tipo Orçamento:" Grid.Row="6" SelectionChangedEvent="rlbTipoOrcamento_SelectionChangedEvent" />
-                <my:MComboBox x:Name="cmbEstadoOrcamento" Titulo="Estado:" Grid.Row="7" Background="#FFF0F0F0" />
+                <my:MDatePicker x:Name="dtpData" Titulo="Data:" WidthTitulo="100" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MBusca x:Name="cmbCliente" Titulo="Cliente:" WidthTitulo="100" Grid.Row="2" CodigoLostFocusEvent="cmbCliente_CodigoGotFocusEvent" NomeGotFocusEvent="cmbCliente_NomeGotFocusEvent" BuscaClickEvent="cmbCliente_BuscaClickEvent" />
+                <my:MComboBox x:Name="cmbResponsavel" Titulo="Responsável:" WidthTitulo="100" Grid.Row="3" Background="#FFF0F0F0" />
+                <my:MComboBox x:Name="cmbVendedor" Titulo="Vendedor:" WidthTitulo="100" Grid.Row="4" />
+                <my:MDecimalTextBox x:Name="txtDesconto" Titulo="Desconto:" WidthTitulo="100" Grid.Row="5" Background="#FFF0F0F0" />
+                <my:MRadioListBox x:Name="rlbTipoOrcamento" Titulo="Tipo Orçamento:" WidthTitulo="100" Grid.Row="6" SelectionChangedEvent="rlbTipoOrcamento_SelectionChangedEvent" />
+                <my:MComboBox x:Name="cmbEstadoOrcamento" Titulo="Estado:" WidthTitulo="100" Grid.Row="7" Background="#FFF0F0F0" />
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">

@@ -159,6 +159,30 @@ namespace BrasilDidaticos.WcfServico.Negocio
             return taxa;
         }
 
+        /// <summary>
+        /// Retorna uma lista de taxas
+        /// </summary>
+        /// <param name="lstUsuarioTaxa">Recebe os taxas do fornecedor recuperado do banco</param>
+        /// <returns>List<Contrato.Taxa></returns>
+        internal static Contrato.Taxa BuscarFornecedorTaxa(Dados.FORNECEDOR_TAXA fornecedorTaxa)
+        {
+            Contrato.Taxa taxa = null;
+
+            if (fornecedorTaxa != null)
+            {
+                taxa = new Contrato.Taxa
+                {
+                    Id = fornecedorTaxa.T_TAXA.ID_TAXA,
+                    Nome = fornecedorTaxa.T_TAXA.NOME_TAXA,
+                    Valor = fornecedorTaxa.NUM_VALOR,
+                    Desconto = fornecedorTaxa.T_TAXA.BOL_DESCONTO,
+                    Prioridade = fornecedorTaxa.ORD_PRIORIDADE,
+                    Ativo = fornecedorTaxa.T_TAXA.BOL_ATIVO
+                };
+            }
+
+            return taxa;
+        }
 
         /// <summary>
         /// Método para salvar o taxa

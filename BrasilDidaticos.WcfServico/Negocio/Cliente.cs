@@ -46,6 +46,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     Id = cliente.ID_CLIENTE,
                     Nome = cliente.NOME_CLIENTE,
+                    CaixaEscolar = cliente.CAIXA_ESCOLAR,
                     Codigo = cliente.COD_CLIENTE,
                     Ativo = cliente.BOL_ATIVO,
                     Cpf_Cnpj = cliente.CPF_CNJP_CLIENTE,
@@ -101,34 +102,39 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 // Verifica se foi encontrado algum registro
                 if (lstClientes.Count > 0)
                 {
+                    List<Contrato.UnidadeFederativa> lstUnidadesFederativas = Negocio.UnidadeFederativa.ListarUnidadeFederativa().UnidadesFederativas;
+
                     // Preenche o objeto de retorno
                     retCliente.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
                     retCliente.Clientes = new List<Contrato.Cliente>();
                     foreach (Dados.CLIENTE cliente in lstClientes)
                     {          
                         retCliente.Clientes.Add( new Contrato.Cliente()
-                        {
+                        {                           
                             Id = cliente.ID_CLIENTE,                            
                             Codigo = cliente.COD_CLIENTE,
-                            Nome = cliente.NOME_CLIENTE,
-                            Ativo = cliente.BOL_ATIVO,
-                            CaixaEscolar = cliente.CAIXA_ESCOLAR,
-                            Cpf_Cnpj = cliente.CPF_CNJP_CLIENTE,
-                            Tipo = cliente.BOL_PESSOA_FISICA ? Contrato.Enumeradores.Pessoa.Fisica : Contrato.Enumeradores.Pessoa.Juridica,
-                            Email = cliente.DES_EMAIL,
-                            Telefone = cliente.NUM_TELEFONE,
-                            Celular = cliente.NUM_CELULAR,
-                            InscricaoEstadual = cliente.DES_INSCRICAO_ESTADUAL,
-                            Endereco = cliente.DES_ENDERECO,
-                            Numero = cliente.NUM_ENDERECO,
-                            Complemento = cliente.CMP_ENDERECO,
-                            Cep = cliente.NUM_CEP,
-                            Bairro = cliente.DES_BAIRRO,
-                            Cidade = cliente.DES_CIDADE,
-                            Uf = Negocio.UnidadeFederativa.BuscarUnidadeFederativa(cliente.COD_ESTADO),
-                            ClienteMatriz = Negocio.Cliente.BuscarCliente(cliente.T_CLIENTE_MATRIZ)
+                            Nome = cliente.NOME_CLIENTE
                         });
-                    };
+                        if (!entradaCliente.PreencherListaSelecao)
+                        {
+                            retCliente.Clientes.Last().Ativo = cliente.BOL_ATIVO;
+                            retCliente.Clientes.Last().CaixaEscolar = cliente.CAIXA_ESCOLAR;
+                            retCliente.Clientes.Last().Cpf_Cnpj = cliente.CPF_CNJP_CLIENTE;
+                            retCliente.Clientes.Last().Tipo = cliente.BOL_PESSOA_FISICA ? Contrato.Enumeradores.Pessoa.Fisica : Contrato.Enumeradores.Pessoa.Juridica;
+                            retCliente.Clientes.Last().Email = cliente.DES_EMAIL;
+                            retCliente.Clientes.Last().Telefone = cliente.NUM_TELEFONE;
+                            retCliente.Clientes.Last().Celular = cliente.NUM_CELULAR;
+                            retCliente.Clientes.Last().InscricaoEstadual = cliente.DES_INSCRICAO_ESTADUAL;
+                            retCliente.Clientes.Last().Endereco = cliente.DES_ENDERECO;
+                            retCliente.Clientes.Last().Numero = cliente.NUM_ENDERECO;
+                            retCliente.Clientes.Last().Complemento = cliente.CMP_ENDERECO;
+                            retCliente.Clientes.Last().Cep = cliente.NUM_CEP;
+                            retCliente.Clientes.Last().Bairro = cliente.DES_BAIRRO;
+                            retCliente.Clientes.Last().Cidade = cliente.DES_CIDADE;
+                            retCliente.Clientes.Last().Uf = Negocio.UnidadeFederativa.BuscarUnidadeFederativa(cliente.COD_ESTADO, lstUnidadesFederativas);
+                            retCliente.Clientes.Last().ClienteMatriz = cliente.ID_CLIENTE_MATRIZ == null ? null : new Contrato.Cliente() { Id = (Guid)cliente.ID_CLIENTE_MATRIZ };
+                        }
+                    }
                 }
                 else
                 {

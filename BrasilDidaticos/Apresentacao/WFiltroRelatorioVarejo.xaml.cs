@@ -63,6 +63,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
@@ -75,7 +76,7 @@ namespace BrasilDidaticos.Apresentacao
                 List<Objeto.Fornecedor> lstFornecedor = new List<Objeto.Fornecedor>();
                 
                 // Adiciona a lista os novos produtos que foram buscados
-                foreach (Contrato.Fornecedor f in retFornecedor.Fornecedores)
+                foreach (Contrato.Fornecedor f in retFornecedor.Fornecedores.OrderBy(f => f.Nome))
                     lstFornecedor.Add(new Objeto.Fornecedor { Selecionado = false, Id = f.Id, Codigo = f.Codigo, Nome = f.Nome });
 
                 // Define os novos produtos
@@ -110,6 +111,15 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void Limpar()
+        {
+            txtCodigo.Conteudo = string.Empty;
+            txtNome.Conteudo = string.Empty;
+            txtCodigo.txtBox.Focus();
+            foreach (Objeto.Fornecedor forn in (List<Objeto.Fornecedor>)dgFornecedores.ItemsSource)
+                forn.Selecionado = false;
+        }
+
         #endregion
 
         #region "[Eventos]"
@@ -131,6 +141,23 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }   
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Relatório Varejo", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)

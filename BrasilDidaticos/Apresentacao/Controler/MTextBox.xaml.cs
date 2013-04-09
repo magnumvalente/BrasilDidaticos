@@ -57,11 +57,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                lblTextBox.Width = value;
+                gdControle.ColumnDefinitions[0].Width = new GridLength(value);
             }
             get
             {
-                return lblTextBox.Width;
+                return gdControle.ColumnDefinitions[0].Width.Value;
             }
         }
 
@@ -69,11 +69,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                txtBox.Width = value;
+                gdControle.ColumnDefinitions[1].Width = new GridLength(value);
             }
             get
             {
-                return txtBox.Width;
+                return gdControle.ColumnDefinitions[1].Width.Value;
             }
         }
 

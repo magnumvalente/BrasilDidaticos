@@ -73,7 +73,7 @@ namespace BrasilDidaticos.Apresentacao
 
                 bool definiuFoco = false;
 
-                foreach (Contrato.Parametro p in retParametro.Parametros)
+                foreach (Contrato.Parametro p in retParametro.Parametros.OrderBy(p => p.Ordem))
                 {
                     // Create Rows
                     RowDefinition gridRow = new RowDefinition();
@@ -137,11 +137,11 @@ namespace BrasilDidaticos.Apresentacao
                             parametro.Valor = ((Controler.MTextBox)item).Conteudo;
                             break;
                         case Contrato.Enumeradores.TipoParametro.Percentagem:
-                            decimal d = (decimal)((Controler.MDecimalUpDown)item).Valor * 100;
+                            decimal d = (decimal)((Controler.MDecimalTextBox)item).Valor * 100;
                             parametro.Valor = d.ToString();
                             break;
                         case Contrato.Enumeradores.TipoParametro.Inteiro:
-                            int i = (int)((Controler.MDecimalUpDown)item).Valor;
+                            int i = (int)((Controler.MDecimalTextBox)item).Valor;
                             parametro.Valor = i.ToString();
                             break;
                     }

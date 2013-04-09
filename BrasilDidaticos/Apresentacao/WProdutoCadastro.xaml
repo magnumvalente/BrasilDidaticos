@@ -46,7 +46,7 @@
                 <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
                 <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="2" SelectionChangedEvent="cmbFornecedor_SelectionChangedEvent" />
                 <my:MTextBox x:Name="txtCodigoFornecedor" Titulo="Código do Fornecedor:" Background="#FFF0F0F0" Grid.Row="3" />
-                <my:MDecimalTextBox x:Name="txtValor" Titulo="Valor:" Grid.Row="4" FomartString="C2"/>
+                <my:MDecimalTextBox x:Name="txtValor" Titulo="Valor:" Grid.Row="4" FormatString="C2"/>
                 <my:MTextBox x:Name="txtNcm" Titulo="NCM:" Grid.Row="5"  Background="#FFF0F0F0" />
                 <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="6" Selecionado="True" />
             </Grid>

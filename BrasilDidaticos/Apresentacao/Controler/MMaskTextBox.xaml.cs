@@ -63,11 +63,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                lblMaskTextBox.Width = value;
+                gdControle.ColumnDefinitions[0].Width = new GridLength(value);
             }
             get
             {
-                return lblMaskTextBox.Width;
+                return gdControle.ColumnDefinitions[0].Width.Value;
             }
         }
 
@@ -75,11 +75,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                txtMaskTextBox.Width = value;
+                gdControle.ColumnDefinitions[1].Width = new GridLength(value);
             }
             get
             {
-                return txtMaskTextBox.Width;
+                return gdControle.ColumnDefinitions[1].Width.Value;
             }
         }
 
@@ -140,10 +140,10 @@ namespace BrasilDidaticos.Apresentacao.Controler
                     txtMaskTextBox.Mask = "000,000,000-00";
                     break;
                 case Comum.Enumeradores.TipoMascara.Telefone:
-                    txtMaskTextBox.Mask = "(000) 0000-0000";
+                    txtMaskTextBox.Mask = "(00) 0000-0000";
                     break;
                 case Comum.Enumeradores.TipoMascara.Celular:
-                    txtMaskTextBox.Mask = "(000) 0000-0000";
+                    txtMaskTextBox.Mask = "(00) 0000-0000";
                     break;
                 case Comum.Enumeradores.TipoMascara.Cep:
                     txtMaskTextBox.Mask = "00000-000";

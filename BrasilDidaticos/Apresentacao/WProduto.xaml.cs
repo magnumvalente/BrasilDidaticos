@@ -49,7 +49,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             // Permissão módulos operacionais sistema
             btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
         private void ListarProdutos()
@@ -90,6 +90,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
@@ -98,7 +99,7 @@ namespace BrasilDidaticos.Apresentacao
 
             if (retFornecedor.Fornecedores != null)
             {
-                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores)
+                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores.OrderBy(f => f.Nome))
                 {
                     cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = fornecedor.Id.ToString(), Content = fornecedor.Nome, Tag = fornecedor });
                 }
@@ -136,7 +137,16 @@ namespace BrasilDidaticos.Apresentacao
                 this._alterou = true;
                 this.ListarProdutos();
             }
-        }       
+        }
+
+        private void Limpar()
+        {
+            txtCodigo.Conteudo = string.Empty;
+            txtCodigoFornecedor.Conteudo = string.Empty;
+            txtNome.Conteudo = string.Empty;
+            cmbFornecedor.ValorSelecionado = null;
+            txtCodigo.txtBox.Focus();
+        }
 
         #endregion
 
@@ -177,7 +187,24 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }
-        }        
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Produto", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {

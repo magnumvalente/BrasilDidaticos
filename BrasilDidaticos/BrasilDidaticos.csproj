@@ -111,14 +111,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Apresentacao\Controler\MBusca.xaml.cs">
+      <DependentUpon>MBusca.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Apresentacao\Controler\MDecimalTextBox.xaml.cs">
       <DependentUpon>MDecimalTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\Controler\MDatePicker.xaml.cs">
       <DependentUpon>MDatePicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Apresentacao\Controler\MDecimalUpDown.xaml.cs">
-      <DependentUpon>MDecimalUpDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\Controler\MComboBox.xaml.cs">
       <DependentUpon>MComboBox.xaml</DependentUpon>
@@ -134,6 +134,9 @@
     </Compile>
     <Compile Include="Apresentacao\Controler\MCheckBox.xaml.cs">
       <DependentUpon>MCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WSobre.xaml.cs">
+      <DependentUpon>WSobre.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\WFiltroRelatorioVarejo.xaml.cs">
       <DependentUpon>WFiltroRelatorioVarejo.xaml</DependentUpon>
@@ -206,6 +209,7 @@
     </Compile>
     <Compile Include="Comum\EnterKeyTransversal.cs" />
     <Compile Include="Comum\ExtraWindowStyles.cs" />
+    <Compile Include="Objeto\Cliente.cs" />
     <Compile Include="Objeto\Fornecedor.cs" />
     <Compile Include="Objeto\Produto.cs" />
     <Compile Include="Objeto\Taxa.cs" />
@@ -229,15 +233,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="Apresentacao\Controler\MBusca.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Apresentacao\Controler\MDecimalTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Apresentacao\Controler\MDatePicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Apresentacao\Controler\MDecimalUpDown.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -266,6 +270,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Apresentacao\Controler\MTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Apresentacao\WSobre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -437,6 +445,10 @@
     </Compile>
     <Resource Include="Imagens\ico_produto_adicionar.png" />
     <Resource Include="Imagens\ico_atualizar.png" />
+    <Resource Include="Imagens\ico_selecionar.png" />
+    <Resource Include="Imagens\ico_limpar.png" />
+    <Resource Include="Imagens\ico_orcamento_custo.png" />
+    <Resource Include="Imagens\ico_orcamento_visualizar.png" />
     <Content Include="Relatorio\RelatorioOrcamento.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

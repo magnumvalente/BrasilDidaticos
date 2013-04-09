@@ -69,7 +69,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoFornecedor retFornecedor = new Contrato.RetornoFornecedor();
-            
+                       
             // Objeto que recebe o retorno da sessão
             Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaFornecedor.UsuarioLogado, Chave = entradaFornecedor.Chave });
             
@@ -80,36 +80,61 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
                                                 
                 // Busca o fornecedor no banco
-                List<Dados.FORNECEDOR> lstFornecedores = (from f in context.T_FORNECEDOR
-                                                          where
-                                                                (entradaFornecedor.Fornecedor.Ativo == null || f.BOL_ATIVO == entradaFornecedor.Fornecedor.Ativo)
-                                                             && (entradaFornecedor.Fornecedor.Codigo == null || entradaFornecedor.Fornecedor.Codigo == string.Empty || f.COD_FORNECEDOR.StartsWith(entradaFornecedor.Fornecedor.Codigo))
-                                                             && (entradaFornecedor.Fornecedor.Nome == null || entradaFornecedor.Fornecedor.Nome == string.Empty || f.NOME_FORNECEDOR.ToLower().Contains(entradaFornecedor.Fornecedor.Nome.ToLower()))
-                                                             && (entradaFornecedor.Fornecedor.Tipo == null || f.BOL_PESSOA_FISICA == (entradaFornecedor.Fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
-                                                             && (entradaFornecedor.Fornecedor.Cpf_Cnpj == null || entradaFornecedor.Fornecedor.Cpf_Cnpj == string.Empty || f.CPF_CNJP_FORNECEDOR != null && f.CPF_CNJP_FORNECEDOR.StartsWith(entradaFornecedor.Fornecedor.Cpf_Cnpj))
-                                                          select f).ToList();
+                var lstFornecedores = (from f in context.T_FORNECEDOR
+                                       join ft in context.T_FORNECEDOR_TAXA on f.ID_FORNECEDOR equals ft.ID_FORNECEDOR into fornededortaxa
+                                       from t in fornededortaxa.DefaultIfEmpty()
+                                       where
+                                           (entradaFornecedor.Fornecedor.Ativo == null || f.BOL_ATIVO == entradaFornecedor.Fornecedor.Ativo)
+                                           && (entradaFornecedor.Fornecedor.Codigo == null || entradaFornecedor.Fornecedor.Codigo == string.Empty || f.COD_FORNECEDOR.StartsWith(entradaFornecedor.Fornecedor.Codigo))
+                                           && (entradaFornecedor.Fornecedor.Nome == null || entradaFornecedor.Fornecedor.Nome == string.Empty || f.NOME_FORNECEDOR.ToLower().Contains(entradaFornecedor.Fornecedor.Nome.ToLower()))
+                                           && (entradaFornecedor.Fornecedor.Tipo == null || f.BOL_PESSOA_FISICA == (entradaFornecedor.Fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
+                                           && (entradaFornecedor.Fornecedor.Cpf_Cnpj == null || entradaFornecedor.Fornecedor.Cpf_Cnpj == string.Empty || f.CPF_CNJP_FORNECEDOR != null && f.CPF_CNJP_FORNECEDOR.StartsWith(entradaFornecedor.Fornecedor.Cpf_Cnpj))
+                                       select new { f, t }).ToList();
                                
                 // Verifica se foi encontrado algum registro
                 if (lstFornecedores.Count > 0)
                 {
                     // Preenche o objeto de retorno
                     retFornecedor.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
+                    
+                    // Inicializa a lista de fornecedores
                     retFornecedor.Fornecedores = new List<Contrato.Fornecedor>();
-                    foreach (Dados.FORNECEDOR fornecedor in lstFornecedores)
-                    {          
-                        retFornecedor.Fornecedores.Add( new Contrato.Fornecedor()
+
+                    // Para cada fornecedor existente na lista
+                    foreach (var item in lstFornecedores)
+                    {
+                        Contrato.Fornecedor forn = retFornecedor.Fornecedores.Where(f => f.Id == item.f.ID_FORNECEDOR).FirstOrDefault();
+
+                        if (forn == null)
                         {
-                            Id = fornecedor.ID_FORNECEDOR,
-                            Nome = fornecedor.NOME_FORNECEDOR,
-                            Codigo = fornecedor.COD_FORNECEDOR,
-                            Cpf_Cnpj = fornecedor.CPF_CNJP_FORNECEDOR,
-                            ValorPercentagemAtacado = fornecedor.NUM_VALOR_ATACADO,
-                            ValorPercentagemVarejo = fornecedor.NUM_VALOR_VAREJO,
-                            Ativo = fornecedor.BOL_ATIVO,
-                            Tipo = fornecedor.BOL_PESSOA_FISICA?Contrato.Enumeradores.Pessoa.Fisica:Contrato.Enumeradores.Pessoa.Juridica,
-                            Taxas = Negocio.Taxa.ListarFornecedorTaxa(fornecedor.T_FORNECEDOR_TAXA)
-                        });
-                    };
+                            retFornecedor.Fornecedores.Add(new Contrato.Fornecedor()
+                            {
+                                Id = item.f.ID_FORNECEDOR,
+                                Nome = item.f.NOME_FORNECEDOR,
+                                Codigo = item.f.COD_FORNECEDOR
+                            });
+
+                            if (!entradaFornecedor.PreencherListaSelecao)
+                            {
+                                retFornecedor.Fornecedores.Last().Cpf_Cnpj = item.f.CPF_CNJP_FORNECEDOR;
+                                retFornecedor.Fornecedores.Last().ValorPercentagemAtacado = item.f.NUM_VALOR_ATACADO;
+                                retFornecedor.Fornecedores.Last().ValorPercentagemVarejo = item.f.NUM_VALOR_VAREJO;
+                                retFornecedor.Fornecedores.Last().Ativo = item.f.BOL_ATIVO;
+                                retFornecedor.Fornecedores.Last().Tipo = item.f.BOL_PESSOA_FISICA ? Contrato.Enumeradores.Pessoa.Fisica : Contrato.Enumeradores.Pessoa.Juridica;
+                                if (retFornecedor.Fornecedores.Last().Taxas == null)
+                                    retFornecedor.Fornecedores.Last().Taxas = new List<Contrato.Taxa>();
+                                if (item.t != null)
+                                    retFornecedor.Fornecedores.Last().Taxas.Add(Negocio.Taxa.BuscarFornecedorTaxa(item.t));
+                            }
+                        }
+                        else
+                        {
+                            if (!entradaFornecedor.PreencherListaSelecao)
+                            {
+                                forn.Taxas.Add(Negocio.Taxa.BuscarFornecedorTaxa(item.t));
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -125,6 +150,102 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 retFornecedor.Mensagem = retSessao.Mensagem;
             }
             
+            // retorna os dados
+            return retFornecedor;
+        }
+
+        /// <summary>
+        /// Método para listar os fornecedores
+        /// </summary>
+        /// <param name="Fornecedor">Objeto com os dados do filtro</param>
+        /// <returns>Contrato.RetornoFornecedor</returns>
+        internal static Contrato.RetornoFornecedor ListarFornecedor2(Contrato.EntradaFornecedor entradaFornecedor)
+        {
+            // Objeto que recebe o retorno do método
+            Contrato.RetornoFornecedor retFornecedor = new Contrato.RetornoFornecedor();
+
+            // Objeto que recebe o retorno da sessão
+            Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaFornecedor.UsuarioLogado, Chave = entradaFornecedor.Chave });
+
+            retFornecedor.Fornecedores = new List<Contrato.Fornecedor>();
+
+            // Verifica se o usuário está autenticado
+            //if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            if (0 == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            {
+                // Loga no banco de dados
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+
+                // Busca o fornecedor no banco
+                var Fornecedores =  from f in context.T_FORNECEDOR
+                                    where
+                                           (entradaFornecedor.Fornecedor.Ativo == null || f.BOL_ATIVO == entradaFornecedor.Fornecedor.Ativo)
+                                        && (entradaFornecedor.Fornecedor.Codigo == null || entradaFornecedor.Fornecedor.Codigo == string.Empty || f.COD_FORNECEDOR.StartsWith(entradaFornecedor.Fornecedor.Codigo))
+                                        && (entradaFornecedor.Fornecedor.Nome == null || entradaFornecedor.Fornecedor.Nome == string.Empty || f.NOME_FORNECEDOR.ToLower().Contains(entradaFornecedor.Fornecedor.Nome.ToLower()))
+                                        && (entradaFornecedor.Fornecedor.Tipo == null || f.BOL_PESSOA_FISICA == (entradaFornecedor.Fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
+                                        && (entradaFornecedor.Fornecedor.Cpf_Cnpj == null || entradaFornecedor.Fornecedor.Cpf_Cnpj == string.Empty || f.CPF_CNJP_FORNECEDOR != null && f.CPF_CNJP_FORNECEDOR.StartsWith(entradaFornecedor.Fornecedor.Cpf_Cnpj))
+                                    select new 
+                                    {
+                                        Id = f.ID_FORNECEDOR,
+                                        Nome = f.NOME_FORNECEDOR,
+                                        Codigo = f.COD_FORNECEDOR,
+                                        Cpf_Cnpj = f.CPF_CNJP_FORNECEDOR,
+                                        ValorPercentagemAtacado = f.NUM_VALOR_ATACADO,
+                                        ValorPercentagemVarejo = f.NUM_VALOR_VAREJO,
+                                        Ativo = f.BOL_ATIVO,
+                                        PessoaFisica = f.BOL_PESSOA_FISICA,
+                                        Taxas = (from t in context.T_FORNECEDOR_TAXA
+                                                 where t.ID_FORNECEDOR == f.ID_FORNECEDOR
+                                                 select new Contrato.Taxa
+                                                 {
+                                                    Id = t.T_TAXA.ID_TAXA,
+                                                    Nome = t.T_TAXA.NOME_TAXA,
+                                                    Valor = t.NUM_VALOR,
+                                                    Desconto = t.T_TAXA.BOL_DESCONTO,
+                                                    Prioridade = t.ORD_PRIORIDADE,
+                                                    Ativo = t.T_TAXA.BOL_ATIVO
+                                                 })
+                                    };
+
+                if (Fornecedores != null && Fornecedores.Count() > 0)
+                { 
+                    foreach (var x in Fornecedores)
+                    {
+                        retFornecedor.Fornecedores.Add
+                            (new Contrato.Fornecedor
+                            {
+                                Id = x.Id,
+                                Nome = x.Nome,
+                                Codigo = x.Codigo,
+                                Cpf_Cnpj = x.Cpf_Cnpj,
+                                ValorPercentagemAtacado = x.ValorPercentagemAtacado,
+                                ValorPercentagemVarejo = x.ValorPercentagemVarejo,
+                                Ativo = x.Ativo,
+                                PessoaFisica = x.PessoaFisica,
+                                Taxas = x.Taxas.ToList()
+                            });
+                    }
+                }
+                // Verifica se foi encontrado algum registro
+                if (retFornecedor.Fornecedores.Count > 0)
+                {
+                    // Preenche o objeto de retorno
+                    retFornecedor.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
+                }
+                else
+                {
+                    // Preenche o objeto de retorno
+                    retFornecedor.Codigo = Contrato.Constantes.COD_RETORNO_VAZIO;
+                    retFornecedor.Mensagem = "Não existe dados para o filtro informado.";
+                }
+            }
+            else
+            {
+                // retorna quando o usuário não está autenticado
+                retFornecedor.Codigo = retSessao.Codigo;
+                retFornecedor.Mensagem = retSessao.Mensagem;
+            }
+
             // retorna os dados
             return retFornecedor;
         }

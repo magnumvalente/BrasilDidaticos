@@ -134,7 +134,7 @@ namespace BrasilDidaticos.Apresentacao
                                 // Adiciona o produto a lista
                                 produtos.Add(new Contrato.Produto
                                 {
-                                    Codigo = conteudo[0].Trim(),
+                                    CodigoFornecedor = conteudo[0].Trim(),
                                     Nome = conteudo[1].Trim(),
                                     ValorBase = decimal.Parse(conteudo[2].Trim()),
                                     Ativo = true

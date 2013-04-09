@@ -44,5 +44,12 @@ namespace BrasilDidaticos.Contrato
             get;
             set;
         }
+
+        [DataMember]
+        public int? Ordem
+        {
+            get;
+            set;
+        }
     }
 }

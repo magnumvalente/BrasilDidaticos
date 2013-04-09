@@ -222,8 +222,10 @@ namespace BrasilDidaticos.Apresentacao
                     txtCPFCNP.Tipo = Comum.Enumeradores.TipoMascara.CPF;
                 else if (_fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Juridica)
                     txtCPFCNP.Tipo = Comum.Enumeradores.TipoMascara.CNPJ;
-                txtValorAtacado.Valor = _fornecedor.ValorPercentagemAtacado;
-                txtValorVarejo.Valor = _fornecedor.ValorPercentagemVarejo;
+                if (_fornecedor.ValorPercentagemAtacado.HasValue)
+                    txtValorAtacado.Conteudo = _fornecedor.ValorPercentagemAtacado.Value.ToString("P2");
+                if (_fornecedor.ValorPercentagemVarejo.HasValue)
+                    txtValorVarejo.Conteudo = _fornecedor.ValorPercentagemVarejo.Value.ToString("P2");
                 chkAtivo.Selecionado = _fornecedor.Ativo;
             }
             else
@@ -267,7 +269,7 @@ namespace BrasilDidaticos.Apresentacao
                     foreach (Contrato.Taxa taxa in retTaxa.Taxas)
                     {
                         objTaxas.Add(new Objeto.Taxa { Selecionado = false, Id = taxa.Id, Nome = taxa.Nome, Ativo = taxa.Ativo});
-                        Contrato.Taxa objTaxa = (from ft in _fornecedor.Taxas where ft.Nome == taxa.Nome select ft).FirstOrDefault();
+                        Contrato.Taxa objTaxa = (from ft in _fornecedor.Taxas where ft != null && ft.Nome == taxa.Nome select ft).FirstOrDefault();
 
                         if (objTaxa != null)
                         {

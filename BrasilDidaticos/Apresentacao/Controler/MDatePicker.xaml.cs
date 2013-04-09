@@ -57,11 +57,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                lblDatePicker.Width = value;
+                gdControle.ColumnDefinitions[0].Width = new GridLength(value);
             }
             get
             {
-                return lblDatePicker.Width;
+                return gdControle.ColumnDefinitions[0].Width.Value;
             }
         }
 

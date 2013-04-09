@@ -9,6 +9,8 @@ namespace BrasilDidaticos.Contrato
     [DataContract]
     public class Fornecedor
     {
+        private bool _PessoaFisica; 
+
         [DataMember]
         public Guid Id
         {
@@ -35,6 +37,20 @@ namespace BrasilDidaticos.Contrato
         {
             get;
             set;
+        }
+
+        [DataMember]
+        public bool PessoaFisica
+        {
+            get
+            {
+                return _PessoaFisica;
+            }
+            set
+            {
+                _PessoaFisica = value;
+                Tipo = _PessoaFisica ? Contrato.Enumeradores.Pessoa.Fisica : Contrato.Enumeradores.Pessoa.Juridica;
+            }
         }
 
         [DataMember]

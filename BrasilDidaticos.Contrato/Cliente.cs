@@ -135,6 +135,7 @@ namespace BrasilDidaticos.Contrato
             set;
         }
 
+        [DataMember]
         public Cliente ClienteMatriz
         {
             get;

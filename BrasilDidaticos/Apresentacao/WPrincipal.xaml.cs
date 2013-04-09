@@ -34,20 +34,20 @@ namespace BrasilDidaticos.Apresentacao
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
-            Orcamento.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Cliente.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Fornecedor.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Produto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Taxa.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Orcamento.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Cliente.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Fornecedor.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Produto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Taxa.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             // Permissão módulos administrativos
-            Usuario.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Perfil.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PERFIL, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Parametro.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PARAMETRO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Usuario.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Perfil.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PERFIL, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Parametro.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PARAMETRO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             // Permissão Relatórios
-            Atacado.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_ATACADO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            Varejo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_VAREJO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Atacado.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_ATACADO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            Varejo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_VAREJO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             // Permissão Valor Custo DataGrid
             DataGridColumn dgColuna = null;
@@ -60,6 +60,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
@@ -70,7 +71,7 @@ namespace BrasilDidaticos.Apresentacao
             {
                 cmbFornecedor.ComboBox.Items.Clear();
                 cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
-                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores)
+                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores.OrderBy(f => f.Nome))
                 {
                     cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = fornecedor.Id.ToString(), Content = fornecedor.Nome, Tag = fornecedor });
                 }
@@ -140,6 +141,15 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.RetornoSessao retSessao = servBrasilDidaticos.SessaoExcluir(new Contrato.Sessao() { Login = Comum.Util.UsuarioLogado.Login, Chave = Comum.Util.Chave });
                 servBrasilDidaticos.Close();
             }
+        }
+
+        private void Limpar()
+        {
+            txtCodigo.Conteudo = string.Empty;
+            txtNome.Conteudo = string.Empty;
+            txtCodigoFornecedor.Conteudo = string.Empty;
+            cmbFornecedor.ValorSelecionado = null;
+            txtCodigo.txtBox.Focus();
         }
 
         #endregion
@@ -360,6 +370,40 @@ namespace BrasilDidaticos.Apresentacao
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Parâmetro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void Sobre_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WSobre wSobre = new WSobre(this);
+                wSobre.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Sobre", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Brasil Didáticos", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {

@@ -56,6 +56,30 @@ namespace BrasilDidaticos.Apresentacao.Controler
             }
         }
 
+        public double WidthTitulo
+        {
+            set
+            {
+                gdControle.ColumnDefinitions[0].Width = new GridLength(value);
+            }
+            get
+            {
+                return gdControle.ColumnDefinitions[0].Width.Value;
+            }
+        }
+
+        public double WidthConteudo
+        {
+            set
+            {
+                gdControle.ColumnDefinitions[1].Width = new GridLength(value);
+            }
+            get
+            {
+                return gdControle.ColumnDefinitions[1].Width.Value;
+            }
+        }
+
         public object ValorSelecionado
         {
             set

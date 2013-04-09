@@ -88,14 +88,21 @@ namespace BrasilDidaticos.Contrato
             {
                 _ValorCusto = ValorBase;
 
-                var taxas = from t in
-                                (from tx in Taxas select new { Prioridade = tx.Prioridade, Percentagem = tx.Desconto != null && tx.Desconto == true ? -1 * tx.Percentagem : tx.Percentagem }).ToList()
-                            group t by t.Prioridade into p
-                            select new { Prioridade = p.Key, Percentagem = p.Sum(v => v.Percentagem) };
-
-                foreach (var taxa in taxas)
+                if (Taxas != null && Taxas.Count > 0 && Taxas.FirstOrDefault() != null)
                 {
-                    _ValorCusto += _ValorCusto * taxa.Percentagem;
+
+                    var taxas = from t in
+                                    (from tx in Taxas select new { Prioridade = tx.Prioridade, Percentagem = tx.Desconto != null && tx.Desconto == true ? -1 * tx.Percentagem : tx.Percentagem }).ToList()
+                                group t by t.Prioridade into p
+                                select new { Prioridade = p.Key, Percentagem = p.Sum(v => v.Percentagem) };
+
+                    if (taxas != null && taxas.Count() > 0)
+                    {
+                        foreach (var taxa in taxas)
+                        {
+                            _ValorCusto += _ValorCusto * taxa.Percentagem;
+                        }
+                    }
                 }
 
                 return _ValorCusto;

@@ -29,7 +29,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             // Permissão módulos operacionais sistema
             btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
         private void ListarTaxas()
@@ -80,7 +80,13 @@ namespace BrasilDidaticos.Apresentacao
 
             if (!taxaCadastro.Cancelou)
                 ListarTaxas();
-        }              
+        }
+
+        private void Limpar()
+        {
+            txtNome.Conteudo = string.Empty;
+            txtNome.txtBox.Focus();
+        }
 
         #endregion
 
@@ -120,7 +126,24 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }
-        }        
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Taxa", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {

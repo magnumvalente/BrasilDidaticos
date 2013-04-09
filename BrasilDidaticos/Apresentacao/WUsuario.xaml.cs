@@ -29,7 +29,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             // Permissão módulos operacionais sistema
             btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
         private void ListarUsuarios()
@@ -81,7 +81,14 @@ namespace BrasilDidaticos.Apresentacao
 
             if (!usuarioCadastro.Cancelou)
                 ListarUsuarios();
-        }              
+        }
+
+        private void Limpar()
+        {
+            txtNome.Conteudo = string.Empty;
+            txtLogin.Conteudo = string.Empty;
+            txtNome.txtBox.Focus();
+        }
 
         #endregion
 
@@ -121,7 +128,24 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }
-        }        
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Usuário", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {

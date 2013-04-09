@@ -23,5 +23,12 @@ namespace BrasilDidaticos.Contrato
             get;
             set;
         }
+
+        [DataMember]
+        public long Duracao
+        {
+            get;
+            set;
+        }
     }
 }

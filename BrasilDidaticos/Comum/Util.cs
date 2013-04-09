@@ -113,33 +113,27 @@ namespace BrasilDidaticos.Comum
                     ((MTextBox)controler).Conteudo = Valor;
                     break;
                 case Contrato.Enumeradores.TipoParametro.Decimal:
-                    controler = new MDecimalUpDown();
+                    controler = new MDecimalTextBox();
                     controler.Tag = tag;
-                    ((MDecimalUpDown)controler).Titulo = string.Format("{0}:", Titulo);
-                    ((MDecimalUpDown)controler).Valor = decimal.Parse(Valor);
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.FormatString = "C";
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.Increment = (decimal).0001;
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.ShowButtonSpinner = false;
+                    ((MDecimalTextBox)controler).Titulo = string.Format("{0}:", Titulo);
+                    ((MDecimalTextBox)controler).FormatString = "C2";
+                    ((MDecimalTextBox)controler).Valor = decimal.Parse(Valor);                    
                     break;
                 case Contrato.Enumeradores.TipoParametro.Percentagem:
-                    controler = new MDecimalUpDown();
+                    controler = new MDecimalTextBox();
                     controler.Tag = tag;
-                    ((MDecimalUpDown)controler).Titulo = string.Format("{0}:", Titulo);
-                    ((MDecimalUpDown)controler).Valor = decimal.Parse(Valor) / 100;
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.FormatString = "P";
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.Increment = (decimal).0001;
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.ShowButtonSpinner = false;
+                    ((MDecimalTextBox)controler).Titulo = string.Format("{0}:", Titulo);                    
+                    ((MDecimalTextBox)controler).Valor = decimal.Parse(Valor) / 100;
+                    ((MDecimalTextBox)controler).FormatString = "P";
                     break;
                 case Contrato.Enumeradores.TipoParametro.Inteiro:
-                    controler = new MDecimalUpDown();
+                    controler = new MDecimalTextBox();
                     controler.Tag = tag;
-                    ((MDecimalUpDown)controler).Titulo = string.Format("{0}:", Titulo);
-                    ((MDecimalUpDown)controler).Valor = int.Parse(Valor);
-                    if (WidthTitulo != double.MinValue) ((MDecimalUpDown)controler).WidthTitulo = WidthTitulo;
-                    if (WidthConteudo != double.MinValue) ((MDecimalUpDown)controler).WidthConteudo = WidthConteudo;                    
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.FormatString = "F0";
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.Increment = (decimal)1;
-                    ((MDecimalUpDown)controler).txtDecimalUpDown.ShowButtonSpinner = false;
+                    ((MDecimalTextBox)controler).Titulo = string.Format("{0}:", Titulo);
+                    ((MDecimalTextBox)controler).FormatString = "F0";
+                    ((MDecimalTextBox)controler).Valor = int.Parse(Valor);
+                    if (WidthTitulo != double.MinValue) ((MDecimalTextBox)controler).WidthTitulo = WidthTitulo;
+                    if (WidthConteudo != double.MinValue) ((MDecimalTextBox)controler).WidthConteudo = WidthConteudo;
                     break;
             }
             return controler;

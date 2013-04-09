@@ -518,7 +518,6 @@
                             <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1434,7 +1433,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Nome.Value, "Clientes")</Value>
+                    <Value>= First(Fields!CaixaEscolar.Value, "Clientes")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>

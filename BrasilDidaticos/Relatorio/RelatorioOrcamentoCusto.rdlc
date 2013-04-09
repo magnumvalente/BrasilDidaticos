@@ -1011,7 +1011,6 @@
                             <rd:FormatSymbolCulture>pt-BR</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1052,7 +1051,7 @@
             <Top>3.17032cm</Top>
             <Left>0.75033cm</Left>
             <Height>1.8cm</Height>
-            <Width>23.17267cm</Width>
+            <Width>23.17265cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1753,12 +1752,14 @@
             </Style>
           </Textbox>
           <Textbox Name="txtRazaoSocialValor">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Nome.Value, "Clientes")</Value>
+                    <Value>= First(Fields!CaixaEscolar.Value, "Clientes")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>

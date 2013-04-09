@@ -78,16 +78,7 @@ namespace BrasilDidaticos.Apresentacao
         /// </summary>
         private StringBuilder ValidarCampos()
         {
-            StringBuilder strValidacao = new StringBuilder();
-
-            // Verifica se o Código foi informado
-            if (string.IsNullOrWhiteSpace(txtCodigoFornecedor.Conteudo.ToString()))
-            {
-                txtCodigoFornecedor.Erro = Visibility.Visible;
-                strValidacao.Append("O campo 'Código Fornecedor' não foi informado!\n");
-            }
-            else
-                txtCodigoFornecedor.Erro = Visibility.Hidden;
+            StringBuilder strValidacao = new StringBuilder();                       
 
             // Verifica se a Nome foi informada
             if (string.IsNullOrWhiteSpace(txtNome.Conteudo.ToString()))
@@ -230,7 +221,7 @@ namespace BrasilDidaticos.Apresentacao
                 // Guarda os fornecedores recuperados
                 _lstFornecedores = retFornecedor.Fornecedores;
 
-                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores)
+                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores.OrderBy(f => f.Nome))
                 {
                     cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() 
                     { 
@@ -289,11 +280,14 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     // Para cada taxa dentro da listagem de taxa
                     foreach (Contrato.Taxa tx in taxas)
-                    {                        
-                        lstTaxas.RemoveAll(t => t.Nome == tx.Nome && t.Valor == tx.Valor || t.Valor == 0);
-                       
-                        if (lstTaxas.Where(t => t.Nome == tx.Nome && t.Valor != tx.Valor).Count() == 0)
-                            lstTaxas.Add(tx);
+                    {
+                        if (tx != null)
+                        {                           
+                            lstTaxas.RemoveAll(t => t.Nome == tx.Nome && t.Valor == tx.Valor || t.Valor == 0);
+
+                            if (lstTaxas.Where(t => t.Nome == tx.Nome && t.Valor != tx.Valor).Count() == 0)
+                                lstTaxas.Add(tx);
+                        }
                     }
                 }
             }
@@ -308,14 +302,17 @@ namespace BrasilDidaticos.Apresentacao
 
                     foreach (Contrato.Taxa taxa in lstTaxas)
                     {
-                        objTaxas.Add(new Objeto.Taxa { Selecionado = false, Id = taxa.Id, Nome = taxa.Nome, Ativo = taxa.Ativo});
-                        Contrato.Taxa objTaxa = (from ft in _produto.Taxas where ft.Nome == taxa.Nome select ft).FirstOrDefault();
-
-                        if (objTaxa != null)
+                        if (taxa != null)
                         {
-                            objTaxas.Last().Selecionado = true;
-                            objTaxas.Last().Valor = objTaxa.Valor;
-                            objTaxas.Last().Prioridade = objTaxa.Prioridade;
+                            objTaxas.Add(new Objeto.Taxa { Selecionado = false, Id = taxa.Id, Nome = taxa.Nome, Ativo = taxa.Ativo });
+                            Contrato.Taxa objTaxa = (from ft in _produto.Taxas where ft.Nome == taxa.Nome select ft).FirstOrDefault();
+
+                            if (objTaxa != null)
+                            {
+                                objTaxas.Last().Selecionado = true;
+                                objTaxas.Last().Valor = objTaxa.Valor;
+                                objTaxas.Last().Prioridade = objTaxa.Prioridade;
+                            }
                         }
                     }                    
                 }

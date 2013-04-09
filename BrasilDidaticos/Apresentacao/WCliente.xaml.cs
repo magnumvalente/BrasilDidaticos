@@ -18,11 +18,36 @@ namespace BrasilDidaticos.Apresentacao
     /// </summary>
     public partial class WCliente : Window
     {
+        #region "[Atributo]"
+
+        private Objeto.Cliente _Cliente = null;
+
+        #endregion
+
+        #region "[Propriedades]"
+
+        public Objeto.Cliente Cliente
+        { 
+            get { return _Cliente; }
+            set { _Cliente = value; }
+        }
+
+        #endregion
+
         #region "[Metodos]"
 
         public WCliente()
         {
             InitializeComponent();
+        }
+
+        public WCliente(Objeto.Cliente cliente)
+        {
+            InitializeComponent();
+
+            _Cliente = new Objeto.Cliente();
+            _Cliente.Codigo = txtCodigo.Conteudo = cliente.Codigo;
+            _Cliente.Nome = txtNome.Conteudo = cliente.Nome;
         }
 
         private void ConfigurarControles()
@@ -34,7 +59,13 @@ namespace BrasilDidaticos.Apresentacao
         {
             // Permissão módulos operacionais sistema
             btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnSelecionar.Visibility = _Cliente == null ? Visibility.Hidden : Visibility.Visible;
+
+            // Permissão Selecionar DataGrid
+            DataGridColumn dgColuna = null;
+            dgColuna = dgClientes.Columns[0];
+            dgColuna.Visibility = dgColuna != null && _Cliente != null ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
         }
 
         private void ListarClientes()
@@ -55,7 +86,30 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
             servBrasilDidaticos.Close();
 
-            dgClientes.ItemsSource = retCliente.Clientes;      
+            if (retCliente.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+                dgClientes.ItemsSource = (from c in retCliente.Clientes select new Objeto.Cliente 
+                { 
+                    Selecionado = false, 
+                    Id = c.Id, 
+                    Codigo = c.Codigo, 
+                    Nome = c.Nome, 
+                    CaixaEscolar = c.CaixaEscolar,
+                    Tipo = c.Tipo, 
+                    Cpf_Cnpj = c.Cpf_Cnpj,
+                    Ativo = c.Ativo,
+                    Email = c.Email,
+                    Telefone = c.Telefone,
+                    Celular = c.Celular,
+                    InscricaoEstadual = c.InscricaoEstadual,
+                    Endereco = c.Endereco,
+                    Numero = c.Numero,
+                    Complemento = c.Complemento,
+                    Cep = c.Cep,
+                    Bairro = c.Bairro,
+                    Cidade = c.Cidade,
+                    Uf = c.Uf,
+                    ClienteMatriz = c.ClienteMatriz
+                });
 
             if (mostrarMsgVazio && retCliente.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retCliente.Mensagem, "Cliente", MessageBoxButton.OK, MessageBoxImage.Information);                              
@@ -99,6 +153,15 @@ namespace BrasilDidaticos.Apresentacao
             rlbPessoa.ListBox.Items.Add(new ListBoxItem() { Content = "Jurídica", Tag = Contrato.Enumeradores.Pessoa.Juridica });
         }
 
+        private void Limpar()
+        {
+            txtCodigo.Conteudo = string.Empty;
+            txtNome.Conteudo = string.Empty;
+            txtCaixaEscolar.Conteudo = string.Empty;
+            txtCPFCNP.Conteudo = string.Empty;
+            txtCodigo.txtBox.Focus();
+        }
+
         #endregion
 
         #region "[Eventos]"
@@ -123,6 +186,33 @@ namespace BrasilDidaticos.Apresentacao
             }   
         }
 
+        private void btnSelecionar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                // Verifica se o grid está selecionado
+                if (dgClientes.SelectedItem != null)
+                {
+                    // verifica se existe algum item selecionado da edição
+                    if (dgClientes.SelectedItem.GetType() == typeof(Objeto.Cliente))
+                    {
+                        // salva as alterações
+                        _Cliente = (Objeto.Cliente)dgClientes.SelectedItem;
+                        this.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Cliente", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
         private void btnNovo_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -138,7 +228,24 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }
-        }        
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Cliente", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
@@ -157,6 +264,23 @@ namespace BrasilDidaticos.Apresentacao
             }            
         }
 
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                _Cliente = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Cliente", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
@@ -167,7 +291,7 @@ namespace BrasilDidaticos.Apresentacao
                     this.Cursor = Cursors.Wait;
 
                     // verifica se existe algum item selecionado da edição
-                    if (((DataGridRow)sender).Item != null && ((DataGridRow)sender).Item.GetType() == typeof(Contrato.Cliente))
+                    if (((DataGridRow)sender).Item != null && ((DataGridRow)sender).Item.GetType() == typeof(Objeto.Cliente))
                     {
                         // salva as alterações
                         EditarCliente((Contrato.Cliente)((DataGridRow)sender).Item);
@@ -211,5 +335,6 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         #endregion                 
+        
     }
 }

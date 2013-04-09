@@ -51,7 +51,12 @@ namespace BrasilDidaticos.Contrato
             set;
         }
 
-
+        [DataMember]
+        public bool PreencherListaSelecao
+        {
+            get;
+            set;
+        }
     }
 }
 

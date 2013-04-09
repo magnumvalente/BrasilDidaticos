@@ -233,6 +233,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             Contrato.EntradaCliente entradaCliente = new Contrato.EntradaCliente();
             entradaCliente.Chave = Comum.Util.Chave;
+            entradaCliente.PreencherListaSelecao = true;
             entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
             entradaCliente.Cliente = new Contrato.Cliente();
             if (_cliente == null) entradaCliente.Cliente.Ativo = true;
@@ -246,7 +247,7 @@ namespace BrasilDidaticos.Apresentacao
                 // Guarda os clientes recuperados
                 _lstClientes = retCliente.Clientes;
 
-                foreach (Contrato.Cliente cliente in retCliente.Clientes)
+                foreach (Contrato.Cliente cliente in retCliente.Clientes.OrderBy(c => c.Nome))
                 {
                     cmbClienteMatriz.ComboBox.Items.Add(new ComboBoxItem()
                     {
@@ -263,7 +264,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             if (Comum.Util.UnidadesFederativas != null && Comum.Util.UnidadesFederativas.Count > 0)
             {
-                foreach (Contrato.UnidadeFederativa unidadeFederativa in Comum.Util.UnidadesFederativas)
+                foreach (Contrato.UnidadeFederativa unidadeFederativa in Comum.Util.UnidadesFederativas.OrderBy(uf => uf.Codigo))
                 {
                     cmbEstado.ComboBox.Items.Add(new ComboBoxItem() 
                     { 

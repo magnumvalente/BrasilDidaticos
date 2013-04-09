@@ -51,6 +51,9 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoFornecedor FornecedorListar(Contrato.EntradaFornecedor Fornecedor);
 
         [OperationContract]
+        Contrato.RetornoFornecedor FornecedorListar2(Contrato.EntradaFornecedor Fornecedor);
+
+        [OperationContract]
         Contrato.RetornoFornecedor FornecedorSalvar(Contrato.EntradaFornecedor Fornecedor);
 
         [OperationContract]
@@ -58,6 +61,9 @@ namespace BrasilDidaticos.WcfServico.Servico
 
         [OperationContract]
         Contrato.RetornoProduto ProdutoListar(Contrato.EntradaProduto Produto);
+
+        [OperationContract]
+        Contrato.RetornoProduto ProdutoListar2(Contrato.EntradaProduto Produto);
 
         [OperationContract]
         Contrato.RetornoProduto ProdutoListarRelatorio(Contrato.EntradaProduto Produto);

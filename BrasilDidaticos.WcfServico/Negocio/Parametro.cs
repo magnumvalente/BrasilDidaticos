@@ -45,7 +45,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             Codigo = parametro.COD_PARAMETRO,
                             Nome = parametro.NOME_PARAMETRO,
                             Valor = parametro.VALOR_PARAMETRO,
-                            TipoParametro = RecuperarTipoParametro(parametro.TIPO_PARAMETRO)
+                            TipoParametro = RecuperarTipoParametro(parametro.TIPO_PARAMETRO),
+                            Ordem = parametro.NUM_ORDEM
                         });
                     };
 

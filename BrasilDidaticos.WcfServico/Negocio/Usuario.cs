@@ -46,12 +46,16 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     retUsuario.Usuarios.Add(new Contrato.Usuario()
                     {
                         Id = objUsuario.ID_USUARIO,
-                        Nome = objUsuario.NOME_USUARIO,
-                        Login = objUsuario.LOGIN_USUARIO,
-                        Senha = objUsuario.SENHA_USUARIO,
-                        Ativo = objUsuario.BOL_ATIVO,
-                        Perfis = Negocio.Perfil.ListarUsuarioPerfil(objUsuario.T_USUARIO_PERFIL)
+                        Nome = objUsuario.NOME_USUARIO
                     });
+                    
+                    if (!entradaUsuario.PreencherListaSelecao)
+                    {
+                        retUsuario.Usuarios.Last().Login = objUsuario.LOGIN_USUARIO;
+                        retUsuario.Usuarios.Last().Senha = objUsuario.SENHA_USUARIO;
+                        retUsuario.Usuarios.Last().Ativo = objUsuario.BOL_ATIVO;
+                        retUsuario.Usuarios.Last().Perfis = Negocio.Perfil.ListarUsuarioPerfil(objUsuario.T_USUARIO_PERFIL);
+                    }
 
                     Contrato.RetornoSessao retSessao = Negocio.Sessao.SalvarSessao(new Contrato.Sessao() 
                     { 

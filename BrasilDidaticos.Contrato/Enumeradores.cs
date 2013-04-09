@@ -10,13 +10,13 @@ namespace BrasilDidaticos.Contrato
         public enum Pessoa
         {
             Fisica,
-            Juridica,
+            Juridica
         }
 
         public enum TipoOrcamento
         {
             Varejo,
-            Atacado,
+            Atacado
         }
 
         public enum TipoParametro

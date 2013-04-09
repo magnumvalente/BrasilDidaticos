@@ -40,6 +40,12 @@
                     <TextBlock Text="Novo"/>
                 </StackPanel>
             </Button>
+            <Button Grid.Column="2" Name="btnLimpar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="False" Margin="0,0,5,0" Click="btnLimpar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_limpar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Limpar"/>
+                </StackPanel>
+            </Button>
             <Button Grid.Column="2" Name="btnBuscar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="True" Margin="0,0,5,0" Click="btnBuscar_Click" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_buscar.png" Margin="0,0,5,0" />

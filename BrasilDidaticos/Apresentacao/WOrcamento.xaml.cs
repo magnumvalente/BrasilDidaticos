@@ -47,13 +47,13 @@ namespace BrasilDidaticos.Apresentacao
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
-            btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnNovo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             // Permissão Valor Custo DataGrid
             DataGridColumn dgColuna = null;
             dgColuna = dgOrcamentos.Columns[6];
-            if (dgColuna != null) dgColuna.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.VER_CUSTO) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            if (dgColuna != null) dgColuna.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.VER_CUSTO) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
         }
 
@@ -81,13 +81,112 @@ namespace BrasilDidaticos.Apresentacao
             servBrasilDidaticos.Close();
 
             if (retOrcamento.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
-            {                
-                foreach (Contrato.Orcamento p in retOrcamento.Orcamentos)
-                    dgOrcamentos.Items.Add(p);
+            {
+                foreach (Contrato.Orcamento c in retOrcamento.Orcamentos)
+                    dgOrcamentos.Items.Add(c);
             }    
 
             if (mostrarMsgVazio && retOrcamento.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retOrcamento.Mensagem, "Orcamento", MessageBoxButton.OK, MessageBoxImage.Information);                              
+        }
+
+        private void BuscarClientePorCodigo()
+        {
+            if (!string.IsNullOrWhiteSpace(cmbCliente.Codigo))
+            {
+                Contrato.EntradaCliente entradaCliente = new Contrato.EntradaCliente();
+                entradaCliente.Chave = Comum.Util.Chave;
+                entradaCliente.PreencherListaSelecao = true;
+                entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaCliente.Cliente = new Contrato.Cliente();
+                entradaCliente.Cliente.Ativo = true;
+                entradaCliente.Cliente.Codigo = cmbCliente.Codigo;
+
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
+                servBrasilDidaticos.Close();
+
+                if (retCliente.Clientes != null)
+                {
+                    if (retCliente.Clientes.Count == 1)
+                    {
+                        cmbCliente.Id = retCliente.Clientes.First().Id;
+                        cmbCliente.Codigo = retCliente.Clientes.First().Codigo;
+                        cmbCliente.Nome = retCliente.Clientes.First().Nome;
+                        cmbResponsavel.cmbComboBox.Focus();
+                    }
+                }
+                else
+                {
+                    cmbCliente.Limpar();
+                }
+            }
+        }
+
+        private void BuscarClientePorNome()
+        {
+            if (!string.IsNullOrWhiteSpace(cmbCliente.Nome))
+            {
+                Contrato.EntradaCliente entradaCliente = new Contrato.EntradaCliente();
+                entradaCliente.Chave = Comum.Util.Chave;
+                entradaCliente.PreencherListaSelecao = true;
+                entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaCliente.Cliente = new Contrato.Cliente();
+                entradaCliente.Cliente.Ativo = true;
+                entradaCliente.Cliente.Nome = cmbCliente.Nome;
+
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
+                servBrasilDidaticos.Close();
+
+                if (retCliente.Clientes != null)
+                {
+                    if (retCliente.Clientes.Count == 1)
+                    {
+                        cmbCliente.Id = retCliente.Clientes.First().Id;
+                        cmbCliente.Codigo = retCliente.Clientes.First().Codigo;
+                        cmbCliente.Nome = retCliente.Clientes.First().Nome;
+                        cmbResponsavel.cmbComboBox.Focus();
+                    }
+                }
+                else
+                {
+                    cmbCliente.Limpar();
+                }
+            }
+        }
+
+        private void BuscarCliente()
+        {
+            
+            Objeto.Cliente cliente = new Objeto.Cliente();                
+            cliente.Codigo = cmbCliente.Codigo;
+            cliente.Nome = cmbCliente.Nome;
+
+            WCliente wCliente = new WCliente(cliente);
+            wCliente.Owner = this;
+            wCliente.ShowDialog();
+
+            if (wCliente.Cliente != null)
+            {
+                cmbCliente.Id = wCliente.Cliente.Id;
+                cmbCliente.Codigo = wCliente.Cliente.Codigo;
+                cmbCliente.Nome = wCliente.Cliente.Nome;
+                cmbResponsavel.cmbComboBox.Focus();
+            }
+            else
+            {
+                cmbCliente.Limpar();
+            }
+        }
+
+        private void PreencherDadosTela()
+        {
+            PreencherVendedor();
+            PreencherResponsavel();
+            PreencherEstadosOrcamento();
+            ListarOrcamentos();
+            txtCodigo.txtBox.Focus();
         }
 
         private void PreencherEstadosOrcamento()
@@ -103,35 +202,11 @@ namespace BrasilDidaticos.Apresentacao
 
             if (retFornecedor.EstadosOrcamento != null)
             {
+                cmbEstadoOrcamento.ComboBox.Items.Clear();
+                cmbEstadoOrcamento.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
                 foreach (Contrato.EstadoOrcamento estadoOrcamento in retFornecedor.EstadosOrcamento)
                 {
                     cmbEstadoOrcamento.ComboBox.Items.Add(new ComboBoxItem() { Uid = estadoOrcamento.Id.ToString(), Content = estadoOrcamento.Nome, Tag = estadoOrcamento });
-                }
-            }
-        }
-
-        private void PreencherCliente()
-        {
-            Contrato.EntradaCliente entradaCliente = new Contrato.EntradaCliente();
-            entradaCliente.Chave = Comum.Util.Chave;
-            entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaCliente.Cliente = new Contrato.Cliente();
-            entradaCliente.Cliente.Ativo = true;
-
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
-            servBrasilDidaticos.Close();
-
-            if (retCliente.Clientes != null)
-            {
-                foreach (Contrato.Cliente cliente in retCliente.Clientes)
-                {
-                    cmbCliente.ComboBox.Items.Add(new ComboBoxItem()
-                    {
-                        Uid = cliente.Id.ToString(),
-                        Content = cliente.Nome,
-                        Tag = cliente
-                    });
                 }
             }
         }
@@ -141,6 +216,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaUsuario entradaUsuario = new Contrato.EntradaUsuario();
             entradaUsuario.Chave = Comum.Util.Chave;
             entradaUsuario.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaUsuario.PreencherListaSelecao = true;
             entradaUsuario.Usuario = new Contrato.Usuario() { Ativo = true };
             
             // Se o perfil para vendedor está definido
@@ -155,7 +231,9 @@ namespace BrasilDidaticos.Apresentacao
 
                 if (retUsuario.Usuarios != null)
                 {
-                    foreach (Contrato.Usuario usuario in retUsuario.Usuarios)
+                    cmbVendedor.ComboBox.Items.Clear();
+                    cmbVendedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
+                    foreach (Contrato.Usuario usuario in retUsuario.Usuarios.OrderBy(u => u.Nome))
                     {
                         cmbVendedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = usuario.Id.ToString(), Content = usuario.Nome, Tag = usuario });
                     }
@@ -168,6 +246,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaUsuario entradaUsuario = new Contrato.EntradaUsuario();
             entradaUsuario.Chave = Comum.Util.Chave;
             entradaUsuario.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaUsuario.PreencherListaSelecao = true;
             entradaUsuario.Usuario = new Contrato.Usuario() { Ativo = true };
             entradaUsuario.Usuario.Perfis = new List<Contrato.Perfil>();
             entradaUsuario.Usuario.Perfis.Add(new Contrato.Perfil() { Codigo = Comum.Parametros.CodigoPerfilOrcamentista });
@@ -187,8 +266,10 @@ namespace BrasilDidaticos.Apresentacao
 
             if (retUsuario.Usuarios != null)
             {
-                foreach (Contrato.Usuario usuario in retUsuario.Usuarios)
+                foreach (Contrato.Usuario usuario in retUsuario.Usuarios.OrderBy(u => u.Nome))
                 {
+                    cmbResponsavel.ComboBox.Items.Clear();
+                    cmbResponsavel.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
                     cmbResponsavel.ComboBox.Items.Add(new ComboBoxItem()
                     {
                         Uid = usuario.Id.ToString(),
@@ -216,8 +297,8 @@ namespace BrasilDidaticos.Apresentacao
             Orcamento.Codigo = txtCodigo.Conteudo;            
             if (dtpData.Conteudo != string.Empty)
                 Orcamento.Data = DateTime.Parse(dtpData.Conteudo);
-            if (cmbCliente.ValorSelecionado != null)
-                Orcamento.Cliente = (Contrato.Cliente)cmbCliente.ValorSelecionado;
+            if (!string.IsNullOrWhiteSpace(cmbCliente.Codigo) || !string.IsNullOrWhiteSpace(cmbCliente.Nome))
+                Orcamento.Cliente = new Contrato.Cliente() { Id = cmbCliente.Id, Codigo = cmbCliente.Codigo, Nome = cmbCliente.Nome };
             if (cmbResponsavel.ValorSelecionado != null)
                 Orcamento.Responsavel = (Contrato.Usuario)cmbResponsavel.ValorSelecionado;
             if (cmbVendedor.ValorSelecionado != null)
@@ -248,7 +329,20 @@ namespace BrasilDidaticos.Apresentacao
                 this._alterou = true;
                 this.ListarOrcamentos();
             }
-        }       
+        }
+
+        private void Limpar()
+        {
+            txtCodigo.Conteudo = string.Empty;
+            dtpData.Conteudo = string.Empty;
+            cmbCliente.Id = Guid.Empty;
+            cmbCliente.Codigo = string.Empty;
+            cmbCliente.Nome = string.Empty;
+            cmbResponsavel.ValorSelecionado = null;
+            cmbVendedor.ValorSelecionado = null;
+            cmbEstadoOrcamento.ValorSelecionado = null;
+            txtCodigo.txtBox.Focus();
+        }
 
         #endregion
 
@@ -260,12 +354,7 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Wait;
                 ValidarPermissao();
-                PreencherCliente();
-                PreencherVendedor();
-                PreencherResponsavel();
-                PreencherEstadosOrcamento();                
-                ListarOrcamentos();
-                txtCodigo.txtBox.Focus();
+                PreencherDadosTela();
             }
             catch (Exception ex)
             {
@@ -310,6 +399,57 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Arrow;
             }            
+        }
+
+        private void btnLimpar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                Limpar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void cmbCliente_CodigoGotFocusEvent(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                BuscarClientePorCodigo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            } 
+        }
+
+        private void cmbCliente_NomeGotFocusEvent(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                BuscarClientePorNome();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -385,7 +525,24 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
-         private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        private void cmbCliente_BuscaClickEvent(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                this.BuscarCliente();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
          {
              try
              {
@@ -401,7 +558,7 @@ namespace BrasilDidaticos.Apresentacao
              }
          }
 
-         private void btnVer_Click(object sender, RoutedEventArgs e)
+        private void btnVer_Click(object sender, RoutedEventArgs e)
          {
              try
              {
@@ -419,7 +576,7 @@ namespace BrasilDidaticos.Apresentacao
              }             
          }
 
-         private void btnCusto_Click(object sender, RoutedEventArgs e)
+        private void btnCusto_Click(object sender, RoutedEventArgs e)
          {
              try
              {
@@ -437,6 +594,6 @@ namespace BrasilDidaticos.Apresentacao
              }
          }
         
-        #endregion                 
+        #endregion                         
     }
 }

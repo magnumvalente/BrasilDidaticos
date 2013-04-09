@@ -60,11 +60,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                lblComboBox.Width = value;
+                gdControle.ColumnDefinitions[0].Width = new GridLength(value);
             }
             get
             {
-                return lblComboBox.Width;
+                return gdControle.ColumnDefinitions[0].Width.Value;
             }
         }
 
@@ -72,11 +72,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set
             {
-                cmbComboBox.Width = value;
+                gdControle.ColumnDefinitions[1].Width = new GridLength(value);
             }
             get
             {
-                return cmbComboBox.Width;
+                return gdControle.ColumnDefinitions[1].Width.Value;
             }
         }
 

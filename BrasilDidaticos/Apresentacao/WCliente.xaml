@@ -38,10 +38,22 @@
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
+            <Button Grid.Column="2" Name="btnSelecionar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" IsDefault="False" Margin="0,0,5,0" Visibility="Hidden" Click="btnSelecionar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_selecionar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Selecionar"/>
+                </StackPanel>
+            </Button>
             <Button Grid.Column="2" Name="btnNovo" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="False" Margin="0,0,5,0" Click="btnNovo_Click" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Margin="0,0,5,0" />
                     <TextBlock Text="Novo"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Name="btnLimpar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="False" Margin="0,0,5,0" Click="btnLimpar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_limpar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Limpar"/>
                 </StackPanel>
             </Button>
             <Button Grid.Column="2" Name="btnBuscar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="True" Margin="0,0,5,0" Click="btnBuscar_Click" >
@@ -50,7 +62,7 @@
                     <TextBlock Text="Buscar"/>
                 </StackPanel>
             </Button>
-            <Button Grid.Column="2" Name="btnCancelar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsCancel="True" Margin="0,0,5,0">
+            <Button Grid.Column="2" Name="btnCancelar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsCancel="True" Margin="0,0,5,0" Click="btnCancelar_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_cancelar.png" Margin="0,0,5,0" />
                     <TextBlock Text="Cancelar"/>
@@ -73,8 +85,16 @@
                     </Style>
                 </DataGrid.ItemContainerStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
+                    <DataGridTemplateColumn Header="Selecionar" Visibility="Hidden">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Selecionar" HorizontalAlignment="Center" IsChecked="{Binding Selecionado}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />                    
                     <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Caixa Escolar" Binding="{Binding CaixaEscolar}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tipo Cliente" Binding="{Binding Tipo}" IsReadOnly="True" />
                     <DataGridTextColumn Header="CPF / CNPJ" Binding="{Binding Cpf_Cnpj}" IsReadOnly="True" />
                 </DataGrid.Columns>
