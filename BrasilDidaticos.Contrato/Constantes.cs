@@ -14,6 +14,8 @@ namespace BrasilDidaticos.Contrato
         public const int COD_FILTRO_INVALIDO = 101;
         public const int COD_RETORNO_VAZIO = 200;
         public const int COD_REGISTRO_DUPLICADO = 300;
+        public const int COD_EMPRESA_INEXISTENTE = 400;
+        public const int COD_EMPRESA_DESATIVADA = 401;
 
         public const string TIPO_COD_PRODUTO = "PRDT";
         public const string TIPO_COD_FORNECEDOR = "FRNC";

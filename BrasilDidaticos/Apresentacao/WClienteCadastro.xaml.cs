@@ -123,12 +123,13 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaCliente entradaCliente = new Contrato.EntradaCliente();
                 entradaCliente.Chave = Comum.Util.Chave;
                 entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaCliente.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 if (_cliente == null) entradaCliente.Novo = true;
                 entradaCliente.Cliente = new Contrato.Cliente();
 
                 PreencherCliente(entradaCliente.Cliente);
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteSalvar(entradaCliente);
                 servBrasilDidaticos.Close();
                 
@@ -149,8 +150,8 @@ namespace BrasilDidaticos.Apresentacao
 
         private void GerarNovoCodigo()
         {
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            string retCodigoCliente = servBrasilDidaticos.ClienteBuscarCodigo();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+            string retCodigoCliente = servBrasilDidaticos.ClienteBuscarCodigo(Comum.Util.UsuarioLogado.Empresa.Id);
             servBrasilDidaticos.Close();
             txtCodigo.Conteudo = retCodigoCliente;
         }
@@ -235,10 +236,11 @@ namespace BrasilDidaticos.Apresentacao
             entradaCliente.Chave = Comum.Util.Chave;
             entradaCliente.PreencherListaSelecao = true;
             entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaCliente.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaCliente.Cliente = new Contrato.Cliente();
             if (_cliente == null) entradaCliente.Cliente.Ativo = true;
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
             servBrasilDidaticos.Close();
 
@@ -294,7 +296,8 @@ namespace BrasilDidaticos.Apresentacao
         
         private void ConfigurarControles()
         {
-            txtNome.txtBox.Focus();
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtNome.txtBox.Focus();
         }
 
         #endregion
@@ -306,9 +309,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherDadosTela();
-                ConfigurarControles();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherDadosTela();
             }
             catch (Exception ex)
             {
@@ -421,7 +424,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = Comum.Util.IsTextNumeric(e.Text);
+            e.Handled = Comum.Util.IsNumeric(e.Text);
         }
 
         private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

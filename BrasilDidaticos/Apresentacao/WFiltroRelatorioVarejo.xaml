@@ -31,8 +31,8 @@
                     <RowDefinition Height="30" />                    
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
-                <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1"  Background="#FFF0F0F0"/>
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="20" Grid.Row="0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="100" Grid.Row="1" Background="#FFF0F0F0"/>
                 <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="2" Selecionado="True" />
                 <GroupBox Name="gpbFornecedores" DockPanel.Dock="Top" Header="Fornecedores" Height="200" Grid.Row="3">
                     <DataGrid DockPanel.Dock="Bottom" Name="dgFornecedores" AutoGenerateColumns="False" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">

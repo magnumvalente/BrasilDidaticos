@@ -10,6 +10,13 @@ namespace BrasilDidaticos.Contrato
     public class Entrada
     {
         [DataMember]
+        public Empresa EmpresaLogada
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public string UsuarioLogado
         {
             get;

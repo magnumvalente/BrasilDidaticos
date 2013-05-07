@@ -28,8 +28,8 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" TamanhoTexto="20" />
-                <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" TamanhoTexto="50" Background="#FFF0F0F0" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="10" Grid.Row="0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="30" Grid.Row="1" Background="#FFF0F0F0" />
                 <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="2" Selecionado="True" />
             </Grid>
         </GroupBox>

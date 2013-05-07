@@ -30,9 +30,9 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
-                <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MTextBox x:Name="txtCaixaEscolar" Titulo="CaixaEscolar:" Grid.Row="2" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="20" Grid.Row="0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="100" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MTextBox x:Name="txtCaixaEscolar" Titulo="CaixaEscolar:" TamanhoTexto="100" Grid.Row="2" />
                 <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="3" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" Background="#FFF0F0F0"/>
                 <my:MMaskTextBox x:Name="txtCPFCNP" Titulo="CPF / CNPJ:" Grid.Row="4" />
             </Grid>

@@ -4,7 +4,7 @@
         xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:ews="clr-namespace:BrasilDidaticos.Comum"
         ews:ExtraWindowStyles.CanMinimize="False"
-        Title="Brasil Didáticos" Height="300" Width="400" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="False" Icon="/BrasilDidaticos;component/brasildidaticos.ico">
+        Title="Brasil Didáticos" Height="420" Width="400" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="False" Icon="/BrasilDidaticos;component/brasildidaticos.ico">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#EB0047E4" Offset="1" />

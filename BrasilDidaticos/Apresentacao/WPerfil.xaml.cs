@@ -25,6 +25,12 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
@@ -41,12 +47,13 @@ namespace BrasilDidaticos.Apresentacao
         {
             Contrato.EntradaPerfil entPerfil = new Contrato.EntradaPerfil();
             entPerfil.Chave = Comum.Util.Chave;
-            entPerfil.Perfil = new Contrato.Perfil();
             entPerfil.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entPerfil.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entPerfil.Perfil = new Contrato.Perfil();            
 
             PreencherFiltro(entPerfil.Perfil);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoPerfil retPerfil = servBrasilDidaticos.PerfilListar(entPerfil);
             servBrasilDidaticos.Close();
 
@@ -99,9 +106,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                ListarPerfils();
-                txtCodigo.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.ListarPerfils();
             }
             catch (Exception ex)
             {

@@ -37,13 +37,44 @@ namespace BrasilDidaticos.Comum
             set;
         }
 
+        public static int ValidadeOrcamento
+        {
+            get;
+            set;
+        }
+
+        public static int PrazoEntrega
+        {
+            get;
+            set;
+        }
+
+        public static string CorPrimariaFundoTela
+        {
+            get;
+            set;
+        }
+
+        public static string CorSecundariaFundoTela
+        {
+            get;
+            set;
+        }
+
+        public static Guid EmpresaProduto
+        {
+            get;
+            set;
+        }
+
         public static void CarregarParametros()
         {
             Contrato.EntradaParametro entradaParametro = new Contrato.EntradaParametro();
             entradaParametro.Chave = Comum.Util.Chave;
-            entradaParametro.UsuarioLogado = Comum.Util.UsuarioLogado.Login;            
+            entradaParametro.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaParametro.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoParametro retParametro = servBrasilDidaticos.ParametroListar(entradaParametro);
             servBrasilDidaticos.Close();
 
@@ -69,6 +100,18 @@ namespace BrasilDidaticos.Comum
                                 break;
                             case Constantes.PARAMETRO_COD_PERFIL_ORCAMENTISTA:
                                 CodigoPerfilOrcamentista = parametro.Valor;
+                                break;
+                            case Constantes.PARAMETRO_NUM_PRAZO_ENTREGA:
+                                PrazoEntrega = int.Parse(parametro.Valor);
+                                break;
+                            case Constantes.PARAMETRO_NUM_VALIDADE_ORCAMENTO:
+                                ValidadeOrcamento = int.Parse(parametro.Valor);
+                                break;
+                            case Constantes.PARAMETRO_COR_PRIMARIA_FUNDO:
+                                CorPrimariaFundoTela = parametro.Valor;
+                                break;
+                            case Constantes.PARAMETRO_COR_SECUNDARIA_FUNDO:
+                                CorSecundariaFundoTela = parametro.Valor;
                                 break;
                         }
                     }

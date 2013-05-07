@@ -87,6 +87,6 @@ namespace BrasilDidaticos.Apresentacao.Controler
             dtpDatePicker.SelectedDate = DateTime.Today;
         }
 
-        #endregion
+        #endregion        
     }
 }

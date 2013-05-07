@@ -26,7 +26,8 @@ namespace BrasilDidaticos.Contrato
             Inteiro,
             Decimal,
             Percentagem,
-            DataHora
+            DataHora,
+            Cor
         }
     }
 }

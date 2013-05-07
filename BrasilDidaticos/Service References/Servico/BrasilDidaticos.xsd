@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" />
+  <xs:import schemaLocation="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:element name="TestarServico">
     <xs:complexType>
       <xs:sequence>
@@ -157,7 +158,9 @@
   </xs:element>
   <xs:element name="FornecedorBuscarCodigo">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="IdEmpresa" type="q21:guid" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FornecedorBuscarCodigoResponse">
@@ -170,34 +173,36 @@
   <xs:element name="FornecedorListar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Fornecedor" nillable="true" type="q21:EntradaFornecedor" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Fornecedor" nillable="true" type="q22:EntradaFornecedor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FornecedorListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="FornecedorListarResult" nillable="true" type="q22:RetornoFornecedor" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="FornecedorListarResult" nillable="true" type="q23:RetornoFornecedor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FornecedorSalvar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Fornecedor" nillable="true" type="q23:EntradaFornecedor" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Fornecedor" nillable="true" type="q24:EntradaFornecedor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FornecedorSalvarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="FornecedorSalvarResult" nillable="true" type="q24:RetornoFornecedor" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="FornecedorSalvarResult" nillable="true" type="q25:RetornoFornecedor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoBuscarCodigo">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="IdEmpresa" type="q26:guid" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoBuscarCodigoResponse">
@@ -210,90 +215,92 @@
   <xs:element name="ProdutoListar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produto" nillable="true" type="q25:EntradaProduto" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produto" nillable="true" type="q27:EntradaProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutoListarResult" nillable="true" type="q26:RetornoProduto" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutoListarResult" nillable="true" type="q28:RetornoProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoListarRelatorio">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produto" nillable="true" type="q27:EntradaProduto" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produto" nillable="true" type="q29:EntradaProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoListarRelatorioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutoListarRelatorioResult" nillable="true" type="q28:RetornoProduto" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutoListarRelatorioResult" nillable="true" type="q30:RetornoProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoSalvar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produto" nillable="true" type="q29:EntradaProduto" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produto" nillable="true" type="q31:EntradaProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutoSalvarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutoSalvarResult" nillable="true" type="q30:RetornoProduto" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutoSalvarResult" nillable="true" type="q32:RetornoProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutosSalvar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produtos" nillable="true" type="q31:EntradaProdutos" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Produtos" nillable="true" type="q33:EntradaProdutos" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProdutosSalvarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutosSalvarResult" nillable="true" type="q32:RetornoProduto" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ProdutosSalvarResult" nillable="true" type="q34:RetornoProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ParametroListar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Parametro" nillable="true" type="q33:EntradaParametro" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Parametro" nillable="true" type="q35:EntradaParametro" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ParametroListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ParametroListarResult" nillable="true" type="q34:RetornoParametro" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ParametroListarResult" nillable="true" type="q36:RetornoParametro" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ParametrosSalvar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Parametros" nillable="true" type="q35:EntradaParametros" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Parametros" nillable="true" type="q37:EntradaParametros" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ParametrosSalvarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ParametrosSalvarResult" nillable="true" type="q36:RetornoParametro" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ParametrosSalvarResult" nillable="true" type="q38:RetornoParametro" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClienteBuscarCodigo">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="IdEmpresa" type="q39:guid" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClienteBuscarCodigoResponse">
@@ -306,34 +313,36 @@
   <xs:element name="ClienteListar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Cliente" nillable="true" type="q37:EntradaCliente" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Cliente" nillable="true" type="q40:EntradaCliente" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClienteListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ClienteListarResult" nillable="true" type="q38:RetornoCliente" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ClienteListarResult" nillable="true" type="q41:RetornoCliente" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClienteSalvar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Cliente" nillable="true" type="q39:EntradaCliente" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Cliente" nillable="true" type="q42:EntradaCliente" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClienteSalvarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ClienteSalvarResult" nillable="true" type="q40:RetornoCliente" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="ClienteSalvarResult" nillable="true" type="q43:RetornoCliente" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrcamentoBuscarCodigo">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="IdEmpresa" type="q44:guid" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrcamentoBuscarCodigoResponse">
@@ -346,42 +355,70 @@
   <xs:element name="EstadoOrcamentoListar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="EstadoOrcamento" nillable="true" type="q41:EntradaEstadoOrcamento" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="EstadoOrcamento" nillable="true" type="q45:EntradaEstadoOrcamento" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EstadoOrcamentoListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="EstadoOrcamentoListarResult" nillable="true" type="q42:RetornoEstadoOrcamento" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="EstadoOrcamentoListarResult" nillable="true" type="q46:RetornoEstadoOrcamento" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrcamentoListar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Orcamento" nillable="true" type="q43:EntradaOrcamento" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Orcamento" nillable="true" type="q47:EntradaOrcamento" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrcamentoListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="OrcamentoListarResult" nillable="true" type="q44:RetornoOrcamento" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="OrcamentoListarResult" nillable="true" type="q48:RetornoOrcamento" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrcamentoSalvar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Orcamento" nillable="true" type="q45:EntradaOrcamento" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="Orcamento" nillable="true" type="q49:EntradaOrcamento" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OrcamentoSalvarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="OrcamentoSalvarResult" nillable="true" type="q46:RetornoOrcamento" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="OrcamentoSalvarResult" nillable="true" type="q50:RetornoOrcamento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnidadeMedidaListar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="UnidadeMedida" nillable="true" type="q51:EntradaUnidadeMedida" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnidadeMedidaListarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="UnidadeMedidaListarResult" nillable="true" type="q52:RetornoUnidadeMedida" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnidadeMedidaSalvar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="UnidadeMedida" nillable="true" type="q53:EntradaUnidadeMedida" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnidadeMedidaSalvarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="UnidadeMedidaSalvarResult" nillable="true" type="q54:RetornoUnidadeMedida" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -393,7 +430,7 @@
   <xs:element name="UnidadeFederativaListarResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="UnidadeFederativaListarResult" nillable="true" type="q47:RetornoUnidadeFederativa" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/BrasilDidaticos.Contrato" minOccurs="0" name="UnidadeFederativaListarResult" nillable="true" type="q55:RetornoUnidadeFederativa" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

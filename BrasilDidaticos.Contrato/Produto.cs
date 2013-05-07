@@ -69,6 +69,13 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
+        public List<UnidadeMedida> UnidadeMedidas
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public Fornecedor Fornecedor
         {
             get;

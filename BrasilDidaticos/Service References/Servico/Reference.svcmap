@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8ca96dfd-afbb-4f9b-971f-93d751f6549d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b41e0c3d-3f6e-47b5-bad9-2ae942693323" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
-    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -21,11 +21,11 @@
     <MetadataSource Address="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="BrasilDidaticos.xsd" MetadataType="Schema" ID="99e1981d-e04a-4601-97bd-0423082073ff" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd0" />
-    <MetadataFile FileName="BrasilDidaticos.disco" MetadataType="Disco" ID="01abd0bb-af7d-4421-93ca-21397007af00" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?disco" />
-    <MetadataFile FileName="BrasilDidaticos1.xsd" MetadataType="Schema" ID="09b66db7-4dcf-4b68-bec6-30c27e8fe2a1" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd2" />
-    <MetadataFile FileName="BrasilDidaticos.wsdl" MetadataType="Wsdl" ID="15eca06d-6744-4e52-8f5f-30dfc7f340b7" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?wsdl" />
-    <MetadataFile FileName="BrasilDidaticos2.xsd" MetadataType="Schema" ID="a95789c7-086d-487c-8bf4-34c0a81f8c9e" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd1" />
+    <MetadataFile FileName="BrasilDidaticos.xsd" MetadataType="Schema" ID="50369f6c-cdd3-4e21-86a3-01cde0782794" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd0" />
+    <MetadataFile FileName="BrasilDidaticos.disco" MetadataType="Disco" ID="c5fe786e-a841-4a9f-9067-32119e2dfe42" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?disco" />
+    <MetadataFile FileName="BrasilDidaticos.wsdl" MetadataType="Wsdl" ID="59f231dd-f9b0-4211-a00b-5961057db1dd" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?wsdl" />
+    <MetadataFile FileName="BrasilDidaticos1.xsd" MetadataType="Schema" ID="d0a4a26c-c412-44d6-96e5-a1c0e380cef5" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd2" />
+    <MetadataFile FileName="BrasilDidaticos2.xsd" MetadataType="Schema" ID="f4395459-f90f-4a5d-8320-3a7307cf9199" SourceId="1" SourceUrl="http://localhost/BrasilDidaticos.WcfServico/Servico/BrasilDidaticos.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

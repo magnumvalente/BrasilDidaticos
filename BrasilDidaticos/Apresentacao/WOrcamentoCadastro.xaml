@@ -16,15 +16,18 @@
             <Image Source="/BrasilDidaticos;component/Imagens/ico_worcamento.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <TextBlock Text="ORÇAMENTO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
         </StackPanel>
-        <GroupBox Name="Item" DockPanel.Dock="Top" Width="460" Margin="0,10,0,0">
+        <GroupBox Name="Item" DockPanel.Dock="Top" Width="500" Margin="0,10,0,0">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Width="16" Height="16" />
                     <TextBlock Text="Novo" VerticalAlignment="Center" Margin="5"/>
                 </StackPanel>
             </GroupBox.Header>
-            <Grid Name="gdOrcamentoDados" MinWidth="400" DockPanel.Dock="Top" Margin="0,10,0,0">
+            <Grid Name="gdOrcamentoDados" MinWidth="500" DockPanel.Dock="Top" Margin="0,10,0,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
@@ -35,29 +38,38 @@
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MinWidth="400" MaxWidth="Infinity"></ColumnDefinition>
+                    <ColumnDefinition Width="*" MinWidth="450" MaxWidth="Infinity"></ColumnDefinition>
                     <ColumnDefinition Width="0"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" WidthTitulo="100" WidthConteudo="90" Grid.Row="0" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="15" WidthTitulo="150" WidthConteudo="90" Grid.Row="0" />
                 <Button Grid.Row="0" Grid.Column="1" Name="btnGerarNovoCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" Click="btnGerarNovoCodigo_Click" ToolTip="Gerar Novo Código" >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
                     </StackPanel>
                 </Button>
-                <my:MDatePicker x:Name="dtpData" Titulo="Data:" WidthTitulo="100" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MBusca x:Name="cmbCliente" Titulo="Cliente:" WidthTitulo="100" Grid.Row="2" CodigoLostFocusEvent="cmbCliente_CodigoGotFocusEvent" NomeGotFocusEvent="cmbCliente_NomeGotFocusEvent" BuscaClickEvent="cmbCliente_BuscaClickEvent" />
-                <my:MComboBox x:Name="cmbResponsavel" Titulo="Responsável:" WidthTitulo="100" Grid.Row="3" Background="#FFF0F0F0" />
-                <my:MComboBox x:Name="cmbVendedor" Titulo="Vendedor:" WidthTitulo="100" Grid.Row="4" />
-                <my:MDecimalTextBox x:Name="txtDesconto" Titulo="Desconto:" WidthTitulo="100" Grid.Row="5" Background="#FFF0F0F0" />
-                <my:MRadioListBox x:Name="rlbTipoOrcamento" Titulo="Tipo Orçamento:" WidthTitulo="100" Grid.Row="6" SelectionChangedEvent="rlbTipoOrcamento_SelectionChangedEvent" />
-                <my:MComboBox x:Name="cmbEstadoOrcamento" Titulo="Estado:" WidthTitulo="100" Grid.Row="7" Background="#FFF0F0F0" />
+                <my:MDatePicker x:Name="dtpData" Titulo="Data:" WidthTitulo="150" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MBusca x:Name="cmbCliente" Titulo="Cliente:" WidthTitulo="150" Grid.Row="2" CodigoLostFocusEvent="cmbCliente_CodigoGotFocusEvent" NomeGotFocusEvent="cmbCliente_NomeGotFocusEvent" BuscaClickEvent="cmbCliente_BuscaClickEvent" />
+                <my:MComboBox x:Name="cmbResponsavel" Titulo="Responsável:" WidthTitulo="150" Grid.Row="3" Background="#FFF0F0F0" />
+                <my:MComboBox x:Name="cmbVendedor" Titulo="Vendedor:" WidthTitulo="150" Grid.Row="4" />
+                <my:MDecimalTextBox x:Name="txtDesconto" Titulo="Desconto:" WidthTitulo="150" Grid.Row="5" Background="#FFF0F0F0" />
+                <my:MRadioListBox x:Name="rlbTipoOrcamento" Titulo="Tipo Orçamento:" WidthTitulo="150" Grid.Row="6" SelectionChangedEvent="rlbTipoOrcamento_SelectionChangedEvent" />
+                <my:MComboBox x:Name="cmbEstadoOrcamento" Titulo="Estado:" WidthTitulo="150" Grid.Row="7" Background="#FFF0F0F0" />
+                <my:MCheckBox x:Name="chkLicitacao" Titulo="Licitação?" WidthTitulo="150" Grid.Row="8" ClickEvent="chkLicitacao_ClickEvent"/>
+                <my:MDecimalTextBox x:Name="txtValidadeOrcamento" Titulo="Validade Orçamento:" TamanhoTexto="3" WidthTitulo="150" Grid.Row="9" FormatString="F0" Background="#FFF0F0F0"/>
+                <my:MDecimalTextBox x:Name="txtPrazoEntrega" Titulo="Prazo de Entrega:" TamanhoTexto="3" WidthTitulo="150" Grid.Row="10" FormatString="F0"/>
             </Grid>
         </GroupBox>
         <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
-            <Button Grid.Column="2" Name="btnAdicionar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" IsDefault="False" Margin="0,0,5,0" Click="btnAdicionarProduto_Click" >
+            <Button Grid.Column="2" Name="btnImportarOrcamento" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" IsDefault="True" Margin="0,0,5,0" Click="btnImportarItensOrcamento_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_orcamento_itens_importar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Importar Itens"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Name="btnAdicionarProduto" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" IsDefault="False" Margin="0,0,5,0" Click="btnAdicionarProduto_Click" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_produto_adicionar.png" Margin="0,0,5,0" />
-                    <TextBlock Text="Adicionar Produto"/>
+                    <TextBlock Text="Adicionar Item"/>
                 </StackPanel>
             </Button>
             <Button Grid.Column="2" Name="btnSalvar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="True" Margin="0,0,5,0" Click="btnSalvar_Click" >
@@ -82,9 +94,9 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Produto" Binding="{Binding Descricao}" CanUserReorder="True"/>
+                    <DataGridTextColumn Header="Produto" Binding="{Binding Descricao}" CanUserReorder="False" CanUserSort="False" />
                  <!--   <DataGridTextColumn Header="Valor Custo" Binding="{Binding ValorCusto, StringFormat=C, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" /> -->
-                    <DataGridTextColumn Header="Valor Unitário" IsReadOnly="False" >
+                    <DataGridTextColumn Header="Valor Unitário" IsReadOnly="False" CanUserSort="False" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -100,7 +112,7 @@
                             </Style>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade, StringFormat=N0, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" >
+                    <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade, StringFormat=N0, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" CanUserSort="False" >
                         <DataGridTextColumn.EditingElementStyle>
                             <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -109,7 +121,7 @@
                             </Style>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Desc. (%)" >
+                    <DataGridTextColumn Header="Desc. (%)" CanUserSort="False" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -125,7 +137,7 @@
                             </Style>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=OneWay, StringFormat=C2, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=OneWay, StringFormat=C2, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" CanUserSort="False" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

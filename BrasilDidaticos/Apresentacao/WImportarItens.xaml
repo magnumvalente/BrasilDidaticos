@@ -1,4 +1,4 @@
-﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" x:Class="BrasilDidaticos.Apresentacao.WImportarProduto"
+﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" x:Class="BrasilDidaticos.Apresentacao.WImportarItens"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ews="clr-namespace:BrasilDidaticos.Comum"
@@ -13,9 +13,9 @@
     <DockPanel>
         <StackPanel Name="stpCabecalho" DockPanel.Dock="Top" Height="50" Orientation="Horizontal">
             <Image Source="/BrasilDidaticos;component/Imagens/ico_wimportarproduto.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <TextBlock Text="IMPORTAR PRODUTO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
+            <TextBlock Text="IMPORTAR ITENS" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
         </StackPanel>
-        <GroupBox Name="Campos" DockPanel.Dock="Top" Width="200">
+        <GroupBox Name="Campos" DockPanel.Dock="Top" Width="250">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image  Source="/BrasilDidaticos;component/Imagens/ico_campos.png" Width="16" Height="16" />
@@ -28,11 +28,13 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MCheckBox x:Name="chkCodigoProdutoFornecedor" Titulo="Código Fornecedor:" WidthTitulo="150" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="0" />
-                <my:MCheckBox x:Name="chkNomeProduto" Titulo="Nome:" WidthTitulo="150" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MCheckBox x:Name="chkValorProduto" Titulo="Valor:" WidthTitulo="150" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="2" />
-                <my:MCheckBox x:Name="chkNCM" Titulo="NCM:" WidthTitulo="150" WidthConteudo="30" Grid.Row="3" Background="#FFF0F0F0" />                
+                <my:MCheckBox x:Name="chkDescricaoItem" Titulo="Descrição:" WidthTitulo="200" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MCheckBox x:Name="chkQuantidadeItem" Titulo="Quantidade:" WidthTitulo="200" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="0" />
+                <my:MCheckBox x:Name="chkValorCusto" Titulo="Valor Custo:" WidthTitulo="200" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="2" />
+                <my:MCheckBox x:Name="chkValorUnitario" Titulo="Valor Unitário:" WidthTitulo="200" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="3" Background="#FFF0F0F0" />
+                <my:MCheckBox x:Name="chkValorDesconto" Titulo="Valor Desconto (%):" WidthTitulo="200" WidthConteudo="30" IsEnabled="False" Selecionado="True" Grid.Row="4" />
             </Grid>
         </GroupBox>
         <GroupBox Name="gpbCaminho" DockPanel.Dock="Top" Width="370" Margin="0,10,0,0">

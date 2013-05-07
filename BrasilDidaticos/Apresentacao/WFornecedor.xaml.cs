@@ -50,6 +50,12 @@ namespace BrasilDidaticos.Apresentacao
             btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtNome.txtBox.Focus();
+        }
+
         private void ListarFornecedores()
         {
             ListarFornecedores(false);
@@ -60,11 +66,12 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();            
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor();
 
             PreencherFiltro(entradaFornecedor.Fornecedor);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
             servBrasilDidaticos.Close();
 
@@ -131,10 +138,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherPessoa();
-                ListarFornecedores();
-                txtCodigo.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherPessoa();
+                this.ListarFornecedores();
             }
             catch (Exception ex)
             {

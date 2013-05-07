@@ -38,6 +38,13 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
+        public BrasilDidaticos.Contrato.Empresa Empresa
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public List<BrasilDidaticos.Contrato.Perfil> Perfis
         {
             get;

@@ -68,9 +68,19 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Taxa.SalvarTaxa(Taxa);
         }
 
-        public string FornecedorBuscarCodigo()
+        public Contrato.RetornoUnidadeMedida UnidadeMedidaListar(Contrato.EntradaUnidadeMedida UnidadeMedida)
         {
-            return Negocio.Fornecedor.BuscarCodigoFornecedor();
+            return Negocio.UnidadeMedida.ListarUnidadeMedida(UnidadeMedida);
+        }
+
+        public Contrato.RetornoUnidadeMedida UnidadeMedidaSalvar(Contrato.EntradaUnidadeMedida UnidadeMedida)
+        {
+            return Negocio.UnidadeMedida.SalvarUnidadeMedida(UnidadeMedida);
+        }
+
+        public string FornecedorBuscarCodigo(Guid IdEmpresa)
+        {
+            return Negocio.Fornecedor.BuscarCodigoFornecedor(IdEmpresa);
         }
 
         public Contrato.RetornoFornecedor FornecedorListar(Contrato.EntradaFornecedor Fornecedor)
@@ -78,29 +88,19 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Fornecedor.ListarFornecedor(Fornecedor);
         }
 
-        public Contrato.RetornoFornecedor FornecedorListar2(Contrato.EntradaFornecedor Fornecedor)
-        {
-            return Negocio.Fornecedor.ListarFornecedor2(Fornecedor);
-        }
-
         public Contrato.RetornoFornecedor FornecedorSalvar(Contrato.EntradaFornecedor Fornecedor)
         {
             return Negocio.Fornecedor.SalvarFornecedor(Fornecedor);
         }
 
-        public string ProdutoBuscarCodigo()
+        public string ProdutoBuscarCodigo(Guid IdEmpresa)
         {
-            return Negocio.Produto.BuscarCodigoProduto();
+            return Negocio.Produto.BuscarCodigoProduto(IdEmpresa);
         }
 
         public Contrato.RetornoProduto ProdutoListar(Contrato.EntradaProduto Produto)
         {
             return Negocio.Produto.ListarProduto(Produto);
-        }
-
-        public Contrato.RetornoProduto ProdutoListar2(Contrato.EntradaProduto Produto)
-        {
-            return Negocio.Produto.ListarProduto2(Produto);
         }
 
         public Contrato.RetornoProduto ProdutoListarRelatorio(Contrato.EntradaProduto Produto)
@@ -118,9 +118,9 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Produto.SalvarProdutos(Produtos);
         }
 
-        public string ClienteBuscarCodigo()
+        public string ClienteBuscarCodigo(Guid IdEmpresa)
         {
-            return Negocio.Cliente.BuscarCodigoCliente();
+            return Negocio.Cliente.BuscarCodigoCliente(IdEmpresa);
         }
 
         public Contrato.RetornoCliente ClienteListar(Contrato.EntradaCliente Cliente)
@@ -143,9 +143,9 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Parametro.SalvarParametros(Parametros);
         }
 
-        public string OrcamentoBuscarCodigo()
+        public string OrcamentoBuscarCodigo(Guid IdEmpresa)
         {
-            return Negocio.Orcamento.BuscarCodigoOrcamento();
+            return Negocio.Orcamento.BuscarCodigoOrcamento(IdEmpresa);
         }
 
         public Contrato.RetornoOrcamento OrcamentoListar(Contrato.EntradaOrcamento Orcamento)

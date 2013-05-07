@@ -84,6 +84,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -111,6 +112,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Apresentacao\Controler\MColorPicker.xaml.cs">
+      <DependentUpon>MColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Apresentacao\Controler\MBusca.xaml.cs">
       <DependentUpon>MBusca.xaml</DependentUpon>
     </Compile>
@@ -135,6 +139,15 @@
     <Compile Include="Apresentacao\Controler\MCheckBox.xaml.cs">
       <DependentUpon>MCheckBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Apresentacao\WUnidadeMedidaCadastro.xaml.cs">
+      <DependentUpon>WUnidadeMedidaCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WUnidadeMedida.xaml.cs">
+      <DependentUpon>WUnidadeMedida.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WImportarItens.xaml.cs">
+      <DependentUpon>WImportarItens.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Apresentacao\WSobre.xaml.cs">
       <DependentUpon>WSobre.xaml</DependentUpon>
     </Compile>
@@ -156,8 +169,8 @@
     <Compile Include="Apresentacao\WRelatorioOrcamento.xaml.cs">
       <DependentUpon>WRelatorioOrcamento.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\WOrcamentoProduto.xaml.cs">
-      <DependentUpon>WOrcamentoProduto.xaml</DependentUpon>
+    <Compile Include="Apresentacao\WOrcamentoItem.xaml.cs">
+      <DependentUpon>WOrcamentoItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\WOrcamentoCadastro.xaml.cs">
       <DependentUpon>WOrcamentoCadastro.xaml</DependentUpon>
@@ -174,8 +187,8 @@
     <Compile Include="Apresentacao\WRelatorioVarejo.xaml.cs">
       <DependentUpon>WRelatorioVarejo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\WImportarProduto.xaml.cs">
-      <DependentUpon>WImportarProduto.xaml</DependentUpon>
+    <Compile Include="Apresentacao\WImportarProdutos.xaml.cs">
+      <DependentUpon>WImportarProdutos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\WParametro.xaml.cs">
       <DependentUpon>WParametro.xaml</DependentUpon>
@@ -210,6 +223,7 @@
     <Compile Include="Comum\EnterKeyTransversal.cs" />
     <Compile Include="Comum\ExtraWindowStyles.cs" />
     <Compile Include="Objeto\Cliente.cs" />
+    <Compile Include="Objeto\UnidadeMedida.cs" />
     <Compile Include="Objeto\Fornecedor.cs" />
     <Compile Include="Objeto\Produto.cs" />
     <Compile Include="Objeto\Taxa.cs" />
@@ -233,6 +247,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
+    <Page Include="Apresentacao\Controler\MColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Apresentacao\Controler\MBusca.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -273,6 +292,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Apresentacao\WUnidadeMedidaCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WUnidadeMedida.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WImportarItens.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Apresentacao\WSobre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,7 +332,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Apresentacao\WOrcamentoProduto.xaml">
+    <Page Include="Apresentacao\WOrcamentoItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -329,7 +360,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Apresentacao\WImportarProduto.xaml">
+    <Page Include="Apresentacao\WImportarProdutos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -443,12 +474,34 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Imagens\ico_orcamento_exportar.png" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoUnidadeMedida.datasource" />
+    <None Include="Service References\Servico\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Servico\configuration.svcinfo" />
+    <None Include="Service References\Servico\configuration91.svcinfo" />
+    <None Include="Service References\Servico\BrasilDidaticos.disco" />
+    <None Include="Service References\Servico\BrasilDidaticos.wsdl" />
+    <None Include="Service References\Servico\BrasilDidaticos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Servico\BrasilDidaticos1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Servico\BrasilDidaticos2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <Resource Include="Imagens\ico_produto_adicionar.png" />
     <Resource Include="Imagens\ico_atualizar.png" />
     <Resource Include="Imagens\ico_selecionar.png" />
     <Resource Include="Imagens\ico_limpar.png" />
     <Resource Include="Imagens\ico_orcamento_custo.png" />
     <Resource Include="Imagens\ico_orcamento_visualizar.png" />
+    <Resource Include="Imagens\ico_orcamento_itens_importar.png" />
+    <Resource Include="Imagens\ico_wprincipal_homologacao.png" />
+    <Resource Include="Imagens\ico_wunidademedida.png" />
     <Content Include="Relatorio\RelatorioOrcamento.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -495,16 +548,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\Servico\BrasilDidaticos.wsdl" />
-    <None Include="Service References\Servico\BrasilDidaticos.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Servico\BrasilDidaticos1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Servico\BrasilDidaticos2.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -546,30 +589,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\Servico\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Servico\BrasilDidaticos.disco">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Servico\configuration91.svcinfo">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Servico\configuration.svcinfo">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Servico\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imagens\ico_login.png" />
@@ -636,6 +655,9 @@
   <ItemGroup>
     <Resource Include="Imagens\ico_campos.png" />
     <Resource Include="Imagens\ico_csv_arquivo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Servico\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

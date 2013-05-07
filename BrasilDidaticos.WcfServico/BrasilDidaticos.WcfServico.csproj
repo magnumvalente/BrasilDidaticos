@@ -57,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Servico\BrasilDidaticos.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -72,6 +74,8 @@
       <DependentUpon>BrasilDidaticos.edmx</DependentUpon>
     </Compile>
     <Compile Include="Negocio\Cliente.cs" />
+    <Compile Include="Negocio\UnidadeMedida.cs" />
+    <Compile Include="Negocio\Empresa.cs" />
     <Compile Include="Negocio\EstadoOrcamento.cs" />
     <Compile Include="Negocio\UnidadeFederativa.cs" />
     <Compile Include="Negocio\Item.cs" />

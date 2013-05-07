@@ -31,7 +31,7 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" WidthTitulo="100" WidthConteudo="90" Grid.Row="0" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="15" WidthTitulo="100" WidthConteudo="90" Grid.Row="0" />
                 <my:MDatePicker x:Name="dtpData" Titulo="Data:" WidthTitulo="100" Grid.Row="1" Background="#FFF0F0F0" />
                 <my:MBusca x:Name="cmbCliente" Titulo="Cliente:" WidthTitulo="100" Grid.Row="2" CodigoLostFocusEvent="cmbCliente_CodigoGotFocusEvent" NomeGotFocusEvent="cmbCliente_NomeGotFocusEvent" BuscaClickEvent="cmbCliente_BuscaClickEvent" />
                 <my:MComboBox x:Name="cmbResponsavel" Titulo="Responsável:" WidthTitulo="100" Grid.Row="3" Background="#FFF0F0F0" />
@@ -92,6 +92,17 @@
                                 <Button Name="btnVerOrcamento" HorizontalAlignment="Center" Height="25" Width="25" Click="btnVer_Click" ToolTip="Ver orçamento" >
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/BrasilDidaticos;component/Imagens/ico_orcamento_visualizar.png" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnExportarItensOrcamento" HorizontalAlignment="Center" Height="25" Width="25" Click="btnExportar_Click" ToolTip="Exportar itens orçamento" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/BrasilDidaticos;component/Imagens/ico_orcamento_exportar.png" />
                                     </StackPanel>
                                 </Button>
                             </DataTemplate>

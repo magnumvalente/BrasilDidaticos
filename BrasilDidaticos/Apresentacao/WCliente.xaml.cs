@@ -52,7 +52,8 @@ namespace BrasilDidaticos.Apresentacao
 
         private void ConfigurarControles()
         {
-            txtCodigo.txtBox.Focus();
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
         }
 
         private void ValidarPermissao()
@@ -78,11 +79,12 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaCliente entradaCliente = new Contrato.EntradaCliente();            
             entradaCliente.Chave = Comum.Util.Chave;
             entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaCliente.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaCliente.Cliente = new Contrato.Cliente();
 
             PreencherFiltro(entradaCliente.Cliente);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
             servBrasilDidaticos.Close();
 
@@ -171,10 +173,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherPessoa();
-                ListarClientes();
-                ConfigurarControles();                
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherPessoa();
+                this.ListarClientes();
             }
             catch (Exception ex)
             {

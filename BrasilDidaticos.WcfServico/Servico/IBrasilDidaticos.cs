@@ -45,25 +45,19 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoTaxa TaxaSalvar(Contrato.EntradaTaxa Taxa);
 
         [OperationContract]
-        string FornecedorBuscarCodigo();
+        string FornecedorBuscarCodigo(Guid IdEmpresa);
 
         [OperationContract]
         Contrato.RetornoFornecedor FornecedorListar(Contrato.EntradaFornecedor Fornecedor);
-
-        [OperationContract]
-        Contrato.RetornoFornecedor FornecedorListar2(Contrato.EntradaFornecedor Fornecedor);
-
+        
         [OperationContract]
         Contrato.RetornoFornecedor FornecedorSalvar(Contrato.EntradaFornecedor Fornecedor);
 
         [OperationContract]
-        string ProdutoBuscarCodigo();
+        string ProdutoBuscarCodigo(Guid IdEmpresa);
 
         [OperationContract]
         Contrato.RetornoProduto ProdutoListar(Contrato.EntradaProduto Produto);
-
-        [OperationContract]
-        Contrato.RetornoProduto ProdutoListar2(Contrato.EntradaProduto Produto);
 
         [OperationContract]
         Contrato.RetornoProduto ProdutoListarRelatorio(Contrato.EntradaProduto Produto);
@@ -81,7 +75,7 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoParametro ParametrosSalvar(Contrato.EntradaParametros Parametros);
 
         [OperationContract]
-        string ClienteBuscarCodigo();
+        string ClienteBuscarCodigo(Guid IdEmpresa);
 
         [OperationContract]
         Contrato.RetornoCliente ClienteListar(Contrato.EntradaCliente Cliente);
@@ -90,7 +84,7 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoCliente ClienteSalvar(Contrato.EntradaCliente Cliente);
 
         [OperationContract]
-        string OrcamentoBuscarCodigo();
+        string OrcamentoBuscarCodigo(Guid IdEmpresa);
 
         [OperationContract]
         Contrato.RetornoEstadoOrcamento EstadoOrcamentoListar(Contrato.EntradaEstadoOrcamento EstadoOrcamento);
@@ -100,6 +94,12 @@ namespace BrasilDidaticos.WcfServico.Servico
 
         [OperationContract]
         Contrato.RetornoOrcamento OrcamentoSalvar(Contrato.EntradaOrcamento Orcamento);
+
+        [OperationContract]
+        Contrato.RetornoUnidadeMedida UnidadeMedidaListar(Contrato.EntradaUnidadeMedida UnidadeMedida);
+
+        [OperationContract]
+        Contrato.RetornoUnidadeMedida UnidadeMedidaSalvar(Contrato.EntradaUnidadeMedida UnidadeMedida);
 
         [OperationContract]
         Contrato.RetornoUnidadeFederativa UnidadeFederativaListar();

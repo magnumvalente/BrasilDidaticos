@@ -45,6 +45,12 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
@@ -64,6 +70,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaProduto.Produto = new Contrato.Produto();
             entradaProduto.Paginar = true;
             entradaProduto.PosicaoUltimoItem = 0;
@@ -71,7 +78,7 @@ namespace BrasilDidaticos.Apresentacao
 
             PreencherFiltro(entradaProduto.Produto);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);
             servBrasilDidaticos.Close();
 
@@ -90,10 +97,11 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
             servBrasilDidaticos.Close();
 
@@ -157,10 +165,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
+                this.ConfigurarControles();
                 ValidarPermissao();
                 PreencherFornecedores();
                 ListarProdutos();
-                txtCodigo.txtBox.Focus();
             }
             catch (Exception ex)
             {
@@ -262,6 +270,7 @@ namespace BrasilDidaticos.Apresentacao
                          Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                          entradaProduto.Chave = Comum.Util.Chave;
                          entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                         entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                          entradaProduto.Produto = new Contrato.Produto() { Ativo = true };
                          entradaProduto.Paginar = true;
                          entradaProduto.PosicaoUltimoItem = int.Parse(e.ExtentHeight.ToString());
@@ -269,7 +278,7 @@ namespace BrasilDidaticos.Apresentacao
 
                          PreencherFiltro(entradaProduto.Produto);
 
-                         Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                         Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                          Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);
                          servBrasilDidaticos.Close();
 

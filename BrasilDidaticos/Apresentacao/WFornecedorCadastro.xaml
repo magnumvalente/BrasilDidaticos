@@ -37,17 +37,17 @@
                 <ColumnDefinition Width="*" MinWidth="400" MaxWidth="Infinity"></ColumnDefinition>
                 <ColumnDefinition Width="0"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <my:MTextBox x:Name="txtCodigo" Titulo="Código:" Grid.Row="0" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="10" Grid.Row="0" />
             <Button Grid.Row="0" Grid.Column="1" Name="btnGerarNovoCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" Click="btnGerarNovoCodigo_Click" ToolTip="Gerar Novo Código" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
                 </StackPanel>
             </Button>
-            <my:MTextBox x:Name="txtNome" Titulo="Nome:" Grid.Row="1" Background="#FFF0F0F0" />
+                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="50" Grid.Row="1" Background="#FFF0F0F0" />
             <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="2" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" />
             <my:MMaskTextBox x:Name="txtCPFCNP" Titulo="CPF / CNPJ:" Grid.Row="3" Background="#FFF0F0F0" />
-            <my:MDecimalTextBox x:Name="txtValorAtacado" Titulo="Porcentagem Atacado:" Grid.Row="4" FormatString="P" />
-            <my:MDecimalTextBox x:Name="txtValorVarejo" Titulo="Porcentagem Varejo:" Grid.Row="5" FormatString="P" Background="#FFF0F0F0" />
+                <my:MDecimalTextBox x:Name="txtValorAtacado" Titulo="Porcentagem Atacado:" TamanhoTexto="14" Grid.Row="4" FormatString="P" />
+                <my:MDecimalTextBox x:Name="txtValorVarejo" Titulo="Porcentagem Varejo:" TamanhoTexto="14" Grid.Row="5" FormatString="P" Background="#FFF0F0F0" />
             <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="6" Selecionado="True" />
         </Grid>
         </GroupBox>

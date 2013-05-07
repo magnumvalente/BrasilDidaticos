@@ -24,14 +24,22 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaPerfil.EmpresaLogada.Id.ToString()))
+                {
+                    entradaPerfil.EmpresaLogada.Id = Guid.Empty;
+                }
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
                 // Busca o perfil no banco
-                List<Dados.PERFIL> lstPerfis = (from f in context.T_PERFIL
-                                                where f.BOL_ATIVO == entradaPerfil.Perfil.Ativo
-                                                select f).ToList();
+                List<Dados.PERFIL> lstPerfis = (from p in context.T_PERFIL
+                                                where p.BOL_ATIVO == entradaPerfil.Perfil.Ativo                                                   
+                                                   && (entradaPerfil.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaPerfil.EmpresaLogada.Id)
+                                                   && (entradaPerfil.Perfil.Codigo == string.Empty || p.COD_PERFIL.Contains(entradaPerfil.Perfil.Codigo))
+                                                   && (entradaPerfil.Perfil.Nome == string.Empty || p.NOME_PERFIL.Contains(entradaPerfil.Perfil.Nome))
+                                                select p).ToList();
 
                 // Verifica se foi encontrado algum registro
                 if (lstPerfis.Count > 0)
@@ -44,8 +52,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         retPerfil.Perfis.Add(new Contrato.Perfil()
                         {
                             Id = perfil.ID_PERFIL,
-                            Nome = perfil.NOME_PERFIL,
                             Codigo = perfil.COD_PERFIL,
+                            Nome = perfil.NOME_PERFIL,
+                            Descricao = perfil.DES_PERFIL,
                             Ativo = perfil.BOL_ATIVO,
                             Permissoes = Negocio.Permissao.ListarPerfilPermissao(perfil.T_PERFIL_PERMISSAO)
                         });
@@ -90,6 +99,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         Id = perfil.T_PERFIL.ID_PERFIL,
                         Codigo = perfil.T_PERFIL.COD_PERFIL,
                         Nome = perfil.T_PERFIL.NOME_PERFIL,
+                        Descricao = perfil.T_PERFIL.DES_PERFIL,
                         Ativo = perfil.T_PERFIL.BOL_ATIVO,
                         Permissoes = Negocio.Permissao.ListarPerfilPermissao(perfil.T_PERFIL.T_PERFIL_PERMISSAO)
                     });
@@ -132,7 +142,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     // Busca o perfil no banco
                     List<Dados.PERFIL> lstPerfis = (from p in context.T_PERFIL
                                                     where (p.COD_PERFIL == entradaPerfil.Perfil.Codigo
-                                                       || (entradaPerfil.Novo == null && entradaPerfil.Perfil.Id == p.ID_PERFIL))
+                                                          && (entradaPerfil.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaPerfil.EmpresaLogada.Id))
+                                                       || (entradaPerfil.Novo == null && entradaPerfil.Perfil.Id == p.ID_PERFIL)
                                                     select p).ToList();
 
                      // Verifica se foi encontrado algum registro
@@ -149,6 +160,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         {
                             // Atualiza o perfil
                             lstPerfis.First().NOME_PERFIL = entradaPerfil.Perfil.Nome;
+                            lstPerfis.First().DES_PERFIL = entradaPerfil.Perfil.Descricao;
                             lstPerfis.First().BOL_ATIVO = entradaPerfil.Perfil.Ativo;
                             lstPerfis.First().DATA_ATUALIZACAO = DateTime.Now;
                             lstPerfis.First().LOGIN_USUARIO = entradaPerfil.UsuarioLogado;
@@ -184,6 +196,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tPerfil.ID_PERFIL = Guid.NewGuid();
                             tPerfil.COD_PERFIL = entradaPerfil.Perfil.Codigo;
                             tPerfil.NOME_PERFIL = entradaPerfil.Perfil.Nome;
+                            tPerfil.DES_PERFIL = entradaPerfil.Perfil.Descricao;
                             tPerfil.BOL_ATIVO = entradaPerfil.Perfil.Ativo;
                             tPerfil.DATA_ATUALIZACAO = DateTime.Now;
                             tPerfil.LOGIN_USUARIO = entradaPerfil.UsuarioLogado;

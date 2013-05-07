@@ -71,7 +71,11 @@ namespace BrasilDidaticos.Apresentacao.Controler
         {
             set 
             {
-                txtDecimalTextBox.Text = value;
+                if (!value.Equals(string.Empty))
+                    _valor = decimal.Parse(value);
+                else
+                    _valor = null;
+                txtDecimalTextBox.Text = _valor.HasValue ? _valor.Value.ToString(_formatString) : string.Empty;
             }
             get
             {
@@ -102,6 +106,18 @@ namespace BrasilDidaticos.Apresentacao.Controler
                 return gdControle.ColumnDefinitions[1].Width.Value;
             }
         }
+
+        public int TamanhoTexto
+        {
+            set
+            {
+                txtDecimalTextBox.MaxLength = value;
+            }
+            get
+            {
+                return txtDecimalTextBox.MaxLength;
+            }
+        }  
 
         public decimal? Valor
         {
@@ -147,7 +163,7 @@ namespace BrasilDidaticos.Apresentacao.Controler
             if (sender != null && sender.GetType() == typeof(TextBox))
                 valorDecimal = ((TextBox)sender).Text + e.Text;
 
-            e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
+            e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
         }
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e)

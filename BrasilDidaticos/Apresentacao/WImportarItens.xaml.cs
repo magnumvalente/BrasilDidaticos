@@ -11,18 +11,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace BrasilDidaticos.Apresentacao
 {
     /// <summary>
-    /// Interaction logic for WImportarProduto.xaml
+    /// Interaction logic for WImportarItens.xaml
     /// </summary>
-    public partial class WImportarProduto : Window
+    public partial class WImportarItens : Window
     {
         #region "[Constantes]"
 
-        const int MAX_TAM_CODIGO = 20;
         const int MAX_TAM_DESCRICAO = 300;
+        const int MAX_TAM_QUANTIDADE = 9;
+        const int MAX_TAM_VALOR_CUSTO = 14;
+        const int MAX_TAM_VALOR_UNITARIO = 14;
+        const int MAX_TAM_VALOR_DESCONTO = 14;
 
         #endregion
 
@@ -46,7 +50,7 @@ namespace BrasilDidaticos.Apresentacao
 
         #region "[Metodos]"
 
-        public WImportarProduto()
+        public WImportarItens()
         {
             InitializeComponent();
         }
@@ -72,22 +76,52 @@ namespace BrasilDidaticos.Apresentacao
             bool retorno = true;
             novaLinha = linha;
 
-            if (conteudo[0].Trim().Length > MAX_TAM_CODIGO)
+            if (conteudo[0].Trim().Length > MAX_TAM_DESCRICAO)
             {
-                novaLinha += string.Format(" - [O tamanho '{0}' do código do produto ultrapassa o máximo '{1}' permitido.]", conteudo[0].Trim().Length, MAX_TAM_CODIGO);
+                novaLinha += string.Format(" - [O tamanho '{0}' da descrição do item ultrapassa o máximo '{1}' permitido.]", conteudo[1].Trim().Length, MAX_TAM_DESCRICAO);
                 retorno = false;
             }
 
-            if (conteudo[1].Trim().Length > MAX_TAM_DESCRICAO)
+            if (conteudo[1].Trim().Length > MAX_TAM_QUANTIDADE)
             {
-                novaLinha += string.Format(" - [O tamanho '{0}' da descrição do produto ultrapassa o máximo '{1}' permitido.]", conteudo[1].Trim().Length, MAX_TAM_DESCRICAO);
+                novaLinha += string.Format(" - [O tamanho '{0}' da quantidade do item ultrapassa o máximo '{1}' permitido.]", conteudo[0].Trim().Length, MAX_TAM_QUANTIDADE);
+                retorno = false;
+            }            
+
+            //if (conteudo[2].Trim().Length > MAX_TAM_VALOR_CUSTO)
+            //{
+            //    novaLinha += string.Format(" - [O tamanho '{0}' do valor de custo do item ultrapassa o máximo '{1}' permitido.]", conteudo[1].Trim().Length, MAX_TAM_VALOR_CUSTO);
+            //    retorno = false;
+            //}
+
+            if (conteudo[3].Trim().Length > MAX_TAM_VALOR_UNITARIO)
+            {
+                novaLinha += string.Format(" - [O tamanho '{0}' do valor unitário do item ultrapassa o máximo '{1}' permitido.]", conteudo[1].Trim().Length, MAX_TAM_VALOR_UNITARIO);
+                retorno = false;
+            }
+
+            if (conteudo[4].Trim().Length > MAX_TAM_VALOR_DESCONTO)
+            {
+                novaLinha += string.Format(" - [O tamanho '{0}' do valor do desconto do item ultrapassa o máximo '{1}' permitido.]", conteudo[1].Trim().Length, MAX_TAM_VALOR_DESCONTO);
                 retorno = false;
             }
 
             double result = double.MinValue;
-            if (!double.TryParse(conteudo[2].Trim(), out result))
+            if (!double.TryParse(Comum.Util.Decriptar(conteudo[2].Trim()), out result))
             {
-                novaLinha += string.Format(" - [O conteudo '{0}' do valor não é numerico.]", conteudo[2].Trim());
+                novaLinha += string.Format(" - [O conteudo '{0}' do valor do custo não é numerico.]", Comum.Util.Decriptar(conteudo[2].Trim()));
+                retorno = false;
+            }
+
+            if (!double.TryParse(conteudo[3].Trim(), out result))
+            {
+                novaLinha += string.Format(" - [O conteudo '{0}' do valor do unitário não é numerico.]", conteudo[3].Trim());
+                retorno = false;
+            }
+
+            if (conteudo[4].Trim() != string.Empty && !double.TryParse(conteudo[4].Trim(), out result))
+            {
+                novaLinha += string.Format(" - [O conteudo '{0}' do valor do desconto não é numerico.]", conteudo[4].Trim());
                 retorno = false;
             }
 
@@ -96,10 +130,10 @@ namespace BrasilDidaticos.Apresentacao
             return retorno;
         }
 
-        public List<Contrato.Produto> LerProdutosArquivo()
+        public ObservableCollection<Contrato.Item> LerItensArquivo()
         {
             // Lista com os produtos
-            List<Contrato.Produto> produtos = new List<Contrato.Produto>();
+            ObservableCollection<Contrato.Item> itens = new ObservableCollection<Contrato.Item>();
 
             // Verifica se encontrou algum erro no arquivo
             bool encontrouErro = false;
@@ -125,24 +159,23 @@ namespace BrasilDidaticos.Apresentacao
                         // Recupera os dados separados por ';'
                         string[] conteudo = linha.Split(';');
 
-                        // Verifica se existe pelo menos '3' informações
-                        if (conteudo.Length >= 3)
+                        // Verifica se existe pelo menos '5' informações
+                        if (conteudo.Length >= 5)
                         {
                             // Se a linha está válida
                             if (ValidarLinha(conteudo, linha, out novaLinha))
                             {
                                 // Adiciona o produto a lista
-                                produtos.Add(new Contrato.Produto
+                                itens.Add(new Contrato.Item
                                 {
-                                    CodigoFornecedor = conteudo[0].Trim(),
-                                    Nome = conteudo[1].Trim(),
-                                    ValorBase = decimal.Parse(conteudo[2].Trim()),
-                                    Ativo = true
+                                    Descricao = conteudo[0].Trim(),
+                                    Quantidade  = int.Parse(conteudo[1].Trim()),
+                                    ValorCusto = decimal.Parse(Comum.Util.Decriptar(conteudo[2].Trim())),
+                                    ValorUnitario = decimal.Parse(conteudo[3].Trim())
                                 });
-
-                                // Verifica se vai existir a coluna de NCM do produto
-                                if (chkNCM.Selecionado != null && chkNCM.Selecionado == true)
-                                    produtos.Last().Ncm = conteudo[3].Trim();
+                                
+                                if (conteudo[4].Trim() != string.Empty)
+                                    itens.Last().ValorDesconto = decimal.Parse(conteudo[4].Trim());
                             }
                             else
                                 encontrouErro = true;
@@ -163,12 +196,12 @@ namespace BrasilDidaticos.Apresentacao
                         string msgErro = string.Format("Foram encontrados erros no arquivo '{0}'!\n Verifique no arquivo de log '{1}' as linhas com problemas.\nCaso elas não sejam corregidas, os produtos existentes nas mesmas não serão importados!", txtCaminhoArquivo.Conteudo, nomeArquivo);
 
                         // Exibi uma mensagem informando que foram encontrados erros no arquivo
-                        MessageBox.Show(msgErro, "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(msgErro, "Orçamento", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
 
-            return produtos;
+            return itens;
         }
 
         private void ProcurarArquivo()
@@ -178,7 +211,7 @@ namespace BrasilDidaticos.Apresentacao
 
             // Define o filtro para a extensão do arquivo 
             dlg.DefaultExt = ".csv";
-            dlg.Filter = "Text documents (.csv)|*.csv";
+            dlg.Filter = "Documento texto (.csv)|*.csv";
 
             // Exibe o OpenFileDialog 
             if (dlg.ShowDialog() == true)
@@ -214,7 +247,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -231,14 +264,14 @@ namespace BrasilDidaticos.Apresentacao
 
                 // Verifica se as informações do usuário são válidas
                 if (strValidacao.Length > 0)
-                    MessageBox.Show(strValidacao.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(strValidacao.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
                     this.Close();
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -255,7 +288,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {

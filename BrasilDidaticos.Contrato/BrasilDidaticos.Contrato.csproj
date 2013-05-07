@@ -43,6 +43,12 @@
   <ItemGroup>
     <Compile Include="Constantes.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="RetornoUnidadeMedida.cs" />
+    <Compile Include="EntradaMedida.cs" />
+    <Compile Include="UnidadeMedida.cs" />
+    <Compile Include="EntradaEmpresa.cs" />
+    <Compile Include="RetornoEmpresa.cs" />
+    <Compile Include="Empresa.cs" />
     <Compile Include="RetornoEstadoOrcamento.cs" />
     <Compile Include="EntradaEstadoOrcamento.cs" />
     <Compile Include="EstadoOrcamento.cs" />

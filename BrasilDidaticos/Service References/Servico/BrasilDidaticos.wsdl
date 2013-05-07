@@ -175,6 +175,18 @@
   <wsdl:message name="IBrasilDidaticos_OrcamentoSalvar_OutputMessage">
     <wsdl:part name="parameters" element="tns:OrcamentoSalvarResponse" />
   </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UnidadeMedidaListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnidadeMedidaListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UnidadeMedidaListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnidadeMedidaListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UnidadeMedidaSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnidadeMedidaSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_UnidadeMedidaSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnidadeMedidaSalvarResponse" />
+  </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_UnidadeFederativaListar_InputMessage">
     <wsdl:part name="parameters" element="tns:UnidadeFederativaListar" />
   </wsdl:message>
@@ -293,6 +305,14 @@
     <wsdl:operation name="OrcamentoSalvar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoSalvar" message="tns:IBrasilDidaticos_OrcamentoSalvar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/OrcamentoSalvarResponse" message="tns:IBrasilDidaticos_OrcamentoSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnidadeMedidaListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaListar" message="tns:IBrasilDidaticos_UnidadeMedidaListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaListarResponse" message="tns:IBrasilDidaticos_UnidadeMedidaListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnidadeMedidaSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvar" message="tns:IBrasilDidaticos_UnidadeMedidaSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvarResponse" message="tns:IBrasilDidaticos_UnidadeMedidaSalvar_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnidadeFederativaListar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListar" message="tns:IBrasilDidaticos_UnidadeFederativaListar_InputMessage" />
@@ -546,6 +566,24 @@
     </wsdl:operation>
     <wsdl:operation name="OrcamentoSalvar">
       <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/OrcamentoSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnidadeMedidaListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnidadeMedidaSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvar" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

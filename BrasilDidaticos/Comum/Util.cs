@@ -1,5 +1,6 @@
 ﻿using BrasilDidaticos.Apresentacao.Controler;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace BrasilDidaticos.Comum
 {
@@ -16,6 +18,8 @@ namespace BrasilDidaticos.Comum
     {
         private static Contrato.Usuario _UsuarioLogado = null;
         private static List<Contrato.UnidadeFederativa> _UnidadesFederativas = null;
+        private static string _NomeEndPoint = string.Empty;
+        private static byte[] _Bytes = ASCIIEncoding.ASCII.GetBytes("GDMInfor");
 
         public static string CriptografiaMD5(string Valor)
         {
@@ -35,7 +39,37 @@ namespace BrasilDidaticos.Comum
             return strResultado;
         }
 
-        public static string RecuperarIp()
+        public static string Encriptar(string valor)
+        {
+            if (String.IsNullOrEmpty(valor))
+                throw new ArgumentNullException("The string which needs to be encrypted can not be null.");
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream,cryptoProvider.CreateEncryptor(_Bytes, _Bytes), CryptoStreamMode.Write);
+            StreamWriter writer = new StreamWriter(cryptoStream);
+            writer.Write(valor);
+            writer.Flush();
+            cryptoStream.FlushFinalBlock();
+            writer.Flush();
+
+            return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+        }
+
+        public static string Decriptar(string valorCriptografado)
+        {
+            if (String.IsNullOrEmpty(valorCriptografado))
+                throw new ArgumentNullException("The string which needs to be decrypted can not be null.");
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(valorCriptografado));
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoProvider.CreateDecryptor(_Bytes, _Bytes), CryptoStreamMode.Read);
+            StreamReader reader = new StreamReader(cryptoStream);
+
+            return reader.ReadToEnd();
+        }
+
+        private static string RecuperarIp()
         {
             string hostName = Dns.GetHostName();
             string ipAddress = string.Empty;
@@ -44,10 +78,57 @@ namespace BrasilDidaticos.Comum
             foreach (IPAddress ipaddress in local.AddressList)
             {
                 if (ipaddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                    ipAddress = ipaddress.ToString() ;
+                    ipAddress = ipaddress.ToString();
             }
 
             return ipAddress;
+        }
+
+        public static string RecuperarNomeEndPoint()
+        {
+            if (_NomeEndPoint.Equals(string.Empty))
+            {
+                string ambiente = Comum.Constantes.AMBIENTE_PRODUCAO;
+
+#if (DEBUG)
+                ambiente = Comum.Constantes.AMBIENTE_DESENVOLVIMENTO;
+#endif
+
+                if (ConfigurationManager.AppSettings["BolAmbienteHomologacao"] != null && ConfigurationManager.AppSettings["BolAmbienteHomologacao"].ToLower() == "true")
+                    ambiente = Comum.Constantes.AMBIENTE_HOMOLOGACAO;
+
+                return string.Format(Comum.Constantes.NOME_END_POINT, ambiente);
+            }
+
+            return _NomeEndPoint;
+        }
+        
+        public static string Chave
+        {
+            get
+            {
+                return CriptografiaMD5(RecuperarIp());
+            }
+        }
+
+        public static List<Contrato.UnidadeFederativa> UnidadesFederativas
+        {
+            get
+            {
+                if (_UnidadesFederativas == null)
+                {
+                    Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+                    Contrato.RetornoUnidadeFederativa retUnidadeFederativa = servBrasilDidaticos.UnidadeFederativaListar();
+                    servBrasilDidaticos.Close();
+
+                    if (retUnidadeFederativa.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+                    {
+                        _UnidadesFederativas = retUnidadeFederativa.UnidadesFederativas;
+                    }
+                }
+
+                return _UnidadesFederativas;
+            }
         }
 
         public static Contrato.Usuario UsuarioLogado
@@ -61,33 +142,28 @@ namespace BrasilDidaticos.Comum
                 return _UsuarioLogado;
             }
         }
-
-        public static string Chave
-        {            
-            get
-            {
-                return CriptografiaMD5(RecuperarIp());
-            }
+        
+        public static bool ValidarPermissao(string nomeTela, string nomePermissao)
+        {
+            return ValidarPermissao(UsuarioLogado, nomeTela, nomePermissao);
         }
 
-        public static List<Contrato.UnidadeFederativa> UnidadesFederativas
-        {    
-            get
+        public static bool ValidarPermissao(Contrato.Usuario usuarioLogado, string nomeTela, string nomePermissao)
+        {
+            string nome = string.Format("{0}_{1}", nomeTela, nomePermissao);
+
+            if (usuarioLogado.Perfis != null && usuarioLogado.Perfis.Count > 0)
             {
-                if (_UnidadesFederativas == null)
+                foreach (Contrato.Perfil perfil in usuarioLogado.Perfis)
                 {
-                    Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-                    Contrato.RetornoUnidadeFederativa retUnidadeFederativa = servBrasilDidaticos.UnidadeFederativaListar();
-                    servBrasilDidaticos.Close();
-
-                    if (retUnidadeFederativa.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
-                    {
-                        _UnidadesFederativas = retUnidadeFederativa.UnidadesFederativas;
-                    }
+                    Contrato.Permissao objPermissao = (from p in perfil.Permissoes
+                                                       where p.Nome == nome
+                                                       select p).FirstOrDefault();
+                    if (objPermissao != null)
+                        return true;
                 }
-
-                return _UnidadesFederativas;
             }
+            return false;
         }
 
         public static UserControl CriarControler(string Titulo, string Valor, Contrato.Enumeradores.TipoParametro tipoParametro, object tag)
@@ -135,31 +211,14 @@ namespace BrasilDidaticos.Comum
                     if (WidthTitulo != double.MinValue) ((MDecimalTextBox)controler).WidthTitulo = WidthTitulo;
                     if (WidthConteudo != double.MinValue) ((MDecimalTextBox)controler).WidthConteudo = WidthConteudo;
                     break;
+                case Contrato.Enumeradores.TipoParametro.Cor:
+                    controler = new MColorPicker();
+                    controler.Tag = tag;
+                    ((MColorPicker)controler).Titulo = string.Format("{0}:", Titulo);
+                    ((MColorPicker)controler).Conteudo = Valor;
+                    break;
             }
             return controler;
-        }
-
-        public static bool ValidarPermissao(string nomeTela, string nomePermissao)
-        { 
-            return ValidarPermissao(UsuarioLogado, nomeTela, nomePermissao);
-        }
-
-        public static bool ValidarPermissao(Contrato.Usuario usuarioLogado, string nomeTela, string nomePermissao)
-        {
-            string nome = string.Format("{0}_{1}", nomeTela, nomePermissao);
-
-            if (usuarioLogado.Perfis != null && usuarioLogado.Perfis.Count > 0)
-            {
-                foreach (Contrato.Perfil perfil in usuarioLogado.Perfis)
-                {
-                    Contrato.Permissao objPermissao = (from p in perfil.Permissoes
-                                                       where p.Nome == nome
-                                                      select p).FirstOrDefault();
-                    if (objPermissao != null)
-                        return true;
-                }
-            }
-            return false;
         }
 
         public static StackPanel GroupHeader(string titulo, string caminhoImagem)
@@ -203,7 +262,27 @@ namespace BrasilDidaticos.Comum
             return img;
         }
 
-        public static bool IsTextNumeric(string str)
+        public static Brush ConfigurarCorFundoTela(Brush background)
+        {
+            Brush retBackground = background;
+
+            if (background.GetType().Equals(typeof(LinearGradientBrush)))
+            {
+                LinearGradientBrush linearGradientBrush = (LinearGradientBrush)background;
+
+                // Verifica se as cores foram informadas
+                if (!string.IsNullOrEmpty(Comum.Parametros.CorPrimariaFundoTela) && !string.IsNullOrEmpty(Comum.Parametros.CorSecundariaFundoTela))
+                {
+                    GradientStopCollection gradientStopCollection = new GradientStopCollection();
+                    gradientStopCollection.Add(new GradientStop((Color)ColorConverter.ConvertFromString(Comum.Parametros.CorPrimariaFundoTela), 1));
+                    gradientStopCollection.Add(new GradientStop((Color)ColorConverter.ConvertFromString(Comum.Parametros.CorSecundariaFundoTela), 0));
+                    retBackground = new LinearGradientBrush(gradientStopCollection, new Point(0.5, 0), new Point(0.5, 1));
+                }
+            }
+            return retBackground;
+        }
+
+        public static bool IsNumeric(string str)
         {
             
             System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^0-9]");
@@ -216,7 +295,7 @@ namespace BrasilDidaticos.Comum
             return int.TryParse(str, out outParse);
         }
 
-        public static bool IsTextNumericFloat(string str)
+        public static bool IsNumericFloat(string str)
         {
             System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^,0-9]");
             return reg.IsMatch(str);

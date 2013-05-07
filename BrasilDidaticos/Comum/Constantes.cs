@@ -23,6 +23,7 @@ namespace BrasilDidaticos.Comum
         public const string TELA_ORCAMENTO = "ORCAMENTO";
         public const string TELA_PRODUTO = "PRODUTO";
         public const string TELA_TAXA = "TAXA";
+        public const string TELA_UNIDADE_MEDIDA = "UNIDADE_MEDIDA";
         public const string TELA_PARAMETRO = "PARAMETRO";
         public const string TELA_CLIENTE = "CLIENTE";
         public const string TELA_SESSAO = "SESSAO";
@@ -35,11 +36,21 @@ namespace BrasilDidaticos.Comum
         public const string PARAMETRO_QTD_ITENS_PAGINA = "QTD_ITENS_PAGINA";
         public const string PARAMETRO_COD_PERFIL_VENDEDOR = "COD_PERFIL_VENDEDOR";
         public const string PARAMETRO_COD_PERFIL_ORCAMENTISTA = "COD_PERFIL_ORCAMENTISTA";
+        public const string PARAMETRO_NUM_VALIDADE_ORCAMENTO = "NUM_VALIDADE_ORCAMENTO";
+        public const string PARAMETRO_NUM_PRAZO_ENTREGA = "NUM_PRAZO_ENTREGA";
+        public const string PARAMETRO_COR_PRIMARIA_FUNDO = "COR_PRIMARIA_FUNDO";
+        public const string PARAMETRO_COR_SECUNDARIA_FUNDO = "COR_SECUNDARIA_FUNDO";
 
         public const string CEP_CODIGO_FILIACAO = "A1C70368-E6DC-4D1A-B562-46004AA53408";
 
         public const string STRING_FORMAT_MOEDA = "C2";
         public const string STRING_FORMAT_DECIMAL = "F2";
         public const string STRING_FORMAT_PORCENTAGEM = "P2";
+
+        public const string AMBIENTE_DESENVOLVIMENTO = "D_";
+        public const string AMBIENTE_HOMOLOGACAO = "H_";
+        public const string AMBIENTE_PRODUCAO = "P_";
+
+        public const string NOME_END_POINT = "{0}BasicHttpBinding_IBrasilDidaticos";
     }
 }

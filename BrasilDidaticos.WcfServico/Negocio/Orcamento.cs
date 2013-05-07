@@ -12,15 +12,15 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// Método para buscar o código do orçamento
         /// </summary>        
         /// <returns>string</returns>
-        internal static string BuscarCodigoOrcamento()
+        internal static string BuscarCodigoOrcamento(Guid IdEmpresa)
         {
             // Objeto que recebe o retorno do método
             string retCodigoOrcamento = string.Empty;
 
             // Loga no banco de dados
             Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-            System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
-            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_ORCAMENTO, objCodigoOrcamento);
+            System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));            
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_ORCAMENTO, IdEmpresa, objCodigoOrcamento);
 
             // Recupera o código do fornecedor
             retCodigoOrcamento = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_ORCAMENTO);
@@ -60,6 +60,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     Codigo = orcamento.COD_ORCAMENTO,
                     Data = orcamento.DATA_ORCAMENTO,
                     ValorDesconto = orcamento.NUM_DESCONTO,
+                    PrazoEntrega = orcamento.NUM_PRAZO_ENTREGA,
+                    ValidadeOrcamento = orcamento.NUM_VALIDADE_ORCAMENTO,
                     Estado = Negocio.EstadoOrcamento.BuscarOrcamentoEstadoOrcamento(orcamento.T_ESTADO_ORCAMENTO),
                     Cliente = Negocio.Cliente.BuscarCliente(orcamento.T_CLIENTE),
                     Responsavel = Negocio.Usuario.BuscarUsuario(orcamento.T_USUARIO_RESPOSANVEL),
@@ -86,8 +88,14 @@ namespace BrasilDidaticos.WcfServico.Negocio
             Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaOrcamento.UsuarioLogado, Chave = entradaOrcamento.Chave });
             
             // Verifica se o usuário está autenticado
-            if (0 == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaOrcamento.EmpresaLogada.Id.ToString()))
+                {
+                    entradaOrcamento.EmpresaLogada.Id = Guid.Empty;
+                }
+
                 // Verifica se o código não foi informado
                 if (string.IsNullOrWhiteSpace(entradaOrcamento.Orcamento.Codigo))
                 {
@@ -119,56 +127,93 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 }
 
                 // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-                                                
-                // Busca o orcamento no banco
-                List<Dados.ORCAMENTO> lstOrcamentos = null;
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();                                                
                     
                 if (entradaOrcamento.Paginar)
                 {
-                    lstOrcamentos = (from o in context.T_ORCAMENTO
-                                    where 
-                                        (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.StartsWith(entradaOrcamento.Orcamento.Codigo))
+                    // Busca o orcamento no banco
+                    var lstOrcamentos = (from o in context.T_ORCAMENTO
+                                    where
+                                        (entradaOrcamento.EmpresaLogada.Id == Guid.Empty || o.ID_EMPRESA == entradaOrcamento.EmpresaLogada.Id)
+                                    &&  (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.Contains(entradaOrcamento.Orcamento.Codigo))
                                     &&  (entradaOrcamento.Orcamento.Cliente.Id == Guid.Empty || o.ID_CLIENTE == entradaOrcamento.Orcamento.Cliente.Id)
                                     &&  (entradaOrcamento.Orcamento.Vendedor.Id == Guid.Empty || o.ID_USUARIO_VENDEDOR == entradaOrcamento.Orcamento.Vendedor.Id)
                                     &&  (entradaOrcamento.Orcamento.Responsavel.Id == Guid.Empty || o.ID_USUARIO_RESPONSAVEL == entradaOrcamento.Orcamento.Responsavel.Id)
                                     &&  (entradaOrcamento.Orcamento.Estado.Id == Guid.Empty || o.ID_ESTADO_ORCAMENTO == entradaOrcamento.Orcamento.Estado.Id)                                    
                                     select o                                                           
-                                    ).OrderBy(o => o.DATA_ORCAMENTO).Skip(entradaOrcamento.PosicaoUltimoItem).Take(entradaOrcamento.CantidadeItens).ToList();
+                                    ).OrderBy(o => o.DATA_ORCAMENTO).Skip(entradaOrcamento.PosicaoUltimoItem).Take(entradaOrcamento.CantidadeItens)
+                                     .Select(o => new
+                                     {
+                                         o,
+                                         e = o.T_ESTADO_ORCAMENTO,
+                                         c = o.T_CLIENTE,
+                                         v = o.T_USUARIO_VENDEDOR,
+                                         r = o.T_USUARIO_RESPOSANVEL,
+                                         i = o.T_ITEM
+                                     }).ToList();
+
+                    // Verifica se foi encontrado algum registro
+                    if (lstOrcamentos.Count > 0)
+                    {
+                        // Preenche o objeto de retorno
+                        retOrcamento.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
+                        retOrcamento.Orcamentos = new List<Contrato.Orcamento>();
+
+                        foreach (var item in lstOrcamentos)
+                        {
+                            retOrcamento.Orcamentos.Add(new Contrato.Orcamento()
+                            {
+                                Id = item.o.ID_ORCAMENTO,
+                                Codigo = item.o.COD_ORCAMENTO,
+                                Data = item.o.DATA_ORCAMENTO,
+                                ValorDesconto = item.o.NUM_DESCONTO,
+                                PrazoEntrega = item.o.NUM_PRAZO_ENTREGA,
+                                ValidadeOrcamento = item.o.NUM_VALIDADE_ORCAMENTO,
+                                Estado = Negocio.EstadoOrcamento.BuscarOrcamentoEstadoOrcamento(item.e),
+                                Cliente = Negocio.Cliente.BuscarCliente(item.c),
+                                Responsavel = Negocio.Usuario.BuscarUsuario(item.r),
+                                Vendedor = Negocio.Usuario.BuscarUsuario(item.v),
+                                Itens = Negocio.Item.ListarOrcamentoItem(item.i)
+                            });
+                        }
+                    }
                 }
                 else
                 {
-                    lstOrcamentos = (from o in context.T_ORCAMENTO
+                    var lstOrcamentos = (from o in context.T_ORCAMENTO
                                    where
                                         (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.StartsWith(entradaOrcamento.Orcamento.Codigo))                                   
                                    &&   (entradaOrcamento.Orcamento.Cliente.Id == Guid.Empty || o.ID_CLIENTE == entradaOrcamento.Orcamento.Cliente.Id)
-                                   select o
-                                    ).ToList();
-                }
-                                
-                // Verifica se foi encontrado algum registro
-                if (lstOrcamentos.Count > 0)
-                {
-                    // Preenche o objeto de retorno
-                    retOrcamento.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
-                    retOrcamento.Orcamentos = new List<Contrato.Orcamento>();
-                    foreach (Dados.ORCAMENTO orcamento in lstOrcamentos)
-                    {          
-                        retOrcamento.Orcamentos.Add( new Contrato.Orcamento()
+                                   select new { o, i = o.T_ITEM } ).ToList();
+
+                    // Verifica se foi encontrado algum registro
+                    if (lstOrcamentos.Count > 0)
+                    {
+                        // Preenche o objeto de retorno
+                        retOrcamento.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
+                        retOrcamento.Orcamentos = new List<Contrato.Orcamento>();
+
+                        foreach (var item in lstOrcamentos)
                         {
-                            Id = orcamento.ID_ORCAMENTO,                            
-                            Codigo = orcamento.COD_ORCAMENTO,
-                            Data = orcamento.DATA_ORCAMENTO,                            
-                            ValorDesconto = orcamento.NUM_DESCONTO,
-                            Estado = Negocio.EstadoOrcamento.BuscarOrcamentoEstadoOrcamento(orcamento.T_ESTADO_ORCAMENTO),
-                            Cliente = Negocio.Cliente.BuscarCliente(orcamento.T_CLIENTE),
-                            Responsavel = Negocio.Usuario.BuscarUsuario(orcamento.T_USUARIO_RESPOSANVEL),
-                            Vendedor = Negocio.Usuario.BuscarUsuario(orcamento.T_USUARIO_VENDEDOR),
-                            Itens = Negocio.Item.ListarOrcamentoItem(orcamento.T_ITEM)
-                        });
-                    };
-                }
-                else
+                            retOrcamento.Orcamentos.Add(new Contrato.Orcamento()
+                            {
+                                Id = item.o.ID_ORCAMENTO,
+                                Codigo = item.o.COD_ORCAMENTO,
+                                Data = item.o.DATA_ORCAMENTO,
+                                ValorDesconto = item.o.NUM_DESCONTO,
+                                PrazoEntrega = item.o.NUM_PRAZO_ENTREGA,
+                                ValidadeOrcamento = item.o.NUM_VALIDADE_ORCAMENTO,
+                                Estado = Negocio.EstadoOrcamento.BuscarOrcamentoEstadoOrcamento(item.o.T_ESTADO_ORCAMENTO),
+                                Cliente = Negocio.Cliente.BuscarCliente(item.o.T_CLIENTE),
+                                Responsavel = Negocio.Usuario.BuscarUsuario(item.o.T_USUARIO_RESPOSANVEL),
+                                Vendedor = Negocio.Usuario.BuscarUsuario(item.o.T_USUARIO_VENDEDOR),
+                                Itens = Negocio.Item.ListarOrcamentoItem(item.i)
+                            });
+                        }
+                    }
+                }                                
+                
+                if (retOrcamento.Orcamentos == null || retOrcamento.Orcamentos.Count == 0)
                 {
                     // Preenche o objeto de retorno
                     retOrcamento.Codigo = Contrato.Constantes.COD_RETORNO_VAZIO;
@@ -218,9 +263,10 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                     // Busca o orcamento no banco
                     List<Dados.ORCAMENTO> lstOrcamentos = (from p in context.T_ORCAMENTO
-                                                       where (p.COD_ORCAMENTO == entradaOrcamento.Orcamento.Codigo
-                                                          || (entradaOrcamento.Novo == null && entradaOrcamento.Orcamento.Id == p.ID_ORCAMENTO))
-                                                       select p).ToList();
+                                                           where (p.COD_ORCAMENTO == entradaOrcamento.Orcamento.Codigo
+                                                                 && (entradaOrcamento.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaOrcamento.EmpresaLogada.Id))
+                                                              || (entradaOrcamento.Novo == null && entradaOrcamento.Orcamento.Id == p.ID_ORCAMENTO)
+                                                           select p).ToList();
 
                     // Verifica se foi encontrado algum registro
                     if (lstOrcamentos.Count > 0 && entradaOrcamento.Novo != null && (bool)entradaOrcamento.Novo)
@@ -242,27 +288,28 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             lstOrcamentos.First().ID_USUARIO_VENDEDOR = entradaOrcamento.Orcamento.Vendedor.Id;
                             lstOrcamentos.First().ID_USUARIO_RESPONSAVEL = entradaOrcamento.Orcamento.Responsavel.Id;
                             lstOrcamentos.First().NUM_DESCONTO = entradaOrcamento.Orcamento.ValorDesconto;
+                            lstOrcamentos.First().NUM_PRAZO_ENTREGA = entradaOrcamento.Orcamento.PrazoEntrega;
+                            lstOrcamentos.First().NUM_VALIDADE_ORCAMENTO = entradaOrcamento.Orcamento.ValidadeOrcamento;
                             lstOrcamentos.First().DATA_ATUALIZACAO = DateTime.Now;
                             lstOrcamentos.First().LOGIN_USUARIO = entradaOrcamento.UsuarioLogado;
 
-                            // Apaga todos as taxas que estão relacionados
+                            // Apaga todos os itens que estão relacionados
                             while (lstOrcamentos.First().T_ITEM.Count > 0)
                             {
                                 context.T_ITEM.DeleteObject(lstOrcamentos.First().T_ITEM.First());
                             }
 
-                            // Verifica se existe alguma taxa  associado ao usuário
+                            // Verifica se existe algum item associado ao orçamento
                             if (entradaOrcamento.Orcamento.Itens != null)
                             {
-                                // Para cada perfil associado
+                                // Para cada item associado
                                 foreach (Contrato.Item item in entradaOrcamento.Orcamento.Itens)
                                 {
-                                    // Associa a taxa ao fornecedor
+                                    // Associa o item ao orçamento
                                     lstOrcamentos.First().T_ITEM.Add(new Dados.ITEM()
                                     {
                                         ID_ITEM = Guid.NewGuid(),
-                                        DES_ITEM = item.Descricao,
-                                        ID_PRODUTO = item.Produto.Id,
+                                        DES_ITEM = item.Descricao,                                       
                                         ID_ORCAMENTO = entradaOrcamento.Orcamento.Id,
                                         NUM_QUANTIDADE = item.Quantidade,
                                         NUM_VALOR_CUSTO = item.ValorCusto,
@@ -271,6 +318,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                         LOGIN_USUARIO = entradaOrcamento.UsuarioLogado,
                                         DATA_ATUALIZACAO = DateTime.Now
                                     });
+
+                                    if (item.Produto != null)
+                                        lstOrcamentos.First().T_ITEM.Last().ID_PRODUTO = item.Produto.Id;
                                 }
                             }
                         }
@@ -283,7 +333,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             else
                             {
                                 System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
-                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_ORCAMENTO, objCodigoOrcamento);
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_ORCAMENTO, entradaOrcamento.EmpresaLogada.Id, objCodigoOrcamento);
                                 codigoOrcamento = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_ORCAMENTO);
                             }
 
@@ -292,26 +342,28 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tOrcamento.ID_ORCAMENTO = Guid.NewGuid();
                             tOrcamento.COD_ORCAMENTO = codigoOrcamento;
                             tOrcamento.DATA_ORCAMENTO = entradaOrcamento.Orcamento.Data;
+                            tOrcamento.ID_EMPRESA = entradaOrcamento.EmpresaLogada.Id;
                             tOrcamento.ID_CLIENTE = entradaOrcamento.Orcamento.Cliente.Id;
                             tOrcamento.ID_ESTADO_ORCAMENTO = entradaOrcamento.Orcamento.Estado.Id;
                             tOrcamento.ID_USUARIO_VENDEDOR = entradaOrcamento.Orcamento.Vendedor.Id;
                             tOrcamento.ID_USUARIO_RESPONSAVEL = entradaOrcamento.Orcamento.Responsavel.Id;
                             tOrcamento.NUM_DESCONTO = entradaOrcamento.Orcamento.ValorDesconto;
+                            tOrcamento.NUM_PRAZO_ENTREGA = entradaOrcamento.Orcamento.PrazoEntrega;
+                            tOrcamento.NUM_VALIDADE_ORCAMENTO = entradaOrcamento.Orcamento.ValidadeOrcamento;
                             tOrcamento.DATA_ATUALIZACAO = DateTime.Now;
                             tOrcamento.LOGIN_USUARIO = entradaOrcamento.UsuarioLogado;                                                       
 
-                            // Verifica se existe alguma taxa  associado ao usuário
+                            // Verifica se existe algum item associado ao orçamento
                             if (entradaOrcamento.Orcamento.Itens != null)
                             {
-                                // Para cada perfil associado
+                                // Para cada item associado
                                 foreach (Contrato.Item item in entradaOrcamento.Orcamento.Itens)
                                 {
-                                    // Associa a taxa ao fornecedor
+                                    // Associa o item ao orçamento
                                     tOrcamento.T_ITEM.Add(new Dados.ITEM()
                                     {
                                         ID_ITEM = Guid.NewGuid(),
-                                        DES_ITEM = item.Descricao,
-                                        ID_PRODUTO = item.Produto.Id,
+                                        DES_ITEM = item.Descricao,                                        
                                         ID_ORCAMENTO = entradaOrcamento.Orcamento.Id,
                                         NUM_QUANTIDADE = item.Quantidade,
                                         NUM_VALOR_CUSTO = item.ValorCusto,
@@ -320,6 +372,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                         LOGIN_USUARIO = entradaOrcamento.UsuarioLogado,
                                         DATA_ATUALIZACAO = DateTime.Now
                                     });
+
+                                    if (item.Produto != null)
+                                        tOrcamento.T_ITEM.Last().ID_PRODUTO = item.Produto.Id;
                                 }
                             }
 

@@ -12,8 +12,8 @@
             <ColumnDefinition />
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <Label Name="lblDecimalUpDown" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Content="lblMaskTextBox" Margin="0,0,5,0"/>
-        <TextBox Name="txtDecimalTextBox" Height="25" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" HorizontalContentAlignment="Right" PreviewTextInput="textBox_PreviewTextInput" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" ></TextBox>   
+        <Label Name="lblDecimalUpDown" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Content="lblDecimalTextBox" Margin="0,0,5,0"/>
+        <TextBox Name="txtDecimalTextBox" Height="25" Width="140" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" HorizontalContentAlignment="Right" PreviewTextInput="textBox_PreviewTextInput" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" ></TextBox>
         <Label Name="lblDecimalUpDownErro" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2" Content="*" Foreground="Red" Visibility="Hidden"/>
     </Grid>
 </UserControl>

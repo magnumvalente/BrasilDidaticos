@@ -24,12 +24,19 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaParametro.EmpresaLogada.Id.ToString()))
+                {
+                    entradaParametro.EmpresaLogada.Id = Guid.Empty;
+                }
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
                 // Busca o parametro no banco
-                List<Dados.PARAMETRO> lstParametros = (from p in context.T_PARAMETRO select p).ToList();
+                List<Dados.PARAMETRO> lstParametros = (from p in context.T_PARAMETRO
+                                                       where (entradaParametro.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaParametro.EmpresaLogada.Id)
+                                                       select p).ToList();
 
                 // Verifica se foi encontrado algum registro
                 if (lstParametros.Count > 0)
@@ -92,7 +99,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     foreach (Contrato.Parametro param in entradaParametros.Parametros)
                     {
                         // Salva o parâmetro
-                        Contrato.RetornoParametro retParam = SalvarParametro(param, entradaParametros.UsuarioLogado);
+                        Contrato.RetornoParametro retParam = SalvarParametro(param, entradaParametros.UsuarioLogado, entradaParametros.EmpresaLogada.Id);
                         
                         // Verifica se o parâmetro foi salvo com sucesso
                         if (retParam.Codigo != Contrato.Constantes.COD_RETORNO_SUCESSO ) 
@@ -117,7 +124,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// <param name="Parametro">Objeto com os dados do parametro</param>
         /// <param name="usuarioLogado">Nome do usuário Logado</param>
         /// <returns>Contrato.RetornoParametro</returns>
-        internal static Contrato.RetornoParametro SalvarParametro(Contrato.Parametro Parametro, string usuarioLogado)
+        internal static Contrato.RetornoParametro SalvarParametro(Contrato.Parametro Parametro, string usuarioLogado, Guid idEmpresa)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoParametro retParametro = new Contrato.RetornoParametro();
@@ -138,7 +145,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Busca o parametro no banco
                 List<Dados.PARAMETRO> lstParametros = (from p in context.T_PARAMETRO
-                                                       where (p.COD_PARAMETRO == Parametro.Codigo)
+                                                       where 
+                                                            (p.COD_PARAMETRO == Parametro.Codigo)
+                                                         && (idEmpresa == Guid.Empty || p.ID_EMPRESA == idEmpresa)
                                                        select p).ToList();
 
                 // Se existe o parametro
@@ -200,6 +209,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     return Contrato.Enumeradores.TipoParametro.Inteiro;
                 case "Percentagem":
                     return Contrato.Enumeradores.TipoParametro.Percentagem;
+                case "Cor":
+                    return Contrato.Enumeradores.TipoParametro.Cor;
                 default:
                     return Contrato.Enumeradores.TipoParametro.Binario;
             }

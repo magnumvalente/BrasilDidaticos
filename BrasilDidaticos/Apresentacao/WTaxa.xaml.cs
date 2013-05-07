@@ -25,6 +25,12 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtNome.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
@@ -40,13 +46,14 @@ namespace BrasilDidaticos.Apresentacao
         private void ListarTaxas(bool mostrarMsgVazio)
         {
             Contrato.EntradaTaxa entTaxa = new Contrato.EntradaTaxa();
-            entTaxa.Chave = Comum.Util.Chave;
-            entTaxa.Taxa = new Contrato.Taxa();
+            entTaxa.Chave = Comum.Util.Chave;            
             entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entTaxa.Taxa = new Contrato.Taxa();
 
             PreencherFiltro(entTaxa.Taxa);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoTaxa retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
             servBrasilDidaticos.Close();
 
@@ -97,9 +104,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                ListarTaxas();
-                txtNome.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.ListarTaxas();                
             }
             catch (Exception ex)
             {

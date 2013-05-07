@@ -91,7 +91,7 @@ namespace BrasilDidaticos.Apresentacao
                 usuario.Chave = Comum.Util.Chave;
 
                 // Chama o serviço para logar na aplicação
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoUsuario retUsuario = servBrasilDidaticos.UsuarioLogar(usuario);
                 servBrasilDidaticos.Close();
 
@@ -100,23 +100,29 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     MessageBox.Show(string.Format("Sessão Bloqueada!\nPor favor, solicite ao responsável o desbloqueio de sua sessão!", txtLogin.Conteudo), "Login", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                    servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                     Contrato.RetornoSessao retSessao = servBrasilDidaticos.SessaoListar(new Contrato.Sessao() { Login = usuario.Usuario.Login });
                     servBrasilDidaticos.Close();
 
                     WSessao wSessao = new WSessao();
+                    wSessao.Usuario = retUsuario.Usuarios.FirstOrDefault();
                     wSessao.Sessao = retSessao.Sessoes.FirstOrDefault();
                     wSessao.ShowDialog();
                     sessaoDesbloqueda = wSessao.SessaoDesbloqueada;
                 }
 
-                // Verifica se o usuário logou com sucesso
-                if (retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO || sessaoDesbloqueda)
+                // Verifica se o usuário foi desbloqueado
+                if (sessaoDesbloqueda)
                 {
                     // Loga novamenente na aplicação
-                    servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                    servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                     retUsuario = servBrasilDidaticos.UsuarioLogar(usuario);
                     servBrasilDidaticos.Close();
+                }
+
+                // Verifica se o usuário logou com sucesso
+                if (retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+                {                    
                     // Guarda os dados do usuário Logado
                     Comum.Util.UsuarioLogado = retUsuario.Usuarios.First();
                     // Esconde a tela de login
@@ -126,13 +132,13 @@ namespace BrasilDidaticos.Apresentacao
                     //// Entra na tela principal
                     WPrincipal wPrincipal = new WPrincipal();
                     wPrincipal.ShowDialog();
-                    //Teste wteste = new Teste();
-                    //wteste.ShowDialog();
                 }
                 else if (retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 {
                     MessageBox.Show(string.Format("Não foi possível entrar na aplicação!\nPor favor, verifique o usuário ou a senha informada!", txtLogin.Conteudo), "Login", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                    MessageBox.Show(retUsuario.Mensagem, "Login", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -144,7 +150,7 @@ namespace BrasilDidaticos.Apresentacao
             // Chama o serviço para apagar a sessão do usuário da aplicação
             if (Comum.Util.UsuarioLogado != null)
             {
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoSessao retSessao = servBrasilDidaticos.SessaoExcluir(new Contrato.Sessao() { Login = Comum.Util.UsuarioLogado.Login, Chave = Comum.Util.Chave });
                 servBrasilDidaticos.Close();
             }

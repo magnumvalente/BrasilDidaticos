@@ -24,6 +24,17 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se o nome da taxa não foi informado
+                if (string.IsNullOrWhiteSpace(entradaTaxa.Taxa.Nome))
+                {
+                    entradaTaxa.Taxa.Nome = string.Empty;
+                }
+
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaTaxa.EmpresaLogada.Id.ToString()))
+                {
+                    entradaTaxa.EmpresaLogada.Id = Guid.Empty;
+                }
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
@@ -32,6 +43,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 List<Dados.TAXA> lstTaxas = (from t in context.T_TAXA
                                                 where 
                                                     (t.BOL_ATIVO == entradaTaxa.Taxa.Ativo)
+                                                 && (entradaTaxa.EmpresaLogada.Id == Guid.Empty || t.ID_EMPRESA == entradaTaxa.EmpresaLogada.Id)
+                                                 && (entradaTaxa.Taxa.Nome == string.Empty || t.NOME_TAXA.Contains(entradaTaxa.Taxa.Nome))
                                                  && (!entradaTaxa.Taxa.Fornecedor.HasValue || t.BOL_FORNECEDOR != null && t.BOL_FORNECEDOR == entradaTaxa.Taxa.Fornecedor.Value)
                                                  && (!entradaTaxa.Taxa.Produto.HasValue || t.BOL_PRODUTO != null && t.BOL_PRODUTO == entradaTaxa.Taxa.Produto.Value)
                                                 select t).ToList();
@@ -217,7 +230,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     // Busca o taxa no banco
                     List<Dados.TAXA> lstTaxas = (from t in context.T_TAXA
                                                     where (t.NOME_TAXA == entradaTaxa.Taxa.Nome
-                                                       || (entradaTaxa.Novo == null && entradaTaxa.Taxa.Id == t.ID_TAXA))
+                                                          && (entradaTaxa.EmpresaLogada.Id == Guid.Empty || t.ID_EMPRESA == entradaTaxa.EmpresaLogada.Id))
+                                                       || (entradaTaxa.Novo == null && entradaTaxa.Taxa.Id == t.ID_TAXA)
                                                     select t).ToList();
 
                      // Verifica se foi encontrado algum registro
@@ -246,7 +260,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             // Cria o taxa
                             Dados.TAXA tTaxa = new Dados.TAXA();
                             tTaxa.ID_TAXA = Guid.NewGuid();
-                            tTaxa.NOME_TAXA = entradaTaxa.Taxa.Nome;                            
+                            tTaxa.NOME_TAXA = entradaTaxa.Taxa.Nome;
+                            tTaxa.ID_EMPRESA = entradaTaxa.EmpresaLogada.Id;
                             tTaxa.BOL_DESCONTO = entradaTaxa.Taxa.Desconto;
                             tTaxa.BOL_FORNECEDOR = entradaTaxa.Taxa.Fornecedor;
                             tTaxa.BOL_PRODUTO = entradaTaxa.Taxa.Produto;
@@ -315,7 +330,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 }
                 else
                 {
-                    // Cria o taxa
+                    // Cria a taxa
                     Dados.PRODUTO_TAXA tProdutoTaxa = new Dados.PRODUTO_TAXA()
                                         {
                                             ID_PRODUTO_TAXA = Guid.NewGuid(),

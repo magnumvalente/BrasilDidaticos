@@ -18,21 +18,6 @@ namespace BrasilDidaticos.WcfServico.Negocio
         internal const int MAX_COD_CLIENTE = 6;
         internal const int MAX_COD_ORCAMENTO = 10;
 
-        internal static string Criptografar(string entrada)
-        {
-            string txtResultado = "";
-            byte[] txtMensagem = System.Text.Encoding.Default.GetBytes(entrada);// Criar o Hash Code
-            System.Security.Cryptography.MD5CryptoServiceProvider txtMD5provider = new MD5CryptoServiceProvider();
-            //Hash Code
-            byte[] txthashcode = txtMD5provider.ComputeHash(txtMensagem);
-            for (int i = 0; i < txthashcode.Length; i++)
-            {
-                txtResultado += (char)(txthashcode[i]);
-            }
-
-            return txtResultado;
-        }
-
         internal static string RecuperaCodigo(int codigo, string tipoCodigo)
         {
             switch (tipoCodigo)

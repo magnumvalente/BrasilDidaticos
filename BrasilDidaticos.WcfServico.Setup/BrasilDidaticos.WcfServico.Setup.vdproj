@@ -101,10 +101,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.0"
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -151,7 +151,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:BrasilDidaticos.Contrato, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:BrasilDidaticos.Contrato, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                 }
@@ -262,15 +262,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BrasilDidaticos.WcfServico"
-        "ProductCode" = "8:{528C2E3B-4329-4E43-8655-384964EB7671}"
-        "PackageCode" = "8:{1771296E-21DC-432D-A0E2-D6F4089CBF92}"
+        "ProductCode" = "8:{C1BD791E-5863-462C-9EC7-56977BA8ADA3}"
+        "PackageCode" = "8:{339E4FD6-6859-4EBD-83EA-65EA946B7A95}"
         "UpgradeCode" = "8:{EE899FC4-2044-4F06-B956-A7511AECB475}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.12"
+        "ProductVersion" = "8:1.0.21"
         "Manufacturer" = "8:GDM Soluções em Informática"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

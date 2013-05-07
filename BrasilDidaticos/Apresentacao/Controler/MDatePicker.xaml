@@ -15,7 +15,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Label Name="lblDatePicker" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="0" Content="lblDatePickerBox" Margin="0,0,5,0"/>
-        <DatePicker Name="dtpDatePicker" Height="25" VerticalAlignment="Center" Grid.Column="1" DataContext="{Binding}" Focusable="True" Text="Selecione uma data" IsHitTestVisible="False" DisplayDate="3/21/2013" />
+        <DatePicker Name="dtpDatePicker" Height="25" VerticalAlignment="Center" Grid.Column="1" Text="Selecione a data" />
         <Label Name="lblDatePickerErro" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="2" Content="*" Foreground="Red" Visibility="Hidden"/>
     </Grid>
 </UserControl>

@@ -36,6 +36,11 @@
                         <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wtaxa.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Name="UnidadMedida" Header="Unidade de Medida" Click="UnidadeMedida_Click">
+                    <MenuItem.Icon>
+                        <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wunidademedida.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Name="Relatorio" Header="Relatório">
                 <MenuItem Name="Varejo" Header="Varejo" Click="Varejo_Click" >
@@ -74,8 +79,48 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ToolBarPanel DockPanel.Dock="Top" Name="tbpBrasilDidaticos" Height="25" VerticalAlignment="Top" Width="Auto"></ToolBarPanel>
-        <GroupBox Name="Filtro" DockPanel.Dock="Top" Width="400">
+        <ToolBar DockPanel.Dock="Top" Name="tbpBrasilDidaticos" Height="50" VerticalAlignment="Center" Width="Auto" >
+            <Button Name="btnOrcamento" ToolTip="Orçamento" Height="50" Click="Orcamento_Click" >
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_worcamento.png" />  
+            </Button>
+            <Button Name="btnCliente" ToolTip="Cliente" Height="50" Click="Cliente_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wcliente.png" />
+            </Button>
+            <Button Name="btnFornecedor" ToolTip="Fornecedor" Height="50" Click="Fornecedor_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wfornecedor.png" />
+            </Button>
+            <Button Name="btnProduto" ToolTip="Produto" Height="50" Click="Produto_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wproduto.png" />
+            </Button>
+            <Button Name="btnTaxa" ToolTip="Taxa" Height="50" Click="Taxa_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wtaxa.png" />
+            </Button>
+            <Button Name="btnUnidadeMedida" ToolTip="Unidade de Medida" Height="50" Click="UnidadeMedida_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wunidademedida.png" />
+            </Button>
+            <Separator/>
+            <Button Name="btnRelatorioVarejo" ToolTip="Relatório Varejo" Height="50" Click="Varejo_Click" >
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wvarejo.png" />
+            </Button>
+            <Button Name="btnRelatorioAtacado" ToolTip="Relatório Atacado" Height="50" Click="Atacado_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_watacado.png" />
+            </Button>
+            <Separator/>
+            <Button Name="btnUsuario" ToolTip="Usuário" Height="50" Click="Usuario_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wusuario.png" />
+            </Button>
+            <Button Name="btnPerfil" ToolTip="Perfil" Height="50" Click="Perfil_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wperfil.png" />
+            </Button>
+            <Button Name="btnParametro" ToolTip="Parâmetros" Height="50" Click="Parametro_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wconfiguracao.png" />
+            </Button>
+        </ToolBar>
+        <StackPanel Name="stpCabecalho" DockPanel.Dock="Top" Height="50" Orientation="Horizontal" Visibility="Collapsed">
+            <Image Source="/BrasilDidaticos;component/Imagens/ico_wprincipal_homologacao.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock Text="HOMOLOGAÇÃO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
+        </StackPanel>
+        <GroupBox Name="Filtro" DockPanel.Dock="Top" Margin="25" Width="400">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <Image  Source="/BrasilDidaticos;component/Imagens/ico_filtro.png" Width="16" Height="16" />
@@ -89,9 +134,9 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="30" Grid.Row="0" />
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="20" Grid.Row="0" />
                 <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="300" Grid.Row="1" Background="#FFF0F0F0" />
-                <my:MTextBox x:Name="txtCodigoFornecedor" Titulo="Código do Fornecedor:" TamanhoTexto="6" Grid.Row="2" />
+                <my:MTextBox x:Name="txtCodigoFornecedor" Titulo="Código do Fornecedor:" TamanhoTexto="20" Grid.Row="2" />
                 <my:MComboBox x:Name="cmbFornecedor" Titulo="Fornecedor:" Grid.Row="3" Background="#FFF0F0F0"/>
             </Grid>
         </GroupBox>

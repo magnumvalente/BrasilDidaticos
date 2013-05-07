@@ -67,10 +67,32 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
+        public int? ValidadeOrcamento
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public int? PrazoEntrega
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public List<Item> Itens
         {
             get;
             set;
-        }                    
+        }
+
+        public bool Licitacao
+        {
+            get
+            {
+                return !(PrazoEntrega.HasValue && ValidadeOrcamento.HasValue);
+            }
+        }
     }
 }

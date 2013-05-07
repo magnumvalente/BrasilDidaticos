@@ -54,18 +54,35 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         retUsuario.Usuarios.Last().Login = objUsuario.LOGIN_USUARIO;
                         retUsuario.Usuarios.Last().Senha = objUsuario.SENHA_USUARIO;
                         retUsuario.Usuarios.Last().Ativo = objUsuario.BOL_ATIVO;
+                        retUsuario.Usuarios.Last().Empresa = Negocio.Empresa.BuscarUsuarioEmpresa(objUsuario.T_EMPRESA);
                         retUsuario.Usuarios.Last().Perfis = Negocio.Perfil.ListarUsuarioPerfil(objUsuario.T_USUARIO_PERFIL);
                     }
 
                     Contrato.RetornoSessao retSessao = Negocio.Sessao.SalvarSessao(new Contrato.Sessao() 
-                    { 
+                    {
                         Login = entradaUsuario.Usuario.Login,
                         Chave = entradaUsuario.Chave
                     });
 
-                    // Preenche o objeto de retorno
-                    retUsuario.Codigo = retSessao.Codigo;
-                    retUsuario.Mensagem = retSessao.Mensagem;
+                    if (retUsuario.Usuarios.First().Empresa == null) 
+                    {
+                        // Preenche o objeto de retorno
+                        retUsuario.Codigo = Contrato.Constantes.COD_EMPRESA_INEXISTENTE;
+                        retUsuario.Mensagem = string.Format("Não foi encontrado uma empresa para o usuário '{0}' informado.", retUsuario.Usuarios.First().Nome);
+                    }
+                    else if (!retUsuario.Usuarios.First().Empresa.Ativo)
+                    {
+                        // Preenche o objeto de retorno
+                        retUsuario.Codigo = Contrato.Constantes.COD_EMPRESA_DESATIVADA;
+                        retUsuario.Mensagem = string.Format("Infelizmente a empresa '{0}' não está ativa para o sistema.", retUsuario.Usuarios.First().Empresa.Nome);
+     
+                    }
+                    else
+                    {
+                        // Preenche o objeto de retorno
+                        retUsuario.Codigo = retSessao.Codigo;
+                        retUsuario.Mensagem = retSessao.Mensagem;
+                    }
                 }
                 else
                 {
@@ -123,6 +140,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaUsuario.EmpresaLogada.Id.ToString()))
+                {
+                    entradaUsuario.EmpresaLogada.Id = Guid.Empty;
+                }
+
                 // Verifica se o nome foi informado
                 if (string.IsNullOrWhiteSpace(entradaUsuario.Usuario.Nome))
                 {
@@ -142,8 +165,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 List<Dados.USUARIO> lstUsuarios = (from u in context.T_USUARIO                                                   
                                                    where
                                                         (entradaUsuario.Usuario.Ativo == null || u.BOL_ATIVO == entradaUsuario.Usuario.Ativo)
+                                                     && (entradaUsuario.EmpresaLogada.Id == Guid.Empty || u.ID_EMPRESA == entradaUsuario.EmpresaLogada.Id)
                                                      && (entradaUsuario.Usuario.Nome == string.Empty || u.NOME_USUARIO.StartsWith(entradaUsuario.Usuario.Nome))
-                                                     && (entradaUsuario.Usuario.Login == string.Empty || u.LOGIN_USUARIO.ToLower().Contains(entradaUsuario.Usuario.Login.ToLower()))
+                                                     && (entradaUsuario.Usuario.Login == string.Empty || u.LOGIN_USUARIO.Contains(entradaUsuario.Usuario.Login))
                                                    select u).ToList();
 
 
@@ -232,7 +256,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     // Busca o usuário no banco
                     List<Dados.USUARIO> lstUsuarios = (from u in context.T_USUARIO
                                                               where (u.LOGIN_USUARIO == entradaUsuario.Usuario.Login
-                                                              || (entradaUsuario.Novo == null && entradaUsuario.Usuario.Id == u.ID_USUARIO))
+                                                                 && (entradaUsuario.EmpresaLogada.Id == Guid.Empty || u.ID_EMPRESA == entradaUsuario.EmpresaLogada.Id)
+                                                                ||  (entradaUsuario.Novo == null && entradaUsuario.Usuario.Id == u.ID_USUARIO))
                                                               select u).ToList();
 
                     // Verifica se foi encontrado algum registro
@@ -287,6 +312,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tUsuario.NOME_USUARIO = entradaUsuario.Usuario.Nome;
                             tUsuario.LOGIN_USUARIO = entradaUsuario.Usuario.Login;
                             tUsuario.SENHA_USUARIO = entradaUsuario.Usuario.Senha;
+                            tUsuario.ID_EMPRESA = entradaUsuario.EmpresaLogada.Id;
                             tUsuario.BOL_ATIVO = (bool)entradaUsuario.Usuario.Ativo;                        
                             tUsuario.DATA_ATUALIZACAO = DateTime.Now;
                             tUsuario.USUARIO_LOGADO = entradaUsuario.UsuarioLogado;

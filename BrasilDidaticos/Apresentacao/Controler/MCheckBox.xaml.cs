@@ -19,6 +19,9 @@ namespace BrasilDidaticos.Apresentacao.Controler
     /// </summary>
     public partial class MCheckBox : UserControl
     {
+        public delegate void Click(object sender, RoutedEventArgs e);
+        public event Click ClickEvent;
+
         #region "[Propriedades]"
 
         public string Titulo
@@ -87,5 +90,27 @@ namespace BrasilDidaticos.Apresentacao.Controler
         }
 
         #endregion
+
+        #region "[Eventos]"
+
+        private void checkBox_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ClickEvent != null)
+                    ClickEvent(sender, e);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        #endregion
+
     }
 }

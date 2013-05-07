@@ -57,6 +57,12 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtNome.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
@@ -85,6 +91,7 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaUsuario entUsuario = new Contrato.EntradaUsuario();
                 entUsuario.Chave = Comum.Util.Chave;
                 entUsuario.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entUsuario.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 entUsuario.Usuario = new Contrato.Usuario();  
 
                 if (_usuario == null)
@@ -94,7 +101,7 @@ namespace BrasilDidaticos.Apresentacao
 
                 PreencherDadosUsuario(entUsuario.Usuario);
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoUsuario retUsuario = servBrasilDidaticos.UsuarioSalvar(entUsuario);
                 servBrasilDidaticos.Close();
 
@@ -213,12 +220,13 @@ namespace BrasilDidaticos.Apresentacao
         private void ListarPerfis()
         {
             Contrato.EntradaPerfil entPerfil = new Contrato.EntradaPerfil();
-            entPerfil.Chave = Comum.Util.Chave;
-            entPerfil.Perfil = new Contrato.Perfil();
-            entPerfil.Perfil.Ativo = true;
             entPerfil.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entPerfil.Chave = Comum.Util.Chave;
+            entPerfil.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entPerfil.Perfil = new Contrato.Perfil();
+            entPerfil.Perfil.Ativo = true;            
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoPerfil retPerfil = servBrasilDidaticos.PerfilListar(entPerfil);
             servBrasilDidaticos.Close();
 
@@ -254,10 +262,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherDadosTela();
-                ListarPerfis();
-                txtNome.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherDadosTela();
+                this.ListarPerfis();
             }
             catch (Exception ex)
             {

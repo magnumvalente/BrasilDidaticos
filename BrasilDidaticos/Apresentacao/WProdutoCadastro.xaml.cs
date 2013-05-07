@@ -60,6 +60,12 @@ namespace BrasilDidaticos.Apresentacao
         {
             InitializeComponent();
         }
+        
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
+        }
 
         private void ValidarPermissao()
         {
@@ -118,12 +124,13 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                 entradaProduto.Chave = Comum.Util.Chave;
                 entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 if (_produto == null) entradaProduto.Novo = true;
                 entradaProduto.Produto = new Contrato.Produto();
 
-                PreencherDados(entradaProduto.Produto);
+                PreencherProduto(entradaProduto.Produto);
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoSalvar(entradaProduto);
                 servBrasilDidaticos.Close();
 
@@ -142,16 +149,17 @@ namespace BrasilDidaticos.Apresentacao
             return salvou;
         }
 
-        private void PreencherDados(Contrato.Produto Produto)
+        private void PreencherProduto(Contrato.Produto Produto)
         {
             Produto.Codigo = txtCodigo.Conteudo;
             Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
             Produto.Nome = txtNome.Conteudo;
             Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
             Produto.Ncm = txtNcm.Conteudo;
-            Produto.ValorBase = txtValor.Valor != null?(decimal)txtValor.Valor:0;
+            Produto.ValorBase = (decimal)txtValor.Valor;
             Produto.Ativo = (bool)chkAtivo.Selecionado;
             PreencherDadosTaxas(Produto);
+            PreencherDadosUnidadeMedidas(Produto);
         }
 
         private void PreencherDadosTaxas(Contrato.Produto Produto)
@@ -175,6 +183,26 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void PreencherDadosUnidadeMedidas(Contrato.Produto Produto)
+        {
+            foreach (var item in dgUnidadeMedidas.Items)
+            {
+                if (item.GetType() == typeof(Objeto.UnidadeMedida) && ((Objeto.UnidadeMedida)item).Selecionado == true)
+                {
+                    if (Produto.UnidadeMedidas == null)
+                        Produto.UnidadeMedidas = new List<Contrato.UnidadeMedida>();
+
+                    Produto.UnidadeMedidas.Add(new Contrato.UnidadeMedida()
+                    {
+                        Id = ((Objeto.UnidadeMedida)item).Id,
+                        Nome = ((Objeto.UnidadeMedida)item).Nome,
+                        Quantidade = ((Objeto.UnidadeMedida)item).Quantidade,
+                        Ativo = ((Objeto.UnidadeMedida)item).Ativo
+                    });
+                }
+            }
+        }
+
         private void PreencherDadosTela()
         {
             PreencherFornecedores();
@@ -187,7 +215,7 @@ namespace BrasilDidaticos.Apresentacao
                 txtCodigoFornecedor.Conteudo = _produto.CodigoFornecedor;
                 txtNome.Conteudo = _produto.Nome;
                 txtNcm.Conteudo = _produto.Ncm;
-                txtValor.Valor = Produto.ValorBase;
+                txtValor.Conteudo = Produto.ValorBase.ToString();
                 chkAtivo.Selecionado = _produto.Ativo;
             }
             else
@@ -198,8 +226,8 @@ namespace BrasilDidaticos.Apresentacao
 
         private void GerarNovoCodigo()
         {
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            string retCodigoProduto = servBrasilDidaticos.ProdutoBuscarCodigo();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+            string retCodigoProduto = servBrasilDidaticos.ProdutoBuscarCodigo(Comum.Util.UsuarioLogado.Empresa.Id);
             servBrasilDidaticos.Close();
             txtCodigo.Conteudo = retCodigoProduto;
         }
@@ -209,10 +237,11 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor();
             if (_produto == null) entradaFornecedor.Fornecedor.Ativo = true;
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);            
             servBrasilDidaticos.Close();
             
@@ -240,10 +269,11 @@ namespace BrasilDidaticos.Apresentacao
 
             Contrato.EntradaTaxa entTaxa = new Contrato.EntradaTaxa();
             entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entTaxa.Chave = Comum.Util.Chave;
             entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Produto = true };
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoTaxa retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
             servBrasilDidaticos.Close();
             
@@ -256,10 +286,11 @@ namespace BrasilDidaticos.Apresentacao
             {
                 entTaxa = new Contrato.EntradaTaxa();
                 entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 entTaxa.Chave = Comum.Util.Chave;
                 entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Fornecedor = true, Produto = false };
 
-                servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
                 servBrasilDidaticos.Close();
 
@@ -324,6 +355,56 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void ListarUnidadeMedidas()
+        {
+            List<Contrato.UnidadeMedida> lstUnidadeMedidas = new List<Contrato.UnidadeMedida>();
+
+            Contrato.EntradaUnidadeMedida entUnidadeMedida = new Contrato.EntradaUnidadeMedida();
+            entUnidadeMedida.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entUnidadeMedida.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entUnidadeMedida.Chave = Comum.Util.Chave;
+            entUnidadeMedida.UnidadeMedida = new Contrato.UnidadeMedida() { Ativo = true };
+
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+            Contrato.RetornoUnidadeMedida retUnidadeMedida = servBrasilDidaticos.UnidadeMedidaListar(entUnidadeMedida);
+            servBrasilDidaticos.Close();
+
+            // Se encontrou unidades de medidas
+            if (retUnidadeMedida.UnidadeMedidas != null)
+                // Adiciona as unidades de medidas
+                lstUnidadeMedidas.AddRange(retUnidadeMedida.UnidadeMedidas);
+             
+            if (lstUnidadeMedidas != null)
+            {
+                List<Objeto.UnidadeMedida> objUnidadeMedidas = null;
+
+                if (_produto != null && _produto.UnidadeMedidas != null)
+                {
+                    objUnidadeMedidas = new List<Objeto.UnidadeMedida>();
+
+                    foreach (Contrato.UnidadeMedida unidadeMedida in lstUnidadeMedidas)
+                    {
+                        if (unidadeMedida != null)
+                        {
+                            objUnidadeMedidas.Add(new Objeto.UnidadeMedida { Selecionado = false, Id = unidadeMedida.Id, Nome = unidadeMedida.Nome, Ativo = unidadeMedida.Ativo });
+                            Contrato.UnidadeMedida objUnidadeMedida = (from ft in _produto.UnidadeMedidas where ft.Nome == unidadeMedida.Nome select ft).FirstOrDefault();
+
+                            if (objUnidadeMedida != null)
+                            {
+                                objUnidadeMedidas.Last().Selecionado = true;
+                                objUnidadeMedidas.Last().Quantidade = objUnidadeMedida.Quantidade;
+                            }
+                        }
+                    }
+                }
+                else
+                    objUnidadeMedidas = (from t in lstUnidadeMedidas
+                                select new Objeto.UnidadeMedida { Selecionado = false, Id = t.Id, Nome = t.Nome, Quantidade = t.Quantidade, Ativo = t.Ativo }).ToList();
+
+                dgUnidadeMedidas.ItemsSource = objUnidadeMedidas;
+            }
+        }
+
         #endregion
 
         #region "[Eventos]"
@@ -333,10 +414,11 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherDadosTela();
-                ListarTaxas();
-                txtNome.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherDadosTela();
+                this.ListarTaxas();
+                this.ListarUnidadeMedidas();
             }
             catch (Exception ex)
             {
@@ -404,7 +486,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             try
             {
-                ListarTaxas();
+                this.ListarTaxas();
             }
             catch (Exception ex)
             {
@@ -418,7 +500,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = Comum.Util.IsTextNumeric(e.Text);
+            e.Handled = Comum.Util.IsNumeric(e.Text);
         }
 
         private void NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -428,7 +510,7 @@ namespace BrasilDidaticos.Apresentacao
             if (sender != null && sender.GetType() == typeof(TextBox))
                 valorDecimal = ((TextBox)sender).Text + e.Text;
 
-            e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
+            e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
         }
 
         private void DataGridCell_NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -438,11 +520,11 @@ namespace BrasilDidaticos.Apresentacao
                 switch (((DataGridCell)sender).Column.Header.ToString())
                 {
                     case "Quantidade":
-                        e.Handled = Comum.Util.IsTextNumeric(e.Text);
+                        e.Handled = Comum.Util.IsNumeric(e.Text);
                         break;
                     case "Desconto":
                     case "Valor Real":
-                        e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
+                        e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
                         break;
                 }
             }

@@ -67,6 +67,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void ValidarPermissao()
         {
+            btnImportarOrcamento.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             txtCodigo.IsEnabled = false;
             dtpData.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
@@ -74,6 +75,8 @@ namespace BrasilDidaticos.Apresentacao
             cmbResponsavel.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             cmbVendedor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtDesconto.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR)|| Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtPrazoEntrega.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtValidadeOrcamento.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             dgItens.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_MODIFICAR);
         }
 
@@ -119,6 +122,28 @@ namespace BrasilDidaticos.Apresentacao
             }
             else
                 cmbVendedor.Erro = Visibility.Hidden;
+            
+            // Verifica se não é Licitação
+            if (!chkLicitacao.checkBox.IsChecked.Value)
+            {
+                // Verifica se a validade do orçamento foi informada
+                if (txtValidadeOrcamento.Conteudo == string.Empty)
+                {
+                    txtValidadeOrcamento.Erro = Visibility.Visible;
+                    strValidacao.Append("O campo 'Validade Orçamento' não foi informado!\n");
+                }
+                else
+                    txtValidadeOrcamento.Erro = Visibility.Hidden;
+
+                // Verifica se o prazo de entrega foi informado
+                if (txtPrazoEntrega.Conteudo == string.Empty)
+                {
+                    txtPrazoEntrega.Erro = Visibility.Visible;
+                    strValidacao.Append("O campo 'Prazo de Entrega' não foi informado!\n");
+                }
+                else
+                    txtPrazoEntrega.Erro = Visibility.Hidden;
+            }
 
             return strValidacao;
         }
@@ -140,12 +165,13 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaOrcamento entradaOrcamento = new Contrato.EntradaOrcamento();
                 entradaOrcamento.Chave = Comum.Util.Chave;
                 entradaOrcamento.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaOrcamento.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 if (_orcamento == null) entradaOrcamento.Novo = true;
                 entradaOrcamento.Orcamento = new Contrato.Orcamento();
 
-                PreencherDados(entradaOrcamento.Orcamento);
+                PreencherOrcamento(entradaOrcamento.Orcamento);
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoOrcamento retOrcamento = servBrasilDidaticos.OrcamentoSalvar(entradaOrcamento);
                 servBrasilDidaticos.Close();
 
@@ -166,25 +192,27 @@ namespace BrasilDidaticos.Apresentacao
 
         private void GerarNovoCodigo()
         {
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            string retCodigoOrcamento = servBrasilDidaticos.OrcamentoBuscarCodigo();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+            string retCodigoOrcamento = servBrasilDidaticos.OrcamentoBuscarCodigo(Comum.Util.UsuarioLogado.Empresa.Id);
             servBrasilDidaticos.Close();
             txtCodigo.Conteudo = retCodigoOrcamento;
         }
 
-        private void PreencherDados(Contrato.Orcamento Orcamento)
-        {
+        private void PreencherOrcamento(Contrato.Orcamento Orcamento)
+        {            
             Orcamento.Codigo = txtCodigo.Conteudo;
             Orcamento.Data = DateTime.Parse(dtpData.Conteudo);
             Orcamento.Cliente = new Contrato.Cliente() { Id = cmbCliente.Id, Codigo = cmbCliente.Codigo, Nome = cmbCliente.Nome };
             Orcamento.Responsavel = (Contrato.Usuario)cmbResponsavel.ValorSelecionado;
             Orcamento.Vendedor = (Contrato.Usuario)cmbVendedor.ValorSelecionado;
-            Orcamento.ValorDesconto = txtDesconto.Valor != null?(decimal)txtDesconto.Valor:0;
+            Orcamento.ValorDesconto = txtDesconto.Valor;
+            Orcamento.PrazoEntrega = (int?) txtPrazoEntrega.Valor;
+            Orcamento.ValidadeOrcamento = (int?) txtValidadeOrcamento.Valor;
             Orcamento.Estado = (Contrato.EstadoOrcamento)cmbEstadoOrcamento.ValorSelecionado;
-            PreencherDadosItens(Orcamento);
+            PreencherItens(Orcamento);
         }
 
-        private void PreencherDadosItens(Contrato.Orcamento Orcamento)
+        private void PreencherItens(Contrato.Orcamento Orcamento)
         {
             foreach (var item in dgItens.Items)
             {                
@@ -195,22 +223,26 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     Id = ((Contrato.Item)item).Id,
                     Descricao = ((Contrato.Item)item).Descricao,
-                    Produto = new Contrato.Produto() 
-                            {
-                                Id = ((Contrato.Item)item).Produto.Id,
-                                Nome = ((Contrato.Item)item).Produto.Nome,
-                                Codigo = ((Contrato.Item)item).Produto.Codigo,
-                                Fornecedor = ((Contrato.Item)item).Produto.Fornecedor,
-                                Ncm = ((Contrato.Item)item).Produto.Ncm,
-                                ValorBase = ((Contrato.Item)item).Produto.ValorBase,
-                                Taxas = ((Contrato.Item)item).Produto.Taxas,
-                                Ativo = ((Contrato.Item)item).Produto.Ativo
-                            },
                     Quantidade = ((Contrato.Item)item).Quantidade,
                     ValorCusto = ((Contrato.Item)item).ValorCusto,
                     ValorDesconto = ((Contrato.Item)item).ValorDesconto,
                     ValorUnitario = ((Contrato.Item)item).ValorUnitario
                 });
+
+                if (((Contrato.Item)item).Produto != null)
+                {
+                    Orcamento.Itens.Last().Produto = new Contrato.Produto()
+                    {
+                        Id = ((Contrato.Item)item).Produto.Id,
+                        Nome = ((Contrato.Item)item).Produto.Nome,
+                        Codigo = ((Contrato.Item)item).Produto.Codigo,
+                        Fornecedor = ((Contrato.Item)item).Produto.Fornecedor,
+                        Ncm = ((Contrato.Item)item).Produto.Ncm,
+                        ValorBase = ((Contrato.Item)item).Produto.ValorBase,
+                        Taxas = ((Contrato.Item)item).Produto.Taxas,
+                        Ativo = ((Contrato.Item)item).Produto.Ativo
+                    };
+                }
             }
         }
 
@@ -222,6 +254,7 @@ namespace BrasilDidaticos.Apresentacao
             PreencherResponsavel();
             PreencherVendedor();
             PreencherEstadosOrcamento();
+            ValidarLicitacao();
 
             if (_orcamento != null)
             {
@@ -230,7 +263,12 @@ namespace BrasilDidaticos.Apresentacao
                 txtCodigo.Conteudo = _orcamento.Codigo;
                 dtpData.Conteudo = _orcamento.Data.ToShortDateString();
                 if (_orcamento.ValorDesconto.HasValue)
-                    txtDesconto.Conteudo = _orcamento.ValorDesconto.Value.ToString("P2");
+                    txtDesconto.Conteudo = _orcamento.ValorDesconto.Value.ToString();
+                chkLicitacao.checkBox.IsChecked = _orcamento.Licitacao;
+                if (_orcamento.PrazoEntrega.HasValue)
+                    txtPrazoEntrega.Conteudo = _orcamento.PrazoEntrega.Value.ToString();
+                if (_orcamento.ValidadeOrcamento.HasValue)
+                    txtValidadeOrcamento.Conteudo = _orcamento.ValidadeOrcamento.Value.ToString();
                 cmbCliente.Id = _orcamento.Cliente.Id;
                 cmbCliente.Codigo = _orcamento.Cliente.Codigo;
                 cmbCliente.Nome = _orcamento.Cliente.Nome;
@@ -246,10 +284,11 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaEstadoOrcamento entradaEstadoOrcamento = new Contrato.EntradaEstadoOrcamento();
             entradaEstadoOrcamento.Chave = Comum.Util.Chave;
             entradaEstadoOrcamento.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaEstadoOrcamento.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaEstadoOrcamento.EstadoOrcamento = new Contrato.EstadoOrcamento();
             if (_orcamento == null) entradaEstadoOrcamento.EstadoOrcamento.Ativo = true;
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoEstadoOrcamento retFornecedor = servBrasilDidaticos.EstadoOrcamentoListar(entradaEstadoOrcamento);
             servBrasilDidaticos.Close();
 
@@ -291,6 +330,27 @@ namespace BrasilDidaticos.Apresentacao
             rlbTipoOrcamento.ListBox.Items.Add(new ListBoxItem() { Content = "Atacado", Tag = Contrato.Enumeradores.TipoOrcamento.Atacado });
         }
 
+        private void ValidarLicitacao()
+        {
+            txtValidadeOrcamento.Conteudo = Comum.Parametros.ValidadeOrcamento.ToString();
+            txtPrazoEntrega.Conteudo = Comum.Parametros.PrazoEntrega.ToString();
+
+            if (chkLicitacao.checkBox.IsChecked.Value)
+            {
+                txtPrazoEntrega.IsEnabled = false;
+                txtValidadeOrcamento.IsEnabled = false;
+                txtPrazoEntrega.Conteudo = string.Empty;
+                txtValidadeOrcamento.Conteudo = string.Empty;
+                txtPrazoEntrega.Erro = Visibility.Hidden;
+                txtValidadeOrcamento.Erro = Visibility.Hidden;
+            }
+            else
+            {                
+                txtPrazoEntrega.IsEnabled = true;
+                txtValidadeOrcamento.IsEnabled = true;
+            }            
+        }
+        
         private void BuscarClientePorCodigo()
         {
             if (!string.IsNullOrWhiteSpace(cmbCliente.Codigo))
@@ -303,7 +363,7 @@ namespace BrasilDidaticos.Apresentacao
                 entradaCliente.Cliente.Ativo = true;
                 entradaCliente.Cliente.Codigo = cmbCliente.Codigo;
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
                 servBrasilDidaticos.Close();
 
@@ -319,7 +379,8 @@ namespace BrasilDidaticos.Apresentacao
                 }
                 else
                 {
-                    cmbCliente.Limpar();
+                    if (_orcamento != null && _orcamento.Cliente == null)
+                        cmbCliente.Limpar();
                 }
             }
         }
@@ -332,11 +393,12 @@ namespace BrasilDidaticos.Apresentacao
                 entradaCliente.Chave = Comum.Util.Chave;
                 entradaCliente.PreencherListaSelecao = true;
                 entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaCliente.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 entradaCliente.Cliente = new Contrato.Cliente();
                 entradaCliente.Cliente.Ativo = true;
                 entradaCliente.Cliente.Nome = cmbCliente.Nome;
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoCliente retCliente = servBrasilDidaticos.ClienteListar(entradaCliente);
                 servBrasilDidaticos.Close();
 
@@ -352,7 +414,8 @@ namespace BrasilDidaticos.Apresentacao
                 }
                 else
                 {
-                    cmbCliente.Limpar();
+                    if (_orcamento != null && _orcamento.Cliente == null)
+                        cmbCliente.Limpar();
                 }
             }
         }
@@ -377,7 +440,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             else
             {
-                if (_orcamento.Cliente == null)
+                if (_orcamento != null && _orcamento.Cliente == null)
                     cmbCliente.Limpar();
             }
         }
@@ -388,6 +451,7 @@ namespace BrasilDidaticos.Apresentacao
             entradaUsuario.Chave = Comum.Util.Chave;
             entradaUsuario.PreencherListaSelecao = true;
             entradaUsuario.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaUsuario.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaUsuario.Usuario = new Contrato.Usuario() { Ativo = true };
 
             // Se o perfil para vendedor está definido
@@ -396,7 +460,7 @@ namespace BrasilDidaticos.Apresentacao
                 entradaUsuario.Usuario.Perfis = new List<Contrato.Perfil>();
                 entradaUsuario.Usuario.Perfis.Add(new Contrato.Perfil() { Codigo = Comum.Parametros.CodigoPerfilVendedor });
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoUsuario retUsuario = servBrasilDidaticos.UsuarioListar(entradaUsuario);
                 servBrasilDidaticos.Close();
 
@@ -426,6 +490,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaUsuario entradaUsuario = new Contrato.EntradaUsuario();
             entradaUsuario.Chave = Comum.Util.Chave;
             entradaUsuario.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaUsuario.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaUsuario.PreencherListaSelecao = true;
             entradaUsuario.Usuario = new Contrato.Usuario() { Ativo = true };
 
@@ -436,7 +501,7 @@ namespace BrasilDidaticos.Apresentacao
                 entradaUsuario.Usuario.Perfis.Add(new Contrato.Perfil() { Codigo = Comum.Parametros.CodigoPerfilOrcamentista });
             }
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoUsuario retUsuario = servBrasilDidaticos.UsuarioListar(entradaUsuario);
             servBrasilDidaticos.Close();
 
@@ -451,7 +516,7 @@ namespace BrasilDidaticos.Apresentacao
                         Uid = usuario.Id.ToString(),
                         Content = usuario.Nome,
                         Tag = usuario,
-                        IsSelected = (_orcamento != null && _orcamento.Responsavel != null ? usuario.Id == _orcamento.Responsavel.Id : false)
+                        IsSelected = (_orcamento != null && _orcamento.Responsavel != null) ? usuario.Id == _orcamento.Responsavel.Id : false
                     });
 
                     if (!incluiuLogado) incluiuLogado = usuario.Login == Comum.Util.UsuarioLogado.Login;
@@ -465,8 +530,9 @@ namespace BrasilDidaticos.Apresentacao
                     Uid = Comum.Util.UsuarioLogado.Id.ToString(),
                     Content = Comum.Util.UsuarioLogado.Nome,
                     Tag = Comum.Util.UsuarioLogado,
-                    IsSelected = _orcamento == null || (_orcamento != null && _orcamento.Responsavel != null ? Comum.Util.UsuarioLogado.Id == _orcamento.Responsavel.Id : false)
+                    IsSelected = true
                 });
+
             }
         }
         
@@ -480,7 +546,8 @@ namespace BrasilDidaticos.Apresentacao
                 foreach (Contrato.Item item in _orcamento.Itens)
                 {
                     lstItens.Add(item);
-                    lstItens.Last().Produto = new Objeto.Produto { Selecionado = true, Id = item.Produto.Id, Codigo = item.Produto.Codigo, Nome = item.Produto.Nome, Fornecedor = item.Produto.Fornecedor, ValorBase = item.Produto.ValorBase, Taxas = item.Produto.Taxas };
+                    if (item.Produto != null)
+                        lstItens.Last().Produto = new Objeto.Produto { Selecionado = true, Id = item.Produto.Id, Codigo = item.Produto.Codigo, Nome = item.Produto.Nome, Fornecedor = item.Produto.Fornecedor, ValorBase = item.Produto.ValorBase, Taxas = item.Produto.Taxas };
                 }
 
                 //  Adiciona os itens ao grid
@@ -499,18 +566,21 @@ namespace BrasilDidaticos.Apresentacao
             {                
                 foreach (Contrato.Item item in lstItens)
                 {
-                    if (item.Descricao != item.Produto.Nome) item.Descricao = item.Produto.Nome;
-                    item.ValorCusto = item.Produto.ValorCusto;
-                    
-                    switch ((Contrato.Enumeradores.TipoOrcamento)rlbTipoOrcamento.ListBox.SelectedValue)
+                    if (item.Produto != null && item.Produto.Id != Guid.Empty)
                     {
-                        case Contrato.Enumeradores.TipoOrcamento.Atacado:
-                            item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorAtacado == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorAtacado : item.ValorUnitario;
-                            break;
-                        case Contrato.Enumeradores.TipoOrcamento.Varejo:
-                            item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorVarejo == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorVarejo : item.ValorUnitario;
-                            break;
-                    }
+                        if (item.Descricao != item.Produto.Nome) item.Descricao = item.Produto.Nome;
+                        item.ValorCusto = item.Produto.ValorCusto;
+                        
+                        switch ((Contrato.Enumeradores.TipoOrcamento)rlbTipoOrcamento.ListBox.SelectedValue)
+                        {
+                            case Contrato.Enumeradores.TipoOrcamento.Atacado:
+                                item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorAtacado == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorAtacado : item.ValorUnitario;
+                                break;
+                            case Contrato.Enumeradores.TipoOrcamento.Varejo:
+                                item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorVarejo == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorVarejo : item.ValorUnitario;
+                                break;
+                        }
+                    }                    
                 }
                 // Atualiza o Grid de itens
                 dgItens.ItemsSource = lstItens;
@@ -519,7 +589,18 @@ namespace BrasilDidaticos.Apresentacao
 
         private void ConfigurarControles()
         {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
             dtpData.Focus();
+        }
+
+        private void ImportarItensOrcamento()
+        {
+            WImportarItens importarProduto = new WImportarItens();
+            importarProduto.Owner = this;
+            importarProduto.ShowDialog();
+
+            if (!importarProduto.Cancelou)
+                dgItens.ItemsSource = importarProduto.LerItensArquivo();
         }
 
         #endregion
@@ -531,10 +612,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherTela();
-                ListarItens();
-                ConfigurarControles();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherTela();
+                this.ListarItens();                
             }
             catch (Exception ex)
             {
@@ -637,6 +718,24 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void chkLicitacao_ClickEvent(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                this.ValidarLicitacao();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
         private void cmbCliente_BuscaClickEvent(object sender, RoutedEventArgs e)
         {
             try
@@ -688,9 +787,26 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void btnImportarItensOrcamento_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                this.ImportarItensOrcamento();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }    
+
         private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = Comum.Util.IsTextNumeric(e.Text);
+            e.Handled = Comum.Util.IsNumeric(e.Text);
         }
 
         private void NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -700,7 +816,7 @@ namespace BrasilDidaticos.Apresentacao
             if (sender != null && sender.GetType() == typeof(TextBox))
                 valorDecimal = ((TextBox)sender).Text + e.Text;
 
-            e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
+            e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
         }
 
         private void dgItens_CurrentCellChanged(object sender, EventArgs e)
@@ -715,11 +831,11 @@ namespace BrasilDidaticos.Apresentacao
                 switch (((DataGridCell)sender).Column.Header.ToString())
                 { 
                     case "Quantidade":
-                        e.Handled = Comum.Util.IsTextNumeric(e.Text);
+                        e.Handled = Comum.Util.IsNumeric(e.Text);
                         break;
                     case "Desconto":
                     case "Valor Real":
-                        e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
+                        e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
                         break;
                 }
             }
@@ -755,6 +871,6 @@ namespace BrasilDidaticos.Apresentacao
         }        
       
         #endregion
-        
+
     }
 }

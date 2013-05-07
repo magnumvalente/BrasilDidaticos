@@ -43,6 +43,11 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+        }
+
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
@@ -57,11 +62,12 @@ namespace BrasilDidaticos.Apresentacao
         private void ListarParametros(bool mostrarMsgVazio)
         {
             Contrato.EntradaParametro entParametro = new Contrato.EntradaParametro();
-            entParametro.Chave = Comum.Util.Chave;
-            entParametro.Parametro = new Contrato.Parametro();
             entParametro.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entParametro.Chave = Comum.Util.Chave;
+            entParametro.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entParametro.Parametro = new Contrato.Parametro();            
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoParametro retParametro = servBrasilDidaticos.ParametroListar(entParametro);
             servBrasilDidaticos.Close();
 
@@ -106,11 +112,12 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaParametros entradaParametros = new Contrato.EntradaParametros();            
             entradaParametros.Chave = Comum.Util.Chave;
             entradaParametros.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaParametros.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaParametros.Parametros = new List<Contrato.Parametro>();
 
             PreencherParametros(entradaParametros.Parametros);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoParametro retParametro = servBrasilDidaticos.ParametrosSalvar(entradaParametros);
             servBrasilDidaticos.Close();
 
@@ -133,7 +140,7 @@ namespace BrasilDidaticos.Apresentacao
 
                     switch (parametro.TipoParametro)
                     { 
-                        case Contrato.Enumeradores.TipoParametro.Texto:
+                        case Contrato.Enumeradores.TipoParametro.Texto:                        
                             parametro.Valor = ((Controler.MTextBox)item).Conteudo;
                             break;
                         case Contrato.Enumeradores.TipoParametro.Percentagem:
@@ -143,6 +150,9 @@ namespace BrasilDidaticos.Apresentacao
                         case Contrato.Enumeradores.TipoParametro.Inteiro:
                             int i = (int)((Controler.MDecimalTextBox)item).Valor;
                             parametro.Valor = i.ToString();
+                            break;
+                        case Contrato.Enumeradores.TipoParametro.Cor:
+                            parametro.Valor = ((Controler.MColorPicker)item).Conteudo;
                             break;
                     }
 
@@ -160,8 +170,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                ListarParametros();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.ListarParametros();
             }
             catch (Exception ex)
             {

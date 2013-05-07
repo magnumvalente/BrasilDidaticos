@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace BrasilDidaticos.Apresentacao
 {
@@ -31,6 +32,17 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();            
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.BrasilDidaticos.Header = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : BrasilDidaticos.Header;
+            this.txtCodigo.txtBox.Focus();
+            this.Background = Comum.Util.ConfigurarCorFundoTela(this.Background);
+
+            if (ConfigurationManager.AppSettings["BolAmbienteHomologacao"] != null && ConfigurationManager.AppSettings["BolAmbienteHomologacao"].ToLower() == "true")
+                stpCabecalho.Visibility = System.Windows.Visibility.Visible;
+        }
+
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
@@ -39,15 +51,25 @@ namespace BrasilDidaticos.Apresentacao
             Fornecedor.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             Produto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             Taxa.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-
+            btnOrcamento.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnCliente.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_CLIENTE, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnFornecedor.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnProduto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnTaxa.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            
             // Permissão módulos administrativos
             Usuario.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             Perfil.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PERFIL, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             Parametro.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PARAMETRO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnUsuario.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_USUARIO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnPerfil.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PERFIL, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnParametro.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PARAMETRO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             // Permissão Relatórios
             Atacado.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_ATACADO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             Varejo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_VAREJO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnRelatorioAtacado.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_ATACADO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnRelatorioVarejo.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.RELATORIO_VAREJO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             // Permissão Valor Custo DataGrid
             DataGridColumn dgColuna = null;
@@ -60,10 +82,11 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
             servBrasilDidaticos.Close();
 
@@ -79,7 +102,7 @@ namespace BrasilDidaticos.Apresentacao
         }        
 
         private void PreencherDadosTela()
-        {
+        {            
             PreencherDadosProdutos();
         }
 
@@ -96,6 +119,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaProduto.Produto = new Contrato.Produto() { Ativo = true };
             entradaProduto.Paginar = true;
             entradaProduto.PosicaoUltimoItem = 0;
@@ -103,7 +127,7 @@ namespace BrasilDidaticos.Apresentacao
 
             PreencherFiltro(entradaProduto.Produto);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);
             servBrasilDidaticos.Close();
 
@@ -137,7 +161,7 @@ namespace BrasilDidaticos.Apresentacao
             // Chama o serviço para apagar a sessão do usuário da aplicação
             if (Comum.Util.UsuarioLogado != null)
             {
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoSessao retSessao = servBrasilDidaticos.SessaoExcluir(new Contrato.Sessao() { Login = Comum.Util.UsuarioLogado.Login, Chave = Comum.Util.Chave });
                 servBrasilDidaticos.Close();
             }
@@ -161,8 +185,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherDadosTela();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherDadosTela();
             }
             catch (Exception ex)
             {
@@ -321,6 +346,24 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void UnidadeMedida_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WUnidadeMedida wTaxa = new WUnidadeMedida();
+                wTaxa.Owner = this;
+                wTaxa.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Unidade de Medida", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
         private void Usuario_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -365,7 +408,10 @@ namespace BrasilDidaticos.Apresentacao
                 wParametro.Owner = this;
                 wParametro.ShowDialog();
                 if (!wParametro.Cancelou)
+                {
+                    ConfigurarControles();
                     PreencherDadosProdutos();
+                }
             }
             catch (Exception ex)
             {
@@ -440,6 +486,7 @@ namespace BrasilDidaticos.Apresentacao
                         Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                         entradaProduto.Chave = Comum.Util.Chave;
                         entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                        entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                         entradaProduto.Produto = new Contrato.Produto() { Ativo = true };
                         entradaProduto.Paginar = true;
                         entradaProduto.PosicaoUltimoItem = int.Parse(e.ExtentHeight.ToString());
@@ -447,7 +494,7 @@ namespace BrasilDidaticos.Apresentacao
                     
                         PreencherFiltro(entradaProduto.Produto);
 
-                        Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                        Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                         Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);
                         servBrasilDidaticos.Close();
 
@@ -458,7 +505,7 @@ namespace BrasilDidaticos.Apresentacao
                             // Se existem produtos preenche o grid
                             if (retProduto.Produtos.Count > 0)
                             {
-                                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
+                                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
                                 foreach (Objeto.Produto p in lstProdutos)
                                     dgProdutos.Items.Add(p);
                             }
@@ -494,5 +541,6 @@ namespace BrasilDidaticos.Apresentacao
         }                   
 
         #endregion                                
+                
     }
 }

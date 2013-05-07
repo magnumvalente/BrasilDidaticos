@@ -31,6 +31,13 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
+        public string Descricao
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
         public bool Ativo
         {
             get;

@@ -70,6 +70,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaProduto.Produto = new Contrato.Produto();
             entradaProduto.Paginar = true;
             entradaProduto.PosicaoUltimoItem = 0;
@@ -77,7 +78,7 @@ namespace BrasilDidaticos.Apresentacao
 
             PreencherFiltro(entradaProduto.Produto);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);
             servBrasilDidaticos.Close();
 
@@ -91,7 +92,7 @@ namespace BrasilDidaticos.Apresentacao
                 
                 // Adiciona a lista os novos produtos que foram buscados
                 foreach (Contrato.Produto p in retProduto.Produtos)
-                    _lstProduto.Add(new Objeto.Produto {Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas});
+                    _lstProduto.Add(new Objeto.Produto {Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas});
             }
 
             // Define os novos produtos
@@ -106,9 +107,10 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
             servBrasilDidaticos.Close();
 
@@ -143,7 +145,7 @@ namespace BrasilDidaticos.Apresentacao
                         this.Itens = new ObservableCollection<Contrato.Item>();
                     
                     // Se o produto ainda não foi adicionado
-                    if ((from i in Itens where i.Produto.Codigo == ((Contrato.Produto)item).Codigo select i).Count() == 0)
+                    if ((from i in Itens where i.Produto != null && i.Produto.Codigo == ((Contrato.Produto)item).Codigo select i).Count() == 0)
                     {
                         Itens.Add(new Contrato.Item()
                         {
@@ -157,6 +159,12 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
+        }
+
         #endregion
 
         #region "[Eventos]"
@@ -166,10 +174,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherFornecedores();
-                ListarProdutos();
-                txtCodigo.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherFornecedores();
+                this.ListarProdutos();
             }
             catch (Exception ex)
             {
@@ -228,6 +236,7 @@ namespace BrasilDidaticos.Apresentacao
                         Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                         entradaProduto.Chave = Comum.Util.Chave;
                         entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                        entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                         entradaProduto.Produto = new Contrato.Produto() { Ativo = true };
                         entradaProduto.Paginar = true;
                         entradaProduto.PosicaoUltimoItem = int.Parse(e.ExtentHeight.ToString());
@@ -235,7 +244,7 @@ namespace BrasilDidaticos.Apresentacao
 
                         PreencherFiltro(entradaProduto.Produto);
 
-                        Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                        Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                         Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListar(entradaProduto);
                         servBrasilDidaticos.Close();
 
@@ -249,7 +258,7 @@ namespace BrasilDidaticos.Apresentacao
                             {                
                                 // Adiciona a lista os novos produtos que foram buscados
                                 foreach (Contrato.Produto p in retProduto.Produtos)
-                                    _lstProduto.Add(new Objeto.Produto {Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas});
+                                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas });
 
                                 dgProdutos.ItemsSource = _lstProduto;
                             }

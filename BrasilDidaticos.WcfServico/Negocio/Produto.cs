@@ -12,7 +12,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// Método para buscar o código do produto
         /// </summary>        
         /// <returns>string</returns>
-        internal static string BuscarCodigoProduto()
+        internal static string BuscarCodigoProduto(Guid IdEmpresa)
         {
             // Objeto que recebe o retorno do método
             string retCodigoProduto = string.Empty;
@@ -20,7 +20,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Loga no banco de dados
             Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
             System.Data.Objects.ObjectParameter objCodigoProduto = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
-            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_PRODUTO, objCodigoProduto);
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_PRODUTO, IdEmpresa, objCodigoProduto);
 
             // Recupera o código do produto
             retCodigoProduto = Util.RecuperaCodigo((int)objCodigoProduto.Value, Contrato.Constantes.TIPO_COD_PRODUTO);
@@ -68,9 +68,6 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// <returns>Contrato.RetornoProduto</returns>
         internal static Contrato.RetornoProduto ListarProduto(Contrato.EntradaProduto entradaProduto)
         {
-            // Inicio execução
-            DateTime dtInicio = DateTime.Now;
-
             // Objeto que recebe o retorno do método
             Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
             
@@ -80,6 +77,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaProduto.EmpresaLogada.Id.ToString()))
+                {
+                    entradaProduto.EmpresaLogada.Id = Guid.Empty;
+                }
+
                 // Verifica se o código não foi informado
                 if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Codigo))
                 {
@@ -105,20 +108,27 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 }
 
                 // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();                                                
-                  
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+
                 if (entradaProduto.Paginar)
                 {
                     // Busca o produto no banco
-                    List<Dados.PRODUTO> lstProdutos = (from p in context.T_PRODUTO
+                    var lstProdutos = (from p in context.T_PRODUTO
                                                        where
                                                        (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
+                                                       && (entradaProduto.EmpresaLogada.Id == Guid.Empty || p.T_FORNECEDOR.ID_EMPRESA == entradaProduto.EmpresaLogada.Id)
                                                        && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.Contains(entradaProduto.Produto.Codigo))
-                                                       && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.ToLower().Contains(entradaProduto.Produto.Nome.ToLower()))
+                                                       && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
                                                        && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
                                                        && (entradaProduto.Produto.Fornecedor.Id == Guid.Empty || p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id)
                                                        select p
-                                                      ).OrderBy(o => o.NOME_PRODUTO).ThenBy(o => o.COD_PRODUTO).ThenBy(o => o.T_FORNECEDOR.NOME_FORNECEDOR).Skip(entradaProduto.PosicaoUltimoItem).Take(entradaProduto.CantidadeItens).ToList();
+                                                      ).OrderBy(o => o.NOME_PRODUTO).ThenBy(o => o.COD_PRODUTO).ThenBy(o => o.T_FORNECEDOR.NOME_FORNECEDOR).Skip(entradaProduto.PosicaoUltimoItem).Take(entradaProduto.CantidadeItens)
+                                                      .Select(p => new
+                                                      {
+                                                          p,
+                                                          t = p.T_PRODUTO_TAXA,
+                                                          um = p.T_PRODUTO_UNIDADE_MEDIDA
+                                                      }).ToList();
 
                     // Verifica se foi encontrado algum registro
                     if (lstProdutos.Count > 0)
@@ -126,35 +136,41 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         // Preenche o objeto de retorno
                         retProduto.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
                         retProduto.Produtos = new List<Contrato.Produto>();
-                        foreach (Dados.PRODUTO produto in lstProdutos)
+                        foreach (var item in lstProdutos)
                         {
                             retProduto.Produtos.Add(new Contrato.Produto()
                             {
-                                Id = produto.ID_PRODUTO,
-                                Nome = produto.NOME_PRODUTO,
-                                Codigo = produto.COD_PRODUTO,
-                                CodigoFornecedor = produto.COD_PRODUTO_FORNECEDOR,
-                                ValorBase = produto.NUM_VALOR,
-                                Ncm = produto.NCM_PRODUTO,
-                                Ativo = produto.BOL_ATIVO,
-                                Fornecedor = Negocio.Fornecedor.BuscarFornecedor(produto.T_FORNECEDOR),
-                                Taxas = Negocio.Taxa.ListarProdutoTaxa(produto.T_PRODUTO_TAXA)
+                                Id = item.p.ID_PRODUTO,
+                                Nome = item.p.NOME_PRODUTO,
+                                Codigo = item.p.COD_PRODUTO,
+                                CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                                ValorBase = item.p.NUM_VALOR,
+                                Ncm = item.p.NCM_PRODUTO,
+                                Ativo = item.p.BOL_ATIVO,
+                                Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
+                                Taxas = Negocio.Taxa.ListarProdutoTaxa(item.t),
+                                UnidadeMedidas = Negocio.UnidadeMedida.ListarProdutoUnidadeMedida(item.um)
                             });
-                        };
-                    }                    
+                        }
+                    }
                 }
                 else
                 {
+                    // Busca o produto no banco
                     var lstProdutos = (from p in context.T_PRODUTO
-                                       join pt in context.T_PRODUTO_TAXA on p.ID_PRODUTO equals pt.ID_PRODUTO into produtotaxa
-                                       from t in produtotaxa.DefaultIfEmpty()
                                        where
                                         (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
-                                        && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.ToLower().Contains(entradaProduto.Produto.Codigo.ToLower()))
-                                        && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.ToLower().Contains(entradaProduto.Produto.CodigoFornecedor.ToLower()))
-                                        && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.ToLower().Contains(entradaProduto.Produto.Nome.ToLower()))
+                                        && (entradaProduto.EmpresaLogada.Id == Guid.Empty || p.T_FORNECEDOR.ID_EMPRESA == entradaProduto.EmpresaLogada.Id)
+                                        && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.Contains(entradaProduto.Produto.Codigo))
+                                        && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
+                                        && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
                                         && (entradaProduto.Produto.Fornecedor.Id == Guid.Empty || p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id)
-                                       select new { p, t }
+                                       select new
+                                       {
+                                           p,
+                                           t = p.T_PRODUTO_TAXA,
+                                           um = p.T_PRODUTO_UNIDADE_MEDIDA
+                                       }
                                         ).ToList();
 
                     // Verifica se foi encontrado algum registro
@@ -163,35 +179,25 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         // Preenche o objeto de retorno
                         retProduto.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
                         retProduto.Produtos = new List<Contrato.Produto>();
-
                         foreach (var item in lstProdutos)
                         {
-                            Contrato.Produto prod = retProduto.Produtos.Where(p => p.Id == item.p.ID_PRODUTO).FirstOrDefault();
-
-                            if (prod == null)
+                            retProduto.Produtos.Add(new Contrato.Produto()
                             {
-                                retProduto.Produtos.Add(new Contrato.Produto()
-                                {
-                                    Id = item.p.ID_PRODUTO,
-                                    Nome = item.p.NOME_PRODUTO,
-                                    Codigo = item.p.COD_PRODUTO,
-                                    CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
-                                    ValorBase = item.p.NUM_VALOR,
-                                    Ncm = item.p.NCM_PRODUTO,
-                                    Ativo = item.p.BOL_ATIVO,
-                                    Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
-                                    Taxas = new List<Contrato.Taxa>()
-                                });
-                                if (item.t != null)
-                                    retProduto.Produtos.Last().Taxas.Add(Negocio.Taxa.BuscarProdutoTaxa(item.t));
-                            }
-                            else
-                            {
-                                prod.Taxas.Add(Negocio.Taxa.BuscarProdutoTaxa(item.t));
-                            }
-                        };
+                                Id = item.p.ID_PRODUTO,
+                                Nome = item.p.NOME_PRODUTO,
+                                Codigo = item.p.COD_PRODUTO,
+                                CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                                ValorBase = item.p.NUM_VALOR,
+                                Ncm = item.p.NCM_PRODUTO,
+                                Ativo = item.p.BOL_ATIVO,
+                                Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
+                                Taxas = Negocio.Taxa.ListarProdutoTaxa(item.t),
+                                UnidadeMedidas = Negocio.UnidadeMedida.ListarProdutoUnidadeMedida(item.um)
+                            });
+                        }
                     }
                 }
+
                 // Se não econtrou nenhum produto
                 if (retProduto.Produtos == null || retProduto.Produtos.Count == 0)
                 {
@@ -208,163 +214,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
             }
 
             // define o tempo de duração
-            retProduto.Duracao = DateTime.Now.Ticks - dtInicio.Ticks;
+            retProduto.Duracao = DateTime.Now.Ticks - retProduto.Duracao;
             
             // retorna os dados
             return retProduto;
         }
-
-        internal static Contrato.RetornoProduto ListarProduto2(Contrato.EntradaProduto entradaProduto)
-        {
-            // Inicio execução
-            DateTime dtInicio = DateTime.Now;
-
-            // Objeto que recebe o retorno do método
-            Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
-
-            // Objeto que recebe o retorno da sessão
-            Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaProduto.UsuarioLogado, Chave = entradaProduto.Chave });
-
-            // Verifica se o usuário está autenticado
-            if (0 == Contrato.Constantes.COD_RETORNO_SUCESSO)
-            {
-                // Verifica se o código não foi informado
-                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Codigo))
-                {
-                    entradaProduto.Produto.Codigo = string.Empty;
-                }
-
-                // Verifica se o código não foi informado
-                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.CodigoFornecedor))
-                {
-                    entradaProduto.Produto.CodigoFornecedor = string.Empty;
-                }
-
-                // Verifica se o nome não foi informado
-                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Nome))
-                {
-                    entradaProduto.Produto.Nome = string.Empty;
-                }
-
-                // Verifica se o fornecedor não foi informado
-                if (entradaProduto.Produto.Fornecedor == null)
-                {
-                    entradaProduto.Produto.Fornecedor = new Contrato.Fornecedor();
-                }
-
-                // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();                                
-                
-                var lstProdutos = (from p in context.T_PRODUTO
-                                   where
-                                      (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
-                                   && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.ToLower().Contains(entradaProduto.Produto.Codigo.ToLower()))
-                                   && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.ToLower().Contains(entradaProduto.Produto.CodigoFornecedor.ToLower()))
-                                   && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.ToLower().Contains(entradaProduto.Produto.Nome.ToLower()))
-                                   && (entradaProduto.Produto.Fornecedor.Id == Guid.Empty || p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id)
-                                   select p
-                                   )
-                                   .OrderBy(o => o.NOME_PRODUTO).ThenBy(o => o.COD_PRODUTO).ThenBy(o => o.T_FORNECEDOR.NOME_FORNECEDOR).Skip(entradaProduto.PosicaoUltimoItem).Take(entradaProduto.CantidadeItens)
-                                   .Select( p => new 
-                                   {
-                                       Id = p.ID_PRODUTO,
-                                       Nome = p.NOME_PRODUTO,
-                                       Codigo = p.COD_PRODUTO,
-                                       CodigoFornecedor = p.COD_PRODUTO_FORNECEDOR,
-                                       ValorBase = p.NUM_VALOR,
-                                       Ncm = p.NCM_PRODUTO,
-                                       Ativo = p.BOL_ATIVO,
-                                       Fornecedor = new
-                                       {
-                                           Id = p.T_FORNECEDOR.ID_FORNECEDOR,
-                                           Nome = p.T_FORNECEDOR.NOME_FORNECEDOR,
-                                           Codigo = p.T_FORNECEDOR.COD_FORNECEDOR,
-                                           Cpf_Cnpj = p.T_FORNECEDOR.CPF_CNJP_FORNECEDOR,
-                                           ValorPercentagemAtacado = p.T_FORNECEDOR.NUM_VALOR_ATACADO,
-                                           ValorPercentagemVarejo = p.T_FORNECEDOR.NUM_VALOR_VAREJO,
-                                           Ativo = p.T_FORNECEDOR.BOL_ATIVO,
-                                           PessoaFisica = p.T_FORNECEDOR.BOL_PESSOA_FISICA,
-                                           Taxas = (from t in p.T_FORNECEDOR.T_FORNECEDOR_TAXA
-                                                    select new Contrato.Taxa
-                                                    {
-                                                        Id = t.T_TAXA.ID_TAXA,
-                                                        Nome = t.T_TAXA.NOME_TAXA,
-                                                        Valor = t.NUM_VALOR,
-                                                        Desconto = t.T_TAXA.BOL_DESCONTO,
-                                                        Prioridade = t.ORD_PRIORIDADE,
-                                                        Ativo = t.T_TAXA.BOL_ATIVO
-                                                    })
-                                       },
-                                       Taxas = (from t in p.T_PRODUTO_TAXA
-                                                select new Contrato.Taxa
-                                                {
-                                                    Id = t.T_TAXA.ID_TAXA,
-                                                    Nome = t.T_TAXA.NOME_TAXA,
-                                                    Valor = t.NUM_VALOR,
-                                                    Desconto = t.T_TAXA.BOL_DESCONTO,
-                                                    Prioridade = t.ORD_PRIORIDADE,
-                                                    Ativo = t.T_TAXA.BOL_ATIVO
-                                                })
-                                   }
-                                   ).ToList();
-
-                // Verifica se foi encontrado algum registro
-                if (lstProdutos.Count > 0)
-                {
-                    // Preenche o objeto de retorno
-                    retProduto.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
-                    retProduto.Produtos = new List<Contrato.Produto>();
-
-                    foreach (var item in lstProdutos)
-                    {                        
-                        retProduto.Produtos.Add(new Contrato.Produto()
-                        {
-                            Id = item.Id,
-                            Nome = item.Nome,
-                            Codigo = item.Codigo,
-                            CodigoFornecedor = item.CodigoFornecedor,
-                            ValorBase = item.ValorBase,
-                            Ncm = item.Ncm,
-                            Ativo = item.Ativo,
-                            Fornecedor = new Contrato.Fornecedor
-                            {
-                                Id = item.Fornecedor.Id,
-                                Nome = item.Fornecedor.Nome,
-                                Codigo = item.Fornecedor.Codigo,
-                                Cpf_Cnpj = item.Fornecedor.Cpf_Cnpj,
-                                ValorPercentagemAtacado = item.Fornecedor.ValorPercentagemAtacado,
-                                ValorPercentagemVarejo = item.Fornecedor.ValorPercentagemVarejo,
-                                Ativo = item.Fornecedor.Ativo,
-                                PessoaFisica = item.Fornecedor.PessoaFisica,
-                                Taxas = item.Fornecedor.Taxas.ToList()
-                            },
-                            Taxas = item.Taxas.ToList()
-                        });
-                    }
-                }
-            
-                // Se não econtrou nenhum produto
-                if (retProduto.Produtos == null || retProduto.Produtos.Count == 0)
-                {
-                    // Preenche o objeto de retorno
-                    retProduto.Codigo = Contrato.Constantes.COD_RETORNO_VAZIO;
-                    retProduto.Mensagem = "Não existe dados para o filtro informado.";
-                }
-            }
-            else
-            {
-                // retorna quando o usuário não está autenticado
-                retProduto.Codigo = retSessao.Codigo;
-                retProduto.Mensagem = retSessao.Mensagem;
-            }
-
-            // define o tempo de duração
-            retProduto.Duracao = DateTime.Now.Ticks - dtInicio.Ticks;
-
-            // retorna os dados
-            return retProduto;
-        }
-
+ 
         /// <summary>
         /// Método para listar os produtos para relatórios
         /// </summary>
@@ -381,6 +236,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaProduto.EmpresaLogada.Id.ToString()))
+                {
+                    entradaProduto.EmpresaLogada.Id = Guid.Empty;
+                }
+
                 // Verifica se o código não foi informado
                 if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Codigo))
                 {
@@ -411,15 +272,19 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Busca o produto no banco
                 var lstProdutos = (from p in context.T_PRODUTO
-                                   join pt in context.T_PRODUTO_TAXA on p.ID_PRODUTO equals pt.ID_PRODUTO into produtotaxa
-                                   from t in produtotaxa.DefaultIfEmpty()
                                    where
                                    (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
+                                   && (entradaProduto.EmpresaLogada.Id == Guid.Empty || p.T_FORNECEDOR.ID_EMPRESA == entradaProduto.EmpresaLogada.Id)
                                    && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.Contains(entradaProduto.Produto.Codigo))
-                                   && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.ToLower().Contains(entradaProduto.Produto.Nome.ToLower()))
-                                   && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.ToLower().Contains(entradaProduto.Produto.CodigoFornecedor.ToLower()))
+                                   && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
+                                   && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
                                    && (IdsFornecedores.Count == 0 || IdsFornecedores.Contains(p.ID_FORNECEDOR))
-                                   select new { p, t}
+                                   select new
+                                   {
+                                       p,
+                                       t = p.T_PRODUTO_TAXA,
+                                       um = p.T_PRODUTO_UNIDADE_MEDIDA
+                                   }
                                 ).ToList();
                 
                 // Verifica se foi encontrado algum registro
@@ -430,29 +295,20 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     retProduto.Produtos = new List<Contrato.Produto>();
                     foreach (var item in lstProdutos)
                     {
-                        Contrato.Produto prod = retProduto.Produtos.Where(p => p.Id == item.p.ID_PRODUTO).FirstOrDefault();
-
-                        if (prod == null)
+                        retProduto.Produtos.Add(new Contrato.Produto()
                         {
-                            retProduto.Produtos.Add(new Contrato.Produto()
-                            {
-                                Id = item.p.ID_PRODUTO,
-                                Nome = item.p.NOME_PRODUTO,
-                                Codigo = item.p.COD_PRODUTO,
-                                CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
-                                ValorBase = item.p.NUM_VALOR,
-                                Ncm = item.p.NCM_PRODUTO,
-                                Ativo = item.p.BOL_ATIVO,
-                                Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
-                                Taxas = new List<Contrato.Taxa>()
-                            });
-                            retProduto.Produtos.Last().Taxas.Add(Negocio.Taxa.BuscarProdutoTaxa(item.t));
-                        }
-                        else
-                        {
-                            prod.Taxas.Add(Negocio.Taxa.BuscarProdutoTaxa(item.t));
-                        }
-                    };
+                            Id = item.p.ID_PRODUTO,
+                            Nome = item.p.NOME_PRODUTO,
+                            Codigo = item.p.COD_PRODUTO,
+                            CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                            ValorBase = item.p.NUM_VALOR,
+                            Ncm = item.p.NCM_PRODUTO,
+                            Ativo = item.p.BOL_ATIVO,
+                            Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
+                            Taxas = Negocio.Taxa.ListarProdutoTaxa(item.t),
+                            UnidadeMedidas = Negocio.UnidadeMedida.ListarProdutoUnidadeMedida(item.um)
+                        });
+                    }
                 }
                 else
                 {
@@ -531,29 +387,23 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             lstProdutos.First().DATA_ATUALIZACAO = DateTime.Now;
                             lstProdutos.First().LOGIN_USUARIO = entradaProduto.UsuarioLogado;
 
-                            // Apaga todos as taxas que estão relacionados
-                            while (lstProdutos.First().T_PRODUTO_TAXA.Count > 0)
-                            {
-                                context.T_PRODUTO_TAXA.DeleteObject(lstProdutos.First().T_PRODUTO_TAXA.First());
-                            }
-
-                            // Verifica se existe alguma taxa  associado ao usuário
+                            // Verifica se existe alguma taxa associada ao produto
                             if (entradaProduto.Produto.Taxas != null)
                             {
-                                // Para cada perfil associado
+                                // Para cada taxa associada
                                 foreach (Contrato.Taxa taxa in entradaProduto.Produto.Taxas)
                                 {
-                                    // Associa a taxa ao fornecedor
-                                    lstProdutos.First().T_PRODUTO_TAXA.Add(new Dados.PRODUTO_TAXA()
-                                    {
-                                        ID_PRODUTO_TAXA = Guid.NewGuid(),
-                                        ID_PRODUTO = entradaProduto.Produto.Id,
-                                        ID_TAXA = taxa.Id,
-                                        NUM_VALOR = taxa.Valor,
-                                        ORD_PRIORIDADE = taxa.Prioridade,
-                                        LOGIN_USUARIO = entradaProduto.UsuarioLogado,
-                                        DATA_ATUALIZACAO = DateTime.Now
-                                    });
+                                    Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First().ID_PRODUTO, entradaProduto.UsuarioLogado, taxa);
+                                }
+                            }
+
+                            // Verifica se existe alguma unidade de medida associado ao produto
+                            if (entradaProduto.Produto.UnidadeMedidas != null)
+                            {
+                                // Para cada taxa associada
+                                foreach (Contrato.UnidadeMedida unidadeMedida in entradaProduto.Produto.UnidadeMedidas)
+                                {
+                                    Negocio.UnidadeMedida.SalvarUnidadeMedidaProduto(lstProdutos.First().ID_PRODUTO, entradaProduto.UsuarioLogado, unidadeMedida);
                                 }
                             }
                         }
@@ -566,16 +416,16 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             else
                             {
                                 System.Data.Objects.ObjectParameter objCodigoProduto = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
-                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_PRODUTO, objCodigoProduto);
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_PRODUTO, entradaProduto.EmpresaLogada.Id, objCodigoProduto);
                                 codigoProduto = Util.RecuperaCodigo((int)objCodigoProduto.Value, Contrato.Constantes.TIPO_COD_PRODUTO);
                             }
 
                             // Cria o produto
                             Dados.PRODUTO tProduto = new Dados.PRODUTO();
                             tProduto.ID_PRODUTO = Guid.NewGuid();
-                            tProduto.COD_PRODUTO = codigoProduto;
-                            tProduto.COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
+                            tProduto.COD_PRODUTO = codigoProduto;                            
                             tProduto.NOME_PRODUTO = entradaProduto.Produto.Nome;
+                            tProduto.COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
                             tProduto.ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
                             tProduto.NCM_PRODUTO = entradaProduto.Produto.Ncm;
                             tProduto.NUM_VALOR = entradaProduto.Produto.ValorBase;
@@ -583,7 +433,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tProduto.DATA_ATUALIZACAO = DateTime.Now;
                             tProduto.LOGIN_USUARIO = entradaProduto.UsuarioLogado;
 
-                            // Verifica se existe algum perfil associado ao usuário
+                            // Verifica se existe alguma taxa associada ao produto
                             if (entradaProduto.Produto.Taxas != null)
                             {
                                 // Para cada perfil associado
@@ -597,6 +447,25 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                         ID_TAXA = taxa.Id,
                                         NUM_VALOR = taxa.Valor,
                                         ORD_PRIORIDADE = taxa.Prioridade,
+                                        LOGIN_USUARIO = entradaProduto.UsuarioLogado,
+                                        DATA_ATUALIZACAO = DateTime.Now
+                                    });
+                                }
+                            }
+
+                            // Verifica se existe alguma unidade de medida associada ao produto
+                            if (entradaProduto.Produto.UnidadeMedidas != null)
+                            {
+                                // Para cada perfil associado
+                                foreach (Contrato.UnidadeMedida unidadeMedida in entradaProduto.Produto.UnidadeMedidas)
+                                {
+                                    // Associa a taxa ao produto
+                                    tProduto.T_PRODUTO_UNIDADE_MEDIDA.Add(new Dados.PRODUTO_UNIDADE_MEDIDA()
+                                    {
+                                        ID_PRODUTO_UNIDADE_MEDIDA = Guid.NewGuid(),
+                                        ID_PRODUTO = entradaProduto.Produto.Id,
+                                        ID_UNIDADE_MEDIDA = unidadeMedida.Id,
+                                        NUM_QUANTIDADE = unidadeMedida.Quantidade,
                                         LOGIN_USUARIO = entradaProduto.UsuarioLogado,
                                         DATA_ATUALIZACAO = DateTime.Now
                                     });
@@ -687,22 +556,23 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 lstProdutos.First().DATA_ATUALIZACAO = DateTime.Now;
                                 lstProdutos.First().LOGIN_USUARIO = entradaProdutos.UsuarioLogado;
 
-                                // Verifica se existe alguma taxa associada ao produto
+                                // Verifica se existe alguma unidade de medida associada ao produto
                                 if (entradaProdutos.Fornecedor.Taxas != null)
                                 {
-                                    // Para cada perfil associado
+                                    // Para cada taxa associada
                                     foreach (Contrato.Taxa taxa in entradaProdutos.Fornecedor.Taxas)
                                     {
-                                        Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First().ID_PRODUTO, entradaProdutos.UsuarioLogado, taxa);                                        
+                                        Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First().ID_PRODUTO, entradaProdutos.UsuarioLogado, taxa);
                                     }
                                 }
+                                
                             }
                             else
                             {
                                 // Cria o produto
                                 Dados.PRODUTO tProduto = new Dados.PRODUTO();
                                 tProduto.ID_PRODUTO = Guid.NewGuid();
-                                tProduto.COD_PRODUTO = BuscarCodigoProduto();
+                                tProduto.COD_PRODUTO = BuscarCodigoProduto(entradaProdutos.EmpresaLogada.Id);
                                 tProduto.NOME_PRODUTO = produto.Nome;
                                 tProduto.COD_PRODUTO_FORNECEDOR = produto.CodigoFornecedor;
                                 tProduto.ID_FORNECEDOR = produto.Fornecedor.Id;

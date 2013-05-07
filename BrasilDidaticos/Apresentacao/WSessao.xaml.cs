@@ -22,6 +22,8 @@ namespace BrasilDidaticos.Apresentacao
     {
         #region "Atributos"
 
+        // Usuário logado
+        private Contrato.Usuario _usuario = null;
         // Sessão do usuário
         private Contrato.Sessao _sessao = null;
         private bool _sessaoDesbloqueada = false;
@@ -30,6 +32,17 @@ namespace BrasilDidaticos.Apresentacao
 
         #region "[Propriedades]"
 
+        public Contrato.Usuario Usuario
+        {
+            get
+            {
+                return _usuario;
+            }
+            set
+            {
+                _usuario = value;
+            }
+        }
         public Contrato.Sessao Sessao
         {
             get
@@ -64,6 +77,11 @@ namespace BrasilDidaticos.Apresentacao
         {
             InitializeComponent();
             txtLogin.txtBox.Focus();
+        }
+
+        private void PreencherTela()
+        {
+            this.Title = _usuario != null ? _usuario.Empresa.Nome : this.Title;
         }
 
         /// <summary>
@@ -116,7 +134,7 @@ namespace BrasilDidaticos.Apresentacao
                 usuario.Chave = Comum.Util.Chave;
 
                 // Chama o serviço para logar na aplicação
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoUsuario retUsuario = servBrasilDidaticos.UsuarioLogar(usuario);
                 servBrasilDidaticos.Close();                
 
@@ -124,9 +142,11 @@ namespace BrasilDidaticos.Apresentacao
                 if (retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO || retUsuario.Codigo == Contrato.Constantes.COD_REGISTRO_DUPLICADO)
                 {
                     // Se o usuáio possui permissão para desbloqueio
-                    if (_sessao != null && Comum.Util.ValidarPermissao(retUsuario.Usuarios.First(), Comum.Constantes.TELA_SESSAO, Comum.Constantes.PERMISSAO_DESBLOQUEAR_USUARIO))
+                    if (_sessao != null && 
+                        Comum.Util.ValidarPermissao(retUsuario.Usuarios.First(), Comum.Constantes.TELA_SESSAO, Comum.Constantes.PERMISSAO_DESBLOQUEAR_USUARIO) && 
+                        retUsuario.Usuarios.First().Empresa.Id == _usuario.Empresa.Id)
                     {
-                        servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                        servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                         servBrasilDidaticos.SessaoExcluir(new Contrato.Sessao() { Login = _sessao.Login, Chave = _sessao.Chave });
                         servBrasilDidaticos.Close();
                         SessaoDesbloqueada = true;
@@ -135,7 +155,7 @@ namespace BrasilDidaticos.Apresentacao
                         if (retUsuario.Codigo != Contrato.Constantes.COD_REGISTRO_DUPLICADO)
                         {
                             // Chama o serviço para apagar a sessão do usuário que possui permissão para o desbloqueio
-                            servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                            servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                             servBrasilDidaticos.SessaoExcluir(new Contrato.Sessao() { Login = usuario.Usuario.Login, Chave = usuario.Chave });
                             servBrasilDidaticos.Close();
                         }
@@ -155,6 +175,11 @@ namespace BrasilDidaticos.Apresentacao
         #endregion
 
         #region "[Eventos]"
+
+        private void frmLogin_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.PreencherTela();
+        }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -191,5 +216,6 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         #endregion
+        
     }
 }

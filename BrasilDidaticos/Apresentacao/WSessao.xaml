@@ -5,7 +5,7 @@
         mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         d:DesignHeight="180" d:DesignWidth="300" SizeToContent="WidthAndHeight" 
-        Topmost="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" Icon="/BrasilDidaticos;component/brasildidaticos.ico" WindowStyle="SingleBorderWindow">
+        Topmost="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler" Icon="/BrasilDidaticos;component/brasildidaticos.ico" WindowStyle="SingleBorderWindow" Loaded="frmLogin_Loaded">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF6A6AF3" Offset="1" />

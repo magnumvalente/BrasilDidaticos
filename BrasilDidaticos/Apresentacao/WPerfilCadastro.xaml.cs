@@ -57,6 +57,12 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PERFIL, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PERFIL, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
@@ -84,12 +90,13 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaPerfil entPerfil = new Contrato.EntradaPerfil();
                 entPerfil.Chave = Comum.Util.Chave;
                 entPerfil.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entPerfil.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 if (_perfil == null) entPerfil.Novo = true;
                 entPerfil.Perfil = new Contrato.Perfil();                
 
                 PreencherDadosPerfil(entPerfil.Perfil);
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoPerfil retPerfil = servBrasilDidaticos.PerfilSalvar(entPerfil);
                 servBrasilDidaticos.Close();
 
@@ -181,7 +188,7 @@ namespace BrasilDidaticos.Apresentacao
             entPermissao.Permissao = new Contrato.Permissao();
             entPermissao.Permissao.Ativo = true;            
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoPermissao retPermissao = servBrasilDidaticos.PermissaoListar(entPermissao);
             servBrasilDidaticos.Close();
 
@@ -217,10 +224,10 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherDadosTela();
-                ListarPermissoes();
-                txtCodigo.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherDadosTela();
+                this.ListarPermissoes();
             }
             catch (Exception ex)
             {

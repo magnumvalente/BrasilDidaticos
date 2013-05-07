@@ -89,9 +89,17 @@
           <DataField>Id</DataField>
           <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
+        <Field Name="PrazoEntrega">
+          <DataField>PrazoEntrega</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="Responsavel">
           <DataField>Responsavel</DataField>
           <rd:TypeName>BrasilDidaticos.Contrato.Usuario</rd:TypeName>
+        </Field>
+        <Field Name="ValidadeOrcamento">
+          <DataField>ValidadeOrcamento</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="ValorDesconto">
           <DataField>ValorDesconto</DataField>
@@ -268,16 +276,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.98425in</Width>
+                  <Width>0.66109in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.16759in</Width>
+                  <Width>3.81231in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98425in</Width>
+                  <Width>1.03842in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98425in</Width>
+                  <Width>1.03842in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -293,7 +301,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Quant</Value>
+                                  <Value>Quant.</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -306,7 +314,6 @@
                           </Paragraphs>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -326,7 +333,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Produtos</Value>
+                                  <Value>Produtos Especificados</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -339,7 +346,6 @@
                           </Paragraphs>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -359,7 +365,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Valor Unit</Value>
+                                  <Value>Preço Único</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -372,7 +378,6 @@
                           </Paragraphs>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -392,7 +397,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Valor Total</Value>
+                                  <Value>Preço Total</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -405,7 +410,6 @@
                           </Paragraphs>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -435,14 +439,13 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Center</TextAlign>
+                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Quantidade</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -474,7 +477,6 @@
                           <rd:DefaultName>Descricao</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -496,7 +498,7 @@
                                 <TextRun>
                                   <Value>= Code.CalcularValorComDesconto(Fields!ValorUnitario.Value, Fields!PercentagemDesconto.Value, Fields!ValorDescontoOrcamento.Value)</Value>
                                   <Style>
-                                    <Format>'R$'#,0.00;('R$'#,0.00)</Format>
+                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -508,7 +510,6 @@
                           <rd:DefaultName>ValorUnitario</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -522,7 +523,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Total">
+                        <Textbox Name="ValorTotal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -531,7 +532,7 @@
                                 <TextRun>
                                   <Value>= Round(Code.CalcularValorComDesconto(Fields!ValorUnitario.Value, Fields!PercentagemDesconto.Value, Fields!ValorDescontoOrcamento.Value), 2) * Fields!Quantidade.Value</Value>
                                   <Style>
-                                    <Format>'R$'#,0.00;('R$'#,0.00)</Format>
+                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -540,10 +541,8 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Total</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -562,7 +561,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox29">
+                        <Textbox Name="Textbox3">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -578,10 +577,142 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox29</rd:DefaultName>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.23622in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -601,7 +732,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total</Value>
+                                  <Value>Total:</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -614,7 +745,6 @@
                           </Paragraphs>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -627,7 +757,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox31">
+                        <Textbox Name="Textbox2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -643,10 +773,9 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -659,7 +788,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox32">
+                        <Textbox Name="txtTotalGeralValor">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -668,7 +797,8 @@
                                 <TextRun>
                                   <Value>= Sum(Round(Code.CalcularValorComDesconto(Fields!ValorUnitario.Value, Fields!PercentagemDesconto.Value, Fields!ValorDescontoOrcamento.Value), 2) * Fields!Quantidade.Value)</Value>
                                   <Style>
-                                    <Format>'R$'#,0.00;('R$'#,0.00)</Format>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>'R$' #,0.00;('R$' #,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -677,10 +807,8 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox32</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -718,23 +846,25 @@
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
                 </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <FixedColumnHeaders>true</FixedColumnHeaders>
-            <KeepTogether>true</KeepTogether>
             <DataSetName>Itens</DataSetName>
             <Top>3.17032cm</Top>
-            <Left>0.75033cm</Left>
-            <Height>1.8cm</Height>
-            <Width>15.54566cm</Width>
+            <Left>0.2cm</Left>
+            <Height>2.4cm</Height>
+            <Width>16.63761cm</Width>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
-          <Rectangle Name="Rectangle2">
+          <Rectangle Name="txtPrazoOrcamento">
             <ReportItems>
               <Textbox Name="txtPrazoValidade">
                 <CanGrow>true</CanGrow>
@@ -743,7 +873,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Prazo de Validade: 60 Dias</Value>
+                        <Value>= "Validade do Orçamento: " &amp; Iif(IsNothing(First(Fields!ValidadeOrcamento.Value, "Orcamentos")), "Conforme o edital", First(Fields!ValidadeOrcamento.Value, "Orcamentos") &amp; " Dias")</Value>
                         <Style />
                       </TextRun>
                     </TextRuns>
@@ -751,7 +881,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <Height>0.6cm</Height>
-                <Width>5.31517cm</Width>
+                <Width>9.4cm</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -769,7 +899,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Prazo de Entrega: 30 Dias</Value>
+                        <Value>= "Prazo de Entrega das Mercadorias: " &amp; Iif(IsNothing(First(Fields!PrazoEntrega.Value, "Orcamentos")), "Conforme o edital", First(Fields!PrazoEntrega.Value, "Orcamentos") &amp; " Dias")</Value>
                         <Style />
                       </TextRun>
                     </TextRuns>
@@ -778,7 +908,7 @@
                 </Paragraphs>
                 <Top>0.6cm</Top>
                 <Height>0.6cm</Height>
-                <Width>5.31517cm</Width>
+                <Width>9.4cm</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
@@ -790,14 +920,17 @@
                   <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
-              <Textbox Name="txtCidade">
+              <Textbox Name="txtCidadeOrigem">
                 <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Belo Horizonte, </Value>
+                        <Value>= "Belo Horizonte, "
+&amp; Format(First(Fields!Data.Value, "Orcamentos"), "dd") &amp; " de "
+&amp; Format(First(Fields!Data.Value, "Orcamentos"), "MMMM") &amp; " de "
+&amp; Format(First(Fields!Data.Value, "Orcamentos"), "yyyy")</Value>
                         <Style>
                           <FontStyle>Normal</FontStyle>
                           <FontWeight>Normal</FontWeight>
@@ -809,44 +942,10 @@
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>1.2cm</Top>
+                <Top>1.835cm</Top>
                 <Height>0.6cm</Height>
-                <Width>2.7775cm</Width>
+                <Width>7.286cm</Width>
                 <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox24">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=First(Fields!Data.Value, "Orcamentos")</Value>
-                        <Style>
-                          <Format>d' de 'MMMM' de 'yyyy</Format>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox24</rd:DefaultName>
-                <Top>1.2cm</Top>
-                <Left>2.7775cm</Left>
-                <Height>0.6cm</Height>
-                <Width>4.5085cm</Width>
-                <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -859,10 +958,10 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>5.56949cm</Top>
-            <Left>5.2cm</Left>
-            <Height>1.8cm</Height>
-            <Width>7.286cm</Width>
+            <Top>6.16949cm</Top>
+            <Left>1.8cm</Left>
+            <Height>2.435cm</Height>
+            <Width>9.4cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -870,7 +969,7 @@
               </Border>
             </Style>
           </Rectangle>
-          <Textbox Name="Textbox42">
+          <Textbox Name="txtInscricaoEstadualValor">
             <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -886,7 +985,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
             <Top>1.93051cm</Top>
             <Left>8.7cm</Left>
             <Height>0.6cm</Height>
@@ -902,7 +1000,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox43">
+          <Textbox Name="txtVendedorValor">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
@@ -917,7 +1015,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
             <Top>1.93051cm</Top>
             <Left>13.2cm</Left>
             <Height>0.6cm</Height>
@@ -933,7 +1030,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="txtRazaoSocial10">
+          <Textbox Name="txtVendedor">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -964,13 +1061,13 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox40">
+          <Textbox Name="txtEstadoValor">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Codigo.Value, "UnidadesFederativa")</Value>
+                    <Value>= Code.RetornarTextoFormatado(First(Fields!Nome.Value, "UnidadesFederativa"))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -979,7 +1076,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
             <Top>1.33051cm</Top>
             <Left>14.2cm</Left>
             <Height>0.6cm</Height>
@@ -995,7 +1091,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="txtRazaoSocial7">
+          <Textbox Name="txtEstado">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1026,14 +1122,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox39">
+          <Textbox Name="txtCidadeValor">
             <CanShrink>true</CanShrink>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Cidade.Value, "Clientes")</Value>
+                    <Value>= Code.RetornarTextoFormatado(First(Fields!Cidade.Value, "Clientes"))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1042,7 +1138,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
             <Top>1.33051cm</Top>
             <Left>8.1cm</Left>
             <Height>0.6cm</Height>
@@ -1064,7 +1159,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= Left(First(Fields!Cep.Value, "Clientes"), 5) &amp; "-" &amp; Right(First(Fields!Cep.Value, "Clientes"), 3)</Value>
+                    <Value>= Iif(IsNothing(First(Fields!Cep.Value, "Clientes")), "", Format(int(First(Fields!Cep.Value, "Clientes")), "00\.000\-000"))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1186,7 +1281,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Endereco.Value, "Clientes")</Value>
+                    <Value>= Code.RetornarTextoFormatado(First(Fields!Endereco.Value, "Clientes"))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1241,7 +1336,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="txtRazaoSocial5">
+          <Textbox Name="txtBairro">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1272,7 +1367,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="txtRazaoSocial8">
+          <Textbox Name="txtCNPJ">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1303,13 +1398,13 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox41">
+          <Textbox Name="txtCNPJValor">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Cpf_Cnpj.Value, "Clientes")</Value>
+                    <Value>= iif(IsNothing(First(Fields!Cpf_Cnpj.Value, "Clientes")), "", Format(int(First(Fields!Cpf_Cnpj.Value, "Clientes")), "00\.000\.000\/0000\-00"))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1318,7 +1413,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
             <Top>1.93051cm</Top>
             <Left>1.8cm</Left>
             <Height>0.6cm</Height>
@@ -1334,13 +1428,13 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox38">
+          <Textbox Name="txtBairroValor">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= First(Fields!Bairro.Value, "Clientes")</Value>
+                    <Value>= Code.RetornarTextoFormatado(First(Fields!Bairro.Value, "Clientes"))</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1349,7 +1443,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox34</rd:DefaultName>
             <Top>1.33051cm</Top>
             <Left>1.6cm</Left>
             <Height>0.6cm</Height>
@@ -1365,7 +1458,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="txtRazaoSocial6">
+          <Textbox Name="txtCidade">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1396,7 +1489,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="txtRazaoSocial9">
+          <Textbox Name="txtInscricaoEstadual">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1490,8 +1583,8 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Height>7.5cm</Height>
-        <Width>16.8cm</Width>
+        <Height>8.60449cm</Height>
+        <Width>16.83761cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1499,7 +1592,7 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>3in</Height>
+    <Height>3.38759in</Height>
     <Style>
       <Border />
     </Style>
@@ -1522,15 +1615,32 @@ Public Function CalcularValorComDesconto(Valor as Decimal, Desconto1 as Decimal,
 	' Retorno o valor com o desconto
 	Return  (Valor - Valor * Desconto1) - (Valor - Valor * Desconto1) * Desconto2
 
+End Function
+
+'***********************************************
+' Escrever texto em maisculo e minusculo
+'***********************************************
+Public Function RetornarTextoFormatado(Texto as String) as String
+	
+	Dim strTexto() as String = Texto.split(" ")
+	Dim strRetorno as String = Iif(strTexto(0).Length &lt;= 2, LCase(strTexto(0)), UCase(Left(strTexto(0), 1)) &amp; Lcase(strTexto(0).SubString(1, strTexto(0).Length - 1)))
+
+	For indice as Integer = 1 To strTexto.Length - 1
+		strRetorno &amp;= " " &amp; Iif(strTexto(indice).Length &lt;= 2, LCase(strTexto(indice)), UCase(Left(strTexto(indice), 1)) &amp; Lcase(strTexto(indice).SubString(1, strTexto(indice).Length - 1)))
+	Next
+	
+	' Retorno o valor formatado
+	Return  strRetorno
+
 End Function</Code>
-  <Width>6.62in</Width>
+  <Width>6.62898in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>1.5cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <TopMargin>5cm</TopMargin>
+    <BottomMargin>2.5cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

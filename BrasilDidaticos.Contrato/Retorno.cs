@@ -9,6 +9,7 @@ namespace BrasilDidaticos.Contrato
     [DataContract]
     public class Retorno
     {
+        private long _Duracao = DateTime.Now.Ticks;
 
         [DataMember]
         public int Codigo
@@ -27,8 +28,14 @@ namespace BrasilDidaticos.Contrato
         [DataMember]
         public long Duracao
         {
-            get;
-            set;
+            get
+            {
+                return _Duracao;
+            }
+            set 
+            {
+                _Duracao = value;
+            }
         }
     }
 }

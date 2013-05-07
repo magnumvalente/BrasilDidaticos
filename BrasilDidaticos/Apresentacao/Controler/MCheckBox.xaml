@@ -12,7 +12,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Label Name="lblCheckBox" Height="25" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="0" Content="lblCheckBox" Margin="0,0,5,0"/>
-        <CheckBox Name="checkBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" DataContext="{Binding}" />
+        <CheckBox Name="checkBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" DataContext="{Binding}" Click="checkBox_Click" />
         <Label Name="lblCheckBoxErro" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="2" Content="*" Foreground="Red" Visibility="Hidden"/>
     </Grid>
 </UserControl>

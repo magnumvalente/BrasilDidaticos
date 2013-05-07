@@ -118,19 +118,21 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
                 entradaFornecedor.Chave = Comum.Util.Chave;
                 entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 if (_fornecedor == null) entradaFornecedor.Novo = true;
                 entradaFornecedor.Fornecedor = new Contrato.Fornecedor();
 
                 PreencherFornecedor(entradaFornecedor.Fornecedor);
 
-                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+                Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
                 Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorSalvar(entradaFornecedor);
 
                 if (retFornecedor.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO && _produtos != null)
                 {
                     Contrato.EntradaProdutos entradaProdutos = new Contrato.EntradaProdutos();
                     entradaProdutos.Chave = Comum.Util.Chave;
-                    entradaProdutos.UsuarioLogado = Comum.Util.UsuarioLogado.Login;                    
+                    entradaProdutos.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                    entradaProdutos.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                     entradaProdutos.Fornecedor = entradaFornecedor.Fornecedor;
                     Contrato.RetornoProduto retProduto = null;
 
@@ -167,8 +169,8 @@ namespace BrasilDidaticos.Apresentacao
 
         private void GerarNovoCodigo()
         {
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
-            string retCodigoFornecedor = servBrasilDidaticos.FornecedorBuscarCodigo();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+            string retCodigoFornecedor = servBrasilDidaticos.FornecedorBuscarCodigo(Comum.Util.UsuarioLogado.Empresa.Id);
             servBrasilDidaticos.Close();
             txtCodigo.Conteudo = retCodigoFornecedor;
         }
@@ -223,9 +225,9 @@ namespace BrasilDidaticos.Apresentacao
                 else if (_fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Juridica)
                     txtCPFCNP.Tipo = Comum.Enumeradores.TipoMascara.CNPJ;
                 if (_fornecedor.ValorPercentagemAtacado.HasValue)
-                    txtValorAtacado.Conteudo = _fornecedor.ValorPercentagemAtacado.Value.ToString("P2");
+                    txtValorAtacado.Conteudo = _fornecedor.ValorPercentagemAtacado.Value.ToString();
                 if (_fornecedor.ValorPercentagemVarejo.HasValue)
-                    txtValorVarejo.Conteudo = _fornecedor.ValorPercentagemVarejo.Value.ToString("P2");
+                    txtValorVarejo.Conteudo = _fornecedor.ValorPercentagemVarejo.Value.ToString();
                 chkAtivo.Selecionado = _fornecedor.Ativo;
             }
             else
@@ -252,9 +254,10 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaTaxa entTaxa = new Contrato.EntradaTaxa();
             entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
             entTaxa.Chave = Comum.Util.Chave;
+            entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Fornecedor = true };
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoTaxa retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
             servBrasilDidaticos.Close();
 
@@ -290,12 +293,13 @@ namespace BrasilDidaticos.Apresentacao
 
         private void ConfigurarControles()
         {
-            txtNome.txtBox.Focus();
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtNome.txtBox.Focus();
         }
         
         private void ImportarProduto()
         {            
-            WImportarProduto importarProduto = new WImportarProduto();
+            WImportarProdutos importarProduto = new WImportarProdutos();
             importarProduto.Owner = this;
             importarProduto.ShowDialog();
 
@@ -314,9 +318,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
+                ConfigurarControles();
                 ValidarPermissao();
                 PreencherDadosTela();
-                ConfigurarControles();
             }
             catch (Exception ex)
             {
@@ -450,7 +454,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = Comum.Util.IsTextNumeric(e.Text);
+            e.Handled = Comum.Util.IsNumeric(e.Text);
         }
 
         private void NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -460,7 +464,7 @@ namespace BrasilDidaticos.Apresentacao
             if (sender != null && sender.GetType() == typeof(TextBox))
                 valorDecimal = ((TextBox)sender).Text + e.Text;
 
-            e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
+            e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(valorDecimal);
         }
 
         private void DataGridCell_NumericFloatOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -470,11 +474,11 @@ namespace BrasilDidaticos.Apresentacao
                 switch (((DataGridCell)sender).Column.Header.ToString())
                 {
                     case "Quantidade":
-                        e.Handled = Comum.Util.IsTextNumeric(e.Text);
+                        e.Handled = Comum.Util.IsNumeric(e.Text);
                         break;
                     case "Desconto":
                     case "Valor Real":
-                        e.Handled = Comum.Util.IsTextNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
+                        e.Handled = Comum.Util.IsNumericFloat(e.Text) || !Comum.Util.IsDecimal(e.Text);
                         break;
                 }
             }

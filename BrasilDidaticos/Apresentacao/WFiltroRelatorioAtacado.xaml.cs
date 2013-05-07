@@ -25,6 +25,12 @@ namespace BrasilDidaticos.Apresentacao
             InitializeComponent();
         }
 
+        private void ConfigurarControles()
+        {
+            this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
+            this.txtCodigo.txtBox.Focus();
+        }
+
         private void ValidarPermissao()
         {
             // Permissão botões da tela         
@@ -35,6 +41,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaProduto.Produto = new Contrato.Produto();
 
             Contrato.EntradaParametro entradaParametro = new Contrato.EntradaParametro();
@@ -43,7 +50,7 @@ namespace BrasilDidaticos.Apresentacao
 
             PreencherFiltro(entradaProduto.Produto);
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoProduto retProduto = servBrasilDidaticos.ProdutoListarRelatorio(entradaProduto);
             servBrasilDidaticos.Close();
 
@@ -63,14 +70,15 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
             entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient();
+            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
             servBrasilDidaticos.Close();
 
-            if (retFornecedor.Fornecedores != null)
+            if (retFornecedor.Fornecedores != null && dgFornecedores.ItemsSource == null)
             {
                 // Cria uma nova lista para receber os fornecedores
                 List<Objeto.Fornecedor> lstFornecedor = new List<Objeto.Fornecedor>();
@@ -129,9 +137,9 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                ValidarPermissao();
-                PreencherFornecedores();
-                txtCodigo.txtBox.Focus();
+                this.ConfigurarControles();
+                this.ValidarPermissao();
+                this.PreencherFornecedores();                
             }
             catch (Exception ex)
             {

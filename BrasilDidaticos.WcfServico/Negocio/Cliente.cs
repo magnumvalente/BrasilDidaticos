@@ -12,7 +12,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// Método para buscar o código do cliente
         /// </summary>        
         /// <returns>string</returns>
-        internal static string BuscarCodigoCliente()
+        internal static string BuscarCodigoCliente(Guid IdEmpresa)
         {
             // Objeto que recebe o retorno do método
             string retCodigoCliente = string.Empty;
@@ -20,7 +20,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Loga no banco de dados
             Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
             System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
-            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_CLIENTE, objCodigoOrcamento);
+            context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_CLIENTE, IdEmpresa, objCodigoOrcamento);
 
             // Recupera o código do fornecedor
             retCodigoCliente = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_CLIENTE);
@@ -86,18 +86,25 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaCliente.EmpresaLogada.Id.ToString()))
+                {
+                    entradaCliente.EmpresaLogada.Id = Guid.Empty;
+                }
+
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
                                                 
                 // Busca o cliente no banco
                 List<Dados.CLIENTE> lstClientes = (from c in context.T_CLIENTE
-                                                          where
-                                                                (entradaCliente.Cliente.Codigo == null || entradaCliente.Cliente.Codigo == string.Empty || c.COD_CLIENTE.ToLower().Contains(entradaCliente.Cliente.Codigo.ToLower()))
-                                                             && (entradaCliente.Cliente.Nome == null || entradaCliente.Cliente.Nome == string.Empty || c.NOME_CLIENTE.ToLower().Contains(entradaCliente.Cliente.Nome.ToLower()))
-                                                             && (entradaCliente.Cliente.CaixaEscolar == null || entradaCliente.Cliente.CaixaEscolar == string.Empty || c.CAIXA_ESCOLAR.ToLower().Contains(entradaCliente.Cliente.CaixaEscolar.ToLower()))
-                                                             && (entradaCliente.Cliente.Tipo == null || c.BOL_PESSOA_FISICA == (entradaCliente.Cliente.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
-                                                             && (entradaCliente.Cliente.Cpf_Cnpj == null || entradaCliente.Cliente.Cpf_Cnpj == string.Empty || c.CPF_CNJP_CLIENTE != null && c.CPF_CNJP_CLIENTE.StartsWith(entradaCliente.Cliente.Cpf_Cnpj))
-                                                          select c).ToList();
+                                                    where
+                                                        (entradaCliente.EmpresaLogada.Id == Guid.Empty || c.ID_EMPRESA == entradaCliente.EmpresaLogada.Id)
+                                                        && (entradaCliente.Cliente.Codigo == null || entradaCliente.Cliente.Codigo == string.Empty || c.COD_CLIENTE.Contains(entradaCliente.Cliente.Codigo))
+                                                        && (entradaCliente.Cliente.Nome == null || entradaCliente.Cliente.Nome == string.Empty || c.NOME_CLIENTE.Contains(entradaCliente.Cliente.Nome))
+                                                        && (entradaCliente.Cliente.CaixaEscolar == null || entradaCliente.Cliente.CaixaEscolar == string.Empty || c.CAIXA_ESCOLAR.Contains(entradaCliente.Cliente.CaixaEscolar))
+                                                        && (entradaCliente.Cliente.Tipo == null || c.BOL_PESSOA_FISICA == (entradaCliente.Cliente.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false))
+                                                        && (entradaCliente.Cliente.Cpf_Cnpj == null || entradaCliente.Cliente.Cpf_Cnpj == string.Empty || c.CPF_CNJP_CLIENTE != null && c.CPF_CNJP_CLIENTE.StartsWith(entradaCliente.Cliente.Cpf_Cnpj))
+                                                    select c).ToList();
                                
                 // Verifica se foi encontrado algum registro
                 if (lstClientes.Count > 0)
@@ -185,11 +192,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
                     // Busca o cliente no banco
-                    List<Dados.CLIENTE> lstClientes = (from f in context.T_CLIENTE
-                                                              where (f.COD_CLIENTE == entradaCliente.Cliente.Codigo &&
-                                                                    (entradaCliente.Cliente.Cpf_Cnpj != null || f.CPF_CNJP_CLIENTE == entradaCliente.Cliente.Cpf_Cnpj))
-                                                                 || (entradaCliente.Novo == null && entradaCliente.Cliente.Id == f.ID_CLIENTE)                                                              
-                                                              select f).ToList();
+                    List<Dados.CLIENTE> lstClientes = (from c in context.T_CLIENTE
+                                                              where (c.COD_CLIENTE == entradaCliente.Cliente.Codigo 
+                                                                     && (entradaCliente.Cliente.Cpf_Cnpj != null || c.CPF_CNJP_CLIENTE == entradaCliente.Cliente.Cpf_Cnpj)
+                                                                     && (entradaCliente.EmpresaLogada.Id == Guid.Empty || c.ID_EMPRESA == entradaCliente.EmpresaLogada.Id))                                                                 
+                                                                 || (entradaCliente.Novo == null && entradaCliente.Cliente.Id == c.ID_CLIENTE)                                                              
+                                                              select c).ToList();
 
                     // Verifica se foi encontrado algum registro
                     if (lstClientes.Count > 0 && entradaCliente.Novo != null && (bool)entradaCliente.Novo)
@@ -234,7 +242,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             else
                             {
                                 System.Data.Objects.ObjectParameter objCodigoOrcamento = new System.Data.Objects.ObjectParameter("P_CODIGO", typeof(global::System.Int32));
-                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_CLIENTE, objCodigoOrcamento);
+                                context.RETORNAR_CODIGO(Contrato.Constantes.TIPO_COD_CLIENTE, entradaCliente.EmpresaLogada.Id, objCodigoOrcamento);
                                 codigoCliente = Util.RecuperaCodigo((int)objCodigoOrcamento.Value, Contrato.Constantes.TIPO_COD_CLIENTE);
                             }
 
@@ -243,6 +251,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tCliente.ID_CLIENTE = Guid.NewGuid();
                             tCliente.COD_CLIENTE = codigoCliente;
                             tCliente.NOME_CLIENTE = entradaCliente.Cliente.Nome;
+                            tCliente.ID_EMPRESA = entradaCliente.EmpresaLogada.Id;
                             tCliente.BOL_ATIVO = entradaCliente.Cliente.Ativo;
                             tCliente.CAIXA_ESCOLAR = entradaCliente.Cliente.CaixaEscolar;
                             tCliente.BOL_PESSOA_FISICA = entradaCliente.Cliente.Tipo == Contrato.Enumeradores.Pessoa.Fisica ? true : false;
