@@ -141,6 +141,7 @@ namespace BrasilDidaticos.Apresentacao
         private void PreencherDadosPerfil(Contrato.Perfil Perfil)
         {
             // Preenche os dados do usuário
+            Perfil.Id = _perfil == null ? Guid.Empty : _perfil.Id;
             Perfil.Codigo = txtCodigo.Conteudo;
             Perfil.Nome = txtNome.Conteudo;
             Perfil.Ativo = (bool)chkAtivo.Selecionado;

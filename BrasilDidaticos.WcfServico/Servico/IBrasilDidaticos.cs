@@ -102,6 +102,21 @@ namespace BrasilDidaticos.WcfServico.Servico
         Contrato.RetornoUnidadeMedida UnidadeMedidaSalvar(Contrato.EntradaUnidadeMedida UnidadeMedida);
 
         [OperationContract]
+        string PedidoBuscarCodigo(Guid IdEmpresa);
+
+        [OperationContract]
+        Contrato.RetornoPedido PedidoListar(Contrato.EntradaPedido Pedido);
+
+        [OperationContract]
+        Contrato.RetornoPedido PedidoSalvar(Contrato.EntradaPedido Pedido);
+
+        [OperationContract]
+        Contrato.RetornoEstadoPedido EstadoPedidoListar(Contrato.EntradaEstadoPedido EstadoPedido);
+
+        [OperationContract]
+        Contrato.RetornoEmpresa EmpresaListar(Contrato.EntradaEmpresa Empresa);
+
+        [OperationContract]
         Contrato.RetornoUnidadeFederativa UnidadeFederativaListar();
     }
 }

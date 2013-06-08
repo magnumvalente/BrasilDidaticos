@@ -64,7 +64,7 @@ namespace BrasilDidaticos.Apresentacao
         private void ConfigurarControles()
         {
             this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
-            this.txtCodigo.txtBox.Focus();
+            this.txtNome.txtBox.Focus();
         }
 
         private void ValidarPermissao()
@@ -72,11 +72,13 @@ namespace BrasilDidaticos.Apresentacao
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             txtCodigo.IsEnabled = false;
             txtNome.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtCodigoFornecedor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             cmbFornecedor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtNcm.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtValor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             chkAtivo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             dgTaxas.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            dgUnidadeMedidas.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
         }
 
         /// <summary>
@@ -124,7 +126,7 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                 entradaProduto.Chave = Comum.Util.Chave;
                 entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-                entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+                entradaProduto.EmpresaLogada = Comum.Parametros.EmpresaProduto;
                 if (_produto == null) entradaProduto.Novo = true;
                 entradaProduto.Produto = new Contrato.Produto();
 
@@ -151,6 +153,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void PreencherProduto(Contrato.Produto Produto)
         {
+            Produto.Id = _produto == null ? Guid.Empty : _produto.Id;
             Produto.Codigo = txtCodigo.Conteudo;
             Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
             Produto.Nome = txtNome.Conteudo;
@@ -197,6 +200,7 @@ namespace BrasilDidaticos.Apresentacao
                         Id = ((Objeto.UnidadeMedida)item).Id,
                         Nome = ((Objeto.UnidadeMedida)item).Nome,
                         Quantidade = ((Objeto.UnidadeMedida)item).Quantidade,
+                        QuantidadeItens = ((Objeto.UnidadeMedida)item).QuantidadeItens,
                         Ativo = ((Objeto.UnidadeMedida)item).Ativo
                     });
                 }
@@ -237,7 +241,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor();
             if (_produto == null) entradaFornecedor.Fornecedor.Ativo = true;
 
@@ -269,7 +273,7 @@ namespace BrasilDidaticos.Apresentacao
 
             Contrato.EntradaTaxa entTaxa = new Contrato.EntradaTaxa();
             entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entTaxa.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entTaxa.Chave = Comum.Util.Chave;
             entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Produto = true };
 
@@ -282,24 +286,7 @@ namespace BrasilDidaticos.Apresentacao
                 // Adiciona as taxas do Produto
                 lstTaxas.AddRange(retTaxa.Taxas);
 
-            if (cmbFornecedor.ValorSelecionado == null)
-            {
-                entTaxa = new Contrato.EntradaTaxa();
-                entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-                entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
-                entTaxa.Chave = Comum.Util.Chave;
-                entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Fornecedor = true, Produto = false };
-
-                servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
-                retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
-                servBrasilDidaticos.Close();
-
-                // Se encontrou taxas
-                if (retTaxa.Taxas != null)
-                    // Adiciona as taxas do Fornecedor
-                    lstTaxas.AddRange(retTaxa.Taxas);
-            }
-            else
+            if (cmbFornecedor.ValorSelecionado != null)
             {
                 // Recupera as taxas do fornecedor
                 List<Contrato.Taxa> taxas = (from f in _lstFornecedores
@@ -309,14 +296,19 @@ namespace BrasilDidaticos.Apresentacao
                 // Se encontrou as taxas do fornecedor
                 if (taxas != null)
                 {
-                    // Para cada taxa dentro da listagem de taxa
+                    // Para cada taxa dentro da listagem de taxa do fornecedor
                     foreach (Contrato.Taxa tx in taxas)
                     {
                         if (tx != null)
-                        {                           
-                            lstTaxas.RemoveAll(t => t.Nome == tx.Nome && t.Valor == tx.Valor || t.Valor == 0);
+                        {   
+                            Contrato.Taxa objTaxa = lstTaxas.Where(t => t.Nome == tx.Nome).FirstOrDefault();
 
-                            if (lstTaxas.Where(t => t.Nome == tx.Nome && t.Valor != tx.Valor).Count() == 0)
+                            if (objTaxa != null)
+                            {                            
+                                if (lstTaxas.RemoveAll(t => t.Nome == tx.Nome && (objTaxa.Valor != t.Valor || t.Valor == 0)) > 0)
+                                    lstTaxas.Add(tx);
+                            }
+                            else
                                 lstTaxas.Add(tx);
                         }
                     }
@@ -331,15 +323,20 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     objTaxas = new List<Objeto.Taxa>();
 
+                    // Para cada taxa existente
                     foreach (Contrato.Taxa taxa in lstTaxas)
                     {
+                        // Verifica se a taxa não está vazia
                         if (taxa != null)
                         {
-                            objTaxas.Add(new Objeto.Taxa { Selecionado = false, Id = taxa.Id, Nome = taxa.Nome, Ativo = taxa.Ativo });
+                            // Adiciona a taxa no objeto que popula o grid
+                            objTaxas.Add(new Objeto.Taxa { Selecionado = false, Id = taxa.Id, Nome = taxa.Nome, Prioridade = taxa.Prioridade, Ativo = taxa.Ativo });
+                            // Recupera a mesma taxa na lista de taxas do produto
                             Contrato.Taxa objTaxa = (from ft in _produto.Taxas where ft.Nome == taxa.Nome select ft).FirstOrDefault();
-
+                            // Se a taxa existe para o produto
                             if (objTaxa != null)
                             {
+                                // Atualiza a taxa com os valores do produto
                                 objTaxas.Last().Selecionado = true;
                                 objTaxas.Last().Valor = objTaxa.Valor;
                                 objTaxas.Last().Prioridade = objTaxa.Prioridade;
@@ -349,7 +346,7 @@ namespace BrasilDidaticos.Apresentacao
                 }
                 else
                     objTaxas = (from t in lstTaxas
-                                select new Objeto.Taxa { Selecionado = false, Id = t.Id, Nome = t.Nome, Valor = t.Valor , Ativo = t.Ativo }).ToList();
+                                select new Objeto.Taxa { Selecionado = false, Id = t.Id, Nome = t.Nome, Valor = t.Valor, Prioridade = t.Prioridade, Ativo = t.Ativo }).ToList();
 
                 dgTaxas.ItemsSource = objTaxas;
             }
@@ -361,7 +358,7 @@ namespace BrasilDidaticos.Apresentacao
 
             Contrato.EntradaUnidadeMedida entUnidadeMedida = new Contrato.EntradaUnidadeMedida();
             entUnidadeMedida.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entUnidadeMedida.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entUnidadeMedida.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entUnidadeMedida.Chave = Comum.Util.Chave;
             entUnidadeMedida.UnidadeMedida = new Contrato.UnidadeMedida() { Ativo = true };
 
@@ -393,13 +390,14 @@ namespace BrasilDidaticos.Apresentacao
                             {
                                 objUnidadeMedidas.Last().Selecionado = true;
                                 objUnidadeMedidas.Last().Quantidade = objUnidadeMedida.Quantidade;
+                                objUnidadeMedidas.Last().QuantidadeItens = objUnidadeMedida.QuantidadeItens;
                             }
                         }
                     }
                 }
                 else
                     objUnidadeMedidas = (from t in lstUnidadeMedidas
-                                select new Objeto.UnidadeMedida { Selecionado = false, Id = t.Id, Nome = t.Nome, Quantidade = t.Quantidade, Ativo = t.Ativo }).ToList();
+                                         select new Objeto.UnidadeMedida { Selecionado = false, Id = t.Id, Nome = t.Nome, Quantidade = t.Quantidade, QuantidadeItens = t.QuantidadeItens, Ativo = t.Ativo }).ToList();
 
                 dgUnidadeMedidas.ItemsSource = objUnidadeMedidas;
             }

@@ -48,7 +48,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaUnidadeMedida entUnidadeMedida = new Contrato.EntradaUnidadeMedida();
             entUnidadeMedida.Chave = Comum.Util.Chave;            
             entUnidadeMedida.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entUnidadeMedida.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entUnidadeMedida.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entUnidadeMedida.UnidadeMedida = new Contrato.UnidadeMedida();
 
             PreencherFiltro(entUnidadeMedida.UnidadeMedida);

@@ -70,7 +70,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaProduto.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaProduto.Produto = new Contrato.Produto();
             entradaProduto.Paginar = true;
             entradaProduto.PosicaoUltimoItem = 0;
@@ -97,7 +97,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
@@ -270,7 +270,7 @@ namespace BrasilDidaticos.Apresentacao
                          Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                          entradaProduto.Chave = Comum.Util.Chave;
                          entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-                         entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+                         entradaProduto.EmpresaLogada = Comum.Parametros.EmpresaProduto;
                          entradaProduto.Produto = new Contrato.Produto() { Ativo = true };
                          entradaProduto.Paginar = true;
                          entradaProduto.PosicaoUltimoItem = int.Parse(e.ExtentHeight.ToString());
@@ -298,7 +298,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Brasil Didáticos", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Produto", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {

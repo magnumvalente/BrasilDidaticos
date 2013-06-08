@@ -15,9 +15,9 @@ using System.Collections.ObjectModel;
 namespace BrasilDidaticos.Apresentacao
 {
     /// <summary>
-    /// Interaction logic for WOrcamentoProduto.xaml
+    /// Interaction logic for WOrcamentoItem.xaml
     /// </summary>
-    public partial class WOrcamentoProduto : Window
+    public partial class WOrcamentoItem : Window
     {
 
         #region "[Atributos]"
@@ -48,7 +48,7 @@ namespace BrasilDidaticos.Apresentacao
 
         #region "[Metodos]"
 
-        public WOrcamentoProduto()
+        public WOrcamentoItem()
         {
             InitializeComponent();
         }
@@ -70,7 +70,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaProduto.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaProduto.Produto = new Contrato.Produto();
             entradaProduto.Paginar = true;
             entradaProduto.PosicaoUltimoItem = 0;
@@ -92,7 +92,7 @@ namespace BrasilDidaticos.Apresentacao
                 
                 // Adiciona a lista os novos produtos que foram buscados
                 foreach (Contrato.Produto p in retProduto.Produtos)
-                    _lstProduto.Add(new Objeto.Produto {Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas});
+                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, Quantidade = p.Quantidade, ValorBase = p.ValorBase, Taxas = p.Taxas, UnidadeMedidas = p.UnidadeMedidas });
             }
 
             // Define os novos produtos
@@ -107,7 +107,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
@@ -158,6 +158,29 @@ namespace BrasilDidaticos.Apresentacao
                 }
             }
         }
+
+        private void ConfigurarProduto(Objeto.Produto produto)
+        {
+            produto.UnidadeMedidaSelecionada = new Contrato.UnidadeMedida() { QuantidadeItens = 1 };
+
+            // Verififica se o produto possui unidades de medidada associados a ele
+            if (produto.UnidadeMedidas != null)
+            {
+                // Verifica se existe somente uma unidade de medida
+                if (produto.UnidadeMedidas.Count == 1)
+                {
+                    produto.UnidadeMedidaSelecionada = produto.UnidadeMedidas.First();
+                }
+                // Verifica se existe mais de uma unidade de medida
+                else if (produto.UnidadeMedidas != null && produto.UnidadeMedidas.Count > 1)
+                {
+                    WProdutoUnidadeMedida wProdutoUnidadeMedida = new WProdutoUnidadeMedida();
+                    wProdutoUnidadeMedida.Owner = this;
+                    wProdutoUnidadeMedida.Produto = produto;
+                    wProdutoUnidadeMedida.ShowDialog();
+                }
+            }
+        }   
 
         private void ConfigurarControles()
         {
@@ -236,7 +259,7 @@ namespace BrasilDidaticos.Apresentacao
                         Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();
                         entradaProduto.Chave = Comum.Util.Chave;
                         entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-                        entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+                        entradaProduto.EmpresaLogada = Comum.Parametros.EmpresaProduto;
                         entradaProduto.Produto = new Contrato.Produto() { Ativo = true };
                         entradaProduto.Paginar = true;
                         entradaProduto.PosicaoUltimoItem = int.Parse(e.ExtentHeight.ToString());
@@ -268,7 +291,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Brasil Didáticos", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -281,6 +304,50 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataGridRow row = Comum.Util.FindVisualParent<DataGridRow>((DataGridCell)sender);
+                // Verifica se a linha está selecionada
+                if (row != null && row.IsSelected)
+                {
+                    this.Cursor = Cursors.Wait;
+
+                    // verifica se existe algum item selecionado da edição
+                    if (row.Item != null && row.Item.GetType() == typeof(Objeto.Produto))
+                    {
+                        // salva as alterações
+                        ConfigurarProduto((Objeto.Produto)dgProdutos.SelectedItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void dgProdutos_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                dgProdutos.SelectedItem = null;               
             }
             catch (Exception ex)
             {
@@ -322,6 +389,5 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         #endregion
-
     }
 }

@@ -139,6 +139,27 @@
     <Compile Include="Apresentacao\Controler\MCheckBox.xaml.cs">
       <DependentUpon>MCheckBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Apresentacao\WPedidoItem.xaml.cs">
+      <DependentUpon>WPedidoItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WPedidoCadastro.xaml.cs">
+      <DependentUpon>WPedidoCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WRelatorioPedido.xaml.cs">
+      <DependentUpon>WRelatorioPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WPedido.xaml.cs">
+      <DependentUpon>WPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WProdutoCadastro.xaml.cs">
+      <DependentUpon>WProdutoCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WEstoqueCadastro.xaml.cs">
+      <DependentUpon>WEstoqueCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WEstoque.xaml.cs">
+      <DependentUpon>WEstoque.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Apresentacao\WUnidadeMedidaCadastro.xaml.cs">
       <DependentUpon>WUnidadeMedidaCadastro.xaml</DependentUpon>
     </Compile>
@@ -193,8 +214,8 @@
     <Compile Include="Apresentacao\WParametro.xaml.cs">
       <DependentUpon>WParametro.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\WProdutoCadastro.xaml.cs">
-      <DependentUpon>WProdutoCadastro.xaml</DependentUpon>
+    <Compile Include="Apresentacao\WProdutoUnidadeMedida.xaml.cs">
+      <DependentUpon>WProdutoUnidadeMedida.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\WProduto.xaml.cs">
       <DependentUpon>WProduto.xaml</DependentUpon>
@@ -247,7 +268,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
     <Page Include="Apresentacao\Controler\MColorPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -291,6 +311,34 @@
     <Page Include="Apresentacao\Controler\MTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Apresentacao\WPedidoItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WPedidoCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WRelatorioPedido.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WPedido.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WProdutoCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WEstoqueCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WEstoque.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Apresentacao\WUnidadeMedidaCadastro.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -364,7 +412,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Apresentacao\WProdutoCadastro.xaml">
+    <Page Include="Apresentacao\WProdutoUnidadeMedida.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -474,14 +522,66 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Imagens\ico_pedido_visualizar.png" />
+    <Content Include="Relatorio\Pedido.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Imagens\ico_orcamento_exportar.png" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Constantes.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Empresa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Entrada.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaCliente.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaEmpresa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaEstadoOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaEstadoPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaFornecedor.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaItem.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaItemPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaParametro.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaParametros.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaPerfil.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaPermissao.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaProduto.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaProdutos.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaTaxa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaUnidadeMedida.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EntradaUsuario.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Enumeradores+EstadoOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Enumeradores+EstadoPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Enumeradores+Pessoa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Enumeradores+TipoOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Enumeradores+TipoParametro.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Enumeradores.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EstadoOrcamento.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.EstadoPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Fornecedor.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.ItemPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Parametro.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Pedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Perfil.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Permissao.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Retorno.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoEmpresa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoEstadoPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoItem.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoItemPedido.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoPedido.datasource" />
     <None Include="Properties\DataSources\BrasilDidaticos.Contrato.RetornoUnidadeMedida.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Sessao.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.Taxa.datasource" />
+    <None Include="Properties\DataSources\BrasilDidaticos.Contrato.UnidadeMedida.datasource" />
     <None Include="Service References\Servico\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\Servico\configuration.svcinfo" />
-    <None Include="Service References\Servico\configuration91.svcinfo" />
+    <None Include="Service References\Servico\configuration.svcinfo">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Servico\configuration91.svcinfo">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Servico\BrasilDidaticos.disco" />
     <None Include="Service References\Servico\BrasilDidaticos.wsdl" />
     <None Include="Service References\Servico\BrasilDidaticos.xsd">
@@ -502,17 +602,19 @@
     <Resource Include="Imagens\ico_orcamento_itens_importar.png" />
     <Resource Include="Imagens\ico_wprincipal_homologacao.png" />
     <Resource Include="Imagens\ico_wunidademedida.png" />
-    <Content Include="Relatorio\RelatorioOrcamento.rdlc">
+    <Resource Include="Imagens\ico_westoque.png" />
+    <Resource Include="Imagens\ico_wpedido.png" />
+    <Content Include="Relatorio\Orcamento.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Relatorio\RelatorioOrcamentoCusto.rdlc">
+    <Content Include="Relatorio\OrcamentoCusto.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Imagens\ico_worcamento.png" />
-    <Content Include="Relatorio\RelatorioAtacado.rdlc">
+    <Content Include="Relatorio\Atacado.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Relatorio\RelatorioVarejo.rdlc">
+    <Content Include="Relatorio\Varejo.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Properties\Resources.resx">

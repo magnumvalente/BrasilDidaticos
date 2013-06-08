@@ -48,7 +48,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaTaxa entTaxa = new Contrato.EntradaTaxa();
             entTaxa.Chave = Comum.Util.Chave;            
             entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entTaxa.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entTaxa.Taxa = new Contrato.Taxa();
 
             PreencherFiltro(entTaxa.Taxa);

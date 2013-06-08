@@ -15,7 +15,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CantidadeItens" type="xs:int" />
       <xs:element minOccurs="0" name="Chave" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Empresa" nillable="true" type="tns:Empresa" />
+      <xs:element minOccurs="0" name="EmpresaLogada" nillable="true" type="tns:Empresa" />
       <xs:element minOccurs="0" name="Novo" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Paginar" type="xs:boolean" />
       <xs:element minOccurs="0" name="PosicaoUltimoItem" type="xs:int" />
@@ -273,11 +273,31 @@
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="Ncm" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
       <xs:element minOccurs="0" name="Taxas" nillable="true" type="tns:ArrayOfTaxa" />
+      <xs:element minOccurs="0" name="UnidadeMedidas" nillable="true" type="tns:ArrayOfUnidadeMedida" />
       <xs:element minOccurs="0" name="ValorBase" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Produto" nillable="true" type="tns:Produto" />
+  <xs:complexType name="ArrayOfUnidadeMedida">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnidadeMedida" nillable="true" type="tns:UnidadeMedida" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUnidadeMedida" nillable="true" type="tns:ArrayOfUnidadeMedida" />
+  <xs:complexType name="UnidadeMedida">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Descricao" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
+      <xs:element minOccurs="0" name="QuantidadeItens" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnidadeMedida" nillable="true" type="tns:UnidadeMedida" />
   <xs:complexType name="RetornoProduto">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Retorno">
@@ -530,16 +550,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="EntradaUnidadeMedida" nillable="true" type="tns:EntradaUnidadeMedida" />
-  <xs:complexType name="UnidadeMedida">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Ativo" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Descricao" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="ser:guid" />
-      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="UnidadeMedida" nillable="true" type="tns:UnidadeMedida" />
   <xs:complexType name="RetornoUnidadeMedida">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Retorno">
@@ -550,12 +560,124 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RetornoUnidadeMedida" nillable="true" type="tns:RetornoUnidadeMedida" />
-  <xs:complexType name="ArrayOfUnidadeMedida">
+  <xs:complexType name="EntradaPedido">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Pedido" nillable="true" type="tns:Pedido" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaPedido" nillable="true" type="tns:EntradaPedido" />
+  <xs:complexType name="Pedido">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="UnidadeMedida" nillable="true" type="tns:UnidadeMedida" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Data" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="tns:EstadoPedido" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="ItensPedido" nillable="true" type="tns:ArrayOfItemPedido" />
+      <xs:element minOccurs="0" name="Responsavel" nillable="true" type="tns:Usuario" />
+      <xs:element minOccurs="0" name="ValorDesconto" nillable="true" type="xs:decimal" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfUnidadeMedida" nillable="true" type="tns:ArrayOfUnidadeMedida" />
+  <xs:element name="Pedido" nillable="true" type="tns:Pedido" />
+  <xs:complexType name="EstadoPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Anterior" nillable="true" type="tns:EstadoPedido" />
+      <xs:element minOccurs="0" name="Ativo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sucessor" nillable="true" type="tns:EstadoPedido" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EstadoPedido" nillable="true" type="tns:EstadoPedido" />
+  <xs:complexType name="ArrayOfItemPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemPedido" nillable="true" type="tns:ItemPedido" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItemPedido" nillable="true" type="tns:ArrayOfItemPedido" />
+  <xs:complexType name="ItemPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Pedido" nillable="true" type="tns:Pedido" />
+      <xs:element minOccurs="0" name="Produto" nillable="true" type="tns:Produto" />
+      <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
+      <xs:element minOccurs="0" name="Valor" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorDesconto" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemPedido" nillable="true" type="tns:ItemPedido" />
+  <xs:complexType name="RetornoPedido">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Pedidos" nillable="true" type="tns:ArrayOfPedido" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoPedido" nillable="true" type="tns:RetornoPedido" />
+  <xs:complexType name="ArrayOfPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Pedido" nillable="true" type="tns:Pedido" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPedido" nillable="true" type="tns:ArrayOfPedido" />
+  <xs:complexType name="EntradaEstadoPedido">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EstadoPedido" nillable="true" type="tns:EstadoPedido" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaEstadoPedido" nillable="true" type="tns:EntradaEstadoPedido" />
+  <xs:complexType name="RetornoEstadoPedido">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EstadosPedido" nillable="true" type="tns:ArrayOfEstadoPedido" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoEstadoPedido" nillable="true" type="tns:RetornoEstadoPedido" />
+  <xs:complexType name="ArrayOfEstadoPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EstadoPedido" nillable="true" type="tns:EstadoPedido" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEstadoPedido" nillable="true" type="tns:ArrayOfEstadoPedido" />
+  <xs:complexType name="EntradaEmpresa">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entrada">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Empresa" nillable="true" type="tns:Empresa" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EntradaEmpresa" nillable="true" type="tns:EntradaEmpresa" />
+  <xs:complexType name="RetornoEmpresa">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Retorno">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Empresas" nillable="true" type="tns:ArrayOfEmpresa" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RetornoEmpresa" nillable="true" type="tns:RetornoEmpresa" />
+  <xs:complexType name="ArrayOfEmpresa">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Empresa" nillable="true" type="tns:Empresa" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmpresa" nillable="true" type="tns:ArrayOfEmpresa" />
   <xs:complexType name="RetornoUnidadeFederativa">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Retorno">

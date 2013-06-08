@@ -138,6 +138,7 @@ namespace BrasilDidaticos.Apresentacao
 
         private void PreencherDados(Contrato.UnidadeMedida UnidadeMedida)
         {
+            UnidadeMedida.Id = _unidadeMedida == null ? Guid.Empty : _unidadeMedida.Id;
             UnidadeMedida.Codigo = txtCodigo.Conteudo;
             UnidadeMedida.Nome = txtNome.Conteudo;
             UnidadeMedida.Descricao = txtDescricao.Conteudo;

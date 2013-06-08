@@ -262,15 +262,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BrasilDidaticos.WcfServico"
-        "ProductCode" = "8:{C1BD791E-5863-462C-9EC7-56977BA8ADA3}"
-        "PackageCode" = "8:{339E4FD6-6859-4EBD-83EA-65EA946B7A95}"
+        "ProductCode" = "8:{D098BE3B-E6CA-4F78-9CA9-863A727473AB}"
+        "PackageCode" = "8:{D43D2E1F-6BA2-445E-91C2-5C1F2D5FDB4F}"
         "UpgradeCode" = "8:{EE899FC4-2044-4F06-B956-A7511AECB475}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.21"
+        "ProductVersion" = "8:1.0.22"
         "Manufacturer" = "8:GDM Soluções em Informática"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -715,7 +715,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_25FF9B736D0F4F92B65C0C204ED23329"
             {
-            "SourcePath" = "8:..\\BrasilDidaticos.WcfServico\\obj\\Release\\BrasilDidaticos.WcfServico.dll"
+            "SourcePath" = "8:..\\BrasilDidaticos.WcfServico\\obj\\Debug\\BrasilDidaticos.WcfServico.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_84FC60DC20B54683B1559476B04F472D"

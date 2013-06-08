@@ -296,7 +296,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Taxas">Objeto com os dados do taxa</param>
         /// <returns>Contrato.RetornoTaxa</returns>
-        internal static Contrato.RetornoTaxa SalvarTaxaProduto(Guid IdProduto, string UsuarioLogado, Contrato.Taxa Taxa)
+        internal static Contrato.RetornoTaxa SalvarTaxaProduto(Dados.PRODUTO Produto, string UsuarioLogado, Contrato.Taxa Taxa)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoTaxa retTaxa = new Contrato.RetornoTaxa();
@@ -315,35 +315,19 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
-                // Busca o taxa do produto no banco
-                List<Dados.PRODUTO_TAXA> lstTaxas = (from t in context.T_PRODUTO_TAXA
-                                                     where (t.ID_TAXA == Taxa.Id && t.ID_PRODUTO == IdProduto)
-                                                     select t).ToList();
-                // Se existe a taxa
-                if (lstTaxas.Count > 0)
-                {
-                    // Atualiza a taxa
-                    lstTaxas.First().NUM_VALOR = Taxa.Valor;
-                    lstTaxas.First().ORD_PRIORIDADE = Taxa.Prioridade;
-                    lstTaxas.First().DATA_ATUALIZACAO = DateTime.Now;
-                    lstTaxas.First().LOGIN_USUARIO = UsuarioLogado;
-                }
-                else
-                {
-                    // Cria a taxa
-                    Dados.PRODUTO_TAXA tProdutoTaxa = new Dados.PRODUTO_TAXA()
-                                        {
-                                            ID_PRODUTO_TAXA = Guid.NewGuid(),
-                                            ID_PRODUTO = IdProduto,
-                                            ID_TAXA = Taxa.Id,
-                                            NUM_VALOR = Taxa.Valor,
-                                            ORD_PRIORIDADE = Taxa.Prioridade,
-                                            LOGIN_USUARIO = UsuarioLogado,
-                                            DATA_ATUALIZACAO = DateTime.Now
-                                        };
+                // Cria a taxa para o produto
+                Dados.PRODUTO_TAXA tProdutoTaxa = new Dados.PRODUTO_TAXA()
+                                    {
+                                        ID_PRODUTO_TAXA = Guid.NewGuid(),
+                                        ID_PRODUTO = Produto.ID_PRODUTO,
+                                        ID_TAXA = Taxa.Id,
+                                        NUM_VALOR = Taxa.Valor,
+                                        ORD_PRIORIDADE = Taxa.Prioridade,
+                                        LOGIN_USUARIO = UsuarioLogado,
+                                        DATA_ATUALIZACAO = DateTime.Now
+                                    };
 
-                    context.AddToT_PRODUTO_TAXA(tProdutoTaxa);
-                }
+                Produto.T_PRODUTO_TAXA.Add(tProdutoTaxa);
 
                 // Salva as alterações
                 context.SaveChanges();

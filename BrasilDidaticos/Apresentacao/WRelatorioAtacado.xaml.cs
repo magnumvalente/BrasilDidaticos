@@ -82,7 +82,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             if (!_isReportViewerLoaded)
             {                
-                this._reportViewer.LocalReport.ReportPath = "Relatorio/RelatorioAtacado.rdlc";                
+                this._reportViewer.LocalReport.ReportPath = "Relatorio/Atacado.rdlc";                
                 this._isReportViewerLoaded = true;
             }
         }    

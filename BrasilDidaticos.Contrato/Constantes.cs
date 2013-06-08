@@ -21,5 +21,6 @@ namespace BrasilDidaticos.Contrato
         public const string TIPO_COD_FORNECEDOR = "FRNC";
         public const string TIPO_COD_CLIENTE = "CLNT";
         public const string TIPO_COD_ORCAMENTO = "ORCM";
+        public const string TIPO_COD_PEDIDO = "PDDO";
     }
 }

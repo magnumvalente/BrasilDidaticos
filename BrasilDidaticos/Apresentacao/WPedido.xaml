@@ -1,0 +1,99 @@
+﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler"  x:Class="BrasilDidaticos.Apresentacao.WPedido"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ews="clr-namespace:BrasilDidaticos.Comum"
+        ews:ExtraWindowStyles.CanMinimize="False"
+        Title="Brasil Didáticos" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="False" WindowState="Maximized" Icon="/BrasilDidaticos;component/brasildidaticos.ico">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#EB0047E4" Offset="1" />
+            <GradientStop Color="#FFF8FFFF" Offset="0.075" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
+        <StackPanel Name="stpCabecalho" DockPanel.Dock="Top" Height="50" Orientation="Horizontal">
+            <Image Source="/BrasilDidaticos;component/Imagens/ico_wpedido.png" Height="36" Width="36" Margin="10,0,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBlock Text="PEDIDO" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontSize="24" />
+        </StackPanel>
+        <GroupBox Name="Filtro" DockPanel.Dock="Top" Width="460" Margin="0,10,0,0">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal" Height="25">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_filtro.png" Width="16" Height="16" />
+                    <TextBlock Text="Filtros" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid Name="gdPedidoFiltro" DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <my:MTextBox x:Name="txtCodigo" Titulo="Código:" TamanhoTexto="15" WidthTitulo="100" WidthConteudo="90" Grid.Row="0" />
+                <my:MDatePicker x:Name="dtpData" Titulo="Data:" WidthTitulo="100" Grid.Row="1" Background="#FFF0F0F0" />                
+                <my:MComboBox x:Name="cmbResponsavel" Titulo="Responsável:" WidthTitulo="100" Grid.Row="2" />
+                <my:MComboBox x:Name="cmbEstadoPedido" Titulo="Estado:" WidthTitulo="100" Grid.Row="3" Background="#FFF0F0F0" />
+            </Grid>
+        </GroupBox>
+        <StackPanel Name="stpBotoes"  DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
+            <Button Grid.Column="2" Name="btnNovo" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="False" Margin="0,0,5,0" Click="btnNovo_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_novo.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Novo"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Name="btnLimpar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="False" Margin="0,0,5,0" Click="btnLimpar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_limpar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Limpar"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Name="btnBuscar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsDefault="True" Margin="0,0,5,0" Click="btnBuscar_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_buscar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Buscar"/>
+                </StackPanel>
+            </Button>
+            <Button Grid.Column="2" Name="btnCancelar" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" IsCancel="True" Margin="0,0,5,0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_cancelar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Cancelar"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <GroupBox Name="gpbPedidos" DockPanel.Dock="Top" Header="Pedidos">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgPedidos" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" ScrollViewer.ScrollChanged="dgPedidos_ScrollChanged">
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#EEE"></Setter>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#CCC"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat={}{0:dd/MM/yyyy}}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado.Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Responsável" Binding="{Binding Responsavel.Nome}" IsReadOnly="True" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnVerPedido" HorizontalAlignment="Center" Height="25" Width="25" Click="btnVer_Click" ToolTip="Ver pedido" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/BrasilDidaticos;component/Imagens/ico_pedido_visualizar.png" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </DockPanel>
+</Window>

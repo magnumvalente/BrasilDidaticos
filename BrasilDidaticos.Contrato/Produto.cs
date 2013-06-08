@@ -11,6 +11,7 @@ namespace BrasilDidaticos.Contrato
     public class Produto
     {
         private decimal _ValorCusto;
+        private int _Quantidade;
 
         [DataMember]
         public Guid Id
@@ -48,6 +49,24 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
+        public int Quantidade
+        {
+            get 
+            {
+                if (UnidadeMedidas != null && UnidadeMedidas.Count > 0)
+                {
+                    return UnidadeMedidas.Sum(um => um.Quantidade * um.QuantidadeItens);
+                }
+                return _Quantidade;
+            }
+            set
+            {
+                _Quantidade = value;
+            }
+            
+        }
+
+        [DataMember]
         public decimal ValorBase
         {
             get;
@@ -70,6 +89,13 @@ namespace BrasilDidaticos.Contrato
 
         [DataMember]
         public List<UnidadeMedida> UnidadeMedidas
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public UnidadeMedida UnidadeMedidaSelecionada
         {
             get;
             set;

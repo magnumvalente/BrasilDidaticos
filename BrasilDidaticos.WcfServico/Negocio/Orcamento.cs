@@ -141,7 +141,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                     &&  (entradaOrcamento.Orcamento.Responsavel.Id == Guid.Empty || o.ID_USUARIO_RESPONSAVEL == entradaOrcamento.Orcamento.Responsavel.Id)
                                     &&  (entradaOrcamento.Orcamento.Estado.Id == Guid.Empty || o.ID_ESTADO_ORCAMENTO == entradaOrcamento.Orcamento.Estado.Id)                                    
                                     select o                                                           
-                                    ).OrderBy(o => o.DATA_ORCAMENTO).Skip(entradaOrcamento.PosicaoUltimoItem).Take(entradaOrcamento.CantidadeItens)
+                                    ).OrderByDescending(o => o.DATA_ORCAMENTO).Skip(entradaOrcamento.PosicaoUltimoItem).Take(entradaOrcamento.CantidadeItens)
                                      .Select(o => new
                                      {
                                          o,
@@ -305,24 +305,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 // Para cada item associado
                                 foreach (Contrato.Item item in entradaOrcamento.Orcamento.Itens)
                                 {
-                                    // Associa o item ao orçamento
-                                    lstOrcamentos.First().T_ITEM.Add(new Dados.ITEM()
-                                    {
-                                        ID_ITEM = Guid.NewGuid(),
-                                        DES_ITEM = item.Descricao,                                       
-                                        ID_ORCAMENTO = entradaOrcamento.Orcamento.Id,
-                                        NUM_QUANTIDADE = item.Quantidade,
-                                        NUM_VALOR_CUSTO = item.ValorCusto,
-                                        NUM_VALOR_UNITARIO = item.ValorUnitario,
-                                        NUM_DESCONTO = item.ValorDesconto,
-                                        LOGIN_USUARIO = entradaOrcamento.UsuarioLogado,
-                                        DATA_ATUALIZACAO = DateTime.Now
-                                    });
-
-                                    if (item.Produto != null)
-                                        lstOrcamentos.First().T_ITEM.Last().ID_PRODUTO = item.Produto.Id;
+                                    Negocio.Item.SalvarItemOrcamento(lstOrcamentos.First(), entradaOrcamento.UsuarioLogado, item);
                                 }
-                            }
+                            }                            
                         }
                         else
                         {
@@ -359,22 +344,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 // Para cada item associado
                                 foreach (Contrato.Item item in entradaOrcamento.Orcamento.Itens)
                                 {
-                                    // Associa o item ao orçamento
-                                    tOrcamento.T_ITEM.Add(new Dados.ITEM()
-                                    {
-                                        ID_ITEM = Guid.NewGuid(),
-                                        DES_ITEM = item.Descricao,                                        
-                                        ID_ORCAMENTO = entradaOrcamento.Orcamento.Id,
-                                        NUM_QUANTIDADE = item.Quantidade,
-                                        NUM_VALOR_CUSTO = item.ValorCusto,
-                                        NUM_VALOR_UNITARIO = item.ValorUnitario,
-                                        NUM_DESCONTO = item.ValorDesconto,
-                                        LOGIN_USUARIO = entradaOrcamento.UsuarioLogado,
-                                        DATA_ATUALIZACAO = DateTime.Now
-                                    });
-
-                                    if (item.Produto != null)
-                                        tOrcamento.T_ITEM.Last().ID_PRODUTO = item.Produto.Id;
+                                    Negocio.Item.SalvarItemOrcamento(tOrcamento, entradaOrcamento.UsuarioLogado, item);
                                 }
                             }
 

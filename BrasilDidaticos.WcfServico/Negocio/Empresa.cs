@@ -24,15 +24,19 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
+                // Verifica se o código da empresa foi informado
+                if (entradaEmpresa.Empresa.Codigo == null)
+                    entradaEmpresa.Empresa.Codigo = string.Empty;
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-
+                
                 // Busca o empresa no banco
                 List<Dados.EMPRESA> lstEmpresas = (
-                                                    from f in context.T_EMPRESA
-                                                    where (f.BOL_ATIVO == entradaEmpresa.Empresa.Ativo)
-                                                    select f
+                                                    from e in context.T_EMPRESA
+                                                    where (e.BOL_ATIVO == entradaEmpresa.Empresa.Ativo)
+                                                       && (entradaEmpresa.Empresa.Codigo == string.Empty || e.COD_EMPRESA == entradaEmpresa.Empresa.Codigo)
+                                                    select e
                                                    ).ToList();
 
                 // Verifica se foi encontrado algum registro

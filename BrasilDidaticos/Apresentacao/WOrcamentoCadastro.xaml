@@ -95,6 +95,7 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Produto" Binding="{Binding Descricao}" CanUserReorder="False" CanUserSort="False" />
+                    <DataGridTextColumn Header="Unidade Medida" Binding="{Binding UnidadeMedida.Nome}" CanUserReorder="False" CanUserSort="False" IsReadOnly="True" />
                  <!--   <DataGridTextColumn Header="Valor Custo" Binding="{Binding ValorCusto, StringFormat=C, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" /> -->
                     <DataGridTextColumn Header="Valor Unitário" IsReadOnly="False" CanUserSort="False" >
                         <DataGridTextColumn.ElementStyle>

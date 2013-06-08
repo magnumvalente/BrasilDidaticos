@@ -93,7 +93,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             if (!_isReportViewerLoaded)
             {                
-                this._reportViewer.LocalReport.ReportPath = "Relatorio/RelatorioOrcamento.rdlc";                
+                this._reportViewer.LocalReport.ReportPath = "Relatorio/Orcamento.rdlc";                
                 this._isReportViewerLoaded = true;
             }
         }    

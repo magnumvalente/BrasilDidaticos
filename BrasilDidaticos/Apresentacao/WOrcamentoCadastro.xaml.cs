@@ -199,7 +199,8 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         private void PreencherOrcamento(Contrato.Orcamento Orcamento)
-        {            
+        {
+            Orcamento.Id = _orcamento == null ? Guid.Empty : _orcamento.Id;
             Orcamento.Codigo = txtCodigo.Conteudo;
             Orcamento.Data = DateTime.Parse(dtpData.Conteudo);
             Orcamento.Cliente = new Contrato.Cliente() { Id = cmbCliente.Id, Codigo = cmbCliente.Codigo, Nome = cmbCliente.Nome };
@@ -240,7 +241,22 @@ namespace BrasilDidaticos.Apresentacao
                         Ncm = ((Contrato.Item)item).Produto.Ncm,
                         ValorBase = ((Contrato.Item)item).Produto.ValorBase,
                         Taxas = ((Contrato.Item)item).Produto.Taxas,
+                        UnidadeMedidas = ((Contrato.Item)item).Produto.UnidadeMedidas,
                         Ativo = ((Contrato.Item)item).Produto.Ativo
+                    };
+                }
+
+                if (((Contrato.Item)item).UnidadeMedida != null)
+                {
+                    Orcamento.Itens.Last().UnidadeMedida = new Contrato.UnidadeMedida()
+                    {
+                        Id = ((Contrato.Item)item).UnidadeMedida.Id,
+                        Nome = ((Contrato.Item)item).UnidadeMedida.Nome,
+                        Codigo = ((Contrato.Item)item).UnidadeMedida.Codigo,
+                        Descricao = ((Contrato.Item)item).UnidadeMedida.Descricao,
+                        Quantidade = ((Contrato.Item)item).UnidadeMedida.Quantidade,
+                        QuantidadeItens = ((Contrato.Item)item).UnidadeMedida.QuantidadeItens,
+                        Ativo = ((Contrato.Item)item).UnidadeMedida.Ativo
                     };
                 }
             }
@@ -359,6 +375,7 @@ namespace BrasilDidaticos.Apresentacao
                 entradaCliente.Chave = Comum.Util.Chave;
                 entradaCliente.PreencherListaSelecao = true;
                 entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaCliente.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 entradaCliente.Cliente = new Contrato.Cliente();
                 entradaCliente.Cliente.Ativo = true;
                 entradaCliente.Cliente.Codigo = cmbCliente.Codigo;
@@ -547,7 +564,7 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     lstItens.Add(item);
                     if (item.Produto != null)
-                        lstItens.Last().Produto = new Objeto.Produto { Selecionado = true, Id = item.Produto.Id, Codigo = item.Produto.Codigo, Nome = item.Produto.Nome, Fornecedor = item.Produto.Fornecedor, ValorBase = item.Produto.ValorBase, Taxas = item.Produto.Taxas };
+                        lstItens.Last().Produto = new Objeto.Produto { Selecionado = true, Id = item.Produto.Id, Codigo = item.Produto.Codigo, Nome = item.Produto.Nome, Fornecedor = item.Produto.Fornecedor, ValorBase = item.Produto.ValorBase, Taxas = item.Produto.Taxas, UnidadeMedidas = item.Produto.UnidadeMedidas };
                 }
 
                 //  Adiciona os itens ao grid
@@ -570,14 +587,15 @@ namespace BrasilDidaticos.Apresentacao
                     {
                         if (item.Descricao != item.Produto.Nome) item.Descricao = item.Produto.Nome;
                         item.ValorCusto = item.Produto.ValorCusto;
+                        item.UnidadeMedida = item.Produto.UnidadeMedidaSelecionada;
                         
                         switch ((Contrato.Enumeradores.TipoOrcamento)rlbTipoOrcamento.ListBox.SelectedValue)
                         {
                             case Contrato.Enumeradores.TipoOrcamento.Atacado:
-                                item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorAtacado == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorAtacado : item.ValorUnitario;
+                                item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorAtacado == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorAtacado * (item.UnidadeMedida != null ? item.UnidadeMedida.QuantidadeItens : 1) : item.ValorUnitario;
                                 break;
                             case Contrato.Enumeradores.TipoOrcamento.Varejo:
-                                item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorVarejo == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorVarejo : item.ValorUnitario;
+                                item.ValorUnitario = ModificouTipoOrcamento || (((Objeto.Produto)item.Produto).ValorVarejo == item.ValorUnitario || item.ValorUnitario == 0) ? ((Objeto.Produto)item.Produto).ValorVarejo * (item.UnidadeMedida != null ? item.UnidadeMedida.QuantidadeItens : 1) : item.ValorUnitario;
                                 break;
                         }
                     }                    
@@ -648,7 +666,7 @@ namespace BrasilDidaticos.Apresentacao
         {
             try
             {
-                WOrcamentoProduto orcamentoProduto = new WOrcamentoProduto();
+                WOrcamentoItem orcamentoProduto = new WOrcamentoItem();
                 orcamentoProduto.Itens = (ObservableCollection<Contrato.Item>)dgItens.ItemsSource;
                 orcamentoProduto.Owner = this;
                 orcamentoProduto.ShowDialog();

@@ -88,31 +88,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7BABF42CF6AC3D214B84F4FCC08AD993"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_65FEA5D76F50D42902146EF082B785BB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6D0A41B0CDCA9DE500DC11A3A1E22660"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_55648CB8168CD0B6D4BD050B5B9532B6"
+        "OwnerKey" = "8:_1E67C988C2939D68F8554D532F3144A7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,7 +100,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E67C988C2939D68F8554D532F3144A7"
+        "OwnerKey" = "8:_55648CB8168CD0B6D4BD050B5B9532B6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_6D0A41B0CDCA9DE500DC11A3A1E22660"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_65FEA5D76F50D42902146EF082B785BB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7BABF42CF6AC3D214B84F4FCC08AD993"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -239,11 +239,6 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1E67C988C2939D68F8554D532F3144A7"
-                    {
-                    "Name" = "8:Microsoft.ReportViewer.Common.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.ReportViewer.Common.dll"
             "TargetName" = "8:"
@@ -301,11 +296,6 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3F1658EFA024C4B77DB90AF8CB79DEF4"
-                    {
-                    "Name" = "8:Microsoft.ReportViewer.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.ReportViewer.WinForms.dll"
             "TargetName" = "8:"
@@ -332,11 +322,6 @@
             "AssemblyAsmDisplayName" = "8:WPFToolkit.Extended, Version=1.7.4644.13122, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_55648CB8168CD0B6D4BD050B5B9532B6"
-                    {
-                    "Name" = "8:WPFToolkit.Extended.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:WPFToolkit.Extended.dll"
             "TargetName" = "8:"
@@ -420,11 +405,6 @@
             "AssemblyAsmDisplayName" = "8:CepFacil.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7BABF42CF6AC3D214B84F4FCC08AD993"
-                    {
-                    "Name" = "8:CepFacil.API.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CepFacil.API.dll"
             "TargetName" = "8:"
@@ -500,15 +480,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Brasil Didáticos"
-        "ProductCode" = "8:{55595352-4AA0-48FD-BBE1-CC2607AADF23}"
-        "PackageCode" = "8:{0A102C74-537E-42AF-9B84-9FF4A5ED3D07}"
+        "ProductCode" = "8:{8F3B0B2C-2AF1-484D-9050-D091F6AAF891}"
+        "PackageCode" = "8:{BDBB9998-8AE0-4637-9D19-D6681732482D}"
         "UpgradeCode" = "8:{B20EDBD9-A7F1-4725-B6E1-D6C516EDA7C0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.21"
+        "ProductVersion" = "8:1.0.22"
         "Manufacturer" = "8:GDM Soluções em Informática"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1064,7 +1044,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D6A3279A6C764F68AFE02D45600FEED3"
             {
-            "SourcePath" = "8:..\\BrasilDidaticos\\obj\\x86\\Release\\BrasilDidaticos.exe"
+            "SourcePath" = "8:..\\BrasilDidaticos\\obj\\x86\\Debug\\BrasilDidaticos.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"

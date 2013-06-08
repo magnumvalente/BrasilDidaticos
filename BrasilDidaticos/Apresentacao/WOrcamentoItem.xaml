@@ -1,4 +1,4 @@
-﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler"  x:Class="BrasilDidaticos.Apresentacao.WOrcamentoProduto"
+﻿<Window xmlns:my="clr-namespace:BrasilDidaticos.Apresentacao.Controler"  x:Class="BrasilDidaticos.Apresentacao.WOrcamentoItem"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ews="clr-namespace:BrasilDidaticos.Comum"
@@ -56,7 +56,7 @@
             </Button>
         </StackPanel>
         <GroupBox Name="gpbProdutos" DockPanel.Dock="Top" Header="Produtos">
-            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgProdutos" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" ScrollViewer.ScrollChanged="dgProdutos_ScrollChanged">
+            <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgProdutos" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" ScrollViewer.ScrollChanged="dgProdutos_ScrollChanged" CellEditEnding="dgProdutos_CellEditEnding">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridCell}">
                         <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
@@ -76,11 +76,19 @@
                     </Style>
                 </DataGrid.ItemContainerStyle>
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Header="Selecionado" Binding="{Binding Selecionado}" CanUserSort="False" CanUserReorder="False" />
+                    <DataGridCheckBoxColumn Header="Selecionado" Binding="{Binding Selecionado}" CanUserSort="False" CanUserReorder="False"  >
+                        <DataGridCheckBoxColumn.CellStyle>
+                            <Style>
+                                <EventSetter Event="CheckBox.Checked" Handler="CheckBox_Checked"/>
+                                <EventSetter Event="CheckBox.PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown"></EventSetter>
+                            </Style>
+                        </DataGridCheckBoxColumn.CellStyle>
+                    </DataGridCheckBoxColumn>                       
                     <DataGridTextColumn Header="Fornecedor" Binding="{Binding Fornecedor.Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Código do Fornecedor" Binding="{Binding CodigoFornecedor}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />                    
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade, StringFormat=F0, ConverterCulture=pt-BR }" IsReadOnly="True" />
                     <DataGridTextColumn Header="Atacado" Binding="{Binding ValorAtacado, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Varejo" Binding="{Binding ValorVarejo, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
                 </DataGrid.Columns>

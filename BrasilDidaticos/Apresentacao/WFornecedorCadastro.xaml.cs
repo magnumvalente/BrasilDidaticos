@@ -118,7 +118,7 @@ namespace BrasilDidaticos.Apresentacao
                 Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
                 entradaFornecedor.Chave = Comum.Util.Chave;
                 entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-                entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+                entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
                 if (_fornecedor == null) entradaFornecedor.Novo = true;
                 entradaFornecedor.Fornecedor = new Contrato.Fornecedor();
 
@@ -254,7 +254,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaTaxa entTaxa = new Contrato.EntradaTaxa();
             entTaxa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
             entTaxa.Chave = Comum.Util.Chave;
-            entTaxa.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entTaxa.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entTaxa.Taxa = new Contrato.Taxa() { Ativo = true, Fornecedor = true };
 
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());

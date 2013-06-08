@@ -18,8 +18,14 @@ namespace BrasilDidaticos.Apresentacao
     /// </summary>
     public partial class WParametro : Window
     {
+        #region "[Constantes]"
+
+        private const string COR_LINHA_GRID = "#FFF0F0F0";
+
+        #endregion
+
         #region "[Atributos]"
-        
+
         private bool _cancelou = false;
 
         #endregion
@@ -94,6 +100,8 @@ namespace BrasilDidaticos.Apresentacao
                         controler.Focus();
                         definiuFoco = true;
                     }
+                    if (dgParametros.RowDefinitions.Count % 2 > 0)
+                        controler.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(COR_LINHA_GRID));
                     dgParametros.Children.Add(controler);
                 }
             }

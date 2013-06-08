@@ -66,7 +66,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();            
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor();
 
             PreencherFiltro(entradaFornecedor.Fornecedor);

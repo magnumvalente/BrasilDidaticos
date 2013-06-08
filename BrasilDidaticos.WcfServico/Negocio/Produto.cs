@@ -50,10 +50,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     Codigo = produto.COD_PRODUTO,
                     CodigoFornecedor = produto.COD_PRODUTO_FORNECEDOR,
                     ValorBase = produto.NUM_VALOR,
+                    Quantidade = produto.NUM_QUANTIDADE,
                     Ncm = produto.NCM_PRODUTO,
                     Fornecedor = Negocio.Fornecedor.BuscarFornecedor(produto.T_FORNECEDOR),                    
                     Ativo = produto.BOL_ATIVO,                    
-                    Taxas = Negocio.Taxa.ListarProdutoTaxa(produto.T_PRODUTO_TAXA)
+                    Taxas = Negocio.Taxa.ListarProdutoTaxa(produto.T_PRODUTO_TAXA),
+                    UnidadeMedidas = Negocio.UnidadeMedida.ListarProdutoUnidadeMedida(produto.T_PRODUTO_UNIDADE_MEDIDA)
                 };
             }
 
@@ -114,21 +116,21 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Busca o produto no banco
                     var lstProdutos = (from p in context.T_PRODUTO
-                                                       where
-                                                       (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
-                                                       && (entradaProduto.EmpresaLogada.Id == Guid.Empty || p.T_FORNECEDOR.ID_EMPRESA == entradaProduto.EmpresaLogada.Id)
-                                                       && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.Contains(entradaProduto.Produto.Codigo))
-                                                       && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
-                                                       && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
-                                                       && (entradaProduto.Produto.Fornecedor.Id == Guid.Empty || p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id)
-                                                       select p
-                                                      ).OrderBy(o => o.NOME_PRODUTO).ThenBy(o => o.COD_PRODUTO).ThenBy(o => o.T_FORNECEDOR.NOME_FORNECEDOR).Skip(entradaProduto.PosicaoUltimoItem).Take(entradaProduto.CantidadeItens)
-                                                      .Select(p => new
-                                                      {
-                                                          p,
-                                                          t = p.T_PRODUTO_TAXA,
-                                                          um = p.T_PRODUTO_UNIDADE_MEDIDA
-                                                      }).ToList();
+                                       where
+                                        (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
+                                        && (entradaProduto.EmpresaLogada.Id == Guid.Empty || p.T_FORNECEDOR.ID_EMPRESA == entradaProduto.EmpresaLogada.Id)
+                                        && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.Contains(entradaProduto.Produto.Codigo))
+                                        && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
+                                        && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
+                                        && (entradaProduto.Produto.Fornecedor.Id == Guid.Empty || p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id)
+                                       select p
+                                        ).OrderBy(o => o.NOME_PRODUTO).ThenBy(o => o.COD_PRODUTO).ThenBy(o => o.T_FORNECEDOR.NOME_FORNECEDOR).Skip(entradaProduto.PosicaoUltimoItem).Take(entradaProduto.CantidadeItens)
+                                        .Select(p => new
+                                        {
+                                            p,
+                                            t = p.T_PRODUTO_TAXA,
+                                            um = p.T_PRODUTO_UNIDADE_MEDIDA
+                                        }).ToList();
 
                     // Verifica se foi encontrado algum registro
                     if (lstProdutos.Count > 0)
@@ -144,6 +146,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 Nome = item.p.NOME_PRODUTO,
                                 Codigo = item.p.COD_PRODUTO,
                                 CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                                Quantidade = item.p.NUM_QUANTIDADE,
                                 ValorBase = item.p.NUM_VALOR,
                                 Ncm = item.p.NCM_PRODUTO,
                                 Ativo = item.p.BOL_ATIVO,
@@ -187,6 +190,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 Nome = item.p.NOME_PRODUTO,
                                 Codigo = item.p.COD_PRODUTO,
                                 CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                                Quantidade = item.p.NUM_QUANTIDADE,
                                 ValorBase = item.p.NUM_VALOR,
                                 Ncm = item.p.NCM_PRODUTO,
                                 Ativo = item.p.BOL_ATIVO,
@@ -301,6 +305,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             Nome = item.p.NOME_PRODUTO,
                             Codigo = item.p.COD_PRODUTO,
                             CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
+                            Quantidade = item.p.NUM_QUANTIDADE,
                             ValorBase = item.p.NUM_VALOR,
                             Ncm = item.p.NCM_PRODUTO,
                             Ativo = item.p.BOL_ATIVO,
@@ -362,7 +367,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     List<Dados.PRODUTO> lstProdutos = (from p in context.T_PRODUTO
                                                        where (p.COD_PRODUTO == entradaProduto.Produto.Codigo
                                                           || (entradaProduto.Novo == null && entradaProduto.Produto.Id == p.ID_PRODUTO) 
-                                                          || (entradaProduto.Novo.Value == true && p.COD_PRODUTO_FORNECEDOR == entradaProduto.Produto.CodigoFornecedor && p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id))
+                                                          || (entradaProduto.Novo.Value == true && p.COD_PRODUTO_FORNECEDOR == entradaProduto.Produto.CodigoFornecedor && p.COD_PRODUTO_FORNECEDOR != string.Empty && p.ID_FORNECEDOR == entradaProduto.Produto.Fornecedor.Id))
                                                        select p).ToList();
 
                     // Verifica se foi encontrado algum registro
@@ -379,6 +384,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         {
                             // Atualiza o produto                            
                             lstProdutos.First().NOME_PRODUTO = entradaProduto.Produto.Nome;
+                            lstProdutos.First().NUM_QUANTIDADE = entradaProduto.Produto.Quantidade;
                             lstProdutos.First().NUM_VALOR = entradaProduto.Produto.ValorBase;
                             lstProdutos.First().COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
                             lstProdutos.First().ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
@@ -387,14 +393,26 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             lstProdutos.First().DATA_ATUALIZACAO = DateTime.Now;
                             lstProdutos.First().LOGIN_USUARIO = entradaProduto.UsuarioLogado;
 
+                            // Apaga todas as taxas que estão relacionados
+                            while (lstProdutos.First().T_PRODUTO_TAXA.Count > 0)
+                            {
+                                context.T_PRODUTO_TAXA.DeleteObject(lstProdutos.First().T_PRODUTO_TAXA.First());
+                            }
+
                             // Verifica se existe alguma taxa associada ao produto
                             if (entradaProduto.Produto.Taxas != null)
                             {
                                 // Para cada taxa associada
                                 foreach (Contrato.Taxa taxa in entradaProduto.Produto.Taxas)
                                 {
-                                    Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First().ID_PRODUTO, entradaProduto.UsuarioLogado, taxa);
+                                    Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First(), entradaProduto.UsuarioLogado, taxa);
                                 }
+                            }
+
+                            // Apaga todas as unidades de medidas que estão relacionados
+                            while (lstProdutos.First().T_PRODUTO_UNIDADE_MEDIDA.Count > 0)
+                            {
+                                context.T_PRODUTO_UNIDADE_MEDIDA.DeleteObject(lstProdutos.First().T_PRODUTO_UNIDADE_MEDIDA.First());
                             }
 
                             // Verifica se existe alguma unidade de medida associado ao produto
@@ -403,7 +421,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 // Para cada taxa associada
                                 foreach (Contrato.UnidadeMedida unidadeMedida in entradaProduto.Produto.UnidadeMedidas)
                                 {
-                                    Negocio.UnidadeMedida.SalvarUnidadeMedidaProduto(lstProdutos.First().ID_PRODUTO, entradaProduto.UsuarioLogado, unidadeMedida);
+                                    Negocio.UnidadeMedida.SalvarUnidadeMedidaProduto(lstProdutos.First(), entradaProduto.UsuarioLogado, unidadeMedida);
                                 }
                             }
                         }
@@ -429,6 +447,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             tProduto.ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
                             tProduto.NCM_PRODUTO = entradaProduto.Produto.Ncm;
                             tProduto.NUM_VALOR = entradaProduto.Produto.ValorBase;
+                            tProduto.NUM_QUANTIDADE = entradaProduto.Produto.Quantidade;
                             tProduto.BOL_ATIVO = entradaProduto.Produto.Ativo;
                             tProduto.DATA_ATUALIZACAO = DateTime.Now;
                             tProduto.LOGIN_USUARIO = entradaProduto.UsuarioLogado;
@@ -436,41 +455,22 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             // Verifica se existe alguma taxa associada ao produto
                             if (entradaProduto.Produto.Taxas != null)
                             {
-                                // Para cada perfil associado
+                                // Para cada taxa associada
                                 foreach (Contrato.Taxa taxa in entradaProduto.Produto.Taxas)
                                 {
-                                    // Associa a taxa ao produto
-                                    tProduto.T_PRODUTO_TAXA.Add(new Dados.PRODUTO_TAXA()
-                                    {
-                                        ID_PRODUTO_TAXA = Guid.NewGuid(),
-                                        ID_PRODUTO = entradaProduto.Produto.Id,
-                                        ID_TAXA = taxa.Id,
-                                        NUM_VALOR = taxa.Valor,
-                                        ORD_PRIORIDADE = taxa.Prioridade,
-                                        LOGIN_USUARIO = entradaProduto.UsuarioLogado,
-                                        DATA_ATUALIZACAO = DateTime.Now
-                                    });
+                                    Negocio.Taxa.SalvarTaxaProduto(tProduto, entradaProduto.UsuarioLogado, taxa);
                                 }
                             }
 
-                            // Verifica se existe alguma unidade de medida associada ao produto
+                            // Verifica se existe alguma unidade de medida associado ao produto
                             if (entradaProduto.Produto.UnidadeMedidas != null)
                             {
-                                // Para cada perfil associado
+                                // Para cada taxa associada
                                 foreach (Contrato.UnidadeMedida unidadeMedida in entradaProduto.Produto.UnidadeMedidas)
                                 {
-                                    // Associa a taxa ao produto
-                                    tProduto.T_PRODUTO_UNIDADE_MEDIDA.Add(new Dados.PRODUTO_UNIDADE_MEDIDA()
-                                    {
-                                        ID_PRODUTO_UNIDADE_MEDIDA = Guid.NewGuid(),
-                                        ID_PRODUTO = entradaProduto.Produto.Id,
-                                        ID_UNIDADE_MEDIDA = unidadeMedida.Id,
-                                        NUM_QUANTIDADE = unidadeMedida.Quantidade,
-                                        LOGIN_USUARIO = entradaProduto.UsuarioLogado,
-                                        DATA_ATUALIZACAO = DateTime.Now
-                                    });
+                                    Negocio.UnidadeMedida.SalvarUnidadeMedidaProduto(lstProdutos.First(), entradaProduto.UsuarioLogado, unidadeMedida);
                                 }
-                            }    
+                            }
 
                             context.AddToT_PRODUTO(tProduto);
                         }
@@ -510,22 +510,25 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Verifica se o usuário está autenticado
             if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
-
                 if (entradaProdutos.Produtos != null)
                 {
                     // Loga no banco de dados
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
                     // Se o identificador do fornecedor está vazio
-                    if (entradaProdutos.Fornecedor.Id == Guid.Empty)
+                    if (entradaProdutos.Fornecedor != null && entradaProdutos.Fornecedor.Id == Guid.Empty)
                         // Busca os dados do fornecedor
                         entradaProdutos.Fornecedor = Fornecedor.BuscarFornecedor((from f in context.T_FORNECEDOR where f.COD_FORNECEDOR == entradaProdutos.Fornecedor.Codigo select f).FirstOrDefault());
 
                     // Para cada produto existente na lista
                     foreach (Contrato.Produto produto in entradaProdutos.Produtos)
                     {
-                        // Define o fornecedor do produto
-                        produto.Fornecedor = entradaProdutos.Fornecedor;
+                        // Se o fornecedor do produto não foi informado
+                        if (produto.Fornecedor == null)
+                        {
+                            // Define o fornecedor do produto
+                            produto.Fornecedor = entradaProdutos.Fornecedor;
+                        }
 
                         // Verifica se as informações do produto foram informadas
                         string strValidacao = ValidarProdutoPreenchido(produto);
@@ -537,18 +540,20 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             retProduto.Mensagem = strValidacao;
                         }
                         else
-                        {                        
+                        {
                             // Busca o produto no banco
                             List<Dados.PRODUTO> lstProdutos = (from p in context.T_PRODUTO
-                                                               where 
-                                                                    p.COD_PRODUTO_FORNECEDOR == produto.CodigoFornecedor &&
-                                                                    p.ID_FORNECEDOR == entradaProdutos.Fornecedor.Id
-                                                               select p).ToList();
+                                                                where
+                                                                    (p.COD_PRODUTO_FORNECEDOR == produto.CodigoFornecedor ||
+                                                                    (p.ID_PRODUTO == produto.Id && produto.Id != Guid.Empty)) &&
+                                                                        p.ID_FORNECEDOR == produto.Fornecedor.Id
+                                                                select p).ToList();
 
                             // Se existe o produto
                             if (lstProdutos.Count > 0)
                             {
                                 // Atualiza o produto
+                                lstProdutos.First().NUM_QUANTIDADE = produto.Quantidade;
                                 lstProdutos.First().NUM_VALOR = produto.ValorBase;
                                 lstProdutos.First().ID_FORNECEDOR = produto.Fornecedor.Id;
                                 lstProdutos.First().NCM_PRODUTO = produto.Ncm;
@@ -556,16 +561,24 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 lstProdutos.First().DATA_ATUALIZACAO = DateTime.Now;
                                 lstProdutos.First().LOGIN_USUARIO = entradaProdutos.UsuarioLogado;
 
-                                // Verifica se existe alguma unidade de medida associada ao produto
-                                if (entradaProdutos.Fornecedor.Taxas != null)
+                                // Apaga todas as taxas que estão relacionados
+                                while (lstProdutos.First().T_PRODUTO_TAXA.Count > 0)
                                 {
-                                    // Para cada taxa associada
-                                    foreach (Contrato.Taxa taxa in entradaProdutos.Fornecedor.Taxas)
+                                    context.T_PRODUTO_TAXA.DeleteObject(lstProdutos.First().T_PRODUTO_TAXA.First());
+                                }
+
+                                if (entradaProdutos.Fornecedor != null)
+                                {
+                                    // Verifica se existe alguma taxa associada ao produto
+                                    if (produto.Fornecedor.Taxas != null)
                                     {
-                                        Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First().ID_PRODUTO, entradaProdutos.UsuarioLogado, taxa);
+                                        // Para cada taxa associada
+                                        foreach (Contrato.Taxa taxa in produto.Fornecedor.Taxas)
+                                        {
+                                            Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First(), entradaProdutos.UsuarioLogado, taxa);
+                                        }
                                     }
                                 }
-                                
                             }
                             else
                             {
@@ -576,6 +589,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 tProduto.NOME_PRODUTO = produto.Nome;
                                 tProduto.COD_PRODUTO_FORNECEDOR = produto.CodigoFornecedor;
                                 tProduto.ID_FORNECEDOR = produto.Fornecedor.Id;
+                                tProduto.NUM_QUANTIDADE = produto.Quantidade;
                                 tProduto.NUM_VALOR = produto.ValorBase;
                                 tProduto.NCM_PRODUTO = produto.Ncm;
                                 tProduto.BOL_ATIVO = produto.Ativo;
@@ -583,28 +597,18 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 tProduto.LOGIN_USUARIO = entradaProdutos.UsuarioLogado;
 
                                 // Verifica se existe alguma taxa associada ao produto
-                                if (entradaProdutos.Fornecedor.Taxas != null)
+                                if (produto.Fornecedor.Taxas != null)
                                 {
-                                    // Para cada perfil associado
-                                    foreach (Contrato.Taxa taxa in entradaProdutos.Fornecedor.Taxas)
+                                    // Para cada taxa associada
+                                    foreach (Contrato.Taxa taxa in produto.Fornecedor.Taxas)
                                     {
-                                        // Associa a taxa ao produto
-                                        tProduto.T_PRODUTO_TAXA.Add(new Dados.PRODUTO_TAXA()
-                                        {
-                                            ID_PRODUTO_TAXA = Guid.NewGuid(),
-                                            ID_PRODUTO = produto.Id,
-                                            ID_TAXA = taxa.Id,
-                                            NUM_VALOR = taxa.Valor,
-                                            ORD_PRIORIDADE = taxa.Prioridade,
-                                            LOGIN_USUARIO = entradaProdutos.UsuarioLogado,
-                                            DATA_ATUALIZACAO = DateTime.Now
-                                        });
+                                        Negocio.Taxa.SalvarTaxaProduto(tProduto, entradaProdutos.UsuarioLogado, taxa);
                                     }
                                 }
 
                                 context.AddToT_PRODUTO(tProduto);
                             }
-                        }                                          
+                        }
                     }
 
                     // Salva as alterações

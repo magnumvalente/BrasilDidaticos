@@ -187,6 +187,36 @@
   <wsdl:message name="IBrasilDidaticos_UnidadeMedidaSalvar_OutputMessage">
     <wsdl:part name="parameters" element="tns:UnidadeMedidaSalvarResponse" />
   </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PedidoBuscarCodigo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PedidoBuscarCodigo" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PedidoBuscarCodigo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PedidoBuscarCodigoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PedidoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:PedidoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PedidoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PedidoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PedidoSalvar_InputMessage">
+    <wsdl:part name="parameters" element="tns:PedidoSalvar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_PedidoSalvar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PedidoSalvarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_EstadoPedidoListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:EstadoPedidoListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_EstadoPedidoListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EstadoPedidoListarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_EmpresaListar_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmpresaListar" />
+  </wsdl:message>
+  <wsdl:message name="IBrasilDidaticos_EmpresaListar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmpresaListarResponse" />
+  </wsdl:message>
   <wsdl:message name="IBrasilDidaticos_UnidadeFederativaListar_InputMessage">
     <wsdl:part name="parameters" element="tns:UnidadeFederativaListar" />
   </wsdl:message>
@@ -313,6 +343,26 @@
     <wsdl:operation name="UnidadeMedidaSalvar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvar" message="tns:IBrasilDidaticos_UnidadeMedidaSalvar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvarResponse" message="tns:IBrasilDidaticos_UnidadeMedidaSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PedidoBuscarCodigo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/PedidoBuscarCodigo" message="tns:IBrasilDidaticos_PedidoBuscarCodigo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/PedidoBuscarCodigoResponse" message="tns:IBrasilDidaticos_PedidoBuscarCodigo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PedidoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/PedidoListar" message="tns:IBrasilDidaticos_PedidoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/PedidoListarResponse" message="tns:IBrasilDidaticos_PedidoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PedidoSalvar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/PedidoSalvar" message="tns:IBrasilDidaticos_PedidoSalvar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/PedidoSalvarResponse" message="tns:IBrasilDidaticos_PedidoSalvar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EstadoPedidoListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/EstadoPedidoListar" message="tns:IBrasilDidaticos_EstadoPedidoListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/EstadoPedidoListarResponse" message="tns:IBrasilDidaticos_EstadoPedidoListar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmpresaListar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/EmpresaListar" message="tns:IBrasilDidaticos_EmpresaListar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBrasilDidaticos/EmpresaListarResponse" message="tns:IBrasilDidaticos_EmpresaListar_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnidadeFederativaListar">
       <wsdl:input wsaw:Action="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListar" message="tns:IBrasilDidaticos_UnidadeFederativaListar_InputMessage" />
@@ -584,6 +634,51 @@
     </wsdl:operation>
     <wsdl:operation name="UnidadeMedidaSalvar">
       <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidoBuscarCodigo">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/PedidoBuscarCodigo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/PedidoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PedidoSalvar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/PedidoSalvar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EstadoPedidoListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/EstadoPedidoListar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmpresaListar">
+      <soap:operation soapAction="http://tempuri.org/IBrasilDidaticos/EmpresaListar" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

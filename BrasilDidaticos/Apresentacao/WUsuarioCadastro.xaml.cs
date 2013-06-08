@@ -172,6 +172,7 @@ namespace BrasilDidaticos.Apresentacao
         private void PreencherDadosUsuario(Contrato.Usuario Usuario)
         {
             // Preenche os dados do usuário
+            Usuario.Id = _usuario == null ? Guid.Empty : _usuario.Id;
             Usuario.Nome = txtNome.Conteudo;
             Usuario.Login = txtLogin.Conteudo;
             if (!string.IsNullOrWhiteSpace(txtSenha.Conteudo))

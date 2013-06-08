@@ -158,6 +158,31 @@ namespace BrasilDidaticos.WcfServico.Servico
             return Negocio.Orcamento.SalvarOrcamento(Orcamento);
         }
 
+        public string PedidoBuscarCodigo(Guid IdEmpresa)
+        {
+            return Negocio.Pedido.BuscarCodigoPedido(IdEmpresa);
+        }
+
+        public Contrato.RetornoPedido PedidoListar(Contrato.EntradaPedido Pedido)
+        {
+            return Negocio.Pedido.ListarPedido(Pedido);
+        }
+
+        public Contrato.RetornoPedido PedidoSalvar(Contrato.EntradaPedido Pedido)
+        {
+            return Negocio.Pedido.SalvarPedido(Pedido);
+        }
+
+        public Contrato.RetornoEmpresa EmpresaListar(Contrato.EntradaEmpresa Empresa)
+        {
+            return Negocio.Empresa.ListarEmpresa(Empresa);
+        }
+
+        public Contrato.RetornoEstadoPedido EstadoPedidoListar(Contrato.EntradaEstadoPedido EstadoPedido)
+        {
+            return Negocio.EstadoPedido.ListarEstadoPedido(EstadoPedido);
+        }
+
         public Contrato.RetornoEstadoOrcamento EstadoOrcamentoListar(Contrato.EntradaEstadoOrcamento EstadoOrcamento)
         {
             return Negocio.EstadoOrcamento.ListarEstadoOrcamento(EstadoOrcamento);

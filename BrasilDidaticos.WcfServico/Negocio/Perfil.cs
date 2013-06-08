@@ -181,7 +181,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                     lstPerfis.First().T_PERFIL_PERMISSAO.Add(new Dados.PERFIL_PERMISSAO()
                                     {
                                         ID_PERFIL_PERMISSAO = Guid.NewGuid(),
-                                        ID_PERFIL = entradaPerfil.Perfil.Id,
+                                        ID_PERFIL = lstPerfis.First().ID_PERFIL,
                                         ID_PERMISSAO = permissao.Id,
                                         LOGIN_USUARIO = entradaPerfil.UsuarioLogado,
                                         DATA_ATUALIZACAO = DateTime.Now
@@ -194,6 +194,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             // Cria o perfil
                             Dados.PERFIL tPerfil = new Dados.PERFIL();
                             tPerfil.ID_PERFIL = Guid.NewGuid();
+                            tPerfil.ID_EMPRESA = entradaPerfil.EmpresaLogada.Id;
                             tPerfil.COD_PERFIL = entradaPerfil.Perfil.Codigo;
                             tPerfil.NOME_PERFIL = entradaPerfil.Perfil.Nome;
                             tPerfil.DES_PERFIL = entradaPerfil.Perfil.Descricao;

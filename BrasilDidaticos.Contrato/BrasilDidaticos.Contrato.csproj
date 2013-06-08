@@ -43,6 +43,14 @@
   <ItemGroup>
     <Compile Include="Constantes.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="RetornoEstadoPedido.cs" />
+    <Compile Include="EntradaEstadoPedido.cs" />
+    <Compile Include="RetornoItemPedido.cs" />
+    <Compile Include="RetornoPedido.cs" />
+    <Compile Include="EntradaPedido.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="ItemPedido.cs" />
+    <Compile Include="EstadoPedido.cs" />
     <Compile Include="RetornoUnidadeMedida.cs" />
     <Compile Include="EntradaMedida.cs" />
     <Compile Include="UnidadeMedida.cs" />
@@ -54,7 +62,7 @@
     <Compile Include="EstadoOrcamento.cs" />
     <Compile Include="RetornoUnidadeFederativa.cs" />
     <Compile Include="UnidadeFederativa.cs" />
-    <Compile Include="EntradaItens.cs" />
+    <Compile Include="EntradaItemPedido.cs" />
     <Compile Include="RetornoItem.cs" />
     <Compile Include="EntradaItem.cs" />
     <Compile Include="Item.cs" />

@@ -29,5 +29,24 @@ namespace BrasilDidaticos.Contrato
             DataHora,
             Cor
         }
+
+        public enum EstadoOrcamento
+        {
+            Iniciado = 01,
+            EmAndamento = 02,
+            Concluido = 03,
+            Aprovado = 04,
+            Reprovado = 05,
+            Reiniciado = 06
+        }
+
+        public enum EstadoPedido
+        {
+            EmAndamento = 01,
+            Concluido = 02,
+            Aprovado = 03,
+            Reprovado = 04,
+            Reiniciado = 05
+        }
     }
 }

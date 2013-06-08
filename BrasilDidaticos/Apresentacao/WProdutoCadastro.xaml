@@ -117,7 +117,7 @@
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn Header="Selecionado" Binding="{Binding Selecionado}" CanUserSort="False" CanUserReorder="False" />
                             <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" CanUserReorder="True"/>
-                            <DataGridTextColumn Header="Qtd Itens" Binding="{Binding Quantidade, StringFormat=N0, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" >
+                            <DataGridTextColumn Header="Qtd Itens" Binding="{Binding QuantidadeItens, StringFormat=N0, ConverterCulture=pt-BR}" ElementStyle="{StaticResource RightAlignStyle}" >
                                 <DataGridTextColumn.EditingElementStyle>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Setter Property="HorizontalAlignment" Value="Right"/>

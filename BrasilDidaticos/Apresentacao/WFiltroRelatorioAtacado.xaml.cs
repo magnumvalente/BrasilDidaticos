@@ -41,7 +41,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaProduto entradaProduto = new Contrato.EntradaProduto();            
             entradaProduto.Chave = Comum.Util.Chave;
             entradaProduto.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaProduto.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaProduto.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaProduto.Produto = new Contrato.Produto();
 
             Contrato.EntradaParametro entradaParametro = new Contrato.EntradaParametro();
@@ -70,7 +70,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
             entradaFornecedor.Chave = Comum.Util.Chave;
             entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
+            entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
             entradaFornecedor.PreencherListaSelecao = true;
             entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
 

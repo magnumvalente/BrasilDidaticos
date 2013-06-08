@@ -74,6 +74,9 @@
       <DependentUpon>BrasilDidaticos.edmx</DependentUpon>
     </Compile>
     <Compile Include="Negocio\Cliente.cs" />
+    <Compile Include="Negocio\EstadoPedido.cs" />
+    <Compile Include="Negocio\Pedido.cs" />
+    <Compile Include="Negocio\ItemPedido.cs" />
     <Compile Include="Negocio\UnidadeMedida.cs" />
     <Compile Include="Negocio\Empresa.cs" />
     <Compile Include="Negocio\EstadoOrcamento.cs" />

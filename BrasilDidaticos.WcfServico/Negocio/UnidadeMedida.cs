@@ -97,8 +97,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     lstUnidadeMedida.Add(new Contrato.UnidadeMedida
                     {
                         Id = unidademedida.T_UNIDADE_MEDIDA.ID_UNIDADE_MEDIDA,
+                        Codigo = unidademedida.T_UNIDADE_MEDIDA.COD_UNIDADE_MEDIDA,
                         Nome = unidademedida.T_UNIDADE_MEDIDA.NOME_UNIDADE_MEDIDA,
-                        Quantidade = unidademedida.NUM_QUANTIDADE
+                        Descricao = unidademedida.T_UNIDADE_MEDIDA.DES_UNIDADE_MEDIDA,
+                        QuantidadeItens = unidademedida.NUM_QUANTIDADE_ITEM,
+                        Quantidade = unidademedida.NUM_QUANTIDADE,
+                        Ativo = unidademedida.T_UNIDADE_MEDIDA.BOL_ATIVO
                     });
                 }
             }
@@ -111,23 +115,26 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioUnidadeMedida">Recebe os unidadeMedidas do produto recuperado do banco</param>
         /// <returns>List<Contrato.UnidadeMedida></returns>
-        //internal static Contrato.UnidadeMedida BuscarProdutoUnidadeMedida(Dados.PRODUTO_UNIDADE_MEDIDA produtoUnidadeMedida)
-        //{
-        //    Contrato.UnidadeMedida unidademedida = null;
+        internal static Contrato.UnidadeMedida BuscarProdutoUnidadeMedida(Dados.PRODUTO_UNIDADE_MEDIDA produtoUnidadeMedida)
+        {
+            Contrato.UnidadeMedida unidademedida = null;
 
-        //    if (produtoUnidadeMedida != null)
-        //    {
-        //        unidademedida = new Contrato.UnidadeMedida
-        //        {
-        //            Id = produtoUnidadeMedida.T_UNIDADE_MEDIDA.ID_UNIDADE_MEDIDA,
-        //            Nome = produtoUnidadeMedida.T_UNIDADE_MEDIDA.NOME_UNIDADE_MEDIDA,
-        //            Descricao = produtoUnidadeMedida.T_UNIDADE_MEDIDA.DES_UNIDADE_MEDIDA,
-        //            Ativo = produtoUnidadeMedida.T_UNIDADE_MEDIDA.BOL_ATIVO
-        //        };
-        //    }
+            if (produtoUnidadeMedida != null)
+            {
+                unidademedida = new Contrato.UnidadeMedida
+                {
+                    Id = produtoUnidadeMedida.T_UNIDADE_MEDIDA.ID_UNIDADE_MEDIDA,
+                    Codigo = produtoUnidadeMedida.T_UNIDADE_MEDIDA.COD_UNIDADE_MEDIDA,
+                    Nome = produtoUnidadeMedida.T_UNIDADE_MEDIDA.NOME_UNIDADE_MEDIDA,
+                    Descricao = produtoUnidadeMedida.T_UNIDADE_MEDIDA.DES_UNIDADE_MEDIDA,
+                    QuantidadeItens = produtoUnidadeMedida.NUM_QUANTIDADE_ITEM,
+                    Quantidade = produtoUnidadeMedida.NUM_QUANTIDADE,
+                    Ativo = produtoUnidadeMedida.T_UNIDADE_MEDIDA.BOL_ATIVO
+                };
+            }
 
-        //    return unidademedida;
-        //}
+            return unidademedida;
+        }
 
         /// <summary>
         /// Método para salvar a unidade de medida
@@ -225,7 +232,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="UnidadeMedidas">Objeto com os dados do unidade de medida</param>
         /// <returns>Contrato.RetornoUnidadeMedida</returns>
-        internal static Contrato.RetornoUnidadeMedida SalvarUnidadeMedidaProduto(Guid IdProduto, string UsuarioLogado, Contrato.UnidadeMedida UnidadeMedida)
+        internal static Contrato.RetornoUnidadeMedida SalvarUnidadeMedidaProduto(Dados.PRODUTO Produto, string UsuarioLogado, Contrato.UnidadeMedida UnidadeMedida)
         {
             // Objeto que recebe o retorno do método
             Contrato.RetornoUnidadeMedida retUnidadeMedida = new Contrato.RetornoUnidadeMedida();
@@ -243,34 +250,20 @@ namespace BrasilDidaticos.WcfServico.Negocio
             {
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                                
+                // Cria a unidade de medida
+                Dados.PRODUTO_UNIDADE_MEDIDA tProdutoUnidadeMedida = new Dados.PRODUTO_UNIDADE_MEDIDA()
+                                    {
+                                        ID_PRODUTO_UNIDADE_MEDIDA = Guid.NewGuid(),
+                                        ID_PRODUTO = Produto.ID_PRODUTO,
+                                        ID_UNIDADE_MEDIDA = UnidadeMedida.Id,
+                                        NUM_QUANTIDADE = UnidadeMedida.Quantidade,
+                                        NUM_QUANTIDADE_ITEM = UnidadeMedida.QuantidadeItens,
+                                        LOGIN_USUARIO = UsuarioLogado,
+                                        DATA_ATUALIZACAO = DateTime.Now
+                                    };
 
-                // Busca o unidademedida do produto no banco
-                List<Dados.PRODUTO_UNIDADE_MEDIDA> lstUnidadeMedidas = (from t in context.T_PRODUTO_UNIDADE_MEDIDA
-                                                                where (t.ID_UNIDADE_MEDIDA == UnidadeMedida.Id && t.ID_PRODUTO == IdProduto)
-                                                                select t).ToList();
-                // Se existe a unidade de medida
-                if (lstUnidadeMedidas.Count > 0)
-                {
-                    // Atualiza a unidade de medida
-                    lstUnidadeMedidas.First().NUM_QUANTIDADE = UnidadeMedida.Quantidade;                    
-                    lstUnidadeMedidas.First().DATA_ATUALIZACAO = DateTime.Now;
-                    lstUnidadeMedidas.First().LOGIN_USUARIO = UsuarioLogado;
-                }
-                else
-                {
-                    // Cria a unidade de medida
-                    Dados.PRODUTO_UNIDADE_MEDIDA tProdutoUnidadeMedida = new Dados.PRODUTO_UNIDADE_MEDIDA()
-                                        {
-                                            ID_PRODUTO_UNIDADE_MEDIDA = Guid.NewGuid(),
-                                            ID_PRODUTO = IdProduto,
-                                            ID_UNIDADE_MEDIDA = UnidadeMedida.Id,
-                                            NUM_QUANTIDADE = UnidadeMedida.Quantidade,
-                                            LOGIN_USUARIO = UsuarioLogado,
-                                            DATA_ATUALIZACAO = DateTime.Now
-                                        };
-
-                    context.AddToT_PRODUTO_UNIDADE_MEDIDA(tProdutoUnidadeMedida);
-                }
+                Produto.T_PRODUTO_UNIDADE_MEDIDA.Add(tProdutoUnidadeMedida);
 
                 // Salva as alterações
                 context.SaveChanges();
@@ -299,7 +292,6 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
             // retorna a variável de retorno
             return strRetorno;
-
         }       
     }
 }

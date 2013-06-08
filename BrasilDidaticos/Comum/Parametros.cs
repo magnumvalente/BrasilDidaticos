@@ -61,7 +61,7 @@ namespace BrasilDidaticos.Comum
             set;
         }
 
-        public static Guid EmpresaProduto
+        public static Contrato.Empresa EmpresaProduto
         {
             get;
             set;
@@ -77,6 +77,13 @@ namespace BrasilDidaticos.Comum
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
             Contrato.RetornoParametro retParametro = servBrasilDidaticos.ParametroListar(entradaParametro);
             servBrasilDidaticos.Close();
+
+            EmpresaProduto = new Contrato.Empresa() { Id = Comum.Util.UsuarioLogado.Empresa.Id };
+            QuantidadeItensPagina = Constantes.QTD_ITENS_PAGINA;
+            ValidadeOrcamento = Constantes.NUM_VALIDADE_ORCAMENTO;
+            PrazoEntrega = Constantes.NUM_PRAZO_ENTREGA;
+            CorPrimariaFundoTela = Constantes.COR_PRIMARIA_FUNDO;
+            CorSecundariaFundoTela = Constantes.COR_SECUNDARIA_FUNDO;
 
             if (retParametro.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
@@ -112,6 +119,17 @@ namespace BrasilDidaticos.Comum
                                 break;
                             case Constantes.PARAMETRO_COR_SECUNDARIA_FUNDO:
                                 CorSecundariaFundoTela = parametro.Valor;
+                                break;
+                            case Constantes.PARAMETRO_COD_EMPRESA_PRODUTO:
+                                Contrato.EntradaEmpresa entradaEmpresa = new Contrato.EntradaEmpresa();
+                                entradaEmpresa.Chave = Comum.Util.Chave;
+                                entradaEmpresa.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                                entradaEmpresa.Empresa = new Contrato.Empresa() { Codigo = parametro.Valor, Ativo = true};
+                                servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
+                                Contrato.RetornoEmpresa retEmpresa = servBrasilDidaticos.EmpresaListar(entradaEmpresa);
+                                servBrasilDidaticos.Close();
+                                if (retEmpresa.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+                                    EmpresaProduto = new Contrato.Empresa() { Id = retEmpresa.Empresas.First().Id };                                
                                 break;
                         }
                     }

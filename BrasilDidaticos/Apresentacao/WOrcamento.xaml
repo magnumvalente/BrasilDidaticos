@@ -83,6 +83,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat={}{0:dd/MM/yyyy}}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado.Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Responsável" Binding="{Binding Responsavel.Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Vendedor" Binding="{Binding Vendedor.Nome}" IsReadOnly="True" />

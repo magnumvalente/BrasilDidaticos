@@ -44,6 +44,15 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_TAXA_T_EMPRESA", "T_EMPRESA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.EMPRESA), "TAXA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.TAXA), true)]
 [assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_USUARIO_T_EMPRESA", "T_EMPRESA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.EMPRESA), "USUARIO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.USUARIO), true)]
 [assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_UNIDADE_MEDIDA_T_EMPRESA", "EMPRESA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.EMPRESA), "T_UNIDADE_MEDIDA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.UNIDADE_MEDIDA), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_PRODUTO", "PRODUTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(BrasilDidaticos.WcfServico.Dados.PRODUTO), "T_ITEM_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.ITEM_PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_EMPRESA", "EMPRESA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.EMPRESA), "T_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.ESTADO_PEDIDO), "T_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_PEDIDO", "T_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.PEDIDO), "ITEM_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.ITEM_PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_USUARIO", "USUARIO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.USUARIO), "T_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(BrasilDidaticos.WcfServico.Dados.ESTADO_PEDIDO), "ESTADO_PEDIDO1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.ESTADO_PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(BrasilDidaticos.WcfServico.Dados.ESTADO_PEDIDO), "ESTADO_PEDIDO1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.ESTADO_PEDIDO), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(BrasilDidaticos.WcfServico.Dados.UNIDADE_MEDIDA), "ITEM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.ITEM), true)]
+[assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(BrasilDidaticos.WcfServico.Dados.UNIDADE_MEDIDA), "ITEM_PEDIDO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.ITEM_PEDIDO), true)]
 [assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO", "PRODUTO", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.PRODUTO), "T_PRODUTO_UNIDADE_MEDIDA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.PRODUTO_UNIDADE_MEDIDA), true)]
 [assembly: EdmRelationshipAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_UNIDADE_MEDIDA_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(BrasilDidaticos.WcfServico.Dados.UNIDADE_MEDIDA), "T_PRODUTO_UNIDADE_MEDIDA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(BrasilDidaticos.WcfServico.Dados.PRODUTO_UNIDADE_MEDIDA), true)]
 
@@ -404,6 +413,54 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<ESTADO_PEDIDO> T_ESTADO_PEDIDO
+        {
+            get
+            {
+                if ((_T_ESTADO_PEDIDO == null))
+                {
+                    _T_ESTADO_PEDIDO = base.CreateObjectSet<ESTADO_PEDIDO>("T_ESTADO_PEDIDO");
+                }
+                return _T_ESTADO_PEDIDO;
+            }
+        }
+        private ObjectSet<ESTADO_PEDIDO> _T_ESTADO_PEDIDO;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ITEM_PEDIDO> T_ITEM_PEDIDO
+        {
+            get
+            {
+                if ((_T_ITEM_PEDIDO == null))
+                {
+                    _T_ITEM_PEDIDO = base.CreateObjectSet<ITEM_PEDIDO>("T_ITEM_PEDIDO");
+                }
+                return _T_ITEM_PEDIDO;
+            }
+        }
+        private ObjectSet<ITEM_PEDIDO> _T_ITEM_PEDIDO;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PEDIDO> T_PEDIDO
+        {
+            get
+            {
+                if ((_T_PEDIDO == null))
+                {
+                    _T_PEDIDO = base.CreateObjectSet<PEDIDO>("T_PEDIDO");
+                }
+                return _T_PEDIDO;
+            }
+        }
+        private ObjectSet<PEDIDO> _T_PEDIDO;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<PRODUTO_UNIDADE_MEDIDA> T_PRODUTO_UNIDADE_MEDIDA
         {
             get
@@ -570,6 +627,30 @@ namespace BrasilDidaticos.WcfServico.Dados
         public void AddToT_UNIDADE_MEDIDA(UNIDADE_MEDIDA uNIDADE_MEDIDA)
         {
             base.AddObject("T_UNIDADE_MEDIDA", uNIDADE_MEDIDA);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_ESTADO_PEDIDO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_ESTADO_PEDIDO(ESTADO_PEDIDO eSTADO_PEDIDO)
+        {
+            base.AddObject("T_ESTADO_PEDIDO", eSTADO_PEDIDO);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_ITEM_PEDIDO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_ITEM_PEDIDO(ITEM_PEDIDO iTEM_PEDIDO)
+        {
+            base.AddObject("T_ITEM_PEDIDO", iTEM_PEDIDO);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the T_PEDIDO EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToT_PEDIDO(PEDIDO pEDIDO)
+        {
+            base.AddObject("T_PEDIDO", pEDIDO);
         }
     
         /// <summary>
@@ -1650,6 +1731,28 @@ namespace BrasilDidaticos.WcfServico.Dados
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_EMPRESA", "T_PEDIDO")]
+        public EntityCollection<PEDIDO> T_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA", "T_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA", "T_PEDIDO", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1973,6 +2076,332 @@ namespace BrasilDidaticos.WcfServico.Dados
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ORCAMENTO>("BrasilDidaticosModel.FK_T_ORCAMENTO_T_ESTADO_ORCAMENTO", "ORCAMENTO", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="ESTADO_PEDIDO")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ESTADO_PEDIDO : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ESTADO_PEDIDO object.
+        /// </summary>
+        /// <param name="iD_ESTADO_PEDIDO">Initial value of the ID_ESTADO_PEDIDO property.</param>
+        /// <param name="cOD_ESTADO_PEDIDO">Initial value of the COD_ESTADO_PEDIDO property.</param>
+        /// <param name="nOME_ESTADO_PEDIDO">Initial value of the NOME_ESTADO_PEDIDO property.</param>
+        /// <param name="bOL_ATIVO">Initial value of the BOL_ATIVO property.</param>
+        public static ESTADO_PEDIDO CreateESTADO_PEDIDO(global::System.Guid iD_ESTADO_PEDIDO, global::System.String cOD_ESTADO_PEDIDO, global::System.String nOME_ESTADO_PEDIDO, global::System.Boolean bOL_ATIVO)
+        {
+            ESTADO_PEDIDO eSTADO_PEDIDO = new ESTADO_PEDIDO();
+            eSTADO_PEDIDO.ID_ESTADO_PEDIDO = iD_ESTADO_PEDIDO;
+            eSTADO_PEDIDO.COD_ESTADO_PEDIDO = cOD_ESTADO_PEDIDO;
+            eSTADO_PEDIDO.NOME_ESTADO_PEDIDO = nOME_ESTADO_PEDIDO;
+            eSTADO_PEDIDO.BOL_ATIVO = bOL_ATIVO;
+            return eSTADO_PEDIDO;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_ESTADO_PEDIDO
+        {
+            get
+            {
+                return _ID_ESTADO_PEDIDO;
+            }
+            set
+            {
+                if (_ID_ESTADO_PEDIDO != value)
+                {
+                    OnID_ESTADO_PEDIDOChanging(value);
+                    ReportPropertyChanging("ID_ESTADO_PEDIDO");
+                    _ID_ESTADO_PEDIDO = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_ESTADO_PEDIDO");
+                    OnID_ESTADO_PEDIDOChanged();
+                }
+            }
+        }
+        private global::System.Guid _ID_ESTADO_PEDIDO;
+        partial void OnID_ESTADO_PEDIDOChanging(global::System.Guid value);
+        partial void OnID_ESTADO_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String COD_ESTADO_PEDIDO
+        {
+            get
+            {
+                return _COD_ESTADO_PEDIDO;
+            }
+            set
+            {
+                OnCOD_ESTADO_PEDIDOChanging(value);
+                ReportPropertyChanging("COD_ESTADO_PEDIDO");
+                _COD_ESTADO_PEDIDO = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("COD_ESTADO_PEDIDO");
+                OnCOD_ESTADO_PEDIDOChanged();
+            }
+        }
+        private global::System.String _COD_ESTADO_PEDIDO;
+        partial void OnCOD_ESTADO_PEDIDOChanging(global::System.String value);
+        partial void OnCOD_ESTADO_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String NOME_ESTADO_PEDIDO
+        {
+            get
+            {
+                return _NOME_ESTADO_PEDIDO;
+            }
+            set
+            {
+                OnNOME_ESTADO_PEDIDOChanging(value);
+                ReportPropertyChanging("NOME_ESTADO_PEDIDO");
+                _NOME_ESTADO_PEDIDO = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("NOME_ESTADO_PEDIDO");
+                OnNOME_ESTADO_PEDIDOChanged();
+            }
+        }
+        private global::System.String _NOME_ESTADO_PEDIDO;
+        partial void OnNOME_ESTADO_PEDIDOChanging(global::System.String value);
+        partial void OnNOME_ESTADO_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean BOL_ATIVO
+        {
+            get
+            {
+                return _BOL_ATIVO;
+            }
+            set
+            {
+                OnBOL_ATIVOChanging(value);
+                ReportPropertyChanging("BOL_ATIVO");
+                _BOL_ATIVO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BOL_ATIVO");
+                OnBOL_ATIVOChanged();
+            }
+        }
+        private global::System.Boolean _BOL_ATIVO;
+        partial void OnBOL_ATIVOChanging(global::System.Boolean value);
+        partial void OnBOL_ATIVOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ID_ESTADO_PEDIDO_ANTERIOR
+        {
+            get
+            {
+                return _ID_ESTADO_PEDIDO_ANTERIOR;
+            }
+            set
+            {
+                OnID_ESTADO_PEDIDO_ANTERIORChanging(value);
+                ReportPropertyChanging("ID_ESTADO_PEDIDO_ANTERIOR");
+                _ID_ESTADO_PEDIDO_ANTERIOR = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_ESTADO_PEDIDO_ANTERIOR");
+                OnID_ESTADO_PEDIDO_ANTERIORChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ID_ESTADO_PEDIDO_ANTERIOR;
+        partial void OnID_ESTADO_PEDIDO_ANTERIORChanging(Nullable<global::System.Guid> value);
+        partial void OnID_ESTADO_PEDIDO_ANTERIORChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ID_ESTADO_PEDIDO_SUCESSOR
+        {
+            get
+            {
+                return _ID_ESTADO_PEDIDO_SUCESSOR;
+            }
+            set
+            {
+                OnID_ESTADO_PEDIDO_SUCESSORChanging(value);
+                ReportPropertyChanging("ID_ESTADO_PEDIDO_SUCESSOR");
+                _ID_ESTADO_PEDIDO_SUCESSOR = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_ESTADO_PEDIDO_SUCESSOR");
+                OnID_ESTADO_PEDIDO_SUCESSORChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ID_ESTADO_PEDIDO_SUCESSOR;
+        partial void OnID_ESTADO_PEDIDO_SUCESSORChanging(Nullable<global::System.Guid> value);
+        partial void OnID_ESTADO_PEDIDO_SUCESSORChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_ESTADO_PEDIDO", "T_PEDIDO")]
+        public EntityCollection<PEDIDO> T_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO", "T_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO", "T_PEDIDO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO1")]
+        public EntityCollection<ESTADO_PEDIDO> T_ESTADO_PEDIDO_ANTERIORES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO")]
+        public ESTADO_PEDIDO T_ESTADO_PEDIDO_ANTERIOR
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ESTADO_PEDIDO> T_ESTADO_PEDIDO_ANTERIORReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO1")]
+        public EntityCollection<ESTADO_PEDIDO> T_ESTADO_PEDIDO_SUCESSORES
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO")]
+        public ESTADO_PEDIDO T_ESTADO_PEDIDO_SUCESSOR
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ESTADO_PEDIDO> T_ESTADO_PEDIDO_SUCESSORReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1", "ESTADO_PEDIDO", value);
                 }
             }
         }
@@ -2944,6 +3373,30 @@ namespace BrasilDidaticos.WcfServico.Dados
         private global::System.Decimal _NUM_VALOR_UNITARIO;
         partial void OnNUM_VALOR_UNITARIOChanging(global::System.Decimal value);
         partial void OnNUM_VALOR_UNITARIOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ID_UNIDADE_MEDIDA
+        {
+            get
+            {
+                return _ID_UNIDADE_MEDIDA;
+            }
+            set
+            {
+                OnID_UNIDADE_MEDIDAChanging(value);
+                ReportPropertyChanging("ID_UNIDADE_MEDIDA");
+                _ID_UNIDADE_MEDIDA = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_UNIDADE_MEDIDA");
+                OnID_UNIDADE_MEDIDAChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ID_UNIDADE_MEDIDA;
+        partial void OnID_UNIDADE_MEDIDAChanging(Nullable<global::System.Guid> value);
+        partial void OnID_UNIDADE_MEDIDAChanged();
 
         #endregion
     
@@ -3021,6 +3474,418 @@ namespace BrasilDidaticos.WcfServico.Dados
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PRODUTO>("BrasilDidaticosModel.FK_T_ITEM_T_PRODUTO", "T_PRODUTO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA")]
+        public UNIDADE_MEDIDA T_UNIDADE_MEDIDA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UNIDADE_MEDIDA> T_UNIDADE_MEDIDAReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="ITEM_PEDIDO")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ITEM_PEDIDO : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ITEM_PEDIDO object.
+        /// </summary>
+        /// <param name="iD_ITEM_PEDIDO">Initial value of the ID_ITEM_PEDIDO property.</param>
+        /// <param name="iD_PEDIDO">Initial value of the ID_PEDIDO property.</param>
+        /// <param name="nUM_VALOR">Initial value of the NUM_VALOR property.</param>
+        /// <param name="nUM_QUANTIDADE">Initial value of the NUM_QUANTIDADE property.</param>
+        /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
+        /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
+        public static ITEM_PEDIDO CreateITEM_PEDIDO(global::System.Guid iD_ITEM_PEDIDO, global::System.Guid iD_PEDIDO, global::System.Decimal nUM_VALOR, global::System.Int32 nUM_QUANTIDADE, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO)
+        {
+            ITEM_PEDIDO iTEM_PEDIDO = new ITEM_PEDIDO();
+            iTEM_PEDIDO.ID_ITEM_PEDIDO = iD_ITEM_PEDIDO;
+            iTEM_PEDIDO.ID_PEDIDO = iD_PEDIDO;
+            iTEM_PEDIDO.NUM_VALOR = nUM_VALOR;
+            iTEM_PEDIDO.NUM_QUANTIDADE = nUM_QUANTIDADE;
+            iTEM_PEDIDO.DATA_ATUALIZACAO = dATA_ATUALIZACAO;
+            iTEM_PEDIDO.LOGIN_USUARIO = lOGIN_USUARIO;
+            return iTEM_PEDIDO;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_ITEM_PEDIDO
+        {
+            get
+            {
+                return _ID_ITEM_PEDIDO;
+            }
+            set
+            {
+                if (_ID_ITEM_PEDIDO != value)
+                {
+                    OnID_ITEM_PEDIDOChanging(value);
+                    ReportPropertyChanging("ID_ITEM_PEDIDO");
+                    _ID_ITEM_PEDIDO = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_ITEM_PEDIDO");
+                    OnID_ITEM_PEDIDOChanged();
+                }
+            }
+        }
+        private global::System.Guid _ID_ITEM_PEDIDO;
+        partial void OnID_ITEM_PEDIDOChanging(global::System.Guid value);
+        partial void OnID_ITEM_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ID_PRODUTO
+        {
+            get
+            {
+                return _ID_PRODUTO;
+            }
+            set
+            {
+                OnID_PRODUTOChanging(value);
+                ReportPropertyChanging("ID_PRODUTO");
+                _ID_PRODUTO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_PRODUTO");
+                OnID_PRODUTOChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ID_PRODUTO;
+        partial void OnID_PRODUTOChanging(Nullable<global::System.Guid> value);
+        partial void OnID_PRODUTOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_PEDIDO
+        {
+            get
+            {
+                return _ID_PEDIDO;
+            }
+            set
+            {
+                OnID_PEDIDOChanging(value);
+                ReportPropertyChanging("ID_PEDIDO");
+                _ID_PEDIDO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_PEDIDO");
+                OnID_PEDIDOChanged();
+            }
+        }
+        private global::System.Guid _ID_PEDIDO;
+        partial void OnID_PEDIDOChanging(global::System.Guid value);
+        partial void OnID_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal NUM_VALOR
+        {
+            get
+            {
+                return _NUM_VALOR;
+            }
+            set
+            {
+                OnNUM_VALORChanging(value);
+                ReportPropertyChanging("NUM_VALOR");
+                _NUM_VALOR = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_VALOR");
+                OnNUM_VALORChanged();
+            }
+        }
+        private global::System.Decimal _NUM_VALOR;
+        partial void OnNUM_VALORChanging(global::System.Decimal value);
+        partial void OnNUM_VALORChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> NUM_DESCONTO
+        {
+            get
+            {
+                return _NUM_DESCONTO;
+            }
+            set
+            {
+                OnNUM_DESCONTOChanging(value);
+                ReportPropertyChanging("NUM_DESCONTO");
+                _NUM_DESCONTO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_DESCONTO");
+                OnNUM_DESCONTOChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _NUM_DESCONTO;
+        partial void OnNUM_DESCONTOChanging(Nullable<global::System.Decimal> value);
+        partial void OnNUM_DESCONTOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NUM_QUANTIDADE
+        {
+            get
+            {
+                return _NUM_QUANTIDADE;
+            }
+            set
+            {
+                OnNUM_QUANTIDADEChanging(value);
+                ReportPropertyChanging("NUM_QUANTIDADE");
+                _NUM_QUANTIDADE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_QUANTIDADE");
+                OnNUM_QUANTIDADEChanged();
+            }
+        }
+        private global::System.Int32 _NUM_QUANTIDADE;
+        partial void OnNUM_QUANTIDADEChanging(global::System.Int32 value);
+        partial void OnNUM_QUANTIDADEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DATA_ATUALIZACAO
+        {
+            get
+            {
+                return _DATA_ATUALIZACAO;
+            }
+            set
+            {
+                OnDATA_ATUALIZACAOChanging(value);
+                ReportPropertyChanging("DATA_ATUALIZACAO");
+                _DATA_ATUALIZACAO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DATA_ATUALIZACAO");
+                OnDATA_ATUALIZACAOChanged();
+            }
+        }
+        private global::System.DateTime _DATA_ATUALIZACAO;
+        partial void OnDATA_ATUALIZACAOChanging(global::System.DateTime value);
+        partial void OnDATA_ATUALIZACAOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LOGIN_USUARIO
+        {
+            get
+            {
+                return _LOGIN_USUARIO;
+            }
+            set
+            {
+                OnLOGIN_USUARIOChanging(value);
+                ReportPropertyChanging("LOGIN_USUARIO");
+                _LOGIN_USUARIO = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LOGIN_USUARIO");
+                OnLOGIN_USUARIOChanged();
+            }
+        }
+        private global::System.String _LOGIN_USUARIO;
+        partial void OnLOGIN_USUARIOChanging(global::System.String value);
+        partial void OnLOGIN_USUARIOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ID_UNIDADE_MEDIDA
+        {
+            get
+            {
+                return _ID_UNIDADE_MEDIDA;
+            }
+            set
+            {
+                OnID_UNIDADE_MEDIDAChanging(value);
+                ReportPropertyChanging("ID_UNIDADE_MEDIDA");
+                _ID_UNIDADE_MEDIDA = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_UNIDADE_MEDIDA");
+                OnID_UNIDADE_MEDIDAChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ID_UNIDADE_MEDIDA;
+        partial void OnID_UNIDADE_MEDIDAChanging(Nullable<global::System.Guid> value);
+        partial void OnID_UNIDADE_MEDIDAChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_PRODUTO", "PRODUTO")]
+        public PRODUTO T_PRODUTO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRODUTO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO", "PRODUTO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRODUTO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO", "PRODUTO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PRODUTO> T_PRODUTOReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PRODUTO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO", "PRODUTO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PRODUTO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO", "PRODUTO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_PEDIDO", "T_PEDIDO")]
+        public PEDIDO T_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO", "T_PEDIDO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO", "T_PEDIDO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PEDIDO> T_PEDIDOReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO", "T_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO", "T_PEDIDO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA")]
+        public UNIDADE_MEDIDA T_UNIDADE_MEDIDA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<UNIDADE_MEDIDA> T_UNIDADE_MEDIDAReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UNIDADE_MEDIDA>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "UNIDADE_MEDIDA", value);
                 }
             }
         }
@@ -3909,6 +4774,406 @@ namespace BrasilDidaticos.WcfServico.Dados
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PEDIDO")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PEDIDO : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PEDIDO object.
+        /// </summary>
+        /// <param name="iD_PEDIDO">Initial value of the ID_PEDIDO property.</param>
+        /// <param name="iD_EMPRESA">Initial value of the ID_EMPRESA property.</param>
+        /// <param name="cOD_PEDIDO">Initial value of the COD_PEDIDO property.</param>
+        /// <param name="dATA_PEDIDO">Initial value of the DATA_PEDIDO property.</param>
+        /// <param name="iD_ESTADO_PEDIDO">Initial value of the ID_ESTADO_PEDIDO property.</param>
+        /// <param name="iD_USUARIO_RESPONSAVEL">Initial value of the ID_USUARIO_RESPONSAVEL property.</param>
+        /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
+        /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
+        public static PEDIDO CreatePEDIDO(global::System.Guid iD_PEDIDO, global::System.Guid iD_EMPRESA, global::System.String cOD_PEDIDO, global::System.DateTime dATA_PEDIDO, global::System.Guid iD_ESTADO_PEDIDO, global::System.Guid iD_USUARIO_RESPONSAVEL, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
+        {
+            PEDIDO pEDIDO = new PEDIDO();
+            pEDIDO.ID_PEDIDO = iD_PEDIDO;
+            pEDIDO.ID_EMPRESA = iD_EMPRESA;
+            pEDIDO.COD_PEDIDO = cOD_PEDIDO;
+            pEDIDO.DATA_PEDIDO = dATA_PEDIDO;
+            pEDIDO.ID_ESTADO_PEDIDO = iD_ESTADO_PEDIDO;
+            pEDIDO.ID_USUARIO_RESPONSAVEL = iD_USUARIO_RESPONSAVEL;
+            pEDIDO.LOGIN_USUARIO = lOGIN_USUARIO;
+            pEDIDO.DATA_ATUALIZACAO = dATA_ATUALIZACAO;
+            return pEDIDO;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_PEDIDO
+        {
+            get
+            {
+                return _ID_PEDIDO;
+            }
+            set
+            {
+                if (_ID_PEDIDO != value)
+                {
+                    OnID_PEDIDOChanging(value);
+                    ReportPropertyChanging("ID_PEDIDO");
+                    _ID_PEDIDO = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID_PEDIDO");
+                    OnID_PEDIDOChanged();
+                }
+            }
+        }
+        private global::System.Guid _ID_PEDIDO;
+        partial void OnID_PEDIDOChanging(global::System.Guid value);
+        partial void OnID_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_EMPRESA
+        {
+            get
+            {
+                return _ID_EMPRESA;
+            }
+            set
+            {
+                OnID_EMPRESAChanging(value);
+                ReportPropertyChanging("ID_EMPRESA");
+                _ID_EMPRESA = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_EMPRESA");
+                OnID_EMPRESAChanged();
+            }
+        }
+        private global::System.Guid _ID_EMPRESA;
+        partial void OnID_EMPRESAChanging(global::System.Guid value);
+        partial void OnID_EMPRESAChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String COD_PEDIDO
+        {
+            get
+            {
+                return _COD_PEDIDO;
+            }
+            set
+            {
+                OnCOD_PEDIDOChanging(value);
+                ReportPropertyChanging("COD_PEDIDO");
+                _COD_PEDIDO = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("COD_PEDIDO");
+                OnCOD_PEDIDOChanged();
+            }
+        }
+        private global::System.String _COD_PEDIDO;
+        partial void OnCOD_PEDIDOChanging(global::System.String value);
+        partial void OnCOD_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DATA_PEDIDO
+        {
+            get
+            {
+                return _DATA_PEDIDO;
+            }
+            set
+            {
+                OnDATA_PEDIDOChanging(value);
+                ReportPropertyChanging("DATA_PEDIDO");
+                _DATA_PEDIDO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DATA_PEDIDO");
+                OnDATA_PEDIDOChanged();
+            }
+        }
+        private global::System.DateTime _DATA_PEDIDO;
+        partial void OnDATA_PEDIDOChanging(global::System.DateTime value);
+        partial void OnDATA_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_ESTADO_PEDIDO
+        {
+            get
+            {
+                return _ID_ESTADO_PEDIDO;
+            }
+            set
+            {
+                OnID_ESTADO_PEDIDOChanging(value);
+                ReportPropertyChanging("ID_ESTADO_PEDIDO");
+                _ID_ESTADO_PEDIDO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_ESTADO_PEDIDO");
+                OnID_ESTADO_PEDIDOChanged();
+            }
+        }
+        private global::System.Guid _ID_ESTADO_PEDIDO;
+        partial void OnID_ESTADO_PEDIDOChanging(global::System.Guid value);
+        partial void OnID_ESTADO_PEDIDOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ID_USUARIO_RESPONSAVEL
+        {
+            get
+            {
+                return _ID_USUARIO_RESPONSAVEL;
+            }
+            set
+            {
+                OnID_USUARIO_RESPONSAVELChanging(value);
+                ReportPropertyChanging("ID_USUARIO_RESPONSAVEL");
+                _ID_USUARIO_RESPONSAVEL = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID_USUARIO_RESPONSAVEL");
+                OnID_USUARIO_RESPONSAVELChanged();
+            }
+        }
+        private global::System.Guid _ID_USUARIO_RESPONSAVEL;
+        partial void OnID_USUARIO_RESPONSAVELChanging(global::System.Guid value);
+        partial void OnID_USUARIO_RESPONSAVELChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> NUM_DESCONTO
+        {
+            get
+            {
+                return _NUM_DESCONTO;
+            }
+            set
+            {
+                OnNUM_DESCONTOChanging(value);
+                ReportPropertyChanging("NUM_DESCONTO");
+                _NUM_DESCONTO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_DESCONTO");
+                OnNUM_DESCONTOChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _NUM_DESCONTO;
+        partial void OnNUM_DESCONTOChanging(Nullable<global::System.Decimal> value);
+        partial void OnNUM_DESCONTOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LOGIN_USUARIO
+        {
+            get
+            {
+                return _LOGIN_USUARIO;
+            }
+            set
+            {
+                OnLOGIN_USUARIOChanging(value);
+                ReportPropertyChanging("LOGIN_USUARIO");
+                _LOGIN_USUARIO = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LOGIN_USUARIO");
+                OnLOGIN_USUARIOChanged();
+            }
+        }
+        private global::System.String _LOGIN_USUARIO;
+        partial void OnLOGIN_USUARIOChanging(global::System.String value);
+        partial void OnLOGIN_USUARIOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DATA_ATUALIZACAO
+        {
+            get
+            {
+                return _DATA_ATUALIZACAO;
+            }
+            set
+            {
+                OnDATA_ATUALIZACAOChanging(value);
+                ReportPropertyChanging("DATA_ATUALIZACAO");
+                _DATA_ATUALIZACAO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DATA_ATUALIZACAO");
+                OnDATA_ATUALIZACAOChanged();
+            }
+        }
+        private global::System.DateTime _DATA_ATUALIZACAO;
+        partial void OnDATA_ATUALIZACAOChanging(global::System.DateTime value);
+        partial void OnDATA_ATUALIZACAOChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_EMPRESA", "EMPRESA")]
+        public EMPRESA T_EMPRESA
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EMPRESA>("BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA", "EMPRESA").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EMPRESA>("BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA", "EMPRESA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<EMPRESA> T_EMPRESAReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EMPRESA>("BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA", "EMPRESA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EMPRESA>("BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA", "EMPRESA", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO")]
+        public ESTADO_PEDIDO T_ESTADO_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ESTADO_PEDIDO> T_ESTADO_PEDIDOReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ESTADO_PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO", "ESTADO_PEDIDO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_PEDIDO", "ITEM_PEDIDO")]
+        public EntityCollection<ITEM_PEDIDO> T_ITEM_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ITEM_PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO", "ITEM_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ITEM_PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO", "ITEM_PEDIDO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_USUARIO", "USUARIO")]
+        public USUARIO T_USUARIO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<USUARIO>("BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO", "USUARIO").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<USUARIO>("BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO", "USUARIO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<USUARIO> T_USUARIOReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<USUARIO>("BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO", "USUARIO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<USUARIO>("BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO", "USUARIO", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="BrasilDidaticosModel", Name="PERFIL")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -4612,7 +5877,8 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="nUM_VALOR">Initial value of the NUM_VALOR property.</param>
-        public static PRODUTO CreatePRODUTO(global::System.Guid iD_PRODUTO, global::System.Guid iD_FORNECEDOR, global::System.String nOME_PRODUTO, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Decimal nUM_VALOR)
+        /// <param name="nUM_QUANTIDADE">Initial value of the NUM_QUANTIDADE property.</param>
+        public static PRODUTO CreatePRODUTO(global::System.Guid iD_PRODUTO, global::System.Guid iD_FORNECEDOR, global::System.String nOME_PRODUTO, global::System.Boolean bOL_ATIVO, global::System.DateTime dATA_ATUALIZACAO, global::System.String lOGIN_USUARIO, global::System.Decimal nUM_VALOR, global::System.Int32 nUM_QUANTIDADE)
         {
             PRODUTO pRODUTO = new PRODUTO();
             pRODUTO.ID_PRODUTO = iD_PRODUTO;
@@ -4622,6 +5888,7 @@ namespace BrasilDidaticos.WcfServico.Dados
             pRODUTO.DATA_ATUALIZACAO = dATA_ATUALIZACAO;
             pRODUTO.LOGIN_USUARIO = lOGIN_USUARIO;
             pRODUTO.NUM_VALOR = nUM_VALOR;
+            pRODUTO.NUM_QUANTIDADE = nUM_QUANTIDADE;
             return pRODUTO;
         }
 
@@ -4870,6 +6137,30 @@ namespace BrasilDidaticos.WcfServico.Dados
         private global::System.String _COD_PRODUTO_FORNECEDOR;
         partial void OnCOD_PRODUTO_FORNECEDORChanging(global::System.String value);
         partial void OnCOD_PRODUTO_FORNECEDORChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NUM_QUANTIDADE
+        {
+            get
+            {
+                return _NUM_QUANTIDADE;
+            }
+            set
+            {
+                OnNUM_QUANTIDADEChanging(value);
+                ReportPropertyChanging("NUM_QUANTIDADE");
+                _NUM_QUANTIDADE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_QUANTIDADE");
+                OnNUM_QUANTIDADEChanged();
+            }
+        }
+        private global::System.Int32 _NUM_QUANTIDADE;
+        partial void OnNUM_QUANTIDADEChanging(global::System.Int32 value);
+        partial void OnNUM_QUANTIDADEChanged();
 
         #endregion
     
@@ -4953,6 +6244,28 @@ namespace BrasilDidaticos.WcfServico.Dados
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRODUTO_TAXA>("BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_PRODUTO", "T_PRODUTO_TAXA", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_PRODUTO", "T_ITEM_PEDIDO")]
+        public EntityCollection<ITEM_PEDIDO> T_ITEM_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ITEM_PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO", "T_ITEM_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ITEM_PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO", "T_ITEM_PEDIDO", value);
                 }
             }
         }
@@ -5288,18 +6601,20 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// <param name="iD_PRODUTO_UNIDADE_MEDIDA">Initial value of the ID_PRODUTO_UNIDADE_MEDIDA property.</param>
         /// <param name="iD_PRODUTO">Initial value of the ID_PRODUTO property.</param>
         /// <param name="iD_UNIDADE_MEDIDA">Initial value of the ID_UNIDADE_MEDIDA property.</param>
-        /// <param name="nUM_QUANTIDADE">Initial value of the NUM_QUANTIDADE property.</param>
+        /// <param name="nUM_QUANTIDADE_ITEM">Initial value of the NUM_QUANTIDADE_ITEM property.</param>
         /// <param name="lOGIN_USUARIO">Initial value of the LOGIN_USUARIO property.</param>
         /// <param name="dATA_ATUALIZACAO">Initial value of the DATA_ATUALIZACAO property.</param>
-        public static PRODUTO_UNIDADE_MEDIDA CreatePRODUTO_UNIDADE_MEDIDA(global::System.Guid iD_PRODUTO_UNIDADE_MEDIDA, global::System.Guid iD_PRODUTO, global::System.Guid iD_UNIDADE_MEDIDA, global::System.Int32 nUM_QUANTIDADE, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO)
+        /// <param name="nUM_QUANTIDADE">Initial value of the NUM_QUANTIDADE property.</param>
+        public static PRODUTO_UNIDADE_MEDIDA CreatePRODUTO_UNIDADE_MEDIDA(global::System.Guid iD_PRODUTO_UNIDADE_MEDIDA, global::System.Guid iD_PRODUTO, global::System.Guid iD_UNIDADE_MEDIDA, global::System.Int32 nUM_QUANTIDADE_ITEM, global::System.String lOGIN_USUARIO, global::System.DateTime dATA_ATUALIZACAO, global::System.Int32 nUM_QUANTIDADE)
         {
             PRODUTO_UNIDADE_MEDIDA pRODUTO_UNIDADE_MEDIDA = new PRODUTO_UNIDADE_MEDIDA();
             pRODUTO_UNIDADE_MEDIDA.ID_PRODUTO_UNIDADE_MEDIDA = iD_PRODUTO_UNIDADE_MEDIDA;
             pRODUTO_UNIDADE_MEDIDA.ID_PRODUTO = iD_PRODUTO;
             pRODUTO_UNIDADE_MEDIDA.ID_UNIDADE_MEDIDA = iD_UNIDADE_MEDIDA;
-            pRODUTO_UNIDADE_MEDIDA.NUM_QUANTIDADE = nUM_QUANTIDADE;
+            pRODUTO_UNIDADE_MEDIDA.NUM_QUANTIDADE_ITEM = nUM_QUANTIDADE_ITEM;
             pRODUTO_UNIDADE_MEDIDA.LOGIN_USUARIO = lOGIN_USUARIO;
             pRODUTO_UNIDADE_MEDIDA.DATA_ATUALIZACAO = dATA_ATUALIZACAO;
+            pRODUTO_UNIDADE_MEDIDA.NUM_QUANTIDADE = nUM_QUANTIDADE;
             return pRODUTO_UNIDADE_MEDIDA;
         }
 
@@ -5386,24 +6701,24 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 NUM_QUANTIDADE
+        public global::System.Int32 NUM_QUANTIDADE_ITEM
         {
             get
             {
-                return _NUM_QUANTIDADE;
+                return _NUM_QUANTIDADE_ITEM;
             }
             set
             {
-                OnNUM_QUANTIDADEChanging(value);
-                ReportPropertyChanging("NUM_QUANTIDADE");
-                _NUM_QUANTIDADE = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("NUM_QUANTIDADE");
-                OnNUM_QUANTIDADEChanged();
+                OnNUM_QUANTIDADE_ITEMChanging(value);
+                ReportPropertyChanging("NUM_QUANTIDADE_ITEM");
+                _NUM_QUANTIDADE_ITEM = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_QUANTIDADE_ITEM");
+                OnNUM_QUANTIDADE_ITEMChanged();
             }
         }
-        private global::System.Int32 _NUM_QUANTIDADE;
-        partial void OnNUM_QUANTIDADEChanging(global::System.Int32 value);
-        partial void OnNUM_QUANTIDADEChanged();
+        private global::System.Int32 _NUM_QUANTIDADE_ITEM;
+        partial void OnNUM_QUANTIDADE_ITEMChanging(global::System.Int32 value);
+        partial void OnNUM_QUANTIDADE_ITEMChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5452,6 +6767,30 @@ namespace BrasilDidaticos.WcfServico.Dados
         private global::System.DateTime _DATA_ATUALIZACAO;
         partial void OnDATA_ATUALIZACAOChanging(global::System.DateTime value);
         partial void OnDATA_ATUALIZACAOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NUM_QUANTIDADE
+        {
+            get
+            {
+                return _NUM_QUANTIDADE;
+            }
+            set
+            {
+                OnNUM_QUANTIDADEChanging(value);
+                ReportPropertyChanging("NUM_QUANTIDADE");
+                _NUM_QUANTIDADE = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_QUANTIDADE");
+                OnNUM_QUANTIDADEChanged();
+            }
+        }
+        private global::System.Int32 _NUM_QUANTIDADE;
+        partial void OnNUM_QUANTIDADEChanging(global::System.Int32 value);
+        partial void OnNUM_QUANTIDADEChanged();
 
         #endregion
     
@@ -6421,6 +7760,50 @@ namespace BrasilDidaticos.WcfServico.Dados
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_T_UNIDADE_MEDIDA", "ITEM")]
+        public EntityCollection<ITEM> T_ITEM
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ITEM>("BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA", "ITEM");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ITEM>("BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA", "ITEM", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "ITEM_PEDIDO")]
+        public EntityCollection<ITEM_PEDIDO> T_ITEM_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ITEM_PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "ITEM_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ITEM_PEDIDO>("BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA", "ITEM_PEDIDO", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PRODUTO_UNIDADE_MEDIDA_T_UNIDADE_MEDIDA", "T_PRODUTO_UNIDADE_MEDIDA")]
         public EntityCollection<PRODUTO_UNIDADE_MEDIDA> T_PRODUTO_UNIDADE_MEDIDA
         {
@@ -6777,6 +8160,28 @@ namespace BrasilDidaticos.WcfServico.Dados
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EMPRESA>("BrasilDidaticosModel.FK_T_USUARIO_T_EMPRESA", "T_EMPRESA", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BrasilDidaticosModel", "FK_T_PEDIDO_T_USUARIO", "T_PEDIDO")]
+        public EntityCollection<PEDIDO> T_PEDIDO
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO", "T_PEDIDO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PEDIDO>("BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO", "T_PEDIDO", value);
                 }
             }
         }

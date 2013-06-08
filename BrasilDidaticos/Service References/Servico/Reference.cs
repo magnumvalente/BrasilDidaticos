@@ -105,6 +105,21 @@ namespace BrasilDidaticos.Servico {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvar", ReplyAction="http://tempuri.org/IBrasilDidaticos/UnidadeMedidaSalvarResponse")]
         BrasilDidaticos.Contrato.RetornoUnidadeMedida UnidadeMedidaSalvar(BrasilDidaticos.Contrato.EntradaUnidadeMedida UnidadeMedida);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/PedidoBuscarCodigo", ReplyAction="http://tempuri.org/IBrasilDidaticos/PedidoBuscarCodigoResponse")]
+        string PedidoBuscarCodigo(System.Guid IdEmpresa);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/PedidoListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/PedidoListarResponse")]
+        BrasilDidaticos.Contrato.RetornoPedido PedidoListar(BrasilDidaticos.Contrato.EntradaPedido Pedido);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/PedidoSalvar", ReplyAction="http://tempuri.org/IBrasilDidaticos/PedidoSalvarResponse")]
+        BrasilDidaticos.Contrato.RetornoPedido PedidoSalvar(BrasilDidaticos.Contrato.EntradaPedido Pedido);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/EstadoPedidoListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/EstadoPedidoListarResponse")]
+        BrasilDidaticos.Contrato.RetornoEstadoPedido EstadoPedidoListar(BrasilDidaticos.Contrato.EntradaEstadoPedido EstadoPedido);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/EmpresaListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/EmpresaListarResponse")]
+        BrasilDidaticos.Contrato.RetornoEmpresa EmpresaListar(BrasilDidaticos.Contrato.EntradaEmpresa Empresa);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListar", ReplyAction="http://tempuri.org/IBrasilDidaticos/UnidadeFederativaListarResponse")]
         BrasilDidaticos.Contrato.RetornoUnidadeFederativa UnidadeFederativaListar();
     }
@@ -254,6 +269,26 @@ namespace BrasilDidaticos.Servico {
         
         public BrasilDidaticos.Contrato.RetornoUnidadeMedida UnidadeMedidaSalvar(BrasilDidaticos.Contrato.EntradaUnidadeMedida UnidadeMedida) {
             return base.Channel.UnidadeMedidaSalvar(UnidadeMedida);
+        }
+        
+        public string PedidoBuscarCodigo(System.Guid IdEmpresa) {
+            return base.Channel.PedidoBuscarCodigo(IdEmpresa);
+        }
+        
+        public BrasilDidaticos.Contrato.RetornoPedido PedidoListar(BrasilDidaticos.Contrato.EntradaPedido Pedido) {
+            return base.Channel.PedidoListar(Pedido);
+        }
+        
+        public BrasilDidaticos.Contrato.RetornoPedido PedidoSalvar(BrasilDidaticos.Contrato.EntradaPedido Pedido) {
+            return base.Channel.PedidoSalvar(Pedido);
+        }
+        
+        public BrasilDidaticos.Contrato.RetornoEstadoPedido EstadoPedidoListar(BrasilDidaticos.Contrato.EntradaEstadoPedido EstadoPedido) {
+            return base.Channel.EstadoPedidoListar(EstadoPedido);
+        }
+        
+        public BrasilDidaticos.Contrato.RetornoEmpresa EmpresaListar(BrasilDidaticos.Contrato.EntradaEmpresa Empresa) {
+            return base.Channel.EmpresaListar(Empresa);
         }
         
         public BrasilDidaticos.Contrato.RetornoUnidadeFederativa UnidadeFederativaListar() {

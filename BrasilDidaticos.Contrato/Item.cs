@@ -41,6 +41,13 @@ namespace BrasilDidaticos.Contrato
             get;
             set;
         }
+
+        [DataMember]
+        public UnidadeMedida UnidadeMedida
+        {
+            get;
+            set;
+        }
         
         [DataMember]
         public decimal ValorCusto

@@ -14,7 +14,7 @@ namespace BrasilDidaticos.Contrato
         {
             get;
             set;
-        }
+        }               
 
         [DataMember]
         public string Codigo
@@ -44,6 +44,13 @@ namespace BrasilDidaticos.Contrato
             set;
         }
 
+        [DataMember]
+        public int QuantidadeItens
+        {
+            get;
+            set;
+        }
+        
         [DataMember]
         public bool Ativo
         {

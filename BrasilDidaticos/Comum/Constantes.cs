@@ -7,8 +7,6 @@ namespace BrasilDidaticos.Comum
 {
     static class Constantes
     {
-        public const string NOME_EMPRESA = "Brasil Didáticos";
-
         public const string PERMISSAO_CRIAR = "CRIAR";
         public const string PERMISSAO_MODIFICAR = "MODIFICAR";
         public const string PERMISSAO_CONSULTAR = "CONSULTAR";
@@ -21,9 +19,11 @@ namespace BrasilDidaticos.Comum
         public const string TELA_PERFIL = "PERFIL";
         public const string TELA_FORNECEDOR = "FORNECEDOR";
         public const string TELA_ORCAMENTO = "ORCAMENTO";
+        public const string TELA_PEDIDO = "PEDIDO";
         public const string TELA_PRODUTO = "PRODUTO";
         public const string TELA_TAXA = "TAXA";
         public const string TELA_UNIDADE_MEDIDA = "UNIDADE_MEDIDA";
+        public const string TELA_ESTOQUE = "ESTOQUE";
         public const string TELA_PARAMETRO = "PARAMETRO";
         public const string TELA_CLIENTE = "CLIENTE";
         public const string TELA_SESSAO = "SESSAO";
@@ -36,10 +36,17 @@ namespace BrasilDidaticos.Comum
         public const string PARAMETRO_QTD_ITENS_PAGINA = "QTD_ITENS_PAGINA";
         public const string PARAMETRO_COD_PERFIL_VENDEDOR = "COD_PERFIL_VENDEDOR";
         public const string PARAMETRO_COD_PERFIL_ORCAMENTISTA = "COD_PERFIL_ORCAMENTISTA";
+        public const string PARAMETRO_COD_EMPRESA_PRODUTO = "COD_EMPRESA_PRODUTO";
         public const string PARAMETRO_NUM_VALIDADE_ORCAMENTO = "NUM_VALIDADE_ORCAMENTO";
         public const string PARAMETRO_NUM_PRAZO_ENTREGA = "NUM_PRAZO_ENTREGA";
         public const string PARAMETRO_COR_PRIMARIA_FUNDO = "COR_PRIMARIA_FUNDO";
         public const string PARAMETRO_COR_SECUNDARIA_FUNDO = "COR_SECUNDARIA_FUNDO";
+
+        public const int QTD_ITENS_PAGINA = 50;
+        public const int NUM_VALIDADE_ORCAMENTO = 60;
+        public const int NUM_PRAZO_ENTREGA = 30;
+        public const string COR_PRIMARIA_FUNDO = "#EB0047E4";
+        public const string COR_SECUNDARIA_FUNDO = "#FFF8FFFF";
 
         public const string CEP_CODIGO_FILIACAO = "A1C70368-E6DC-4D1A-B562-46004AA53408";
 

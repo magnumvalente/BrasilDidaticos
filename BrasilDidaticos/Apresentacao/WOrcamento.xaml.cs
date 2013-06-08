@@ -108,6 +108,7 @@ namespace BrasilDidaticos.Apresentacao
                 entradaCliente.Chave = Comum.Util.Chave;
                 entradaCliente.PreencherListaSelecao = true;
                 entradaCliente.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
+                entradaCliente.EmpresaLogada = Comum.Util.UsuarioLogado.Empresa;
                 entradaCliente.Cliente = new Contrato.Cliente();
                 entradaCliente.Cliente.Ativo = true;
                 entradaCliente.Cliente.Codigo = cmbCliente.Codigo;
@@ -207,14 +208,14 @@ namespace BrasilDidaticos.Apresentacao
             entradaEstadoOrcamento.EstadoOrcamento = new Contrato.EstadoOrcamento() { Ativo = true };
 
             Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
-            Contrato.RetornoEstadoOrcamento retFornecedor = servBrasilDidaticos.EstadoOrcamentoListar(entradaEstadoOrcamento);
+            Contrato.RetornoEstadoOrcamento retEstadoOrcamento = servBrasilDidaticos.EstadoOrcamentoListar(entradaEstadoOrcamento);
             servBrasilDidaticos.Close();
 
-            if (retFornecedor.EstadosOrcamento != null)
+            if (retEstadoOrcamento.EstadosOrcamento != null)
             {
                 cmbEstadoOrcamento.ComboBox.Items.Clear();
                 cmbEstadoOrcamento.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
-                foreach (Contrato.EstadoOrcamento estadoOrcamento in retFornecedor.EstadosOrcamento)
+                foreach (Contrato.EstadoOrcamento estadoOrcamento in retEstadoOrcamento.EstadosOrcamento)
                 {
                     cmbEstadoOrcamento.ComboBox.Items.Add(new ComboBoxItem() { Uid = estadoOrcamento.Id.ToString(), Content = estadoOrcamento.Nome, Tag = estadoOrcamento });
                 }

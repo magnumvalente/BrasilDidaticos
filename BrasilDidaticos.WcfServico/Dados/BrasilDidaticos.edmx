@@ -9,11 +9,14 @@
           <EntitySet Name="T_CLIENTE" EntityType="BrasilDidaticosModel.Store.T_CLIENTE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_EMPRESA" EntityType="BrasilDidaticosModel.Store.T_EMPRESA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_ESTADO_ORCAMENTO" EntityType="BrasilDidaticosModel.Store.T_ESTADO_ORCAMENTO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_ESTADO_PEDIDO" EntityType="BrasilDidaticosModel.Store.T_ESTADO_PEDIDO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_FORNECEDOR" EntityType="BrasilDidaticosModel.Store.T_FORNECEDOR" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_FORNECEDOR_TAXA" EntityType="BrasilDidaticosModel.Store.T_FORNECEDOR_TAXA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_ITEM" EntityType="BrasilDidaticosModel.Store.T_ITEM" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_ITEM_PEDIDO" EntityType="BrasilDidaticosModel.Store.T_ITEM_PEDIDO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_ORCAMENTO" EntityType="BrasilDidaticosModel.Store.T_ORCAMENTO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_PARAMETRO" EntityType="BrasilDidaticosModel.Store.T_PARAMETRO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="T_PEDIDO" EntityType="BrasilDidaticosModel.Store.T_PEDIDO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_PERFIL" EntityType="BrasilDidaticosModel.Store.T_PERFIL" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_PERFIL_PERMISSAO" EntityType="BrasilDidaticosModel.Store.T_PERFIL_PERMISSAO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="T_PERMISSAO" EntityType="BrasilDidaticosModel.Store.T_PERMISSAO" store:Type="Tables" Schema="dbo" />
@@ -42,6 +45,14 @@
             <End Role="T_ESTADO_ORCAMENTO" EntitySet="T_ESTADO_ORCAMENTO" />
             <End Role="T_ESTADO_ORCAMENTO1" EntitySet="T_ESTADO_ORCAMENTO" />
           </AssociationSet>
+          <AssociationSet Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO" Association="BrasilDidaticosModel.Store.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO">
+            <End Role="T_ESTADO_PEDIDO" EntitySet="T_ESTADO_PEDIDO" />
+            <End Role="T_ESTADO_PEDIDO1" EntitySet="T_ESTADO_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1" Association="BrasilDidaticosModel.Store.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1">
+            <End Role="T_ESTADO_PEDIDO" EntitySet="T_ESTADO_PEDIDO" />
+            <End Role="T_ESTADO_PEDIDO1" EntitySet="T_ESTADO_PEDIDO" />
+          </AssociationSet>
           <AssociationSet Name="FK_T_FORNECEDOR_T_EMPRESA" Association="BrasilDidaticosModel.Store.FK_T_FORNECEDOR_T_EMPRESA">
             <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
             <End Role="T_FORNECEDOR" EntitySet="T_FORNECEDOR" />
@@ -54,12 +65,28 @@
             <End Role="T_TAXA" EntitySet="T_TAXA" />
             <End Role="T_FORNECEDOR_TAXA" EntitySet="T_FORNECEDOR_TAXA" />
           </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_PEDIDO_T_PEDIDO" Association="BrasilDidaticosModel.Store.FK_T_ITEM_PEDIDO_T_PEDIDO">
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+            <End Role="T_ITEM_PEDIDO" EntitySet="T_ITEM_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_PEDIDO_T_PRODUTO" Association="BrasilDidaticosModel.Store.FK_T_ITEM_PEDIDO_T_PRODUTO">
+            <End Role="T_PRODUTO" EntitySet="T_PRODUTO" />
+            <End Role="T_ITEM_PEDIDO" EntitySet="T_ITEM_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA" Association="BrasilDidaticosModel.Store.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA">
+            <End Role="T_UNIDADE_MEDIDA" EntitySet="T_UNIDADE_MEDIDA" />
+            <End Role="T_ITEM_PEDIDO" EntitySet="T_ITEM_PEDIDO" />
+          </AssociationSet>
           <AssociationSet Name="FK_T_ITEM_T_ORCAMENTO" Association="BrasilDidaticosModel.Store.FK_T_ITEM_T_ORCAMENTO">
             <End Role="T_ORCAMENTO" EntitySet="T_ORCAMENTO" />
             <End Role="T_ITEM" EntitySet="T_ITEM" />
           </AssociationSet>
           <AssociationSet Name="FK_T_ITEM_T_PRODUTO" Association="BrasilDidaticosModel.Store.FK_T_ITEM_T_PRODUTO">
             <End Role="T_PRODUTO" EntitySet="T_PRODUTO" />
+            <End Role="T_ITEM" EntitySet="T_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_T_UNIDADE_MEDIDA" Association="BrasilDidaticosModel.Store.FK_T_ITEM_T_UNIDADE_MEDIDA">
+            <End Role="T_UNIDADE_MEDIDA" EntitySet="T_UNIDADE_MEDIDA" />
             <End Role="T_ITEM" EntitySet="T_ITEM" />
           </AssociationSet>
           <AssociationSet Name="FK_T_ORCAMENTO_T_CLIENTE" Association="BrasilDidaticosModel.Store.FK_T_ORCAMENTO_T_CLIENTE">
@@ -85,6 +112,18 @@
           <AssociationSet Name="FK_T_PARAMETRO_T_EMPRESA" Association="BrasilDidaticosModel.Store.FK_T_PARAMETRO_T_EMPRESA">
             <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
             <End Role="T_PARAMETRO" EntitySet="T_PARAMETRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PEDIDO_T_EMPRESA" Association="BrasilDidaticosModel.Store.FK_T_PEDIDO_T_EMPRESA">
+            <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PEDIDO_T_ESTADO_PEDIDO" Association="BrasilDidaticosModel.Store.FK_T_PEDIDO_T_ESTADO_PEDIDO">
+            <End Role="T_ESTADO_PEDIDO" EntitySet="T_ESTADO_PEDIDO" />
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PEDIDO_T_USUARIO" Association="BrasilDidaticosModel.Store.FK_T_PEDIDO_T_USUARIO">
+            <End Role="T_USUARIO" EntitySet="T_USUARIO" />
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
           </AssociationSet>
           <AssociationSet Name="FK_T_PERFIL_PERMISSAO_T_PERFIL" Association="BrasilDidaticosModel.Store.FK_T_PERFIL_PERMISSAO_T_PERFIL">
             <End Role="T_PERFIL" EntitySet="T_PERFIL" />
@@ -187,6 +226,17 @@
           <Property Name="ID_ESTADO_ORCAMENTO_ANTERIOR" Type="uniqueidentifier" />
           <Property Name="ID_ESTADO_ORCAMENTO_SUCESSOR" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="T_ESTADO_PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_PEDIDO" />
+          </Key>
+          <Property Name="ID_ESTADO_PEDIDO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="COD_ESTADO_PEDIDO" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="NOME_ESTADO_PEDIDO" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="BOL_ATIVO" Type="bit" Nullable="false" />
+          <Property Name="ID_ESTADO_PEDIDO_ANTERIOR" Type="uniqueidentifier" />
+          <Property Name="ID_ESTADO_PEDIDO_SUCESSOR" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="T_FORNECEDOR">
           <Key>
             <PropertyRef Name="ID_FORNECEDOR" />
@@ -222,9 +272,24 @@
           <Property Name="ID_ITEM" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ID_PRODUTO" Type="uniqueidentifier" />
           <Property Name="ID_ORCAMENTO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ID_UNIDADE_MEDIDA" Type="uniqueidentifier" />
           <Property Name="DES_ITEM" Type="varchar" MaxLength="300" />
           <Property Name="NUM_VALOR_CUSTO" Type="money" Nullable="false" />
           <Property Name="NUM_VALOR_UNITARIO" Type="money" Nullable="false" />
+          <Property Name="NUM_DESCONTO" Type="money" />
+          <Property Name="NUM_QUANTIDADE" Type="int" Nullable="false" />
+          <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
+          <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="T_ITEM_PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_ITEM_PEDIDO" />
+          </Key>
+          <Property Name="ID_ITEM_PEDIDO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="uniqueidentifier" />
+          <Property Name="ID_PEDIDO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ID_UNIDADE_MEDIDA" Type="uniqueidentifier" />
+          <Property Name="NUM_VALOR" Type="money" Nullable="false" />
           <Property Name="NUM_DESCONTO" Type="money" />
           <Property Name="NUM_QUANTIDADE" Type="int" Nullable="false" />
           <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
@@ -261,6 +326,20 @@
           <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
           <Property Name="NUM_ORDEM" Type="int" />
+        </EntityType>
+        <EntityType Name="T_PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_PEDIDO" />
+          </Key>
+          <Property Name="ID_PEDIDO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="COD_PEDIDO" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="DATA_PEDIDO" Type="date" Nullable="false" />
+          <Property Name="ID_ESTADO_PEDIDO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ID_USUARIO_RESPONSAVEL" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NUM_DESCONTO" Type="money" />
+          <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="T_PERFIL">
           <Key>
@@ -307,6 +386,7 @@
           <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="NUM_VALOR" Type="money" Nullable="false" />
           <Property Name="COD_PRODUTO" Type="varchar" MaxLength="20" />
+          <Property Name="NUM_QUANTIDADE" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="T_PRODUTO_TAXA">
           <Key>
@@ -327,9 +407,10 @@
           <Property Name="ID_PRODUTO_UNIDADE_MEDIDA" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ID_PRODUTO" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ID_UNIDADE_MEDIDA" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="NUM_QUANTIDADE" Type="int" Nullable="false" />
+          <Property Name="NUM_QUANTIDADE_ITEM" Type="int" Nullable="false" />
           <Property Name="LOGIN_USUARIO" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="DATA_ATUALIZACAO" Type="datetime" Nullable="false" />
+          <Property Name="NUM_QUANTIDADE" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="T_SESSAO">
           <Key>
@@ -447,6 +528,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO">
+          <End Role="T_ESTADO_PEDIDO" Type="BrasilDidaticosModel.Store.T_ESTADO_PEDIDO" Multiplicity="0..1" />
+          <End Role="T_ESTADO_PEDIDO1" Type="BrasilDidaticosModel.Store.T_ESTADO_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESTADO_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Principal>
+            <Dependent Role="T_ESTADO_PEDIDO1">
+              <PropertyRef Name="ID_ESTADO_PEDIDO_ANTERIOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1">
+          <End Role="T_ESTADO_PEDIDO" Type="BrasilDidaticosModel.Store.T_ESTADO_PEDIDO" Multiplicity="0..1" />
+          <End Role="T_ESTADO_PEDIDO1" Type="BrasilDidaticosModel.Store.T_ESTADO_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESTADO_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Principal>
+            <Dependent Role="T_ESTADO_PEDIDO1">
+              <PropertyRef Name="ID_ESTADO_PEDIDO_SUCESSOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_T_FORNECEDOR_T_EMPRESA">
           <End Role="T_EMPRESA" Type="BrasilDidaticosModel.Store.T_EMPRESA" Multiplicity="1" />
           <End Role="T_FORNECEDOR" Type="BrasilDidaticosModel.Store.T_FORNECEDOR" Multiplicity="*" />
@@ -483,6 +588,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_ITEM_PEDIDO_T_PEDIDO">
+          <End Role="T_PEDIDO" Type="BrasilDidaticosModel.Store.T_PEDIDO" Multiplicity="1" />
+          <End Role="T_ITEM_PEDIDO" Type="BrasilDidaticosModel.Store.T_ITEM_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PEDIDO">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Principal>
+            <Dependent Role="T_ITEM_PEDIDO">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ITEM_PEDIDO_T_PRODUTO">
+          <End Role="T_PRODUTO" Type="BrasilDidaticosModel.Store.T_PRODUTO" Multiplicity="0..1" />
+          <End Role="T_ITEM_PEDIDO" Type="BrasilDidaticosModel.Store.T_ITEM_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="T_ITEM_PEDIDO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA">
+          <End Role="T_UNIDADE_MEDIDA" Type="BrasilDidaticosModel.Store.T_UNIDADE_MEDIDA" Multiplicity="0..1" />
+          <End Role="T_ITEM_PEDIDO" Type="BrasilDidaticosModel.Store.T_ITEM_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_UNIDADE_MEDIDA">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Principal>
+            <Dependent Role="T_ITEM_PEDIDO">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_T_ITEM_T_ORCAMENTO">
           <End Role="T_ORCAMENTO" Type="BrasilDidaticosModel.Store.T_ORCAMENTO" Multiplicity="1" />
           <End Role="T_ITEM" Type="BrasilDidaticosModel.Store.T_ITEM" Multiplicity="*" />
@@ -504,6 +645,18 @@
             </Principal>
             <Dependent Role="T_ITEM">
               <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ITEM_T_UNIDADE_MEDIDA">
+          <End Role="T_UNIDADE_MEDIDA" Type="BrasilDidaticosModel.Store.T_UNIDADE_MEDIDA" Multiplicity="0..1" />
+          <End Role="T_ITEM" Type="BrasilDidaticosModel.Store.T_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_UNIDADE_MEDIDA">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Principal>
+            <Dependent Role="T_ITEM">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -576,6 +729,42 @@
             </Principal>
             <Dependent Role="T_PARAMETRO">
               <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PEDIDO_T_EMPRESA">
+          <End Role="T_EMPRESA" Type="BrasilDidaticosModel.Store.T_EMPRESA" Multiplicity="1" />
+          <End Role="T_PEDIDO" Type="BrasilDidaticosModel.Store.T_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="T_PEDIDO">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PEDIDO_T_ESTADO_PEDIDO">
+          <End Role="T_ESTADO_PEDIDO" Type="BrasilDidaticosModel.Store.T_ESTADO_PEDIDO" Multiplicity="1" />
+          <End Role="T_PEDIDO" Type="BrasilDidaticosModel.Store.T_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESTADO_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Principal>
+            <Dependent Role="T_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PEDIDO_T_USUARIO">
+          <End Role="T_USUARIO" Type="BrasilDidaticosModel.Store.T_USUARIO" Multiplicity="1" />
+          <End Role="T_PEDIDO" Type="BrasilDidaticosModel.Store.T_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="T_PEDIDO">
+              <PropertyRef Name="ID_USUARIO_RESPONSAVEL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -873,6 +1062,45 @@
             <End Role="EMPRESA" EntitySet="T_EMPRESA" />
             <End Role="T_UNIDADE_MEDIDA" EntitySet="T_UNIDADE_MEDIDA" />
           </AssociationSet>
+          <EntitySet Name="T_ESTADO_PEDIDO" EntityType="BrasilDidaticosModel.ESTADO_PEDIDO" />
+          <EntitySet Name="T_ITEM_PEDIDO" EntityType="BrasilDidaticosModel.ITEM_PEDIDO" />
+          <AssociationSet Name="FK_T_ITEM_PEDIDO_T_PRODUTO" Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO">
+            <End Role="PRODUTO" EntitySet="T_PRODUTO" />
+            <End Role="T_ITEM_PEDIDO" EntitySet="T_ITEM_PEDIDO" />
+          </AssociationSet>
+          <EntitySet Name="T_PEDIDO" EntityType="BrasilDidaticosModel.PEDIDO" />
+          <AssociationSet Name="FK_T_PEDIDO_T_EMPRESA" Association="BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA">
+            <End Role="EMPRESA" EntitySet="T_EMPRESA" />
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PEDIDO_T_ESTADO_PEDIDO" Association="BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO">
+            <End Role="ESTADO_PEDIDO" EntitySet="T_ESTADO_PEDIDO" />
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_PEDIDO_T_PEDIDO" Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO">
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+            <End Role="ITEM_PEDIDO" EntitySet="T_ITEM_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PEDIDO_T_USUARIO" Association="BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO">
+            <End Role="USUARIO" EntitySet="T_USUARIO" />
+            <End Role="T_PEDIDO" EntitySet="T_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO" Association="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO">
+            <End Role="ESTADO_PEDIDO" EntitySet="T_ESTADO_PEDIDO" />
+            <End Role="ESTADO_PEDIDO1" EntitySet="T_ESTADO_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1" Association="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1">
+            <End Role="ESTADO_PEDIDO" EntitySet="T_ESTADO_PEDIDO" />
+            <End Role="ESTADO_PEDIDO1" EntitySet="T_ESTADO_PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_T_UNIDADE_MEDIDA" Association="BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA">
+            <End Role="UNIDADE_MEDIDA" EntitySet="T_UNIDADE_MEDIDA" />
+            <End Role="ITEM" EntitySet="T_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA" Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA">
+            <End Role="UNIDADE_MEDIDA" EntitySet="T_UNIDADE_MEDIDA" />
+            <End Role="ITEM_PEDIDO" EntitySet="T_ITEM_PEDIDO" />
+          </AssociationSet>
           <EntitySet Name="T_PRODUTO_UNIDADE_MEDIDA" EntityType="BrasilDidaticosModel.PRODUTO_UNIDADE_MEDIDA" />
           <AssociationSet Name="FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO" Association="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO">
             <End Role="PRODUTO" EntitySet="T_PRODUTO" />
@@ -964,6 +1192,8 @@
           <NavigationProperty Name="T_PRODUTO" Relationship="BrasilDidaticosModel.FK_T_ITEM_T_PRODUTO" FromRole="T_ITEM" ToRole="T_PRODUTO" />
           <Property Type="String" Name="DES_ITEM" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="NUM_VALOR_UNITARIO" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Guid" Name="ID_UNIDADE_MEDIDA" />
+          <NavigationProperty Name="T_UNIDADE_MEDIDA" Relationship="BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA" FromRole="ITEM" ToRole="UNIDADE_MEDIDA" />
         </EntityType>
         <EntityType Name="ORCAMENTO">
           <Key>
@@ -1058,6 +1288,8 @@
           <NavigationProperty Name="T_ITEM" Relationship="BrasilDidaticosModel.FK_T_ITEM_T_PRODUTO" FromRole="T_PRODUTO" ToRole="T_ITEM" />
           <NavigationProperty Name="T_PRODUTO_TAXA" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_PRODUTO" FromRole="T_PRODUTO" ToRole="T_PRODUTO_TAXA" />
           <Property Type="String" Name="COD_PRODUTO_FORNECEDOR" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NUM_QUANTIDADE" Nullable="false" />
+          <NavigationProperty Name="T_ITEM_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO" FromRole="PRODUTO" ToRole="T_ITEM_PEDIDO" />
           <NavigationProperty Name="T_PRODUTO_UNIDADE_MEDIDA" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO" FromRole="PRODUTO" ToRole="T_PRODUTO_UNIDADE_MEDIDA" />
         </EntityType>
         <EntityType Name="PRODUTO_TAXA">
@@ -1117,6 +1349,7 @@
           <NavigationProperty Name="T_ORCAMENTO_T_USUARIO_VENDEDOR" Relationship="BrasilDidaticosModel.FK_T_ORCAMENTO_T_USUARIO_VENDEDOR" FromRole="USUARIO" ToRole="ORCAMENTO" />
           <Property Type="Guid" Name="ID_EMPRESA" Nullable="false" />
           <NavigationProperty Name="T_EMPRESA" Relationship="BrasilDidaticosModel.FK_T_USUARIO_T_EMPRESA" FromRole="USUARIO" ToRole="T_EMPRESA" />
+          <NavigationProperty Name="T_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO" FromRole="USUARIO" ToRole="T_PEDIDO" />
         </EntityType>
         <EntityType Name="USUARIO_PERFIL">
           <Key>
@@ -1386,6 +1619,7 @@
           <NavigationProperty Name="T_TAXA" Relationship="BrasilDidaticosModel.FK_T_TAXA_T_EMPRESA" FromRole="T_EMPRESA" ToRole="TAXA" />
           <NavigationProperty Name="T_USUARIO" Relationship="BrasilDidaticosModel.FK_T_USUARIO_T_EMPRESA" FromRole="T_EMPRESA" ToRole="USUARIO" />
           <NavigationProperty Name="T_UNIDADE_MEDIDA" Relationship="BrasilDidaticosModel.FK_T_UNIDADE_MEDIDA_T_EMPRESA" FromRole="EMPRESA" ToRole="T_UNIDADE_MEDIDA" />
+          <NavigationProperty Name="T_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA" FromRole="EMPRESA" ToRole="T_PEDIDO" />
         </EntityType>
         <Association Name="FK_T_CLIENTE_T_EMPRESA">
           <End Type="BrasilDidaticosModel.EMPRESA" Role="T_EMPRESA" Multiplicity="1" />
@@ -1484,6 +1718,8 @@
           <Property Type="String" Name="LOGIN_USUARIO" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_EMPRESA" Relationship="BrasilDidaticosModel.FK_T_UNIDADE_MEDIDA_T_EMPRESA" FromRole="T_UNIDADE_MEDIDA" ToRole="EMPRESA" />
           <Property Type="String" Name="COD_UNIDADE_MEDIDA" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_ITEM" Relationship="BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA" FromRole="UNIDADE_MEDIDA" ToRole="ITEM" />
+          <NavigationProperty Name="T_ITEM_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA" FromRole="UNIDADE_MEDIDA" ToRole="ITEM_PEDIDO" />
           <NavigationProperty Name="T_PRODUTO_UNIDADE_MEDIDA" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_UNIDADE_MEDIDA" FromRole="UNIDADE_MEDIDA" ToRole="T_PRODUTO_UNIDADE_MEDIDA" />
         </EntityType>
         <Association Name="FK_T_UNIDADE_MEDIDA_T_EMPRESA">
@@ -1498,6 +1734,165 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ESTADO_PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_PEDIDO" />
+          </Key>
+          <Property Type="Guid" Name="ID_ESTADO_PEDIDO" Nullable="false" />
+          <Property Type="String" Name="COD_ESTADO_PEDIDO" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="NOME_ESTADO_PEDIDO" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="BOL_ATIVO" Nullable="false" />
+          <Property Type="Guid" Name="ID_ESTADO_PEDIDO_ANTERIOR" />
+          <Property Type="Guid" Name="ID_ESTADO_PEDIDO_SUCESSOR" />
+          <NavigationProperty Name="T_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO" FromRole="ESTADO_PEDIDO" ToRole="T_PEDIDO" />
+          <NavigationProperty Name="T_ESTADO_PEDIDO_ANTERIORES" Relationship="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO" FromRole="ESTADO_PEDIDO" ToRole="ESTADO_PEDIDO1" />
+          <NavigationProperty Name="T_ESTADO_PEDIDO_ANTERIOR" Relationship="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO" FromRole="ESTADO_PEDIDO1" ToRole="ESTADO_PEDIDO" />
+          <NavigationProperty Name="T_ESTADO_PEDIDO_SUCESSORES" Relationship="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1" FromRole="ESTADO_PEDIDO" ToRole="ESTADO_PEDIDO1" />
+          <NavigationProperty Name="T_ESTADO_PEDIDO_SUCESSOR" Relationship="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1" FromRole="ESTADO_PEDIDO1" ToRole="ESTADO_PEDIDO" />
+        </EntityType>
+        <EntityType Name="ITEM_PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_ITEM_PEDIDO" />
+          </Key>
+          <Property Type="Guid" Name="ID_ITEM_PEDIDO" Nullable="false" />
+          <Property Type="Guid" Name="ID_PRODUTO" />
+          <Property Type="Guid" Name="ID_PEDIDO" Nullable="false" />
+          <Property Type="Decimal" Name="NUM_VALOR" Nullable="false" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="NUM_DESCONTO" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="NUM_QUANTIDADE" Nullable="false" />
+          <Property Type="DateTime" Name="DATA_ATUALIZACAO" Nullable="false" />
+          <Property Type="String" Name="LOGIN_USUARIO" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_PRODUTO" Relationship="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO" FromRole="T_ITEM_PEDIDO" ToRole="PRODUTO" />
+          <NavigationProperty Name="T_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO" FromRole="ITEM_PEDIDO" ToRole="T_PEDIDO" />
+          <Property Type="Guid" Name="ID_UNIDADE_MEDIDA" />
+          <NavigationProperty Name="T_UNIDADE_MEDIDA" Relationship="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA" FromRole="ITEM_PEDIDO" ToRole="UNIDADE_MEDIDA" />
+        </EntityType>
+        <Association Name="FK_T_ITEM_PEDIDO_T_PRODUTO">
+          <End Type="BrasilDidaticosModel.PRODUTO" Role="PRODUTO" Multiplicity="0..1" />
+          <End Type="BrasilDidaticosModel.ITEM_PEDIDO" Role="T_ITEM_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="T_ITEM_PEDIDO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_PEDIDO" />
+          </Key>
+          <Property Type="Guid" Name="ID_PEDIDO" Nullable="false" />
+          <Property Type="Guid" Name="ID_EMPRESA" Nullable="false" />
+          <Property Type="String" Name="COD_PEDIDO" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DATA_PEDIDO" Nullable="false" />
+          <Property Type="Guid" Name="ID_ESTADO_PEDIDO" Nullable="false" />
+          <Property Type="Guid" Name="ID_USUARIO_RESPONSAVEL" Nullable="false" />
+          <Property Type="Decimal" Name="NUM_DESCONTO" Precision="19" Scale="4" />
+          <Property Type="String" Name="LOGIN_USUARIO" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DATA_ATUALIZACAO" Nullable="false" />
+          <NavigationProperty Name="T_EMPRESA" Relationship="BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA" FromRole="T_PEDIDO" ToRole="EMPRESA" />
+          <NavigationProperty Name="T_ESTADO_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO" FromRole="T_PEDIDO" ToRole="ESTADO_PEDIDO" />
+          <NavigationProperty Name="T_ITEM_PEDIDO" Relationship="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO" FromRole="T_PEDIDO" ToRole="ITEM_PEDIDO" />
+          <NavigationProperty Name="T_USUARIO" Relationship="BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO" FromRole="T_PEDIDO" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK_T_PEDIDO_T_EMPRESA">
+          <End Type="BrasilDidaticosModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="BrasilDidaticosModel.PEDIDO" Role="T_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="T_PEDIDO">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PEDIDO_T_ESTADO_PEDIDO">
+          <End Type="BrasilDidaticosModel.ESTADO_PEDIDO" Role="ESTADO_PEDIDO" Multiplicity="1" />
+          <End Type="BrasilDidaticosModel.PEDIDO" Role="T_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Principal>
+            <Dependent Role="T_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ITEM_PEDIDO_T_PEDIDO">
+          <End Type="BrasilDidaticosModel.PEDIDO" Role="T_PEDIDO" Multiplicity="1" />
+          <End Type="BrasilDidaticosModel.ITEM_PEDIDO" Role="ITEM_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PEDIDO">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Principal>
+            <Dependent Role="ITEM_PEDIDO">
+              <PropertyRef Name="ID_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PEDIDO_T_USUARIO">
+          <End Type="BrasilDidaticosModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="BrasilDidaticosModel.PEDIDO" Role="T_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="T_PEDIDO">
+              <PropertyRef Name="ID_USUARIO_RESPONSAVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO">
+          <End Type="BrasilDidaticosModel.ESTADO_PEDIDO" Role="ESTADO_PEDIDO" Multiplicity="0..1" />
+          <End Type="BrasilDidaticosModel.ESTADO_PEDIDO" Role="ESTADO_PEDIDO1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Principal>
+            <Dependent Role="ESTADO_PEDIDO1">
+              <PropertyRef Name="ID_ESTADO_PEDIDO_ANTERIOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1">
+          <End Type="BrasilDidaticosModel.ESTADO_PEDIDO" Role="ESTADO_PEDIDO" Multiplicity="0..1" />
+          <End Type="BrasilDidaticosModel.ESTADO_PEDIDO" Role="ESTADO_PEDIDO1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_PEDIDO">
+              <PropertyRef Name="ID_ESTADO_PEDIDO" />
+            </Principal>
+            <Dependent Role="ESTADO_PEDIDO1">
+              <PropertyRef Name="ID_ESTADO_PEDIDO_SUCESSOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ITEM_T_UNIDADE_MEDIDA">
+          <End Type="BrasilDidaticosModel.UNIDADE_MEDIDA" Role="UNIDADE_MEDIDA" Multiplicity="0..1" />
+          <End Type="BrasilDidaticosModel.ITEM" Role="ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADE_MEDIDA">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Principal>
+            <Dependent Role="ITEM">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA">
+          <End Type="BrasilDidaticosModel.UNIDADE_MEDIDA" Role="UNIDADE_MEDIDA" Multiplicity="0..1" />
+          <End Type="BrasilDidaticosModel.ITEM_PEDIDO" Role="ITEM_PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UNIDADE_MEDIDA">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Principal>
+            <Dependent Role="ITEM_PEDIDO">
+              <PropertyRef Name="ID_UNIDADE_MEDIDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="PRODUTO_UNIDADE_MEDIDA">
           <Key>
             <PropertyRef Name="ID_PRODUTO_UNIDADE_MEDIDA" />
@@ -1505,9 +1900,10 @@
           <Property Type="Guid" Name="ID_PRODUTO_UNIDADE_MEDIDA" Nullable="false" />
           <Property Type="Guid" Name="ID_PRODUTO" Nullable="false" />
           <Property Type="Guid" Name="ID_UNIDADE_MEDIDA" Nullable="false" />
-          <Property Type="Int32" Name="NUM_QUANTIDADE" Nullable="false" />
+          <Property Type="Int32" Name="NUM_QUANTIDADE_ITEM" Nullable="false" />
           <Property Type="String" Name="LOGIN_USUARIO" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="DATA_ATUALIZACAO" Nullable="false" />
+          <Property Type="Int32" Name="NUM_QUANTIDADE" Nullable="false" />
           <NavigationProperty Name="T_PRODUTO" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO" FromRole="T_PRODUTO_UNIDADE_MEDIDA" ToRole="PRODUTO" />
           <NavigationProperty Name="T_UNIDADE_MEDIDA" Relationship="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_UNIDADE_MEDIDA" FromRole="T_PRODUTO_UNIDADE_MEDIDA" ToRole="UNIDADE_MEDIDA" />
         </EntityType>
@@ -1589,7 +1985,8 @@
             <ScalarProperty Name="DATA_ATUALIZACAO" ColumnName="DATA_ATUALIZACAO" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="T_ITEM"><EntityTypeMapping TypeName="BrasilDidaticosModel.ITEM"><MappingFragment StoreEntitySet="T_ITEM">
-            <ScalarProperty Name="NUM_VALOR_UNITARIO" ColumnName="NUM_VALOR_UNITARIO" />
+                <ScalarProperty Name="ID_UNIDADE_MEDIDA" ColumnName="ID_UNIDADE_MEDIDA" />
+                <ScalarProperty Name="NUM_VALOR_UNITARIO" ColumnName="NUM_VALOR_UNITARIO" />
                 <ScalarProperty Name="DES_ITEM" ColumnName="DES_ITEM" />
                 <ScalarProperty Name="ID_ITEM" ColumnName="ID_ITEM" />
             <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
@@ -1649,7 +2046,8 @@
             <ScalarProperty Name="BOL_ATIVO" ColumnName="BOL_ATIVO" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="T_PRODUTO"><EntityTypeMapping TypeName="BrasilDidaticosModel.PRODUTO"><MappingFragment StoreEntitySet="T_PRODUTO">
-            <ScalarProperty Name="COD_PRODUTO_FORNECEDOR" ColumnName="COD_PRODUTO_FORNECEDOR" />
+            <ScalarProperty Name="NUM_QUANTIDADE" ColumnName="NUM_QUANTIDADE" />
+                <ScalarProperty Name="COD_PRODUTO_FORNECEDOR" ColumnName="COD_PRODUTO_FORNECEDOR" />
                 <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
             <ScalarProperty Name="ID_FORNECEDOR" ColumnName="ID_FORNECEDOR" />
             <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
@@ -1750,12 +2148,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="T_ESTADO_PEDIDO">
+            <EntityTypeMapping TypeName="BrasilDidaticosModel.ESTADO_PEDIDO">
+              <MappingFragment StoreEntitySet="T_ESTADO_PEDIDO">
+                <ScalarProperty Name="ID_ESTADO_PEDIDO_SUCESSOR" ColumnName="ID_ESTADO_PEDIDO_SUCESSOR" />
+                <ScalarProperty Name="ID_ESTADO_PEDIDO_ANTERIOR" ColumnName="ID_ESTADO_PEDIDO_ANTERIOR" />
+                <ScalarProperty Name="BOL_ATIVO" ColumnName="BOL_ATIVO" />
+                <ScalarProperty Name="NOME_ESTADO_PEDIDO" ColumnName="NOME_ESTADO_PEDIDO" />
+                <ScalarProperty Name="COD_ESTADO_PEDIDO" ColumnName="COD_ESTADO_PEDIDO" />
+                <ScalarProperty Name="ID_ESTADO_PEDIDO" ColumnName="ID_ESTADO_PEDIDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_ITEM_PEDIDO">
+            <EntityTypeMapping TypeName="BrasilDidaticosModel.ITEM_PEDIDO">
+              <MappingFragment StoreEntitySet="T_ITEM_PEDIDO">
+                <ScalarProperty Name="ID_UNIDADE_MEDIDA" ColumnName="ID_UNIDADE_MEDIDA" />
+                <ScalarProperty Name="LOGIN_USUARIO" ColumnName="LOGIN_USUARIO" />
+                <ScalarProperty Name="DATA_ATUALIZACAO" ColumnName="DATA_ATUALIZACAO" />
+                <ScalarProperty Name="NUM_QUANTIDADE" ColumnName="NUM_QUANTIDADE" />
+                <ScalarProperty Name="NUM_DESCONTO" ColumnName="NUM_DESCONTO" />
+                <ScalarProperty Name="NUM_VALOR" ColumnName="NUM_VALOR" />
+                <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+                <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="ID_ITEM_PEDIDO" ColumnName="ID_ITEM_PEDIDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PEDIDO">
+            <EntityTypeMapping TypeName="BrasilDidaticosModel.PEDIDO">
+              <MappingFragment StoreEntitySet="T_PEDIDO">
+                <ScalarProperty Name="DATA_ATUALIZACAO" ColumnName="DATA_ATUALIZACAO" />
+                <ScalarProperty Name="LOGIN_USUARIO" ColumnName="LOGIN_USUARIO" />
+                <ScalarProperty Name="NUM_DESCONTO" ColumnName="NUM_DESCONTO" />
+                <ScalarProperty Name="ID_USUARIO_RESPONSAVEL" ColumnName="ID_USUARIO_RESPONSAVEL" />
+                <ScalarProperty Name="ID_ESTADO_PEDIDO" ColumnName="ID_ESTADO_PEDIDO" />
+                <ScalarProperty Name="DATA_PEDIDO" ColumnName="DATA_PEDIDO" />
+                <ScalarProperty Name="COD_PEDIDO" ColumnName="COD_PEDIDO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="T_PRODUTO_UNIDADE_MEDIDA">
             <EntityTypeMapping TypeName="BrasilDidaticosModel.PRODUTO_UNIDADE_MEDIDA">
               <MappingFragment StoreEntitySet="T_PRODUTO_UNIDADE_MEDIDA">
+                <ScalarProperty Name="NUM_QUANTIDADE" ColumnName="NUM_QUANTIDADE" />
                 <ScalarProperty Name="DATA_ATUALIZACAO" ColumnName="DATA_ATUALIZACAO" />
                 <ScalarProperty Name="LOGIN_USUARIO" ColumnName="LOGIN_USUARIO" />
-                <ScalarProperty Name="NUM_QUANTIDADE" ColumnName="NUM_QUANTIDADE" />
+                <ScalarProperty Name="NUM_QUANTIDADE_ITEM" ColumnName="NUM_QUANTIDADE_ITEM" />
                 <ScalarProperty Name="ID_UNIDADE_MEDIDA" ColumnName="ID_UNIDADE_MEDIDA" />
                 <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
                 <ScalarProperty Name="ID_PRODUTO_UNIDADE_MEDIDA" ColumnName="ID_PRODUTO_UNIDADE_MEDIDA" />
@@ -1776,17 +2217,17 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="BrasilDidaticos" ZoomLevel="81">
+      <Diagram Name="BrasilDidaticos" ZoomLevel="48">
         <EntityTypeShape EntityType="BrasilDidaticosModel.CLIENTE" Width="1.5" PointX="0.75" PointY="13.125" Height="5.634013671874996" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.FORNECEDOR" Width="1.5" PointX="0.75" PointY="5.5" Height="3.3263964843749996" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.FORNECEDOR_TAXA" Width="1.5" PointX="3" PointY="4.875" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="BrasilDidaticosModel.ITEM" Width="1.5" PointX="5.25" PointY="9.125" Height="3.3263964843749978" IsExpanded="true" />
+        <EntityTypeShape EntityType="BrasilDidaticosModel.ITEM" Width="2.25" PointX="5.25" PointY="9.125" Height="3.7109993489583335" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.ORCAMENTO" Width="1.5" PointX="3" PointY="16.125" Height="3.7109993489583353" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.PARAMETRO" Width="1.5" PointX="2.75" PointY="1.5" Height="2.3648893229166665" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.PERFIL" Width="1.5" PointX="5.75" PointY="3.375" Height="2.5571907552083313" IsExpanded="true" />
@@ -1818,10 +2259,10 @@
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_T_FORNECEDOR" ManuallyRouted="false">
           <ConnectorPoint PointX="1.5" PointY="9.2109993489583335" />
-          <ConnectorPoint PointX="1.5" PointY="10.956198416666664" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="10.956198416666664" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="10.956198416666664" />
-          <ConnectorPoint PointX="3" PointY="10.956198416666664" />
+          <ConnectorPoint PointX="1.5" PointY="11.15330128125" />
+          <ConnectorPoint PointX="2.2291666666666665" PointY="11.15330128125" />
+          <ConnectorPoint PointX="2.3958333333333335" PointY="11.15330128125" />
+          <ConnectorPoint PointX="3" PointY="11.15330128125" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_FORNECEDOR_TAXA_T_TAXA" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="5.0718489583333328" />
@@ -1832,32 +2273,39 @@
           <ConnectorPoint PointX="3" PointY="5.0718489583333328" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_T_ORCAMENTO" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="18.267495058593752" />
-          <ConnectorPoint PointX="5.1080694791666668" PointY="18.267495058593752" />
-          <ConnectorPoint PointX="5.2747361458333328" PointY="18.267495058593752" />
-          <ConnectorPoint PointX="5.7936205729166668" PointY="18.267495058593752" />
-          <ConnectorPoint PointX="5.9602872395833328" PointY="18.267495058593752" />
-          <ConnectorPoint PointX="6.65625" PointY="18.267495058593752" />
-          <ConnectorPoint PointX="6.65625" PointY="12.451396484374998" />
+          <ConnectorPoint PointX="4.5" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="5.254407335831325" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="5.4210740024979911" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="5.6546530049959829" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="5.821319671662649" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="6.1525718046371152" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="6.3192384713037812" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="7.083333333333333" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="7.2187525" PointY="18.751852213541667" />
+          <ConnectorPoint PointX="7.2187525" PointY="12.835999348958334" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_T_PRODUTO" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="10.325524681640625" />
-          <ConnectorPoint PointX="4.9791641666666671" PointY="10.325524681640625" />
-          <ConnectorPoint PointX="5.1770833333333321" PointY="10.325524681640625" />
-          <ConnectorPoint PointX="5.25" PointY="10.325524681640625" />
+          <ConnectorPoint PointX="4.5" PointY="11.603311822753906" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="11.603311822753904" />
+          <ConnectorPoint PointX="5.2083358333333338" PointY="11.603311822753906" />
+          <ConnectorPoint PointX="5.25" PointY="11.603311822753906" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ORCAMENTO_T_USUARIO" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="19.926747814955554" />
-          <ConnectorPoint PointX="3" PointY="19.926747814955554" />
+          <ConnectorPoint PointX="2.25" PointY="19.890975785938956" />
+          <ConnectorPoint PointX="3" PointY="19.890975785938956" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PERFIL_PERMISSAO_T_PERFIL" ManuallyRouted="false">
           <ConnectorPoint PointX="7.25" PointY="4.6824446614583337" />
           <ConnectorPoint PointX="8" PointY="4.6824446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_USUARIO_PERFIL_T_PERFIL" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.2500000000000009" PointY="6.5090950520833326" />
-          <ConnectorPoint PointX="7.625" PointY="6.8840950520833317" />
-          <ConnectorPoint PointX="7.625" PointY="14.807444661458334" />
+          <ConnectorPoint PointX="6.5" PointY="6.5090950520833326" />
+          <ConnectorPoint PointX="6.5" PointY="8.875" />
+          <ConnectorPoint PointX="7.75" PointY="8.875" />
+          <ConnectorPoint PointX="7.75" PointY="14.807444661458334" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="14.807444661458334" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="14.807444661458334" />
           <ConnectorPoint PointX="8" PointY="14.807444661458334" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PERFIL_PERMISSAO_T_PERMISSAO" ManuallyRouted="false">
@@ -1866,39 +2314,49 @@
           <ConnectorPoint PointX="8.75" PointY="3.5" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_PRODUTO" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="4.833333333333333" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="4.9791641666666671" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="5.1770833333333321" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="6.9166641666666679" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="7.083330833333334" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="7.541666666666667" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="7.708333333333333" PointY="12.576397734374996" />
-          <ConnectorPoint PointX="9" PointY="12.576397734374996" />
+          <ConnectorPoint PointX="4.5" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="4.9791641666666671" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="5.2083358333333329" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="7.1354191666666669" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="7.3020858333333329" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="9" PointY="12.964874674479166" />
           <ConnectorPoint PointX="9" PointY="12.124492187500003" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_TAXA" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.0551584368917357" />
-          <ConnectorPoint PointX="2.5" PointY="3.0551584368917357" />
+          <ConnectorPoint PointX="2.25" PointY="2.9204262099862115" />
+          <ConnectorPoint PointX="2.5" PointY="2.9204262099862115" />
           <ConnectorPoint PointX="2.5" PointY="7.8744921875" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="7.8744921874999987" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="7.8744921875" />
           <ConnectorPoint PointX="4.9791641666666671" PointY="7.8744921874999987" />
-          <ConnectorPoint PointX="5.1458308333333331" PointY="7.8744921875" />
-          <ConnectorPoint PointX="6.9166641666666679" PointY="7.8744921874999987" />
-          <ConnectorPoint PointX="7.083330833333334" PointY="7.8744921875" />
-          <ConnectorPoint PointX="7.541666666666667" PointY="7.8744921874999987" />
-          <ConnectorPoint PointX="7.708333333333333" PointY="7.8744921875" />
-          <ConnectorPoint PointX="8.593748" PointY="7.8744921875" />
-          <ConnectorPoint PointX="8.593748" PointY="9.375" />
+          <ConnectorPoint PointX="5.2083358333333329" PointY="7.8744921875" />
+          <ConnectorPoint PointX="6.416666666666667" PointY="7.8744921874999987" />
+          <ConnectorPoint PointX="6.583333333333333" PointY="7.8744921875" />
+          <ConnectorPoint PointX="9" PointY="7.8744921875" />
+          <ConnectorPoint PointX="9" PointY="9.375" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_USUARIO_PERFIL_T_USUARIO" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="21.592503217585026" />
-          <ConnectorPoint PointX="5.7936205729166668" PointY="21.592503217585026" />
-          <ConnectorPoint PointX="5.9602872395833328" PointY="21.592503217585026" />
-          <ConnectorPoint PointX="8.28125" PointY="21.592503217585026" />
-          <ConnectorPoint PointX="8.28125" PointY="15.989889322916667" />
+          <ConnectorPoint PointX="2.25" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="5.254407335831325" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="5.4210740024979911" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="6.1525718046371152" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="6.3192384713037812" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="7" PointY="21.511520832450749" />
+          <ConnectorPoint PointX="7" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="7.1354191666666669" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="7.3020858333333329" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="7.322916666666667" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="7.489583333333333" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="8.75" PointY="16.364889322916667" />
+          <ConnectorPoint PointX="8.75" PointY="15.989889322916667" />
         </AssociationConnector>
         <EntityTypeShape EntityType="BrasilDidaticosModel.UNIDADE_FEDERATIVA" Width="1.5" PointX="11.25" PointY="4.375" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.ESTADO_ORCAMENTO" Width="3.75" PointX="10.375" PointY="7" Height="3.1340950520833388" />
@@ -1915,39 +2373,41 @@
           <ConnectorPoint PointX="12.831576852964744" PointY="7" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ORCAMENTO_T_ESTADO_ORCAMENTO" >
-          <ConnectorPoint PointX="12.25" PointY="10.134095052083339" />
-          <ConnectorPoint PointX="12.25" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="8.3645833333333339" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="8.1979166666666661" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="5.9602872395833328" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="5.7936205729166668" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="5.2747361458333328" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="5.1080694791666668" PointY="20.083598632812503" />
-          <ConnectorPoint PointX="4.5" PointY="20.083598632812503" />
+          <ConnectorPoint PointX="13.78125" PointY="10.134095052083339" />
+          <ConnectorPoint PointX="13.78125" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="12.020833333333334" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="11.854166666666666" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="9.0520833333333339" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="8.8854166666666661" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="7.489583333333333" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="7.322916666666667" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="7.083333333333333" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="6.3192384713037812" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="6.1525718046371152" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="5.821319671662649" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="5.6546530049959829" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="5.4210740024979911" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="5.254407335831325" PointY="20.179749348958339" />
+          <ConnectorPoint PointX="4.5" PointY="20.179749348958339" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ORCAMENTO_T_USUARIO_VENDEDOR" >
-          <ConnectorPoint PointX="2.25" PointY="20.424627162686111" />
-          <ConnectorPoint PointX="3" PointY="20.424627162686111" />
+          <ConnectorPoint PointX="2.25" PointY="20.406741148177812" />
+          <ConnectorPoint PointX="3" PointY="20.406741148177812" />
         </AssociationConnector>
         <EntityTypeShape EntityType="BrasilDidaticosModel.EMPRESA" Width="1.5" PointX="5" PointY="13.125" Height="3.3263964843749996" />
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_CLIENTE_T_EMPRESA" >
-          <ConnectorPoint PointX="5" PointY="14.456111882215208" />
-          <ConnectorPoint PointX="3.8333333333333335" PointY="14.456111882215208" />
-          <ConnectorPoint PointX="3.6666666666666665" PointY="14.456111882215208" />
-          <ConnectorPoint PointX="2.25" PointY="14.456111882215208" />
+          <ConnectorPoint PointX="5" PointY="14.753764761389517" />
+          <ConnectorPoint PointX="2.25" PointY="14.753764761389517" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_FORNECEDOR_T_EMPRESA" >
           <ConnectorPoint PointX="5.09375" PointY="13.125" />
           <ConnectorPoint PointX="5.09375" PointY="8.40599609375" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="8.40599609375" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="8.40599609375" />
           <ConnectorPoint PointX="2.25" PointY="8.40599609375" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ORCAMENTO_T_EMPRESA" >
-          <ConnectorPoint PointX="5" PointY="16.288198242187498" />
-          <ConnectorPoint PointX="4.5" PointY="16.288198242187498" />
+          <ConnectorPoint PointX="5" PointY="16.384348958333334" />
+          <ConnectorPoint PointX="4.5" PointY="16.384348958333334" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PARAMETRO_T_EMPRESA" >
           <ConnectorPoint PointX="5.0624975" PointY="13.125" />
@@ -1955,56 +2415,135 @@
           <ConnectorPoint PointX="4.25" PointY="2.9564925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PERFIL_T_EMPRESA" >
-          <ConnectorPoint PointX="6.5" PointY="14.7881982421875" />
-          <ConnectorPoint PointX="6.572916666666667" PointY="14.7881982421875" />
-          <ConnectorPoint PointX="6.739583333333333" PointY="14.7881982421875" />
-          <ConnectorPoint PointX="6.999997500000001" PointY="14.7881982421875" />
-          <ConnectorPoint PointX="6.999997500000001" PointY="6.5090950520833326" />
+          <ConnectorPoint PointX="5.1250025" PointY="13.125" />
+          <ConnectorPoint PointX="5.1250025" PointY="4.9420475260416659" />
+          <ConnectorPoint PointX="5.75" PointY="4.9420475260416659" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_TAXA_T_EMPRESA" >
-          <ConnectorPoint PointX="5.828127" PointY="13.125" />
-          <ConnectorPoint PointX="5.828127" PointY="12.701396484374996" />
-          <ConnectorPoint PointX="5.177083333333333" PointY="12.701396484374996" />
-          <ConnectorPoint PointX="5.010416666666667" PointY="12.701396484374996" />
-          <ConnectorPoint PointX="5" PointY="12.701396484374996" />
-          <ConnectorPoint PointX="5" PointY="4.6917936197916656" />
-          <ConnectorPoint PointX="2.625" PointY="4.6917936197916656" />
-          <ConnectorPoint PointX="2.625" PointY="4.0635036976125338" />
-          <ConnectorPoint PointX="2.5833333333333335" PointY="4.0635036976125329" />
-          <ConnectorPoint PointX="2.4166666666666665" PointY="4.0635036976125338" />
-          <ConnectorPoint PointX="2.25" PointY="4.0635036976125338" />
+          <ConnectorPoint PointX="5" PointY="13.908130380694765" />
+          <ConnectorPoint PointX="2.3125" PointY="13.908130380694765" />
+          <ConnectorPoint PointX="2.3125" PointY="5.3624479166666656" />
+          <ConnectorPoint PointX="1.5" PointY="5.3624479166666656" />
+          <ConnectorPoint PointX="1.5" PointY="5.2686979166666656" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_USUARIO_T_EMPRESA" >
-          <ConnectorPoint PointX="5.1914028125" PointY="16.451396484375" />
-          <ConnectorPoint PointX="5.1914028125" PointY="21.185001435170069" />
-          <ConnectorPoint PointX="2.25" PointY="21.185001435170069" />
+          <ConnectorPoint PointX="5.7379863383293159" PointY="16.643697916666667" />
+          <ConnectorPoint PointX="5.7379863383293159" PointY="21.1934323319212" />
+          <ConnectorPoint PointX="5.4210740024979911" PointY="21.1934323319212" />
+          <ConnectorPoint PointX="5.254407335831325" PointY="21.1934323319212" />
+          <ConnectorPoint PointX="2.25" PointY="21.1934323319212" />
         </AssociationConnector>
         <EntityTypeShape EntityType="BrasilDidaticosModel.UNIDADE_MEDIDA" Width="1.875" PointX="3" PointY="22" Height="2.5571907552083388" />
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_UNIDADE_MEDIDA_T_EMPRESA" >
-          <ConnectorPoint PointX="5.87695390625" PointY="16.451396484375" />
-          <ConnectorPoint PointX="5.87695390625" PointY="23.217286413923741" />
-          <ConnectorPoint PointX="4.875" PointY="23.217286413923741" />
+          <ConnectorPoint PointX="5.3377406691646581" PointY="16.643697916666667" />
+          <ConnectorPoint PointX="5.3377406691646581" PointY="22.95720521736785" />
+          <ConnectorPoint PointX="4.875" PointY="22.95720521736785" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="BrasilDidaticosModel.PRODUTO_UNIDADE_MEDIDA" Width="1.5" PointX="8.625" PointY="16.75" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="BrasilDidaticosModel.ESTADO_PEDIDO" Width="1.5" PointX="5" PointY="25.875" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="BrasilDidaticosModel.ITEM_PEDIDO" Width="2.875" PointX="10.5" PointY="13" Height="3.3263964843750031" />
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO" >
+          <ConnectorPoint PointX="4.5" PointY="10.27040391137696" />
+          <ConnectorPoint PointX="5" PointY="10.27040391137696" />
+          <ConnectorPoint PointX="5" PointY="12.875" />
+          <ConnectorPoint PointX="5.010416666666667" PointY="12.875" />
+          <ConnectorPoint PointX="5.2083358333333338" PointY="12.875" />
+          <ConnectorPoint PointX="6.75" PointY="12.875" />
+          <ConnectorPoint PointX="6.75" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="7.1354191666666669" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="7.3020858333333329" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="13.08599934895833" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="8" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="8" PointY="12.374492187500003" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="12.374492187500003" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="12.374492187500003" />
+          <ConnectorPoint PointX="11.9375" PointY="12.374492187500003" />
+          <ConnectorPoint PointX="11.9375" PointY="13" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BrasilDidaticosModel.PEDIDO" Width="1.5" PointX="7.25" PointY="20.875" Height="3.5186979166666674" />
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_PEDIDO_T_EMPRESA" >
+          <ConnectorPoint PointX="6.2359051379704482" PointY="16.643697916666667" />
+          <ConnectorPoint PointX="6.2359051379704482" PointY="22.221569553331378" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="22.221569553331378" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="22.221569553331378" />
+          <ConnectorPoint PointX="7.25" PointY="22.221569553331378" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_PEDIDO_T_ESTADO_PEDIDO" >
+          <ConnectorPoint PointX="5.9718102759408955" PointY="25.875" />
+          <ConnectorPoint PointX="5.9718102759408955" PointY="23.692840881404326" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="23.692840881404326" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="23.692840881404326" />
+          <ConnectorPoint PointX="7.25" PointY="23.692840881404326" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO" >
+          <ConnectorPoint PointX="7.40625" PointY="20.875" />
+          <ConnectorPoint PointX="7.40625" PointY="13.324249674479166" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="13.324249674479164" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="13.324249674479166" />
+          <ConnectorPoint PointX="10.5" PointY="13.324249674479166" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_PEDIDO_T_USUARIO" >
+          <ConnectorPoint PointX="2.25" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="5.254407335831325" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="5.4210740024979911" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="6.1525718046371152" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="6.3192384713037812" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="21.829609332980297" />
+          <ConnectorPoint PointX="7.25" PointY="21.829609332980297" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO" >
+          <ConnectorPoint PointX="5.5319230769230767" PointY="29.009095052083335" />
+          <ConnectorPoint PointX="5.5319230769230767" PointY="29.259095052083339" />
+          <ConnectorPoint PointX="5.9784615384615378" PointY="29.259095052083339" />
+          <ConnectorPoint PointX="5.9784615384615378" PointY="29.009095052083335" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_ESTADO_PEDIDO_T_ESTADO_PEDIDO1" >
+          <ConnectorPoint PointX="5" PointY="26.960001402243591" />
+          <ConnectorPoint PointX="4.75" PointY="26.960001402243591" />
+          <ConnectorPoint PointX="4.75" PointY="27.947048227163464" />
+          <ConnectorPoint PointX="5" PointY="27.947048227163464" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA" >
+          <ConnectorPoint PointX="4.875" PointY="24.891297200520835" />
+          <ConnectorPoint PointX="5.8884769426075625" PointY="24.891297200520835" />
+          <ConnectorPoint PointX="6.0551436092742286" PointY="24.891297200520835" />
+          <ConnectorPoint PointX="6.875" PointY="24.891297200520835" />
+          <ConnectorPoint PointX="6.875" PointY="12.835999348958334" />
+        </AssociationConnector>
+        <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA" >
+          <ConnectorPoint PointX="4.875" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="5.8884769426075625" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="6.0551436092742286" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="8.8854166666666661" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="9.0520833333333339" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="11.9375" PointY="24.642495058593752" />
+          <ConnectorPoint PointX="11.9375" PointY="16.326396484375003" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BrasilDidaticosModel.PRODUTO_UNIDADE_MEDIDA" Width="1.5" PointX="7.625" PointY="16.75" Height="2.7494921875000102" />
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO" >
-          <ConnectorPoint PointX="4.5" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="4.666666666666667" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="4.833333333333333" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="4.9791641666666671" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="5.1770833333333321" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="5.7447936666666672" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="5.9114603333333333" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="6.9166641666666679" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="7.083330833333334" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="7.541666666666667" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="7.708333333333333" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="9.96875" PointY="12.833601132812497" />
-          <ConnectorPoint PointX="9.96875" PointY="16.75" />
+          <ConnectorPoint PointX="4.5" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="4.9791641666666671" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="5.2083358333333329" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="6.791666666666667" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="6.958333333333333" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="7.1354191666666669" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="7.3020858333333329" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="7.84375" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="7.84375" PointY="16.75" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_UNIDADE_MEDIDA" >
-          <ConnectorPoint PointX="4.875" PointY="24.1107925168577" />
-          <ConnectorPoint PointX="9.375" PointY="24.1107925168577" />
-          <ConnectorPoint PointX="9.375" PointY="19.307190755208339" />
+          <ConnectorPoint PointX="4.875" PointY="25.140099342447918" />
+          <ConnectorPoint PointX="5.8884769426075625" PointY="25.140099342447918" />
+          <ConnectorPoint PointX="6.0551436092742286" PointY="25.140099342447918" />
+          <ConnectorPoint PointX="8.96875" PointY="25.140099342447918" />
+          <ConnectorPoint PointX="8.96875" PointY="19.49949218750001" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

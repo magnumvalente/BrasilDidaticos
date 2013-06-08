@@ -130,7 +130,8 @@ namespace BrasilDidaticos.Apresentacao
         }
 
         private void PreencherDados(Contrato.Taxa Taxa)
-        {            
+        {
+            Taxa.Id = _taxa == null ? Guid.Empty : _taxa.Id;
             Taxa.Nome = txtNome.Conteudo;
             Taxa.Fornecedor = (bool)chkFornecedor.Selecionado;
             Taxa.Produto = (bool)chkProduto.Selecionado;

@@ -99,5 +99,15 @@ namespace BrasilDidaticos.Apresentacao.Controler
         }
 
         #endregion
+
+        #region "[Eventos]"
+
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
+        }
+
+        #endregion
+
     }
 }
