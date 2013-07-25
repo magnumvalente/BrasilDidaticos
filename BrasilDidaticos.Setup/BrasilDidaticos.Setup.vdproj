@@ -21,8 +21,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E67C988C2939D68F8554D532F3144A7"
-        "OwnerKey" = "8:_3F1658EFA024C4B77DB90AF8CB79DEF4"
+        "MsmKey" = "8:_23FEC546D0B5FC46EAC20D8D637E5952"
+        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -33,8 +33,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_24CE6B46E511A73FFDDBB51C91142BF2"
-        "OwnerKey" = "8:_1E67C988C2939D68F8554D532F3144A7"
+        "MsmKey" = "8:_29930222015F50A122CC6A69DCC9DBA5"
+        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,25 +51,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_65FEA5D76F50D42902146EF082B785BB"
-        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6D0A41B0CDCA9DE500DC11A3A1E22660"
-        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6D0A41B0CDCA9DE500DC11A3A1E22660"
-        "OwnerKey" = "8:_1E67C988C2939D68F8554D532F3144A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7BABF42CF6AC3D214B84F4FCC08AD993"
         "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -88,43 +70,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E67C988C2939D68F8554D532F3144A7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3F1658EFA024C4B77DB90AF8CB79DEF4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_55648CB8168CD0B6D4BD050B5B9532B6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6D0A41B0CDCA9DE500DC11A3A1E22660"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_65FEA5D76F50D42902146EF082B785BB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7BABF42CF6AC3D214B84F4FCC08AD993"
+        "OwnerKey" = "8:_D6A3279A6C764F68AFE02D45600FEED3"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -196,10 +148,20 @@
                     "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
                     }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.ReportViewer.10.0"
+                    {
+                    "Name" = "8:Microsoft Visual Studio 2010 Report Viewer"
+                    "ProductCode" = "8:Microsoft.ReportViewer.10.0"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
                     "Name" = "8:Windows Installer 3.1"
                     "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.4.5"
+                    {
+                    "Name" = "8:Windows Installer 4.5"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.4.5"
                     }
                 }
             }
@@ -232,32 +194,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1E67C988C2939D68F8554D532F3144A7"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:Microsoft.ReportViewer.Common.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_24CE6B46E511A73FFDDBB51C91142BF2"
             {
             "AssemblyRegister" = "3:1"
@@ -289,84 +225,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3F1658EFA024C4B77DB90AF8CB79DEF4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:Microsoft.ReportViewer.WinForms.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55648CB8168CD0B6D4BD050B5B9532B6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WPFToolkit.Extended, Version=1.7.4644.13122, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:WPFToolkit.Extended.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_65FEA5D76F50D42902146EF082B785BB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:BrasilDidaticos.Contrato, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:BrasilDidaticos.Contrato.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6D0A41B0CDCA9DE500DC11A3A1E22660"
             {
             "AssemblyRegister" = "3:1"
@@ -381,32 +239,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.ReportViewer.ProcessingObjectModel.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7BABF42CF6AC3D214B84F4FCC08AD993"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CepFacil.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:CepFacil.API.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"
@@ -480,15 +312,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Brasil Didáticos"
-        "ProductCode" = "8:{8F3B0B2C-2AF1-484D-9050-D091F6AAF891}"
-        "PackageCode" = "8:{BDBB9998-8AE0-4637-9D19-D6681732482D}"
+        "ProductCode" = "8:{408A9930-0EDB-40EE-9C49-052232E64C9F}"
+        "PackageCode" = "8:{0E830C8C-E9DB-4ED8-BD10-41BC29CE55DC}"
         "UpgradeCode" = "8:{B20EDBD9-A7F1-4725-B6E1-D6C516EDA7C0}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.22"
+        "ProductVersion" = "8:1.0.23"
         "Manufacturer" = "8:GDM Soluções em Informática"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1044,7 +876,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D6A3279A6C764F68AFE02D45600FEED3"
             {
-            "SourcePath" = "8:..\\BrasilDidaticos\\obj\\x86\\Debug\\BrasilDidaticos.exe"
+            "SourcePath" = "8:..\\BrasilDidaticos\\obj\\x86\\Release\\BrasilDidaticos.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_83E1F0A754844BF6AD5FBDFCD52EC17E"

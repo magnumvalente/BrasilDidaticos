@@ -523,12 +523,10 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     // Para cada produto existente na lista
                     foreach (Contrato.Produto produto in entradaProdutos.Produtos)
                     {
-                        // Se o fornecedor do produto não foi informado
-                        if (produto.Fornecedor == null)
-                        {
+                        // Se encontrou o fornecedor
+                        if (entradaProdutos.Fornecedor != null)
                             // Define o fornecedor do produto
                             produto.Fornecedor = entradaProdutos.Fornecedor;
-                        }
 
                         // Verifica se as informações do produto foram informadas
                         string strValidacao = ValidarProdutoPreenchido(produto);
@@ -543,10 +541,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         {
                             // Busca o produto no banco
                             List<Dados.PRODUTO> lstProdutos = (from p in context.T_PRODUTO
-                                                                where
-                                                                    (p.COD_PRODUTO_FORNECEDOR == produto.CodigoFornecedor ||
-                                                                    (p.ID_PRODUTO == produto.Id && produto.Id != Guid.Empty)) &&
-                                                                        p.ID_FORNECEDOR == produto.Fornecedor.Id
+                                                                where                                                                    
+                                                                     p.ID_PRODUTO == produto.Id && produto.Id != Guid.Empty  &&
+                                                                     p.ID_FORNECEDOR == produto.Fornecedor.Id
                                                                 select p).ToList();
 
                             // Se existe o produto
@@ -567,9 +564,10 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                     context.T_PRODUTO_TAXA.DeleteObject(lstProdutos.First().T_PRODUTO_TAXA.First());
                                 }
 
+                                // Se existe o forneedor
                                 if (entradaProdutos.Fornecedor != null)
                                 {
-                                    // Verifica se existe alguma taxa associada ao produto
+                                    // Verifica se existe alguma taxa associada ao fornecedor
                                     if (produto.Fornecedor.Taxas != null)
                                     {
                                         // Para cada taxa associada

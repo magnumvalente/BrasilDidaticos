@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5AD4B466F98816E6A0BF0D332629841A"
+        "MsmKey" = "8:_59AECEE8D542382420CBE3D77D5D8E82"
         "OwnerKey" = "8:_25FF9B736D0F4F92B65C0C204ED23329"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -29,12 +29,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_25FF9B736D0F4F92B65C0C204ED23329"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5AD4B466F98816E6A0BF0D332629841A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -147,32 +141,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5AD4B466F98816E6A0BF0D332629841A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:BrasilDidaticos.Contrato, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:BrasilDidaticos.Contrato.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_12DC5A2E43534ABC904AAD88906D71D6"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -262,15 +230,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BrasilDidaticos.WcfServico"
-        "ProductCode" = "8:{D098BE3B-E6CA-4F78-9CA9-863A727473AB}"
-        "PackageCode" = "8:{D43D2E1F-6BA2-445E-91C2-5C1F2D5FDB4F}"
+        "ProductCode" = "8:{6ADB25AC-6861-4723-87C6-E16C792E5941}"
+        "PackageCode" = "8:{13CE352F-A5B2-4F98-A51A-25475B7A60A4}"
         "UpgradeCode" = "8:{EE899FC4-2044-4F06-B956-A7511AECB475}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.22"
+        "ProductVersion" = "8:1.0.23"
         "Manufacturer" = "8:GDM Soluções em Informática"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -715,7 +683,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_25FF9B736D0F4F92B65C0C204ED23329"
             {
-            "SourcePath" = "8:..\\BrasilDidaticos.WcfServico\\obj\\Debug\\BrasilDidaticos.WcfServico.dll"
+            "SourcePath" = "8:..\\BrasilDidaticos.WcfServico\\obj\\Release\\BrasilDidaticos.WcfServico.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_84FC60DC20B54683B1559476B04F472D"

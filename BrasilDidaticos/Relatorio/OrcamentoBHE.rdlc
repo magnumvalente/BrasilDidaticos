@@ -276,7 +276,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.29773in</Width>
+                  <Width>0.37074in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.44895in</Width>
@@ -347,7 +347,7 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -372,7 +372,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Quant.</Value>
+                                  <Value>Quant</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -573,7 +573,7 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Right</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -932,106 +932,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total:</Value>
+                                  <Value>TOTAL</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox14">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox14</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox22">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox2">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -1039,7 +943,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1050,8 +953,12 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <ColSpan>4</ColSpan>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="txtTotalGeralValor">
@@ -1125,7 +1032,7 @@
             <Top>3.17032cm</Top>
             <Left>0.2cm</Left>
             <Height>2.4cm</Height>
-            <Width>16.61878cm</Width>
+            <Width>16.8042cm</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1156,7 +1063,6 @@
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Left>0cm</Left>
                 <Height>0.6cm</Height>
                 <Width>7.286cm</Width>
                 <Style>
@@ -1505,9 +1411,9 @@ Code.RetornarTextoFormatado(First(Fields!Nome.Value, "UnidadesFederativa"))</Val
               </Paragraph>
             </Paragraphs>
             <Top>0.13051cm</Top>
-            <Left>4.38561cm</Left>
+            <Left>2.64994cm</Left>
             <Height>0.6cm</Height>
-            <Width>12.41439cm</Width>
+            <Width>14.15006cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -1526,7 +1432,7 @@ Code.RetornarTextoFormatado(First(Fields!Nome.Value, "UnidadesFederativa"))</Val
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Razão Social da Escola:</Value>
+                    <Value>Razão Social:</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -1538,7 +1444,7 @@ Code.RetornarTextoFormatado(First(Fields!Nome.Value, "UnidadesFederativa"))</Val
             <Top>0.13051cm</Top>
             <Left>0.2cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.18561cm</Width>
+            <Width>2.44994cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -1553,7 +1459,7 @@ Code.RetornarTextoFormatado(First(Fields!Nome.Value, "UnidadesFederativa"))</Val
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Height>8.60449cm</Height>
-        <Width>16.81878cm</Width>
+        <Width>17.0042cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1567,7 +1473,7 @@ Code.RetornarTextoFormatado(First(Fields!Nome.Value, "UnidadesFederativa"))</Val
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>= "Validade do Orçamento: " &amp; Iif(IsNothing(First(Fields!ValidadeOrcamento.Value, "Orcamentos")), "Conforme o edital", First(Fields!ValidadeOrcamento.Value, "Orcamentos") &amp; " Dias")</Value>
+                <Value>= "Validade da Proposta: " &amp; Iif(IsNothing(First(Fields!ValidadeOrcamento.Value, "Orcamentos")), "Conforme o edital", First(Fields!ValidadeOrcamento.Value, "Orcamentos") &amp; " Dias")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1660,7 +1566,7 @@ Public Function RetornarTextoFormatado(Texto as String) as String
 	Return  strRetorno
 
 End Function</Code>
-  <Width>6.62157in</Width>
+  <Width>6.69457in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

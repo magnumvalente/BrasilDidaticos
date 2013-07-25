@@ -7,6 +7,7 @@ using System.Text;
 namespace BrasilDidaticos.Contrato
 {
     [DataContract]
+    [Serializable]
     public class UnidadeMedida
     {
         [DataMember]

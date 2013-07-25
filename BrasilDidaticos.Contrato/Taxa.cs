@@ -8,6 +8,7 @@ using System.ComponentModel;
 namespace BrasilDidaticos.Contrato
 {
     [DataContract]
+    [Serializable]
     public class Taxa : INotifyPropertyChanged
     {
         private decimal _Valor = 0;

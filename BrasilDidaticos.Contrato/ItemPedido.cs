@@ -8,6 +8,7 @@ using System.ComponentModel;
 namespace BrasilDidaticos.Contrato
 {
     [DataContract]
+    [Serializable]
     public class ItemPedido : INotifyPropertyChanged
     {
         private int _Quantidade = 0;

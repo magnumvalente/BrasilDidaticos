@@ -247,10 +247,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 retUnidadeMedida.Mensagem = strValidacao;
             }
             else
-            {
-                // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-                                
+            {                                
                 // Cria a unidade de medida
                 Dados.PRODUTO_UNIDADE_MEDIDA tProdutoUnidadeMedida = new Dados.PRODUTO_UNIDADE_MEDIDA()
                                     {
@@ -264,9 +261,6 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                     };
 
                 Produto.T_PRODUTO_UNIDADE_MEDIDA.Add(tProdutoUnidadeMedida);
-
-                // Salva as alterações
-                context.SaveChanges();
 
                 // Preenche o objeto de retorno
                 retUnidadeMedida.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;

@@ -311,10 +311,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 retTaxa.Mensagem = strValidacao;
             }
             else
-            {
-                // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-
+            {               
                 // Cria a taxa para o produto
                 Dados.PRODUTO_TAXA tProdutoTaxa = new Dados.PRODUTO_TAXA()
                                     {
@@ -328,10 +325,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                     };
 
                 Produto.T_PRODUTO_TAXA.Add(tProdutoTaxa);
-
-                // Salva as alterações
-                context.SaveChanges();
-
+                
                 // Preenche o objeto de retorno
                 retTaxa.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
             }

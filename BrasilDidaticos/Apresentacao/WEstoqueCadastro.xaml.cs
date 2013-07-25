@@ -164,11 +164,11 @@ namespace BrasilDidaticos.Apresentacao
 
         private void PreencherDadosUnidadeMedidas(Contrato.Produto Produto)
         {
+            Produto.UnidadeMedidas = new List<Contrato.UnidadeMedida>();
             foreach (var item in dgUnidadeMedidas.Items)
             {
                 if (item.GetType() == typeof(Objeto.UnidadeMedida))
-                {                    
-                    Produto.UnidadeMedidas = new List<Contrato.UnidadeMedida>();
+                {                                        
                     Produto.UnidadeMedidas.Add(new Contrato.UnidadeMedida()
                     {
                         Id = ((Objeto.UnidadeMedida)item).Id,

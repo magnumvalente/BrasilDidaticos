@@ -30,6 +30,18 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     entradaPerfil.EmpresaLogada.Id = Guid.Empty;
                 }
 
+                // Verifica se o nome foi informado
+                if (string.IsNullOrWhiteSpace(entradaPerfil.Perfil.Codigo))
+                {
+                    entradaPerfil.Perfil.Codigo = string.Empty;
+                }
+
+                // Verifica se o Login foi informado
+                if (string.IsNullOrWhiteSpace(entradaPerfil.Perfil.Nome))
+                {
+                    entradaPerfil.Perfil.Nome = string.Empty;
+                }
+
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 

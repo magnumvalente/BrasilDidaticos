@@ -216,10 +216,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                             // Verifica se é para atualizar os produtos
                             if (entradaFornecedor.Fornecedor.Taxas != null && !atualizarProdutos)
+                                // Para cada taxa existente
                                 foreach (Contrato.Taxa t in entradaFornecedor.Fornecedor.Taxas)
                                 {
                                     // Verifica se é para atualizar os produtos
                                     if (!atualizarProdutos)
+                                        // Verifica se alguma informação da taxa foi atualizada
                                         atualizarProdutos = (from ft in lstFornecedores.First().T_FORNECEDOR_TAXA where ft.ID_TAXA == t.Id && (ft.NUM_VALOR != t.Valor || ft.ORD_PRIORIDADE != t.Prioridade) select ft).Count() > 0;
                                     else
                                         break;

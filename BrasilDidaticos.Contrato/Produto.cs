@@ -8,6 +8,7 @@ namespace BrasilDidaticos.Contrato
 {
 
     [DataContract]
+    [Serializable]
     public class Produto
     {
         private decimal _ValorCusto;
