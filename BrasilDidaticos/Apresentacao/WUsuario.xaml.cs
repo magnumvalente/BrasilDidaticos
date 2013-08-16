@@ -57,7 +57,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.RetornoUsuario retUsuario = servBrasilDidaticos.UsuarioListar(entUsuario);
             servBrasilDidaticos.Close();
 
-            dgUsuarios.ItemsSource = retUsuario.Usuarios;      
+            dgUsuarios.ItemsSource = retUsuario.Usuarios.OrderBy(o => o.Nome);      
 
             if (mostrarMsgVazio && retUsuario.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retUsuario.Mensagem, "Usuario", MessageBoxButton.OK, MessageBoxImage.Information);                              

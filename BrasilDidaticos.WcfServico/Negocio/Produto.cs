@@ -111,6 +111,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = true;
 
                 if (entradaProduto.Paginar)
                 {

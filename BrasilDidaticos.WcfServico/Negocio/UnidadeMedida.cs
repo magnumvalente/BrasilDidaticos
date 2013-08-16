@@ -32,34 +32,29 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-
-                // Busca o unidademedida no banco
-                List<Dados.UNIDADE_MEDIDA> lstUnidadeMedidas = (from um in context.T_UNIDADE_MEDIDA
-                                                where 
-                                                    (um.BOL_ATIVO == entradaUnidadeMedida.UnidadeMedida.Ativo)
-                                                 && (entradaUnidadeMedida.UnidadeMedida.Codigo == null || entradaUnidadeMedida.UnidadeMedida.Codigo == string.Empty || um.COD_UNIDADE_MEDIDA.Contains(entradaUnidadeMedida.UnidadeMedida.Codigo))
-                                                 && (entradaUnidadeMedida.UnidadeMedida.Nome == null || entradaUnidadeMedida.UnidadeMedida.Nome == string.Empty || um.NOME_UNIDADE_MEDIDA.Contains(entradaUnidadeMedida.UnidadeMedida.Nome))
-                                                 && (entradaUnidadeMedida.EmpresaLogada.Id == Guid.Empty || um.ID_EMPRESA == entradaUnidadeMedida.EmpresaLogada.Id)
-                                                 select um).ToList();
+                
+                // Busca a unidade de medida no banco
+                List<Contrato.UnidadeMedida> lstUnidadeMedidas = (from um in context.T_UNIDADE_MEDIDA
+                                                                   where
+                                                                       (um.BOL_ATIVO == entradaUnidadeMedida.UnidadeMedida.Ativo)
+                                                                    && (entradaUnidadeMedida.UnidadeMedida.Codigo == null || entradaUnidadeMedida.UnidadeMedida.Codigo == string.Empty || um.COD_UNIDADE_MEDIDA.Contains(entradaUnidadeMedida.UnidadeMedida.Codigo))
+                                                                    && (entradaUnidadeMedida.UnidadeMedida.Nome == null || entradaUnidadeMedida.UnidadeMedida.Nome == string.Empty || um.NOME_UNIDADE_MEDIDA.Contains(entradaUnidadeMedida.UnidadeMedida.Nome))
+                                                                    && (entradaUnidadeMedida.EmpresaLogada.Id == Guid.Empty || um.ID_EMPRESA == entradaUnidadeMedida.EmpresaLogada.Id)
+                                                                   select new Contrato.UnidadeMedida
+                                                                   {
+                                                                       Id = um.ID_UNIDADE_MEDIDA,
+                                                                       Codigo = um.COD_UNIDADE_MEDIDA,
+                                                                       Nome = um.NOME_UNIDADE_MEDIDA,
+                                                                       Descricao = um.DES_UNIDADE_MEDIDA,
+                                                                       Ativo = um.BOL_ATIVO
+                                                                   }).ToList();
 
                 // Verifica se foi encontrado algum registro
                 if (lstUnidadeMedidas.Count > 0)
                 {
                     // Preenche o objeto de retorno
                     retUnidadeMedida.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
-                    retUnidadeMedida.UnidadeMedidas = new List<Contrato.UnidadeMedida>();
-                    foreach (Dados.UNIDADE_MEDIDA unidademedida in lstUnidadeMedidas)
-                    {
-                        retUnidadeMedida.UnidadeMedidas.Add(new Contrato.UnidadeMedida()
-                        {
-                            Id = unidademedida.ID_UNIDADE_MEDIDA,
-                            Codigo = unidademedida.COD_UNIDADE_MEDIDA,
-                            Nome = unidademedida.NOME_UNIDADE_MEDIDA,
-                            Descricao = unidademedida.DES_UNIDADE_MEDIDA,                            
-                            Ativo = unidademedida.BOL_ATIVO
-                        });
-                    };
-
+                    retUnidadeMedida.UnidadeMedidas = lstUnidadeMedidas;
                 }
                 else
                 {

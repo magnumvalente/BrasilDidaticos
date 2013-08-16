@@ -44,6 +44,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = true;
 
                 // Busca o perfil no banco
                 List<Dados.PERFIL> lstPerfis = (from p in context.T_PERFIL

@@ -117,13 +117,14 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Busca o pedido no banco
                     var lstPedidos = (from p in context.T_PEDIDO
-                                    where
-                                        (entradaPedido.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaPedido.EmpresaLogada.Id)
-                                    &&  (entradaPedido.Pedido.Codigo == string.Empty || p.COD_PEDIDO.Contains(entradaPedido.Pedido.Codigo))                                    
-                                    &&  (entradaPedido.Pedido.Responsavel.Id == Guid.Empty || p.ID_USUARIO_RESPONSAVEL == entradaPedido.Pedido.Responsavel.Id)
-                                    &&  (entradaPedido.Pedido.Estado.Id == Guid.Empty || p.ID_ESTADO_PEDIDO == entradaPedido.Pedido.Estado.Id)                                    
-                                    select p                                                           
-                                    ).OrderBy(p => p.DATA_PEDIDO).Skip(entradaPedido.PosicaoUltimoItem).Take(entradaPedido.CantidadeItens)
+                                      where
+                                          (entradaPedido.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaPedido.EmpresaLogada.Id)
+                                      &&  (p.DATA_PEDIDO >= entradaPedido.Pedido.Data)
+                                      &&  (entradaPedido.Pedido.Codigo == string.Empty || p.COD_PEDIDO.Contains(entradaPedido.Pedido.Codigo))                                    
+                                      &&  (entradaPedido.Pedido.Responsavel.Id == Guid.Empty || p.ID_USUARIO_RESPONSAVEL == entradaPedido.Pedido.Responsavel.Id)
+                                      &&  (entradaPedido.Pedido.Estado.Id == Guid.Empty || p.ID_ESTADO_PEDIDO == entradaPedido.Pedido.Estado.Id)                                    
+                                      select p                                                           
+                                     ).OrderByDescending(p => p.DATA_PEDIDO).Skip(entradaPedido.PosicaoUltimoItem).Take(entradaPedido.CantidadeItens)
                                      .Select(p => new
                                      {
                                          o = p,
@@ -157,9 +158,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 else
                 {
                     var lstPedidos = (from p in context.T_PEDIDO
-                                   where
-                                        (entradaPedido.Pedido.Codigo == string.Empty || p.COD_PEDIDO.StartsWith(entradaPedido.Pedido.Codigo))
-                                   select new { p, i = p.T_ITEM_PEDIDO } ).ToList();
+                                      where
+                                          (entradaPedido.EmpresaLogada.Id == Guid.Empty || p.ID_EMPRESA == entradaPedido.EmpresaLogada.Id)
+                                      &&  (entradaPedido.Pedido.Codigo == string.Empty || p.COD_PEDIDO.Contains(entradaPedido.Pedido.Codigo))
+                                      &&  (entradaPedido.Pedido.Responsavel.Id == Guid.Empty || p.ID_USUARIO_RESPONSAVEL == entradaPedido.Pedido.Responsavel.Id)
+                                      &&  (entradaPedido.Pedido.Estado.Id == Guid.Empty || p.ID_ESTADO_PEDIDO == entradaPedido.Pedido.Estado.Id)
+                                      select new { p, i = p.T_ITEM_PEDIDO }).ToList();
 
                     // Verifica se foi encontrado algum registro
                     if (lstPedidos.Count > 0)

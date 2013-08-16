@@ -132,9 +132,10 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 if (entradaOrcamento.Paginar)
                 {
                     // Busca o orcamento no banco
-                    var lstOrcamentos = (from o in context.T_ORCAMENTO
+                    var lstOrcamentos = (from o in context.T_ORCAMENTO.Include("T_ITEM")
                                     where
                                         (entradaOrcamento.EmpresaLogada.Id == Guid.Empty || o.ID_EMPRESA == entradaOrcamento.EmpresaLogada.Id)
+                                    &&  (o.DATA_ORCAMENTO >= entradaOrcamento.Orcamento.Data)
                                     &&  (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.Contains(entradaOrcamento.Orcamento.Codigo))
                                     &&  (entradaOrcamento.Orcamento.Cliente.Id == Guid.Empty || o.ID_CLIENTE == entradaOrcamento.Orcamento.Cliente.Id)
                                     &&  (entradaOrcamento.Orcamento.Vendedor.Id == Guid.Empty || o.ID_USUARIO_VENDEDOR == entradaOrcamento.Orcamento.Vendedor.Id)
@@ -181,10 +182,14 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 else
                 {
                     var lstOrcamentos = (from o in context.T_ORCAMENTO
-                                   where
-                                        (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.StartsWith(entradaOrcamento.Orcamento.Codigo))                                   
-                                   &&   (entradaOrcamento.Orcamento.Cliente.Id == Guid.Empty || o.ID_CLIENTE == entradaOrcamento.Orcamento.Cliente.Id)
-                                   select new { o, i = o.T_ITEM } ).ToList();
+                                         where (entradaOrcamento.EmpresaLogada.Id == Guid.Empty || o.ID_EMPRESA == entradaOrcamento.EmpresaLogada.Id)
+                                          && (o.DATA_ORCAMENTO >= entradaOrcamento.Orcamento.Data)
+                                          && (entradaOrcamento.Orcamento.Codigo == string.Empty || o.COD_ORCAMENTO.Contains(entradaOrcamento.Orcamento.Codigo))
+                                          && (entradaOrcamento.Orcamento.Cliente.Id == Guid.Empty || o.ID_CLIENTE == entradaOrcamento.Orcamento.Cliente.Id)
+                                          && (entradaOrcamento.Orcamento.Vendedor.Id == Guid.Empty || o.ID_USUARIO_VENDEDOR == entradaOrcamento.Orcamento.Vendedor.Id)
+                                          && (entradaOrcamento.Orcamento.Responsavel.Id == Guid.Empty || o.ID_USUARIO_RESPONSAVEL == entradaOrcamento.Orcamento.Responsavel.Id)
+                                          && (entradaOrcamento.Orcamento.Estado.Id == Guid.Empty || o.ID_ESTADO_ORCAMENTO == entradaOrcamento.Orcamento.Estado.Id)
+                                         select new { o, i = o.T_ITEM }).ToList();
 
                     // Verifica se foi encontrado algum registro
                     if (lstOrcamentos.Count > 0)

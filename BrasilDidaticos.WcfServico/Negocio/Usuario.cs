@@ -30,7 +30,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             {
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-                string con = context.Connection.ConnectionString;
+                context.ContextOptions.LazyLoadingEnabled = true;
 
                 // Busca o usuario no banco
                 Dados.USUARIO objUsuario = (from u in context.T_USUARIO
@@ -162,7 +162,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
                 // Busca o usuario no banco
-                List<Dados.USUARIO> lstUsuarios = (from u in context.T_USUARIO                                                   
+                List<Dados.USUARIO> lstUsuarios = (from u in context.T_USUARIO.Include("T_USUARIO_PERFIL")                             
                                                    where
                                                         (entradaUsuario.Usuario.Ativo == null || u.BOL_ATIVO == entradaUsuario.Usuario.Ativo)
                                                      && (entradaUsuario.EmpresaLogada.Id == Guid.Empty || u.ID_EMPRESA == entradaUsuario.EmpresaLogada.Id)

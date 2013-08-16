@@ -74,25 +74,19 @@ namespace BrasilDidaticos.WcfServico.Negocio
             Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
             // Busca o usuario no banco
-            List<Dados.UNIDADE_FEDERATIVA> lstUnidadesFederativas = context.T_UNIDADE_FEDERATIVA.ToList();
+            List<Contrato.UnidadeFederativa> lstUnidadesFederativas = (from uf in context.T_UNIDADE_FEDERATIVA select new Contrato.UnidadeFederativa
+                                                                                                                {
+                                                                                                                    Id = uf.ID_UNIDADE_FEDERATIVA,
+                                                                                                                    Codigo = uf.COD_UNIDADE_FEDERATIVA,
+                                                                                                                    Nome = uf.NOME_UNIDADE_FEDERATIVA
+                                                                                                                }).ToList();
 
             // Verifica se foi encontrado algum registro
             if (lstUnidadesFederativas.Count > 0)
             {
                 // Preenche o objeto de retorno
                 retUnidadeFederativa.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
-                retUnidadeFederativa.UnidadesFederativas = new List<Contrato.UnidadeFederativa>();
-                
-                // Preenche o objeto de retorno
-                foreach (Dados.UNIDADE_FEDERATIVA unidadeFederativa in lstUnidadesFederativas)
-                {
-                    retUnidadeFederativa.UnidadesFederativas.Add(new Contrato.UnidadeFederativa()
-                    {
-                        Id = unidadeFederativa.ID_UNIDADE_FEDERATIVA,
-                        Codigo = unidadeFederativa.COD_UNIDADE_FEDERATIVA,
-                        Nome = unidadeFederativa.NOME_UNIDADE_FEDERATIVA
-                    });
-                };
+                retUnidadeFederativa.UnidadesFederativas = lstUnidadesFederativas;              
             }
 
             // retorna os dados

@@ -39,35 +39,29 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
 
-                // Busca o taxa no banco
-                List<Dados.TAXA> lstTaxas = (from t in context.T_TAXA
-                                                where 
+                List<Contrato.Taxa> lstTaxas = (from t in context.T_TAXA
+                                                where
                                                     (t.BOL_ATIVO == entradaTaxa.Taxa.Ativo)
                                                  && (entradaTaxa.EmpresaLogada.Id == Guid.Empty || t.ID_EMPRESA == entradaTaxa.EmpresaLogada.Id)
                                                  && (entradaTaxa.Taxa.Nome == string.Empty || t.NOME_TAXA.Contains(entradaTaxa.Taxa.Nome))
                                                  && (!entradaTaxa.Taxa.Fornecedor.HasValue || t.BOL_FORNECEDOR != null && t.BOL_FORNECEDOR == entradaTaxa.Taxa.Fornecedor.Value)
                                                  && (!entradaTaxa.Taxa.Produto.HasValue || t.BOL_PRODUTO != null && t.BOL_PRODUTO == entradaTaxa.Taxa.Produto.Value)
-                                                select t).ToList();
+                                                select new Contrato.Taxa
+                                                {
+                                                    Id = t.ID_TAXA,
+                                                    Nome = t.NOME_TAXA,
+                                                    Fornecedor = t.BOL_FORNECEDOR != null ? (bool)t.BOL_FORNECEDOR : false,
+                                                    Produto = t.BOL_PRODUTO != null ? (bool)t.BOL_PRODUTO : false,
+                                                    Desconto = t.BOL_DESCONTO != null ? (bool)t.BOL_DESCONTO : false,
+                                                    Ativo = t.BOL_ATIVO
+                                                }).ToList();
 
                 // Verifica se foi encontrado algum registro
                 if (lstTaxas.Count > 0)
                 {
                     // Preenche o objeto de retorno
                     retTaxa.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
-                    retTaxa.Taxas = new List<Contrato.Taxa>();
-                    foreach (Dados.TAXA taxa in lstTaxas)
-                    {
-                        retTaxa.Taxas.Add(new Contrato.Taxa()
-                        {
-                            Id = taxa.ID_TAXA,
-                            Nome = taxa.NOME_TAXA,
-                            Fornecedor = taxa.BOL_FORNECEDOR!=null? (bool)taxa.BOL_FORNECEDOR:false,
-                            Produto = taxa.BOL_PRODUTO != null ? (bool)taxa.BOL_PRODUTO : false,
-                            Desconto = taxa.BOL_DESCONTO != null ? (bool)taxa.BOL_DESCONTO : false,
-                            Ativo = taxa.BOL_ATIVO
-                        });
-                    };
-
+                    retTaxa.Taxas = lstTaxas;
                 }
                 else
                 {

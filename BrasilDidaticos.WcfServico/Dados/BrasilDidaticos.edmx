@@ -2230,7 +2230,7 @@
         <EntityTypeShape EntityType="BrasilDidaticosModel.ITEM" Width="2.25" PointX="5.25" PointY="9.125" Height="3.7109993489583335" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.ORCAMENTO" Width="1.5" PointX="3" PointY="16.125" Height="3.7109993489583353" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.PARAMETRO" Width="1.5" PointX="2.75" PointY="1.5" Height="2.3648893229166665" IsExpanded="true" />
-        <EntityTypeShape EntityType="BrasilDidaticosModel.PERFIL" Width="1.5" PointX="5.75" PointY="3.375" Height="2.5571907552083313" IsExpanded="true" />
+        <EntityTypeShape EntityType="BrasilDidaticosModel.PERFIL" Width="1.875" PointX="5.75" PointY="3.375" Height="3.1340950520833326" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.PERFIL_PERMISSAO" Width="1.5" PointX="8" PointY="3.5" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.PERMISSAO" Width="1.5" PointX="5.75" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.PRODUTO" Width="1.5" PointX="3" PointY="9" Height="3.3263964843750031" IsExpanded="true" />
@@ -2273,35 +2273,37 @@
           <ConnectorPoint PointX="3" PointY="5.0718489583333328" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_T_ORCAMENTO" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="5.254407335831325" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="5.4210740024979911" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="5.6546530049959829" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="5.821319671662649" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="6.1525718046371152" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="6.3192384713037812" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="6.791666666666667" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="7.083333333333333" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="7.2187525" PointY="18.751852213541667" />
-          <ConnectorPoint PointX="7.2187525" PointY="12.835999348958334" />
+          <ConnectorPoint PointX="4.5" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="5.2788256184504432" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="5.4454922851171093" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="5.70348957023422" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="5.8701562369008862" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="6.1525718046371152" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="6.3192384713037812" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="6.97656" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="7.0989583333333339" PointY="18.496610034648178" />
+          <ConnectorPoint PointX="7.0989583333333339" PointY="12.835999348958334" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_T_PRODUTO" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="11.603311822753906" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="11.603311822753904" />
-          <ConnectorPoint PointX="5.2083358333333338" PointY="11.603311822753906" />
-          <ConnectorPoint PointX="5.25" PointY="11.603311822753906" />
+          <ConnectorPoint PointX="4.5" PointY="11.615701630167646" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="11.615701630167644" />
+          <ConnectorPoint PointX="5.177083333333333" PointY="11.615701630167646" />
+          <ConnectorPoint PointX="5.25" PointY="11.615701630167646" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ORCAMENTO_T_USUARIO" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="19.890975785938956" />
           <ConnectorPoint PointX="3" PointY="19.890975785938956" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PERFIL_PERMISSAO_T_PERFIL" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.25" PointY="4.6824446614583337" />
+          <ConnectorPoint PointX="7.625" PointY="4.6824446614583337" />
           <ConnectorPoint PointX="8" PointY="4.6824446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_USUARIO_PERFIL_T_PERFIL" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.5" PointY="6.5090950520833326" />
-          <ConnectorPoint PointX="6.5" PointY="8.875" />
+          <ConnectorPoint PointX="6.6875" PointY="6.5090950520833326" />
+          <ConnectorPoint PointX="6.6875" PointY="8.875" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="8.875" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="8.875" />
           <ConnectorPoint PointX="7.75" PointY="8.875" />
           <ConnectorPoint PointX="7.75" PointY="14.807444661458334" />
           <ConnectorPoint PointX="7.760416666666667" PointY="14.807444661458334" />
@@ -2314,28 +2316,30 @@
           <ConnectorPoint PointX="8.75" PointY="3.5" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_PRODUTO" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="4.9791641666666671" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="5.2083358333333329" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="6.791666666666667" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="6.958333333333333" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="7.1354191666666669" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="7.3020858333333329" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="7.666666666666667" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="7.833333333333333" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="12.964874674479166" />
-          <ConnectorPoint PointX="9" PointY="12.964874674479166" />
+          <ConnectorPoint PointX="4.5" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="4.9791641666666671" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="5.1770833333333321" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="6.809893333333334" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="6.97656" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="7.0156250000000009" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="7.182291666666667" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="12.947313261718744" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="8.1666666666666661" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="8.3333333333333339" PointY="12.947313261718746" />
+          <ConnectorPoint PointX="9" PointY="12.947313261718746" />
           <ConnectorPoint PointX="9" PointY="12.124492187500003" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_TAXA_T_TAXA" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.9204262099862115" />
-          <ConnectorPoint PointX="2.5" PointY="2.9204262099862115" />
+          <ConnectorPoint PointX="2.25" PointY="3.3796724791666728" />
+          <ConnectorPoint PointX="2.5" PointY="3.3796724791666728" />
           <ConnectorPoint PointX="2.5" PointY="7.8744921875" />
           <ConnectorPoint PointX="4.9791641666666671" PointY="7.8744921874999987" />
-          <ConnectorPoint PointX="5.2083358333333329" PointY="7.8744921875" />
-          <ConnectorPoint PointX="6.416666666666667" PointY="7.8744921874999987" />
-          <ConnectorPoint PointX="6.583333333333333" PointY="7.8744921875" />
+          <ConnectorPoint PointX="5.1458308333333331" PointY="7.8744921875" />
+          <ConnectorPoint PointX="6.604166666666667" PointY="7.8744921874999987" />
+          <ConnectorPoint PointX="6.770833333333333" PointY="7.8744921875" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="7.8744921874999987" />
+          <ConnectorPoint PointX="7.677083333333333" PointY="7.8744921875" />
           <ConnectorPoint PointX="9" PointY="7.8744921875" />
           <ConnectorPoint PointX="9" PointY="9.375" />
         </AssociationConnector>
@@ -2415,9 +2419,15 @@
           <ConnectorPoint PointX="4.25" PointY="2.9564925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PERFIL_T_EMPRESA" >
-          <ConnectorPoint PointX="5.1250025" PointY="13.125" />
-          <ConnectorPoint PointX="5.1250025" PointY="4.9420475260416659" />
-          <ConnectorPoint PointX="5.75" PointY="4.9420475260416659" />
+          <ConnectorPoint PointX="6.5" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="6.809893333333334" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="6.97656" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="7.0156250000000009" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="7.182291666666667" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="7.322916666666667" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="7.489583333333333" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="7.59375" PointY="14.844569498697917" />
+          <ConnectorPoint PointX="7.59375" PointY="6.5090950520833326" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_TAXA_T_EMPRESA" >
           <ConnectorPoint PointX="5" PointY="13.908130380694765" />
@@ -2442,21 +2452,21 @@
         <EntityTypeShape EntityType="BrasilDidaticosModel.ESTADO_PEDIDO" Width="1.5" PointX="5" PointY="25.875" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="BrasilDidaticosModel.ITEM_PEDIDO" Width="2.875" PointX="10.5" PointY="13" Height="3.3263964843750031" />
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PRODUTO" >
-          <ConnectorPoint PointX="4.5" PointY="10.27040391137696" />
-          <ConnectorPoint PointX="5" PointY="10.27040391137696" />
+          <ConnectorPoint PointX="4.5" PointY="10.27659881508383" />
+          <ConnectorPoint PointX="5" PointY="10.27659881508383" />
           <ConnectorPoint PointX="5" PointY="12.875" />
           <ConnectorPoint PointX="5.010416666666667" PointY="12.875" />
-          <ConnectorPoint PointX="5.2083358333333338" PointY="12.875" />
+          <ConnectorPoint PointX="5.177083333333333" PointY="12.875" />
           <ConnectorPoint PointX="6.75" PointY="12.875" />
           <ConnectorPoint PointX="6.75" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="6.791666666666667" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="6.958333333333333" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="7.1354191666666669" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="7.3020858333333329" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="7.666666666666667" PointY="13.08599934895833" />
-          <ConnectorPoint PointX="7.927083333333333" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="8" PointY="13.085999348958332" />
-          <ConnectorPoint PointX="8" PointY="12.374492187500003" />
+          <ConnectorPoint PointX="6.809893333333334" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="6.97656" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="7.0156250000000009" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="7.182291666666667" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="13.08599934895833" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="8.25" PointY="13.085999348958332" />
+          <ConnectorPoint PointX="8.25" PointY="12.374492187500003" />
           <ConnectorPoint PointX="8.9166666666666661" PointY="12.374492187500003" />
           <ConnectorPoint PointX="9.0833333333333339" PointY="12.374492187500003" />
           <ConnectorPoint PointX="11.9375" PointY="12.374492187500003" />
@@ -2480,7 +2490,7 @@
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_PEDIDO" >
           <ConnectorPoint PointX="7.40625" PointY="20.875" />
           <ConnectorPoint PointX="7.40625" PointY="13.324249674479166" />
-          <ConnectorPoint PointX="7.666666666666667" PointY="13.324249674479164" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="13.324249674479164" />
           <ConnectorPoint PointX="7.927083333333333" PointY="13.324249674479166" />
           <ConnectorPoint PointX="10.5" PointY="13.324249674479166" />
         </AssociationConnector>
@@ -2507,11 +2517,11 @@
           <ConnectorPoint PointX="5" PointY="27.947048227163464" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_T_UNIDADE_MEDIDA" >
-          <ConnectorPoint PointX="4.875" PointY="24.891297200520835" />
-          <ConnectorPoint PointX="5.8884769426075625" PointY="24.891297200520835" />
-          <ConnectorPoint PointX="6.0551436092742286" PointY="24.891297200520835" />
-          <ConnectorPoint PointX="6.875" PointY="24.891297200520835" />
-          <ConnectorPoint PointX="6.875" PointY="12.835999348958334" />
+          <ConnectorPoint PointX="4.875" PointY="24.816373803982664" />
+          <ConnectorPoint PointX="5.9280306874356681" PointY="24.816373803982664" />
+          <ConnectorPoint PointX="6.0946973541023342" PointY="24.816373803982664" />
+          <ConnectorPoint PointX="6.8932266666666671" PointY="24.816373803982664" />
+          <ConnectorPoint PointX="6.8932266666666671" PointY="12.835999348958334" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_ITEM_PEDIDO_T_UNIDADE_MEDIDA" >
           <ConnectorPoint PointX="4.875" PointY="24.642495058593752" />
@@ -2526,16 +2536,14 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="BrasilDidaticosModel.PRODUTO_UNIDADE_MEDIDA" Width="1.5" PointX="7.625" PointY="16.75" Height="2.7494921875000102" />
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_PRODUTO" >
-          <ConnectorPoint PointX="4.5" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="4.9791641666666671" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="5.2083358333333329" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="6.791666666666667" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="6.958333333333333" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="7.1354191666666669" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="7.3020858333333329" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="7.666666666666667" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="7.833333333333333" PointY="12.99612717447916" />
-          <ConnectorPoint PointX="7.84375" PointY="12.99612717447916" />
+          <ConnectorPoint PointX="4.5" PointY="13.047908805338533" />
+          <ConnectorPoint PointX="6.809893333333334" PointY="13.047908805338533" />
+          <ConnectorPoint PointX="6.97656" PointY="13.047908805338533" />
+          <ConnectorPoint PointX="7.0156250000000009" PointY="13.047908805338533" />
+          <ConnectorPoint PointX="7.182291666666667" PointY="13.047908805338533" />
+          <ConnectorPoint PointX="7.510416666666667" PointY="13.047908805338532" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="13.047908805338533" />
+          <ConnectorPoint PointX="7.84375" PointY="13.047908805338533" />
           <ConnectorPoint PointX="7.84375" PointY="16.75" />
         </AssociationConnector>
         <AssociationConnector Association="BrasilDidaticosModel.FK_T_PRODUTO_UNIDADE_MEDIDA_T_UNIDADE_MEDIDA" >

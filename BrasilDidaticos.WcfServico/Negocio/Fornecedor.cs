@@ -86,7 +86,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
                                                 
                 // Busca o fornecedor no banco
-                var lstFornecedores = (from f in context.T_FORNECEDOR                                       
+                var lstFornecedores = (from f in context.T_FORNECEDOR.Include("T_FORNECEDOR_TAXA.T_TAXA")                                       
                                        where
                                               (entradaFornecedor.Fornecedor.Ativo == null || f.BOL_ATIVO == entradaFornecedor.Fornecedor.Ativo)
                                            && (entradaFornecedor.EmpresaLogada.Id == Guid.Empty || f.ID_EMPRESA == entradaFornecedor.EmpresaLogada.Id)

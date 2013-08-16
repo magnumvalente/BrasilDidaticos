@@ -111,7 +111,7 @@ namespace BrasilDidaticos.Apresentacao
                     Cidade = c.Cidade,
                     Uf = c.Uf,
                     ClienteMatriz = c.ClienteMatriz
-                });
+                }).OrderBy(o => o.Nome);
 
             if (mostrarMsgVazio && retCliente.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retCliente.Mensagem, "Cliente", MessageBoxButton.OK, MessageBoxImage.Information);                              

@@ -264,7 +264,7 @@ namespace BrasilDidaticos.Apresentacao
             entradaUsuario.Usuario.Perfis = new List<Contrato.Perfil>();
             entradaUsuario.Usuario.Perfis.Add(new Contrato.Perfil() { Codigo = Comum.Parametros.CodigoPerfilOrcamentista });
 
-            // Se o perfil para vendedor está definido
+            // Se o perfil para orçamentista está definido
             if (Comum.Parametros.CodigoPerfilOrcamentista != null)
             {
                 entradaUsuario.Usuario.Perfis = new List<Contrato.Perfil>();
@@ -287,7 +287,8 @@ namespace BrasilDidaticos.Apresentacao
                     {
                         Uid = usuario.Id.ToString(),
                         Content = usuario.Nome,
-                        Tag = usuario
+                        Tag = usuario,
+                        IsSelected = Comum.Util.UsuarioLogado.Perfis.Count(c => c.Codigo == Comum.Parametros.CodigoPerfilOrcamentista) > 0
                     });
 
                     if (!incluiuLogado) incluiuLogado = usuario.Login == Comum.Util.UsuarioLogado.Login;
@@ -300,7 +301,8 @@ namespace BrasilDidaticos.Apresentacao
                 {
                     Uid = Comum.Util.UsuarioLogado.Id.ToString(),
                     Content = Comum.Util.UsuarioLogado.Nome,
-                    Tag = Comum.Util.UsuarioLogado
+                    Tag = Comum.Util.UsuarioLogado,
+                    IsSelected = true
                 });
             }
         }

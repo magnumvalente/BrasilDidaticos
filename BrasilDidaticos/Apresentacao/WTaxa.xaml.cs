@@ -57,7 +57,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.RetornoTaxa retTaxa = servBrasilDidaticos.TaxaListar(entTaxa);
             servBrasilDidaticos.Close();
 
-            dgTaxas.ItemsSource = retTaxa.Taxas;      
+            dgTaxas.ItemsSource = retTaxa.Taxas.OrderBy(o => o.Nome);      
 
             if (mostrarMsgVazio && retTaxa.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retTaxa.Mensagem, "Taxa", MessageBoxButton.OK, MessageBoxImage.Information);                              

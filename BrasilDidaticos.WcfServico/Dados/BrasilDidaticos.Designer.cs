@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -475,6 +476,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         private ObjectSet<PRODUTO_UNIDADE_MEDIDA> _T_PRODUTO_UNIDADE_MEDIDA;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -662,6 +664,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Function Imports
     
         /// <summary>
@@ -696,11 +699,11 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -739,6 +742,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1297,6 +1301,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_EMPRESAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1421,6 +1426,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1451,6 +1457,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1553,6 +1560,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnBOL_ATIVOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1755,6 +1763,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1785,6 +1794,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1935,6 +1945,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_ESTADO_ORCAMENTO_SUCESSORChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2081,6 +2092,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2111,6 +2123,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2261,6 +2274,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_ESTADO_PEDIDO_SUCESSORChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2407,6 +2421,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2445,6 +2460,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -2715,6 +2731,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_EMPRESAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -2801,6 +2818,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2837,6 +2855,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3011,6 +3030,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnDATA_ATUALIZACAOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3091,6 +3111,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3129,6 +3150,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3399,6 +3421,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_UNIDADE_MEDIDAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3517,6 +3540,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3551,6 +3575,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -3773,6 +3798,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_UNIDADE_MEDIDAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -3891,6 +3917,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3933,6 +3960,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4251,6 +4279,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_EMPRESAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -4467,6 +4496,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -4505,6 +4535,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -4727,6 +4758,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_EMPRESAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -4769,6 +4801,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -4807,6 +4840,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5029,6 +5063,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnDATA_ATUALIZACAOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5169,6 +5204,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5201,6 +5237,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5399,6 +5436,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnDES_PERFILChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5485,6 +5523,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5517,6 +5556,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5643,6 +5683,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnLOGIN_USUARIOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5723,6 +5764,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5751,6 +5793,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -5829,6 +5872,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnBOL_ATIVOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -5855,6 +5899,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -5893,6 +5938,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6163,6 +6209,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnNUM_QUANTIDADEChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -6293,6 +6340,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -6329,6 +6377,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6503,6 +6552,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnDATA_ATUALIZACAOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -6583,6 +6633,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -6619,6 +6670,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -6793,6 +6845,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnNUM_QUANTIDADEChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -6873,6 +6926,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -6903,6 +6957,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7005,6 +7060,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnDES_CHAVEChanged();
 
         #endregion
+
     
     }
     
@@ -7040,6 +7096,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7286,6 +7343,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnDES_TAXAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -7372,6 +7430,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -7400,6 +7459,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7478,6 +7538,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnNOME_UNIDADE_FEDERATIVAChanged();
 
         #endregion
+
     
     }
     
@@ -7515,6 +7576,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -7713,6 +7775,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnCOD_UNIDADE_MEDIDAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -7821,6 +7884,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -7859,6 +7923,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8057,6 +8122,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnID_EMPRESAChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -8187,6 +8253,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -8219,6 +8286,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -8345,6 +8413,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         partial void OnLOGIN_USUARIOChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -8425,8 +8494,10 @@ namespace BrasilDidaticos.WcfServico.Dados
         }
 
         #endregion
+
     }
 
     #endregion
+
     
 }

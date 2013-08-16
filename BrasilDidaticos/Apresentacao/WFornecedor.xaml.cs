@@ -75,7 +75,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
             servBrasilDidaticos.Close();
 
-            dgFornecedores.ItemsSource = retFornecedor.Fornecedores;      
+            dgFornecedores.ItemsSource = retFornecedor.Fornecedores.OrderBy(o => o.Nome);      
 
             if (mostrarMsgVazio && retFornecedor.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retFornecedor.Mensagem, "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Information);                              

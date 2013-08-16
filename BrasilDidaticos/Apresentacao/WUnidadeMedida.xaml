@@ -59,7 +59,7 @@
                 </StackPanel>
             </Button>
         </StackPanel>
-        <GroupBox Name="gpbUnidadeMedidas" DockPanel.Dock="Top" Header="Taxas">
+        <GroupBox Name="gpbUnidadeMedidas" DockPanel.Dock="Top" Header="Unidades de Medida">
             <DataGrid DockPanel.Dock="Bottom" AutoGenerateColumns="False" Name="dgUnidadeMedidas" Width="Auto" CanUserAddRows="False" CanUserDeleteRows="False" >
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
