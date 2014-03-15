@@ -43,15 +43,21 @@
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_atualizar.png"/>
                 </StackPanel>
             </Button>
-                <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="50" Grid.Row="1" Background="#FFF0F0F0" />
+            <my:MTextBox x:Name="txtNome" Titulo="Nome:" TamanhoTexto="50" Grid.Row="1" Background="#FFF0F0F0" />
             <my:MRadioListBox x:Name="rlbPessoa" Titulo="Pessoa:" Grid.Row="2" SelectionChangedEvent="rlbPessoa_SelectionChangedEvent" />
             <my:MMaskTextBox x:Name="txtCPFCNP" Titulo="CPF / CNPJ:" Grid.Row="3" Background="#FFF0F0F0" />
-                <my:MDecimalTextBox x:Name="txtValorAtacado" Titulo="Porcentagem Atacado:" TamanhoTexto="14" Grid.Row="4" FormatString="P" />
-                <my:MDecimalTextBox x:Name="txtValorVarejo" Titulo="Porcentagem Varejo:" TamanhoTexto="14" Grid.Row="5" FormatString="P" Background="#FFF0F0F0" />
+            <my:MDecimalTextBox x:Name="txtValorAtacado" Titulo="Porcentagem Atacado:" TamanhoTexto="14" Grid.Row="4" FormatString="P" />
+            <my:MDecimalTextBox x:Name="txtValorVarejo" Titulo="Porcentagem Varejo:" TamanhoTexto="14" Grid.Row="5" FormatString="P" Background="#FFF0F0F0" />
             <my:MCheckBox x:Name="chkAtivo" Titulo="Ativo:" Grid.Row="6" Selecionado="True" />
         </Grid>
         </GroupBox>
-        <StackPanel Name="stpBotoes" DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">            
+        <StackPanel Name="stpBotoes" DockPanel.Dock="Top" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" FlowDirection="LeftToRight" Orientation="Horizontal">
+            <Button Grid.Column="2" Name="btnSelecionarProduto" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" IsDefault="True" Margin="0,0,5,0" Click="btnSelecionarProduto_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/BrasilDidaticos;component/Imagens/ico_selecionar.png" Margin="0,0,5,0" />
+                    <TextBlock Text="Selecionar Produtos"/>
+                </StackPanel>
+            </Button>
             <Button Grid.Column="2" Name="btnImportarProduto" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Width="130" IsDefault="True" Margin="0,0,5,0" Click="btnImportarProduto_Click" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/BrasilDidaticos;component/Imagens/ico_produto_importar.png" Margin="0,0,5,0" />

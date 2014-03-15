@@ -86,7 +86,13 @@ namespace BrasilDidaticos.WcfServico.Negocio
             {
                 // Preenche o objeto de retorno
                 retUnidadeFederativa.Codigo = Contrato.Constantes.COD_RETORNO_SUCESSO;
-                retUnidadeFederativa.UnidadesFederativas = lstUnidadesFederativas;              
+                retUnidadeFederativa.UnidadesFederativas = lstUnidadesFederativas;
+            }
+            else
+            {
+                // Preenche o objeto de retorno
+                retUnidadeFederativa.Codigo = Contrato.Constantes.COD_RETORNO_VAZIO;
+                retUnidadeFederativa.Mensagem = "Não existem unidades federativas cadastradas.";
             }
 
             // retorna os dados

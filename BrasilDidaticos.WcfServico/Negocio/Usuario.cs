@@ -152,37 +152,29 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     entradaUsuario.Usuario.Nome = string.Empty;
                 }
 
-                // Verifica se o Login foi informado
-                if (string.IsNullOrWhiteSpace(entradaUsuario.Usuario.Login))
+                // Verifica se o código do Perfil foi informado
+                string codigoPerfil = string.Empty;
+                if (entradaUsuario.Usuario.Perfis != null && entradaUsuario.Usuario.Perfis.Count > 0)
                 {
-                    entradaUsuario.Usuario.Login = string.Empty;
+                    codigoPerfil = entradaUsuario.Usuario.Perfis.First().Codigo;
                 }
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = true;
 
                 // Busca o usuario no banco
-                List<Dados.USUARIO> lstUsuarios = (from u in context.T_USUARIO.Include("T_USUARIO_PERFIL")                             
+                List<Dados.USUARIO> lstUsuarios = (from u in context.T_USUARIO
+                                                   join up in context.T_USUARIO_PERFIL on u.ID_USUARIO equals up.ID_USUARIO
+                                                   join p in context.T_PERFIL on up.ID_PERFIL equals p.ID_PERFIL
                                                    where
                                                         (entradaUsuario.Usuario.Ativo == null || u.BOL_ATIVO == entradaUsuario.Usuario.Ativo)
                                                      && (entradaUsuario.EmpresaLogada.Id == Guid.Empty || u.ID_EMPRESA == entradaUsuario.EmpresaLogada.Id)
                                                      && (entradaUsuario.Usuario.Nome == string.Empty || u.NOME_USUARIO.StartsWith(entradaUsuario.Usuario.Nome))
                                                      && (entradaUsuario.Usuario.Login == string.Empty || u.LOGIN_USUARIO.Contains(entradaUsuario.Usuario.Login))
+                                                     && (codigoPerfil == string.Empty || codigoPerfil == p.COD_PERFIL)
                                                    select u).ToList();
-
-
-                 // Verifica se o código do Perfil foi informado
-                string codigoPerfil = string.Empty;
-                if (entradaUsuario.Usuario.Perfis != null && entradaUsuario.Usuario.Perfis.Count > 0)
-                {
-                    codigoPerfil = entradaUsuario.Usuario.Perfis.First().Codigo;
-                    lstUsuarios = (from u in lstUsuarios                                   
-                                   join up in context.T_USUARIO_PERFIL on u.ID_USUARIO equals up.ID_USUARIO
-                                   join p in context.T_PERFIL on up.ID_PERFIL equals p.ID_PERFIL
-                                   where (p.COD_PERFIL == codigoPerfil)
-                                   select u).ToList();
-                }
-
+               
                 // Verifica se foi encontrado algum registro
                 if (lstUsuarios != null && lstUsuarios.Count > 0)
                 {

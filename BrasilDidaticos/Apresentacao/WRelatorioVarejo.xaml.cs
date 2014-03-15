@@ -51,7 +51,7 @@ namespace BrasilDidaticos.Apresentacao
             
             if (Produtos != null && Produtos.Count > 0)
             {
-                lstProdutos = (from p in Produtos select new Objeto.Produto { Codigo = p.Codigo, CodigoFornecedor = p.CodigoFornecedor, Nome = p.Nome, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
+                lstProdutos = (from p in Produtos select new Objeto.Produto { Codigo = p.Codigo, CodigoFornecedor = p.CodigoFornecedor, Nome = p.Nome, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, Fornecedor = p.Fornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
                 this._reportViewer.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("Produto", lstProdutos));
                 this._reportViewer.RefreshReport();
             }

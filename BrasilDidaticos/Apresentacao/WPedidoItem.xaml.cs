@@ -92,7 +92,7 @@ namespace BrasilDidaticos.Apresentacao
                 
                 // Adiciona a lista os novos produtos que foram buscados
                 foreach (Contrato.Produto p in retProduto.Produtos)
-                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, Quantidade = p.Quantidade, ValorBase = p.ValorBase, Taxas = p.Taxas, UnidadeMedidas = p.UnidadeMedidas });
+                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, Quantidade = p.Quantidade, ValorBase = p.ValorBase, Taxas = p.Taxas, UnidadeMedidas = p.UnidadeMedidas });
             }
 
             // Define os novos produtos
@@ -281,7 +281,7 @@ namespace BrasilDidaticos.Apresentacao
                             {                
                                 // Adiciona a lista os novos produtos que foram buscados
                                 foreach (Contrato.Produto p in retProduto.Produtos)
-                                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas });
+                                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas });
 
                                 dgProdutos.ItemsSource = _lstProduto;
                             }

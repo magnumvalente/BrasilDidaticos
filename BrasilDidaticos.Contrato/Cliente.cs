@@ -141,5 +141,18 @@ namespace BrasilDidaticos.Contrato
             get;
             set;
         }
+
+        public string Cpf_Cnpj_ToString
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Cpf_Cnpj))
+                    if (Tipo == Enumeradores.Pessoa.Fisica)
+                        return String.Format(@"{0:000\.000\.000\-00}", long.Parse(Cpf_Cnpj));
+                    else
+                        return String.Format(@"{0:00\.000\.000\/0000\-00}", long.Parse(Cpf_Cnpj));
+                return string.Empty;
+            }
+        }
     }    
 }

@@ -13,6 +13,7 @@ namespace BrasilDidaticos.Contrato
     {
         private decimal _ValorCusto;
         private int _Quantidade;
+        private List<Taxa> _Taxas;
 
         [DataMember]
         public Guid Id
@@ -30,6 +31,20 @@ namespace BrasilDidaticos.Contrato
 
         [DataMember]
         public string Codigo
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string Ncm
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string CodigoBarras
         {
             get;
             set;
@@ -75,7 +90,20 @@ namespace BrasilDidaticos.Contrato
         }
 
         [DataMember]
-        public string Ncm
+        public decimal? ValorPercentagemVarejo
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public decimal? ValorPercentagemAtacado
+        {
+            get;
+            set;
+        }
+
+        public IEnumerable<Taxa> eTaxas
         {
             get;
             set;
@@ -84,8 +112,19 @@ namespace BrasilDidaticos.Contrato
         [DataMember]
         public List<Taxa> Taxas
         {
-            get;
-            set;
+            get 
+            {
+                if (eTaxas != null)
+                {
+                    _Taxas = eTaxas.ToList();
+                    eTaxas = null;                    
+                }
+                return _Taxas;
+            }
+            set
+            {
+                _Taxas = value;
+            }
         }
 
         [DataMember]
@@ -126,7 +165,7 @@ namespace BrasilDidaticos.Contrato
                 {
 
                     var taxas = from t in
-                                    (from tx in Taxas select new { Prioridade = tx.Prioridade, Percentagem = tx.Desconto != null && tx.Desconto == true ? -1 * tx.Percentagem : tx.Percentagem }).ToList()
+                                    (from tx in Taxas select new { Prioridade = tx.Prioridade, Percentagem = tx.Desconto.HasValue ? -1 * tx.Percentagem : tx.Percentagem }).ToList()
                                 group t by t.Prioridade into p
                                 select new { Prioridade = p.Key, Percentagem = p.Sum(v => v.Percentagem) };
 

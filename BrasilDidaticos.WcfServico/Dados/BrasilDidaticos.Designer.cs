@@ -75,7 +75,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         public BRASIL_DIDATICOS() : base("name=BRASIL_DIDATICOS", "BRASIL_DIDATICOS")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            this.ContextOptions.LazyLoadingEnabled = false;
             OnContextCreated();
         }
     
@@ -84,7 +84,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         public BRASIL_DIDATICOS(string connectionString) : base(connectionString, "BRASIL_DIDATICOS")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            this.ContextOptions.LazyLoadingEnabled = false;
             OnContextCreated();
         }
     
@@ -93,7 +93,7 @@ namespace BrasilDidaticos.WcfServico.Dados
         /// </summary>
         public BRASIL_DIDATICOS(EntityConnection connection) : base(connection, "BRASIL_DIDATICOS")
         {
-            this.ContextOptions.LazyLoadingEnabled = true;
+            this.ContextOptions.LazyLoadingEnabled = false;
             OnContextCreated();
         }
     
@@ -6207,6 +6207,78 @@ namespace BrasilDidaticos.WcfServico.Dados
         private global::System.Int32 _NUM_QUANTIDADE;
         partial void OnNUM_QUANTIDADEChanging(global::System.Int32 value);
         partial void OnNUM_QUANTIDADEChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String COD_BARRAS
+        {
+            get
+            {
+                return _COD_BARRAS;
+            }
+            set
+            {
+                OnCOD_BARRASChanging(value);
+                ReportPropertyChanging("COD_BARRAS");
+                _COD_BARRAS = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("COD_BARRAS");
+                OnCOD_BARRASChanged();
+            }
+        }
+        private global::System.String _COD_BARRAS;
+        partial void OnCOD_BARRASChanging(global::System.String value);
+        partial void OnCOD_BARRASChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> NUM_VALOR_VAREJO
+        {
+            get
+            {
+                return _NUM_VALOR_VAREJO;
+            }
+            set
+            {
+                OnNUM_VALOR_VAREJOChanging(value);
+                ReportPropertyChanging("NUM_VALOR_VAREJO");
+                _NUM_VALOR_VAREJO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_VALOR_VAREJO");
+                OnNUM_VALOR_VAREJOChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _NUM_VALOR_VAREJO;
+        partial void OnNUM_VALOR_VAREJOChanging(Nullable<global::System.Decimal> value);
+        partial void OnNUM_VALOR_VAREJOChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> NUM_VALOR_ATACADO
+        {
+            get
+            {
+                return _NUM_VALOR_ATACADO;
+            }
+            set
+            {
+                OnNUM_VALOR_ATACADOChanging(value);
+                ReportPropertyChanging("NUM_VALOR_ATACADO");
+                _NUM_VALOR_ATACADO = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NUM_VALOR_ATACADO");
+                OnNUM_VALOR_ATACADOChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _NUM_VALOR_ATACADO;
+        partial void OnNUM_VALOR_ATACADOChanging(Nullable<global::System.Decimal> value);
+        partial void OnNUM_VALOR_ATACADOChanged();
 
         #endregion
 

@@ -129,6 +129,9 @@
             <Button Name="btnPerfil" ToolTip="Perfil" Height="50" Click="Perfil_Click">
                 <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wperfil.png" />
             </Button>
+            <Button Name="btnEmail" ToolTip="Email" Height="50" Click="btnEmail_Click">
+                <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wemail.png" />
+            </Button>
             <Button Name="btnParametro" ToolTip="Parâmetros" Height="50" Click="Parametro_Click">
                 <Image Height="24" Width="24" Source="/BrasilDidaticos;component/Imagens/ico_wconfiguracao.png" />
             </Button>
@@ -178,6 +181,7 @@
                     <DataGridTextColumn Header="Código do Fornecedor" Binding="{Binding CodigoFornecedor}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="NCM" Binding="{Binding Ncm}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade, StringFormat=F0, ConverterCulture=pt-BR }" IsReadOnly="True" />
                     <DataGridTextColumn Header="Custo" Binding="{Binding ValorCusto, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Atacado" Binding="{Binding ValorAtacado, StringFormat=C, ConverterCulture=pt-BR }" ElementStyle="{StaticResource RightAlignStyle}" IsReadOnly="True" />

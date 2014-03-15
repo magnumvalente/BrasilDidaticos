@@ -139,6 +139,12 @@
     <Compile Include="Apresentacao\Controler\MCheckBox.xaml.cs">
       <DependentUpon>MCheckBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Apresentacao\WUnidadeMedidaCadastro.xaml.cs">
+      <DependentUpon>WUnidadeMedidaCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Apresentacao\WFornecedorItem.xaml.cs">
+      <DependentUpon>WFornecedorItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Apresentacao\WPedidoItem.xaml.cs">
       <DependentUpon>WPedidoItem.xaml</DependentUpon>
     </Compile>
@@ -160,8 +166,8 @@
     <Compile Include="Apresentacao\WEstoque.xaml.cs">
       <DependentUpon>WEstoque.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Apresentacao\WUnidadeMedidaCadastro.xaml.cs">
-      <DependentUpon>WUnidadeMedidaCadastro.xaml</DependentUpon>
+    <Compile Include="Apresentacao\WEmailEnvio.xaml.cs">
+      <DependentUpon>WEmailEnvio.xaml</DependentUpon>
     </Compile>
     <Compile Include="Apresentacao\WUnidadeMedida.xaml.cs">
       <DependentUpon>WUnidadeMedida.xaml</DependentUpon>
@@ -312,6 +318,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Apresentacao\WUnidadeMedidaCadastro.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Apresentacao\WFornecedorItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Apresentacao\WPedidoItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -340,7 +354,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Apresentacao\WUnidadeMedidaCadastro.xaml">
+    <Page Include="Apresentacao\WEmailEnvio.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -523,6 +537,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Resource Include="Imagens\ico_pedido_visualizar.png" />
+    <Resource Include="Imagens\ico_wemail.png" />
+    <Resource Include="Imagens\ico_enviar_email.png" />
     <Content Include="Relatorio\Pedido.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

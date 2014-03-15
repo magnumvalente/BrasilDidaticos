@@ -48,8 +48,11 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     Id = produto.ID_PRODUTO,
                     Nome = produto.NOME_PRODUTO,
                     Codigo = produto.COD_PRODUTO,
+                    CodigoBarras = produto.COD_BARRAS,
                     CodigoFornecedor = produto.COD_PRODUTO_FORNECEDOR,
                     ValorBase = produto.NUM_VALOR,
+                    ValorPercentagemAtacado = produto.NUM_VALOR_ATACADO,
+                    ValorPercentagemVarejo = produto.NUM_VALOR_VAREJO,
                     Quantidade = produto.NUM_QUANTIDADE,
                     Ncm = produto.NCM_PRODUTO,
                     Fornecedor = Negocio.Fornecedor.BuscarFornecedor(produto.T_FORNECEDOR),                    
@@ -146,9 +149,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 Id = item.p.ID_PRODUTO,
                                 Nome = item.p.NOME_PRODUTO,
                                 Codigo = item.p.COD_PRODUTO,
+                                CodigoBarras = item.p.COD_BARRAS,
                                 CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
                                 Quantidade = item.p.NUM_QUANTIDADE,
                                 ValorBase = item.p.NUM_VALOR,
+                                ValorPercentagemAtacado = item.p.NUM_VALOR_ATACADO,
+                                ValorPercentagemVarejo = item.p.NUM_VALOR_VAREJO,
                                 Ncm = item.p.NCM_PRODUTO,
                                 Ativo = item.p.BOL_ATIVO,
                                 Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
@@ -190,9 +196,12 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 Id = item.p.ID_PRODUTO,
                                 Nome = item.p.NOME_PRODUTO,
                                 Codigo = item.p.COD_PRODUTO,
+                                CodigoBarras = item.p.COD_BARRAS,
                                 CodigoFornecedor = item.p.COD_PRODUTO_FORNECEDOR,
                                 Quantidade = item.p.NUM_QUANTIDADE,
                                 ValorBase = item.p.NUM_VALOR,
+                                ValorPercentagemAtacado = item.p.NUM_VALOR_ATACADO,
+                                ValorPercentagemVarejo = item.p.NUM_VALOR_VAREJO,
                                 Ncm = item.p.NCM_PRODUTO,
                                 Ativo = item.p.BOL_ATIVO,
                                 Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
@@ -235,6 +244,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // Objeto que recebe o retorno do método
             Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
 
+            // define o tempo de duração
+            retProduto.Duracao = DateTime.Now.Ticks;
+
             // Objeto que recebe o retorno da sessão
             Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaProduto.UsuarioLogado, Chave = entradaProduto.Chave });
 
@@ -274,6 +286,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = false;
 
                 // Busca o produto no banco
                 var lstProdutos = (from p in context.T_PRODUTO
@@ -284,14 +297,140 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                    && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
                                    && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
                                    && (IdsFornecedores.Count == 0 || IdsFornecedores.Contains(p.ID_FORNECEDOR))
-                                   select new
-                                   {
-                                       p,
-                                       t = p.T_PRODUTO_TAXA,
-                                       um = p.T_PRODUTO_UNIDADE_MEDIDA
+                                   select new Contrato.Produto
+                                    {
+                                        Id = p.ID_PRODUTO,
+                                        Nome = p.NOME_PRODUTO,
+                                        Codigo = p.COD_PRODUTO,
+                                        CodigoBarras = p.COD_BARRAS,
+                                        CodigoFornecedor = p.COD_PRODUTO_FORNECEDOR,
+                                        Quantidade = p.NUM_QUANTIDADE,
+                                        ValorBase = p.NUM_VALOR,
+                                        ValorPercentagemAtacado = p.NUM_VALOR_ATACADO,
+                                        ValorPercentagemVarejo = p.NUM_VALOR_VAREJO,
+                                        Ncm = p.NCM_PRODUTO,
+                                        Ativo = p.BOL_ATIVO,
+                                        Fornecedor = new Contrato.Fornecedor
+                                        {
+                                            Id = p.T_FORNECEDOR.ID_FORNECEDOR,
+                                            Nome = p.T_FORNECEDOR.NOME_FORNECEDOR,
+                                            Codigo = p.T_FORNECEDOR.COD_FORNECEDOR,
+                                            Cpf_Cnpj = p.T_FORNECEDOR.CPF_CNJP_FORNECEDOR,
+                                            ValorPercentagemAtacado = p.T_FORNECEDOR.NUM_VALOR_ATACADO,
+                                            ValorPercentagemVarejo = p.T_FORNECEDOR.NUM_VALOR_VAREJO,
+                                            Ativo = p.T_FORNECEDOR.BOL_ATIVO,
+                                            Tipo = p.T_FORNECEDOR.BOL_PESSOA_FISICA ? Contrato.Enumeradores.Pessoa.Fisica : Contrato.Enumeradores.Pessoa.Juridica,
+                                        },
+                                        eTaxas = (from pt in p.T_PRODUTO_TAXA join t in context.T_TAXA on pt.ID_TAXA equals t.ID_TAXA select new Contrato.Taxa
+                                        {
+                                            Id = t.ID_TAXA,
+                                            Nome = t.NOME_TAXA,
+                                            Valor = pt.NUM_VALOR,
+                                            Desconto = t.BOL_DESCONTO,
+                                            Prioridade = pt.ORD_PRIORIDADE,
+                                            Ativo = t.BOL_ATIVO
+
+                                        }).AsEnumerable(),
                                    }
                                 ).ToList();
-                
+
+                if (lstProdutos.Count > 0)
+                {
+                    retProduto.Produtos = lstProdutos.ToList(); 
+                }
+                else
+                {
+                    // Preenche o objeto de retorno
+                    retProduto.Codigo = Contrato.Constantes.COD_RETORNO_VAZIO;
+                    retProduto.Mensagem = "Não existe dados para o filtro informado.";
+                }
+            }
+            else
+            {
+                // retorna quando o usuário não está autenticado
+                retProduto.Codigo = retSessao.Codigo;
+                retProduto.Mensagem = retSessao.Mensagem;
+            }
+
+            // define o tempo de duração
+            retProduto.Duracao = DateTime.Now.Ticks - retProduto.Duracao;
+
+            // retorna os dados
+            return retProduto;
+        }
+
+        /// <summary>
+        /// Método para listar os produtos para relatórios
+        /// </summary>
+        /// <param name="Produto">Objeto com os dados do filtro</param>
+        /// <returns>Contrato.RetornoProduto</returns>
+        internal static Contrato.RetornoProduto ListarProdutoRelatorio2(Contrato.EntradaProduto entradaProduto)
+        {            
+            // Objeto que recebe o retorno do método
+            Contrato.RetornoProduto retProduto = new Contrato.RetornoProduto();
+
+            // define o tempo de duração
+            retProduto.Duracao = DateTime.Now.Ticks;
+
+            // Objeto que recebe o retorno da sessão
+            Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaProduto.UsuarioLogado, Chave = entradaProduto.Chave });
+
+            // Verifica se o usuário está autenticado
+            if (retSessao.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            {
+                // Verifica se a empresa não foi informada
+                if (string.IsNullOrWhiteSpace(entradaProduto.EmpresaLogada.Id.ToString()))
+                {
+                    entradaProduto.EmpresaLogada.Id = Guid.Empty;
+                }
+
+                // Verifica se o código não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Codigo))
+                {
+                    entradaProduto.Produto.Codigo = string.Empty;
+                }
+
+                // Verifica se o código não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.CodigoFornecedor))
+                {
+                    entradaProduto.Produto.CodigoFornecedor = string.Empty;
+                }
+
+                // Verifica se o nome não foi informado
+                if (string.IsNullOrWhiteSpace(entradaProduto.Produto.Nome))
+                {
+                    entradaProduto.Produto.Nome = string.Empty;
+                }
+
+                List<Guid> IdsFornecedores = new List<Guid>();
+                // Verifica se existe fornecedores
+                if (entradaProduto.Produto.Fornecedores != null && entradaProduto.Produto.Fornecedores.Count > 0)
+                {
+                    IdsFornecedores = entradaProduto.Produto.Fornecedores.Select(f => f.Id).ToList();
+                }
+
+                // Loga no banco de dados
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = false;
+
+                // Busca o produto no banco
+                var lstProdutos = (from p in context.T_PRODUTO
+                                   where
+                                   (p.BOL_ATIVO == entradaProduto.Produto.Ativo)
+                                   && (entradaProduto.EmpresaLogada.Id == Guid.Empty || p.T_FORNECEDOR.ID_EMPRESA == entradaProduto.EmpresaLogada.Id)
+                                   && (entradaProduto.Produto.Codigo == string.Empty || p.COD_PRODUTO.Contains(entradaProduto.Produto.Codigo))
+                                   && (entradaProduto.Produto.Nome == string.Empty || p.NOME_PRODUTO.Contains(entradaProduto.Produto.Nome))
+                                   && (entradaProduto.Produto.CodigoFornecedor == string.Empty || p.COD_PRODUTO_FORNECEDOR.Contains(entradaProduto.Produto.CodigoFornecedor))
+                                   && (IdsFornecedores.Count == 0 || IdsFornecedores.Contains(p.ID_FORNECEDOR))
+                                   select  new
+                                   {
+                                       p,
+                                       f = p.T_FORNECEDOR,
+                                       tp = p.T_PRODUTO_TAXA,
+                                       t = (from pt in p.T_PRODUTO_TAXA join t in context.T_TAXA on pt.ID_TAXA equals t.ID_TAXA select t),
+                                   }
+                                ).ToList();
+
                 // Verifica se foi encontrado algum registro
                 if (lstProdutos.Count > 0)
                 {
@@ -311,8 +450,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             Ncm = item.p.NCM_PRODUTO,
                             Ativo = item.p.BOL_ATIVO,
                             Fornecedor = Negocio.Fornecedor.BuscarFornecedor(item.p.T_FORNECEDOR),
-                            Taxas = Negocio.Taxa.ListarProdutoTaxa(item.t),
-                            UnidadeMedidas = Negocio.UnidadeMedida.ListarProdutoUnidadeMedida(item.um)
+                            Taxas = Negocio.Taxa.ListarProdutoTaxa(item.tp, item.t)
                         });
                     }
                 }
@@ -329,6 +467,9 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 retProduto.Codigo = retSessao.Codigo;
                 retProduto.Mensagem = retSessao.Mensagem;
             }
+
+            // define o tempo de duração
+            retProduto.Duracao = DateTime.Now.Ticks - retProduto.Duracao;
 
             // retorna os dados
             return retProduto;
@@ -363,6 +504,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Loga no banco de dados
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                    context.ContextOptions.LazyLoadingEnabled = true;
 
                     // Busca o produto no banco
                     List<Dados.PRODUTO> lstProdutos = (from p in context.T_PRODUTO
@@ -385,8 +527,11 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         {
                             // Atualiza o produto                            
                             lstProdutos.First().NOME_PRODUTO = entradaProduto.Produto.Nome;
+                            lstProdutos.First().COD_BARRAS = entradaProduto.Produto.CodigoBarras;
                             lstProdutos.First().NUM_QUANTIDADE = entradaProduto.Produto.Quantidade;
                             lstProdutos.First().NUM_VALOR = entradaProduto.Produto.ValorBase;
+                            lstProdutos.First().NUM_VALOR_ATACADO = entradaProduto.Produto.ValorPercentagemAtacado;
+                            lstProdutos.First().NUM_VALOR_VAREJO = entradaProduto.Produto.ValorPercentagemVarejo;
                             lstProdutos.First().COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
                             lstProdutos.First().ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
                             lstProdutos.First().NCM_PRODUTO = entradaProduto.Produto.Ncm;
@@ -442,12 +587,15 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             // Cria o produto
                             Dados.PRODUTO tProduto = new Dados.PRODUTO();
                             tProduto.ID_PRODUTO = Guid.NewGuid();
-                            tProduto.COD_PRODUTO = codigoProduto;                            
+                            tProduto.COD_PRODUTO = codigoProduto;
+                            tProduto.COD_BARRAS = entradaProduto.Produto.CodigoBarras;
                             tProduto.NOME_PRODUTO = entradaProduto.Produto.Nome;
                             tProduto.COD_PRODUTO_FORNECEDOR = entradaProduto.Produto.CodigoFornecedor;
                             tProduto.ID_FORNECEDOR = entradaProduto.Produto.Fornecedor.Id;
                             tProduto.NCM_PRODUTO = entradaProduto.Produto.Ncm;
                             tProduto.NUM_VALOR = entradaProduto.Produto.ValorBase;
+                            tProduto.NUM_VALOR_ATACADO = entradaProduto.Produto.ValorPercentagemAtacado;
+                            tProduto.NUM_VALOR_VAREJO = entradaProduto.Produto.ValorPercentagemVarejo;
                             tProduto.NUM_QUANTIDADE = entradaProduto.Produto.Quantidade;
                             tProduto.BOL_ATIVO = entradaProduto.Produto.Ativo;
                             tProduto.DATA_ATUALIZACAO = DateTime.Now;
@@ -540,6 +688,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         }
                         else
                         {
+                            context.ContextOptions.LazyLoadingEnabled = true;
                             // Busca o produto no banco
                             List<Dados.PRODUTO> lstProdutos = (from p in context.T_PRODUTO
                                                                 where                                                                    
@@ -551,8 +700,11 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             if (lstProdutos.Count > 0)
                             {
                                 // Atualiza o produto
+                                lstProdutos.First().COD_BARRAS = produto.CodigoBarras;
                                 lstProdutos.First().NUM_QUANTIDADE = produto.Quantidade;
                                 lstProdutos.First().NUM_VALOR = produto.ValorBase;
+                                lstProdutos.First().NUM_VALOR_ATACADO = produto.ValorPercentagemAtacado;
+                                lstProdutos.First().NUM_VALOR_VAREJO = produto.ValorPercentagemVarejo;
                                 lstProdutos.First().ID_FORNECEDOR = produto.Fornecedor.Id;
                                 lstProdutos.First().NCM_PRODUTO = produto.Ncm;
                                 lstProdutos.First().BOL_ATIVO = (bool)produto.Fornecedor.Ativo;
@@ -578,6 +730,16 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                         }
                                     }
                                 }
+
+                                // Verifica se existe alguma taxa associada ao produto
+                                if (produto.Taxas != null)
+                                {
+                                    // Para cada taxa associada
+                                    foreach (Contrato.Taxa taxa in produto.Taxas)
+                                    {
+                                        Negocio.Taxa.SalvarTaxaProduto(lstProdutos.First(), entradaProdutos.UsuarioLogado, taxa);
+                                    }
+                                }
                             }
                             else
                             {
@@ -585,11 +747,14 @@ namespace BrasilDidaticos.WcfServico.Negocio
                                 Dados.PRODUTO tProduto = new Dados.PRODUTO();
                                 tProduto.ID_PRODUTO = Guid.NewGuid();
                                 tProduto.COD_PRODUTO = BuscarCodigoProduto(entradaProdutos.EmpresaLogada.Id);
+                                tProduto.COD_BARRAS = produto.CodigoBarras;
                                 tProduto.NOME_PRODUTO = produto.Nome;
                                 tProduto.COD_PRODUTO_FORNECEDOR = produto.CodigoFornecedor;
                                 tProduto.ID_FORNECEDOR = produto.Fornecedor.Id;
                                 tProduto.NUM_QUANTIDADE = produto.Quantidade;
                                 tProduto.NUM_VALOR = produto.ValorBase;
+                                tProduto.NUM_VALOR_ATACADO = produto.ValorPercentagemAtacado;
+                                tProduto.NUM_VALOR_VAREJO = produto.ValorPercentagemVarejo;
                                 tProduto.NCM_PRODUTO = produto.Ncm;
                                 tProduto.BOL_ATIVO = produto.Ativo;
                                 tProduto.DATA_ATUALIZACAO = DateTime.Now;

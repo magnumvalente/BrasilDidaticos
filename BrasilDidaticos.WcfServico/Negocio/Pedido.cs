@@ -111,7 +111,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 }
 
                 // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();                                                
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = true;                               
                     
                 if (entradaPedido.Paginar)
                 {
@@ -235,6 +236,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Loga no banco de dados
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                    context.ContextOptions.LazyLoadingEnabled = true;
 
                     // Busca o pedido no banco
                     List<Dados.PEDIDO> lstPedidos = (from p in context.T_PEDIDO

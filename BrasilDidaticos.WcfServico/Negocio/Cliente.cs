@@ -94,7 +94,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-                                                
+                context.ContextOptions.LazyLoadingEnabled = true;
+                    
                 // Busca o cliente no banco
                 List<Dados.CLIENTE> lstClientes = (from c in context.T_CLIENTE
                                                     where
@@ -190,6 +191,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Loga no banco de dados
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                    context.ContextOptions.LazyLoadingEnabled = true;
 
                     // Busca o cliente no banco
                     List<Dados.CLIENTE> lstClientes = (from c in context.T_CLIENTE

@@ -15,14 +15,15 @@ using System.Collections.ObjectModel;
 namespace BrasilDidaticos.Apresentacao
 {
     /// <summary>
-    /// Interaction logic for WOrcamentoItem.xaml
+    /// Interaction logic for WFornecedorItem.xaml
     /// </summary>
-    public partial class WOrcamentoItem : Window
+    public partial class WFornecedorItem : Window
     {
 
         #region "[Atributos]"
 
         private bool _alterou = false;
+        private bool _cancelou = false;
         private bool _BuscarProduto = true;
         private ObservableCollection<Objeto.Produto> _lstProduto = new ObservableCollection<Objeto.Produto>();
 
@@ -38,7 +39,22 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
-        public ObservableCollection<Contrato.Item> Itens
+        public bool Cancelou
+        {
+            get
+            {
+                return _cancelou;
+            }
+        }
+        
+
+        public Contrato.Fornecedor Fornecedor
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Contrato.Produto> Produtos
         {
             get;
             set;
@@ -48,7 +64,7 @@ namespace BrasilDidaticos.Apresentacao
 
         #region "[Metodos]"
 
-        public WOrcamentoItem()
+        public WFornecedorItem()
         {
             InitializeComponent();
         }
@@ -56,8 +72,8 @@ namespace BrasilDidaticos.Apresentacao
         private void ValidarPermissao()
         {
             // Permissão módulos operacionais sistema
-            btnAdicionar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
-            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_ORCAMENTO, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnAdicionar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnBuscar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CONSULTAR) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
         }
 
         private void ListarProdutos()
@@ -92,45 +108,21 @@ namespace BrasilDidaticos.Apresentacao
                 
                 // Adiciona a lista os novos produtos que foram buscados
                 foreach (Contrato.Produto p in retProduto.Produtos)
-                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas });
+                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, Quantidade = p.Quantidade, ValorBase = p.ValorBase, Taxas = p.Taxas, UnidadeMedidas = p.UnidadeMedidas });
             }
 
             // Define os novos produtos
             dgProdutos.ItemsSource = _lstProduto;
             
             if (mostrarMsgVazio && retProduto.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
-                MessageBox.Show(retProduto.Mensagem, "Orçamento", MessageBoxButton.OK, MessageBoxImage.Information);                              
-        }
-
-        private void PreencherFornecedores()
-        {
-            Contrato.EntradaFornecedor entradaFornecedor = new Contrato.EntradaFornecedor();
-            entradaFornecedor.Chave = Comum.Util.Chave;
-            entradaFornecedor.UsuarioLogado = Comum.Util.UsuarioLogado.Login;
-            entradaFornecedor.EmpresaLogada = Comum.Parametros.EmpresaProduto;
-            entradaFornecedor.Fornecedor = new Contrato.Fornecedor() { Ativo = true };
-
-            Servico.BrasilDidaticosClient servBrasilDidaticos = new Servico.BrasilDidaticosClient(Comum.Util.RecuperarNomeEndPoint());
-            Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);
-            servBrasilDidaticos.Close();
-
-            if (retFornecedor.Fornecedores != null)
-            {
-                cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = Guid.Empty.ToString(), Content = "Todos" });
-                foreach (Contrato.Fornecedor fornecedor in retFornecedor.Fornecedores.OrderBy(f => f.Nome))
-                {
-                    cmbFornecedor.ComboBox.Items.Add(new ComboBoxItem() { Uid = fornecedor.Id.ToString(), Content = fornecedor.Nome, Tag = fornecedor });
-                }
-            }
-        }
+                MessageBox.Show(retProduto.Mensagem, "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Information);                              
+        }        
 
         private void PreencherFiltro(Contrato.Produto Produto)
         {
             Produto.Codigo = txtCodigo.Conteudo;
             Produto.Nome = txtNome.Conteudo;
-            Produto.CodigoFornecedor = txtCodigoFornecedor.Conteudo;
-            if (cmbFornecedor.ValorSelecionado != null)
-                Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
+            Produto.Fornecedor = Fornecedor;
             Produto.Ativo = true;
         }
 
@@ -141,16 +133,13 @@ namespace BrasilDidaticos.Apresentacao
                 if (item.GetType() == typeof(Objeto.Produto) && ((Objeto.Produto)item).Selecionado == true)
                 {
                     // Verifica se a lista é nula
-                    if (this.Itens == null)
-                        this.Itens = new ObservableCollection<Contrato.Item>();
+                    if (this.Produtos == null)
+                        this.Produtos = new ObservableCollection<Contrato.Produto>();
                     
                     // Se o produto ainda não foi adicionado
-                    if ((from i in Itens where i.Produto != null && i.Produto.Codigo == ((Contrato.Produto)item).Codigo select i).Count() == 0)
+                    if ((from p in Produtos where p.Codigo == ((Contrato.Produto)item).Codigo select p).Count() == 0)
                     {
-                        Itens.Add(new Contrato.Item()
-                        {
-                            Produto = ((Contrato.Produto)item)
-                        });
+                        Produtos.Add((Contrato.Produto)item);
 
                         if (!_alterou)
                             _alterou = true;
@@ -158,29 +147,6 @@ namespace BrasilDidaticos.Apresentacao
                 }
             }
         }
-
-        private void ConfigurarProduto(Objeto.Produto produto)
-        {
-            produto.UnidadeMedidaSelecionada = new Contrato.UnidadeMedida() { QuantidadeItens = 1 };
-
-            // Verififica se o produto possui unidades de medidada associados a ele
-            if (produto.UnidadeMedidas != null)
-            {
-                // Verifica se existe somente uma unidade de medida
-                if (produto.UnidadeMedidas.Count == 1)
-                {
-                    produto.UnidadeMedidaSelecionada = produto.UnidadeMedidas.First();
-                }
-                // Verifica se existe mais de uma unidade de medida
-                else if (produto.UnidadeMedidas != null && produto.UnidadeMedidas.Count > 1)
-                {
-                    WProdutoUnidadeMedida wProdutoUnidadeMedida = new WProdutoUnidadeMedida();
-                    wProdutoUnidadeMedida.Owner = this;
-                    wProdutoUnidadeMedida.Produto = produto;
-                    wProdutoUnidadeMedida.ShowDialog();
-                }
-            }
-        }   
 
         private void ConfigurarControles()
         {
@@ -199,12 +165,11 @@ namespace BrasilDidaticos.Apresentacao
                 this.Cursor = Cursors.Wait;
                 this.ConfigurarControles();
                 this.ValidarPermissao();
-                this.PreencherFornecedores();
                 this.ListarProdutos();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -217,12 +182,12 @@ namespace BrasilDidaticos.Apresentacao
             try
             {
                 this.Cursor = Cursors.Wait;
-                PreencherDadosProdutos();
+                this.PreencherDadosProdutos();
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -240,7 +205,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -281,7 +246,7 @@ namespace BrasilDidaticos.Apresentacao
                             {                
                                 // Adiciona a lista os novos produtos que foram buscados
                                 foreach (Contrato.Produto p in retProduto.Produtos)
-                                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas });
+                                    _lstProduto.Add(new Objeto.Produto { Selecionado = false, Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas });
 
                                 dgProdutos.ItemsSource = _lstProduto;
                             }
@@ -291,7 +256,7 @@ namespace BrasilDidaticos.Apresentacao
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -303,62 +268,19 @@ namespace BrasilDidaticos.Apresentacao
         {
             try
             {
-                this.Close();
+                this.Cursor = Cursors.Wait;
+                this._cancelou = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
                 this.Cursor = Cursors.Arrow;
             }
         }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                DataGridRow row = Comum.Util.FindVisualParent<DataGridRow>((DataGridCell)sender);
-                // Verifica se a linha está selecionada
-                if (row != null && row.IsSelected)
-                {
-                    this.Cursor = Cursors.Wait;
-
-                    // verifica se existe algum item selecionado da edição
-                    if (row.Item != null && row.Item.GetType() == typeof(Objeto.Produto))
-                    {
-                        // salva as alterações
-                        ConfigurarProduto((Objeto.Produto)dgProdutos.SelectedItem);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Arrow;
-            }
-        }
-
-        private void dgProdutos_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            try
-            {
-                dgProdutos.SelectedItem = null;               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Orçamento", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Arrow;
-            }
-        }
-
+        
         private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;

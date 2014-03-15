@@ -75,7 +75,10 @@ namespace BrasilDidaticos.Apresentacao
             txtCodigoFornecedor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             cmbFornecedor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtNcm.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtCodigoBarras.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             txtValor.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtValorAtacado.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
+            txtValorVarejo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             chkAtivo.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             dgTaxas.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
             dgUnidadeMedidas.IsEnabled = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_MODIFICAR);
@@ -159,7 +162,10 @@ namespace BrasilDidaticos.Apresentacao
             Produto.Nome = txtNome.Conteudo;
             Produto.Fornecedor = (Contrato.Fornecedor)cmbFornecedor.ValorSelecionado;
             Produto.Ncm = txtNcm.Conteudo;
+            Produto.CodigoBarras = txtCodigoBarras.Conteudo;
             Produto.ValorBase = (decimal)txtValor.Valor;
+            Produto.ValorPercentagemAtacado = txtValorAtacado.Valor;
+            Produto.ValorPercentagemVarejo = txtValorVarejo.Valor;
             Produto.Ativo = (bool)chkAtivo.Selecionado;
             PreencherDadosTaxas(Produto);
             PreencherDadosUnidadeMedidas(Produto);
@@ -219,7 +225,12 @@ namespace BrasilDidaticos.Apresentacao
                 txtCodigoFornecedor.Conteudo = _produto.CodigoFornecedor;
                 txtNome.Conteudo = _produto.Nome;
                 txtNcm.Conteudo = _produto.Ncm;
+                txtCodigoBarras.Conteudo = _produto.CodigoBarras;
                 txtValor.Conteudo = Produto.ValorBase.ToString();
+                if (Produto.ValorPercentagemAtacado.HasValue)
+                    txtValorAtacado.Conteudo = Produto.ValorPercentagemAtacado.ToString();
+                if (Produto.ValorPercentagemAtacado.HasValue)
+                    txtValorVarejo.Conteudo = Produto.ValorPercentagemVarejo.ToString();
                 chkAtivo.Selecionado = _produto.Ativo;
             }
             else
@@ -249,6 +260,7 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.RetornoFornecedor retFornecedor = servBrasilDidaticos.FornecedorListar(entradaFornecedor);            
             servBrasilDidaticos.Close();
             
+
             if (retFornecedor.Fornecedores != null)
             {
                 // Guarda os fornecedores recuperados

@@ -27,6 +27,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = true;
 
                 // Busca o estadoOrcamento no banco
                 List<Dados.ESTADO_ORCAMENTO> lstPermissoes = (from f in context.T_ESTADO_ORCAMENTO

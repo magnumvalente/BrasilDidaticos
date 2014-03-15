@@ -127,7 +127,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 }
 
                 // Loga no banco de dados
-                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();                                                
+                Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                context.ContextOptions.LazyLoadingEnabled = true;
                     
                 if (entradaOrcamento.Paginar)
                 {
@@ -265,6 +266,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Loga no banco de dados
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                    context.ContextOptions.LazyLoadingEnabled = true;
 
                     // Busca o orcamento no banco
                     List<Dados.ORCAMENTO> lstOrcamentos = (from p in context.T_ORCAMENTO

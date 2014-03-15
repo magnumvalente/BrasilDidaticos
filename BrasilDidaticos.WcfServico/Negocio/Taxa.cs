@@ -146,49 +146,31 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="lstUsuarioTaxa">Recebe os taxas do produto recuperado do banco</param>
         /// <returns>List<Contrato.Taxa></returns>
-        internal static Contrato.Taxa BuscarProdutoTaxa(Dados.PRODUTO_TAXA produtoTaxa)
+        internal static List<Contrato.Taxa> ListarProdutoTaxa(System.Data.Objects.DataClasses.EntityCollection<Dados.PRODUTO_TAXA> lstProdutoTaxa, IEnumerable<Dados.TAXA> lstTaxa)
         {
-            Contrato.Taxa taxa = null;
+            List<Contrato.Taxa> taxas = null;
 
-            if (produtoTaxa != null)
+            if (lstProdutoTaxa != null)
             {
-                taxa = new Contrato.Taxa
+                taxas = new List<Contrato.Taxa>();
+
+                foreach (Dados.PRODUTO_TAXA taxa in lstProdutoTaxa)
                 {
-                    Id = produtoTaxa.T_TAXA.ID_TAXA,
-                    Nome = produtoTaxa.T_TAXA.NOME_TAXA,
-                    Valor = produtoTaxa.NUM_VALOR,
-                    Desconto = produtoTaxa.T_TAXA.BOL_DESCONTO,
-                    Prioridade = produtoTaxa.ORD_PRIORIDADE,
-                    Ativo = produtoTaxa.T_TAXA.BOL_ATIVO
-                };
+                    Dados.TAXA tx = lstTaxa.Where(t => t.ID_TAXA == taxa.ID_TAXA).FirstOrDefault();
+
+                    taxas.Add(new Contrato.Taxa
+                    {
+                        Id = tx.ID_TAXA,
+                        Nome = tx.NOME_TAXA,
+                        Valor = taxa.NUM_VALOR,
+                        Desconto = tx.BOL_DESCONTO,
+                        Prioridade = taxa.ORD_PRIORIDADE,
+                        Ativo = tx.BOL_ATIVO
+                    });
+                }
             }
 
-            return taxa;
-        }
-
-        /// <summary>
-        /// Retorna uma lista de taxas
-        /// </summary>
-        /// <param name="lstUsuarioTaxa">Recebe os taxas do fornecedor recuperado do banco</param>
-        /// <returns>List<Contrato.Taxa></returns>
-        internal static Contrato.Taxa BuscarFornecedorTaxa(Dados.FORNECEDOR_TAXA fornecedorTaxa)
-        {
-            Contrato.Taxa taxa = null;
-
-            if (fornecedorTaxa != null)
-            {
-                taxa = new Contrato.Taxa
-                {
-                    Id = fornecedorTaxa.T_TAXA.ID_TAXA,
-                    Nome = fornecedorTaxa.T_TAXA.NOME_TAXA,
-                    Valor = fornecedorTaxa.NUM_VALOR,
-                    Desconto = fornecedorTaxa.T_TAXA.BOL_DESCONTO,
-                    Prioridade = fornecedorTaxa.ORD_PRIORIDADE,
-                    Ativo = fornecedorTaxa.T_TAXA.BOL_ATIVO
-                };
-            }
-
-            return taxa;
+            return taxas;
         }
 
         /// <summary>
@@ -202,7 +184,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             Contrato.RetornoTaxa retTaxa = new Contrato.RetornoTaxa();
 
             // Verifica se as informações do taxa foram informadas
-            string strValidacao = ValidarTaxaPreenchido(entradaTaxa.Taxa);
+            string strValidacao = ValidarTaxaPreenchida(entradaTaxa.Taxa);
 
             // Objeto que recebe o retorno da sessão
             Contrato.RetornoSessao retSessao = Negocio.Sessao.ValidarSessao(new Contrato.Sessao() { Login = entradaTaxa.UsuarioLogado, Chave = entradaTaxa.Chave });
@@ -237,10 +219,10 @@ namespace BrasilDidaticos.WcfServico.Negocio
                     }
                     else
                     {
-                        // Se existe o taxa
+                        // Se existe a taxa
                         if (lstTaxas.Count > 0)
                         {
-                            // Atualiza o taxa
+                            // Atualiza a taxa
                             lstTaxas.First().NOME_TAXA = entradaTaxa.Taxa.Nome;
                             lstTaxas.First().BOL_DESCONTO = entradaTaxa.Taxa.Desconto;
                             lstTaxas.First().BOL_FORNECEDOR = entradaTaxa.Taxa.Fornecedor;
@@ -251,7 +233,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                         }
                         else
                         {
-                            // Cria o taxa
+                            // Cria a taxa
                             Dados.TAXA tTaxa = new Dados.TAXA();
                             tTaxa.ID_TAXA = Guid.NewGuid();
                             tTaxa.NOME_TAXA = entradaTaxa.Taxa.Nome;
@@ -296,7 +278,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             Contrato.RetornoTaxa retTaxa = new Contrato.RetornoTaxa();
 
             // Verifica se as informações do taxa foram informadas
-            string strValidacao = ValidarTaxaPreenchido(Taxa);
+            string strValidacao = ValidarTaxaPreenchida(Taxa);
                       
             // Se existe algum erro
             if (strValidacao.Length > 0)
@@ -333,7 +315,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
         /// </summary>
         /// <param name="Usuario">Objeto com o dados do taxa</param>
         /// <returns></returns>
-        private static string ValidarTaxaPreenchido(Contrato.Taxa Taxa)
+        private static string ValidarTaxaPreenchida(Contrato.Taxa Taxa)
         {
             // Cria a variável de retorno
             string strRetorno = string.Empty;
@@ -345,6 +327,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
             // retorna a variável de retorno
             return strRetorno;
 
-        }       
+        }
+              
     }
 }

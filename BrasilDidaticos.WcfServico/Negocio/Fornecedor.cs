@@ -84,7 +84,8 @@ namespace BrasilDidaticos.WcfServico.Negocio
 
                 // Loga no banco de dados
                 Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
-                                                
+                context.ContextOptions.LazyLoadingEnabled = true;
+
                 // Busca o fornecedor no banco
                 var lstFornecedores = (from f in context.T_FORNECEDOR.Include("T_FORNECEDOR_TAXA.T_TAXA")                                       
                                        where
@@ -173,6 +174,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                 {
                     // Loga no banco de dados
                     Dados.BRASIL_DIDATICOS context = new Dados.BRASIL_DIDATICOS();
+                    context.ContextOptions.LazyLoadingEnabled = true;
 
                     // Busca o fornecedor no banco
                     List<Dados.FORNECEDOR> lstFornecedores = (from f in context.T_FORNECEDOR
@@ -212,7 +214,7 @@ namespace BrasilDidaticos.WcfServico.Negocio
                             // Verifica se é para atualizar os produtos
                             if (!atualizarProdutos)
                                 // verifica se a quantidade de taxas foi alterada
-                                atualizarProdutos = entradaFornecedor.Fornecedor.Taxas != null && lstFornecedores.First().T_FORNECEDOR_TAXA.Count != entradaFornecedor.Fornecedor.Taxas.Count;
+                                atualizarProdutos = (entradaFornecedor.Fornecedor.Taxas == null && lstFornecedores.First().T_FORNECEDOR_TAXA.Count > 0) || (entradaFornecedor.Fornecedor.Taxas != null && lstFornecedores.First().T_FORNECEDOR_TAXA.Count != entradaFornecedor.Fornecedor.Taxas.Count);
 
                             // Verifica se é para atualizar os produtos
                             if (entradaFornecedor.Fornecedor.Taxas != null && !atualizarProdutos)

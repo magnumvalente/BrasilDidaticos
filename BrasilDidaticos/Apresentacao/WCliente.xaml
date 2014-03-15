@@ -96,7 +96,7 @@
                     <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Caixa Escolar" Binding="{Binding CaixaEscolar}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tipo Cliente" Binding="{Binding Tipo}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="CPF / CNPJ" Binding="{Binding Cpf_Cnpj}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="CPF / CNPJ" Binding="{Binding Cpf_Cnpj_ToString}" IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

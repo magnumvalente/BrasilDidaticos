@@ -30,6 +30,9 @@ namespace BrasilDidaticos.Objeto
         {
             get
             {
+                if (ValorPercentagemAtacado.HasValue && ValorPercentagemAtacado.Value > 0)
+                    return ValorCusto * (decimal)ValorPercentagemAtacado;
+
                 if (Fornecedor != null && Fornecedor.ValorPercentagemAtacado.HasValue && Fornecedor.ValorPercentagemAtacado.Value > 0)
                     return ValorCusto * (decimal)Fornecedor.ValorPercentagemAtacado;
 
@@ -42,6 +45,9 @@ namespace BrasilDidaticos.Objeto
         {
             get
             {
+                if (ValorPercentagemVarejo.HasValue && ValorPercentagemVarejo.Value > 0)
+                    return ValorCusto * (decimal)ValorPercentagemVarejo;
+
                 if (Fornecedor != null && Fornecedor.ValorPercentagemVarejo.HasValue && Fornecedor.ValorPercentagemVarejo.Value > 0)
                     return ValorCusto * (decimal)Fornecedor.ValorPercentagemVarejo;
 

@@ -66,10 +66,10 @@ namespace BrasilDidaticos.Apresentacao
 
         private void ValidarPermissao()
         {
-            btnImportarProduto.Visibility = _fornecedor == null ? Visibility.Collapsed : Visibility.Visible;
             // Permissão módulos operacionais sistema
             btnSalvar.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true || Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             btnImportarProduto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_PRODUTO, Comum.Constantes.PERMISSAO_IMPORTAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            btnSelecionarProduto.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_FORNECEDOR, Comum.Constantes.PERMISSAO_CRIAR) == true && _fornecedor != null ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             gpbTaxas.Visibility = Comum.Util.ValidarPermissao(Comum.Constantes.TELA_TAXA, Comum.Constantes.PERMISSAO_MODIFICAR) == true ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
 
             txtCodigo.IsEnabled = false;
@@ -218,12 +218,12 @@ namespace BrasilDidaticos.Apresentacao
 
                 txtCodigo.Conteudo = _fornecedor.Codigo;
                 txtNome.Conteudo = _fornecedor.Nome;
-                rlbPessoa.ValorSelecionado = _fornecedor.Tipo;
-                txtCPFCNP.Valor = _fornecedor.Cpf_Cnpj;
+                rlbPessoa.ValorSelecionado = _fornecedor.Tipo;                
                 if (_fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Fisica)
                     txtCPFCNP.Tipo = Comum.Enumeradores.TipoMascara.CPF;
                 else if (_fornecedor.Tipo == Contrato.Enumeradores.Pessoa.Juridica)
                     txtCPFCNP.Tipo = Comum.Enumeradores.TipoMascara.CNPJ;
+                txtCPFCNP.Valor = _fornecedor.Cpf_Cnpj;
                 if (_fornecedor.ValorPercentagemAtacado.HasValue)
                     txtValorAtacado.Conteudo = _fornecedor.ValorPercentagemAtacado.Value.ToString();
                 if (_fornecedor.ValorPercentagemVarejo.HasValue)
@@ -296,7 +296,18 @@ namespace BrasilDidaticos.Apresentacao
             this.Title = Comum.Util.UsuarioLogado != null ? Comum.Util.UsuarioLogado.Empresa.Nome : this.Title;
             this.txtNome.txtBox.Focus();
         }
-        
+
+        private void SelecionarProdutos()
+        {
+            WFornecedorItem wFornecedorItem = new WFornecedorItem();
+            wFornecedorItem.Fornecedor = this._fornecedor;
+            wFornecedorItem.Owner = this;
+            wFornecedorItem.ShowDialog();
+
+            if (!wFornecedorItem.Cancelou && wFornecedorItem.Produtos != null && wFornecedorItem.Produtos.Count > 0)
+                _produtos = (from p in wFornecedorItem.Produtos select new Contrato.Produto { Id = p.Id, Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, ValorBase = p.ValorBase, Taxas = p.Taxas, UnidadeMedidas = p.UnidadeMedidas }).ToList();
+        }
+
         private void ImportarProduto()
         {            
             WImportarProdutos importarProduto = new WImportarProdutos();
@@ -338,6 +349,23 @@ namespace BrasilDidaticos.Apresentacao
             {
                 this.Cursor = Cursors.Wait;
                 GerarNovoCodigo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Fornecedor", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void btnSelecionarProduto_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.Wait;
+                SelecionarProdutos();
             }
             catch (Exception ex)
             {

@@ -57,7 +57,10 @@ namespace BrasilDidaticos.Apresentacao
             Contrato.RetornoUnidadeMedida retUnidadeMedida = servBrasilDidaticos.UnidadeMedidaListar(entUnidadeMedida);
             servBrasilDidaticos.Close();
 
-            dgUnidadeMedidas.ItemsSource = retUnidadeMedida.UnidadeMedidas.OrderBy(o => o.Nome);      
+            if (retUnidadeMedida.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
+            {
+                dgUnidadeMedidas.ItemsSource = retUnidadeMedida.UnidadeMedidas.OrderBy(o => o.Nome);
+            }
 
             if (mostrarMsgVazio && retUnidadeMedida.Codigo == Contrato.Constantes.COD_RETORNO_VAZIO)
                 MessageBox.Show(retUnidadeMedida.Mensagem, "Unidade de Medida", MessageBoxButton.OK, MessageBoxImage.Information);                              

@@ -139,7 +139,7 @@ namespace BrasilDidaticos.Apresentacao
 
             if (retProduto.Codigo == Contrato.Constantes.COD_RETORNO_SUCESSO)
             {
-                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, CodigoFornecedor = p.CodigoFornecedor, Fornecedor = p.Fornecedor, Taxas = p.Taxas, Quantidade = p.Quantidade, ValorBase = p.ValorBase }).ToList();
+                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Ncm = p.Ncm, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, CodigoFornecedor = p.CodigoFornecedor, Fornecedor = p.Fornecedor, Taxas = p.Taxas, Quantidade = p.Quantidade, ValorBase = p.ValorBase }).ToList();
                 foreach (Objeto.Produto p in lstProdutos)
                     dgProdutos.Items.Add(p);
             }
@@ -446,6 +446,24 @@ namespace BrasilDidaticos.Apresentacao
             }
         }
 
+        private void btnEmail_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WEmailEnvio wEmailEnvio = new WEmailEnvio();
+                wEmailEnvio.Owner = this;
+                wEmailEnvio.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), Comum.Util.UsuarioLogado.Empresa.Nome, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
         private void Parametro_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -551,7 +569,7 @@ namespace BrasilDidaticos.Apresentacao
                             // Se existem produtos preenche o grid
                             if (retProduto.Produtos.Count > 0)
                             {
-                                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Fornecedor = p.Fornecedor, CodigoFornecedor = p.CodigoFornecedor, Taxas = p.Taxas, ValorBase = p.ValorBase }).ToList();
+                                List<Objeto.Produto> lstProdutos = (from p in retProduto.Produtos select new Objeto.Produto { Codigo = p.Codigo, Nome = p.Nome, Ncm = p.Ncm, ValorPercentagemAtacado = p.ValorPercentagemAtacado, ValorPercentagemVarejo = p.ValorPercentagemVarejo, CodigoFornecedor = p.CodigoFornecedor, Fornecedor = p.Fornecedor, Taxas = p.Taxas, Quantidade = p.Quantidade, ValorBase = p.ValorBase }).ToList();
                                 foreach (Objeto.Produto p in lstProdutos)
                                     dgProdutos.Items.Add(p);
                             }
@@ -586,7 +604,7 @@ namespace BrasilDidaticos.Apresentacao
             }
         }                   
 
-        #endregion                                
+        #endregion 
                       
     }
 }
