@@ -1,13 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilDidaticos", "BrasilDidaticos\BrasilDidaticos.csproj", "{EE40C134-4BEA-40FE-9BBD-A52AD385B0A2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1A106E91-5AF7-4FF4-B6FB-D9158E685F7A} = {1A106E91-5AF7-4FF4-B6FB-D9158E685F7A}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilDidaticos.Contrato", "BrasilDidaticos.Contrato\BrasilDidaticos.Contrato.csproj", "{D05B89F7-D0EE-4319-8456-08030C03EFEC}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C974309-C14F-4953-BAFA-BD85F272D23C}"
 	ProjectSection(SolutionItems) = preProject
 		BrasilDidaticos.vsmdi = BrasilDidaticos.vsmdi
@@ -16,6 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilDidaticos", "BrasilDidaticos\BrasilDidaticos.csproj", "{EE40C134-4BEA-40FE-9BBD-A52AD385B0A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A106E91-5AF7-4FF4-B6FB-D9158E685F7A} = {1A106E91-5AF7-4FF4-B6FB-D9158E685F7A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilDidaticos.Contrato", "BrasilDidaticos.Contrato\BrasilDidaticos.Contrato.csproj", "{D05B89F7-D0EE-4319-8456-08030C03EFEC}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilDidaticos.WcfServico", "BrasilDidaticos.WcfServico\BrasilDidaticos.WcfServico.csproj", "{1A106E91-5AF7-4FF4-B6FB-D9158E685F7A}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BrasilDidaticos.WcfServico.Setup", "BrasilDidaticos.WcfServico.Setup\BrasilDidaticos.WcfServico.Setup.vdproj", "{D024A6B7-0C23-4AA3-AF46-0115CE3BB928}"
@@ -23,9 +25,6 @@ EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BrasilDidaticos.Setup", "BrasilDidaticos.Setup\BrasilDidaticos.Setup.vdproj", "{6C903445-8413-4B91-B4ED-B30FBD8D6A18}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = BrasilDidaticos.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -82,5 +81,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = BrasilDidaticos.vsmdi
 	EndGlobalSection
 EndGlobal
